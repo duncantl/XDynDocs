@@ -121,7 +121,7 @@
 </xsl:template>
 
 
-<xsl:template match="r:numeric|r:vector|r:list">
+<xsl:template match="r:numeric|r:vector|r:list|r:character|r:logical">
   <b class="rkeyword"><xsl:value-of select="local-name()"/></b>
 </xsl:template>
 
@@ -341,7 +341,7 @@
 <xsl:template match="@*"> <xsl:value-of select="."/></xsl:template>
 
 <xsl:template match="hr|sub|sup|i|object|param|table[not(tgroup) and not(r:code)]|tr|td|th|h1|h2|h3|h4|h5|h6|code|form|font|html|head|body|OBJECT|PARAM|br|option|select|optgroup|input">
-<xsl:message>Passing a node (<xsl:value-of select="string(.)"/>) through to HTML</xsl:message>
+<xsl:message>Passing a node (<xsl:value-of select="name()"/> -> <xsl:value-of select="string(.)"/>) through to HTML</xsl:message>
  <xsl:element name="{name(.)}">
   <xsl:for-each select="@*">
    <xsl:copy />
