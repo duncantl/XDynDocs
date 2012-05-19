@@ -12,6 +12,7 @@
 <xsl:template match="xpath"><acronym def="XPath">XPath</acronym></xsl:template>
 <xsl:template match="xsl"><acronym def="eXtensible Stylesheet Language">XSL</acronym></xsl:template>
 <xsl:template match="c"><acronym def="C programming language">C</acronym></xsl:template>
+<xsl:template match="cpp"><acronym def="C++ programming language">C++</acronym></xsl:template>
 <xsl:template match="sql"><acronym def="Structured Query Language">SQL</acronym></xsl:template>
 <xsl:template match="oracle"><acronym def="Oracle Database System">SQL</acronym></xsl:template>
 <xsl:template match="mysql"><acronym def="MySQL Database System">MySQL</acronym></xsl:template>
