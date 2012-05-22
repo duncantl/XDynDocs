@@ -70,13 +70,15 @@
 </tr>
 </table>
 </center>
-    <hr width="50%" height="2"/>
 
+<xsl:if test="count(/topics/topic) > 1">
+    <hr width="50%" height="2"/>
    <!-- Announce the different topics.  -->
    <!-- Show the summary tables for all topics -->
     <div class="count-tables">
       <xsl:call-template name="showCountTables" />
     </div>
+</xsl:if>
 
     <div>
      <hr width="50%" />
