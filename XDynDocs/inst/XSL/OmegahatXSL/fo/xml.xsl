@@ -42,7 +42,7 @@
  <fo:inline font-weight="italic"><xsl:apply-templates /></fo:inline>
 </xsl:template>
 
-<xsl:template match="xml:namespace|xml:namespaceprefix">
+<xsl:template match="xml:namespace|xml:namespaceprefix|xml:nsprefix">
  <fo:inline font-weight="italic"><xsl:apply-templates /></fo:inline>
 </xsl:template>
 
