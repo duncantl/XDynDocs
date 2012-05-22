@@ -5,7 +5,7 @@
 		 xmlns:kml="http://earth.google.com/kml/2.1"
 		 version="1.0">
 
-<! this is a comment test -->
+<!-- this is a comment test and another one from duncan -->
 <xsl:template match="xml:tag|xml:element|xml:node|xml:tagName|xml:el">
   &lt;<xsl:apply-templates/>&gt;
 </xsl:template>
