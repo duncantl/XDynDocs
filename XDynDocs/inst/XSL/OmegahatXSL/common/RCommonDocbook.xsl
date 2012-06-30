@@ -22,8 +22,8 @@
 <!--??? Do we want these for HTML? We should use CSS. -->
 <xsl:param name="r.error.color">#54ff9f</xsl:param>
 
-<xsl:param name="r.code.background.color">#C0C0C0</xsl:param>
-<xsl:param name="r.code.color">#FFF8DC</xsl:param>	       <!--7000FF-->
+<xsl:param name="r.code.background.color">#fff5ee</xsl:param>
+<xsl:param name="r.code.color">#000000</xsl:param>	<!-- FF8DC --> <!--7000FF-->
 
 <xsl:param name="r.var.background.color">#ffffffff</xsl:param>
 <xsl:param name="r.var.color">#888888</xsl:param>
@@ -41,7 +41,7 @@
 <xsl:param name="r.output.code.color">#54ff9f</xsl:param>
 <xsl:param name="r.warning.color">#54ff9f</xsl:param>
 <xsl:param name="shell.code.color">#54ff9f</xsl:param>
-<xsl:param name="omg.package.color">blue</xsl:param>
+<xsl:param name="omg.package.color">#ff1493</xsl:param>
 <xsl:param name="fo.code.color">red</xsl:param>
 
 

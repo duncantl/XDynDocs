@@ -3,11 +3,16 @@
 		 xmlns:xp="http://www.w3.org/TR/xpath"		       
 		 xmlns:fo="http://www.w3.org/1999/XSL/Format"
 		 xmlns:kml="http://earth.google.com/kml/2.1"
+		 xmlns:sch="http://www.w3.org/2001/XMLSchema"
 		 version="1.0">
 
 <!-- this is a comment test and another one from duncan. And again -->
 <xsl:template match="xml:tag|xml:element|xml:node|xml:tagName|xml:el">
   &lt;<xsl:apply-templates/>&gt;
+</xsl:template>
+
+<xsl:template match="sch:type">
+ <fo:inline font-weight="italic"><xsl:apply-templates /></fo:inline>
 </xsl:template>
 
 <xsl:template match="xp:func">

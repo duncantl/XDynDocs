@@ -55,7 +55,7 @@
 </xsl:template>
 
 <xsl:template match="c:routine|c:func">
- <fo:inline color="#66f00fa" font-style="italic">
+ <fo:inline color="#66f00f" font-style="italic">
   <xsl:apply-templates />
  </fo:inline>
 </xsl:template>

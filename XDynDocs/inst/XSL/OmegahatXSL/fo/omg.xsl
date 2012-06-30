@@ -21,6 +21,9 @@
 <!--<xsl:call-template name="ulink"><xsl:with-param name="url">http://www.omegahat.org/<xsl:value-of select="."/></xsl:with-param></xsl:call-template> -->
 </xsl:template>
 
+<xsl:template match="bioc|bioconductor">
+<ulink url="http://www.bioconductor.org">BioConductor</ulink>
+</xsl:template>
 
 
 <xsl:template match="bioc:pkg">

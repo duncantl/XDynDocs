@@ -24,6 +24,8 @@
 <xsl:template match="atom"><acronym def="">Atom</acronym></xsl:template>
 <xsl:template match="kml"><acronym def="Keyhole Markup Language">KML</acronym></xsl:template>
 <xsl:template match="http"><acronym def="HyperText Transfer Protocol">HTTP</acronym></xsl:template>
+<xsl:template match="https"><acronym def="Secure HyperText Transfer Protocol">HTTPs</acronym></xsl:template>
+<xsl:template match="ftp"><acronym def="File Transfer Protocol">FTP</acronym></xsl:template>
 <xsl:template match="java"><acronym def="Java">Java</acronym></xsl:template>
 
 

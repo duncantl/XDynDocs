@@ -5,11 +5,10 @@
                 version="1.0">
 
 
-<xsl:param name="curl.option.color">#885488</xsl:param>
+<xsl:param name="curl.option.color">#0000CD</xsl:param>
+
 <xsl:template match="curl:opt">
-  <fo:inline color="{$curl.option.color}" font-weight="italic">  
-    <xsl:apply-templates />  
-  </fo:inline>
+ <fo:inline color="{$curl.option.color}" font-weight="italic"><xsl:apply-templates /></fo:inline>
 </xsl:template>
 
 </xsl:stylesheet>

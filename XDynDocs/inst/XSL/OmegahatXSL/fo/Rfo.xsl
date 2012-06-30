@@ -326,6 +326,7 @@
 <xsl:template match="latex">LaTeX</xsl:template>
 <xsl:template match="tex">TeX</xsl:template>
 <xsl:template match="html">HTML</xsl:template>
+<xsl:template match="html5">HTML5</xsl:template>
 
 
 

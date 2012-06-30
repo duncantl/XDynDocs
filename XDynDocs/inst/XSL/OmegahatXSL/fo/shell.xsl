@@ -46,6 +46,11 @@ $<xsl:apply-templates />
 </xsl:template>
 -->
 
+<xsl:template match="sh:arg|sh:flag">
+ <xsl:call-template name="expression">
+  <xsl:with-param name="color">#DC00DC</xsl:with-param>
+ </xsl:call-template>
+</xsl:template>
 
 <xsl:template match="sh:code">
  <xsl:call-template name="makeVerbatimCode">
@@ -69,7 +74,7 @@ $<xsl:apply-templates />
  </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="sh:exec|sh:executable|executable|sh:func">
+<xsl:template match="sh:exec|sh:executable|executable|sh:func|sh:app">
   <xsl:call-template name="inline.monoseq"/>
 </xsl:template>
 

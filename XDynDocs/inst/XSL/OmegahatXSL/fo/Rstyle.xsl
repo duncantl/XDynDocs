@@ -249,7 +249,7 @@ R
 </xsl:template>
 
 
-<xsl:template match="r:numeric|r:vector|r:list|r:factor|r:integer|r:character|r:complex|r:logical">
+<xsl:template match="r:numeric|r:vector|r:list|r:raw|r:factor|r:integer|r:character|r:complex|r:logical">
   <fo:inline color="#ff0000" 
              font-weight="bold"
              xsl:use-attribute-sets="monospace.verbatim.properties">

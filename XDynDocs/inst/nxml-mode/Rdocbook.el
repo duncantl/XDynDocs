@@ -380,6 +380,7 @@ This deals with a CDATA escape and extracts the contents from that."
 (defun r-nxml-keys-map (map)
   "register key bindings for R-related nodes (i.e. r:...) in XML documents"
   (interactive "*")
+  (define-key map "\C-qr" '(lambda () "" (interactive "*") (insert "<r/>")))
   (define-key map "\C-qc" 'r-insert-class)
   (define-key map "\C-qa" '(lambda () "" (interactive "*") (r-insert-node "r:arg" nil)))
   (define-key map "\C-qx" 'r-insert-rexpr)
@@ -475,7 +476,7 @@ This deals with a CDATA escape and extracts the contents from that."
   (define-key map  "\C-x\C-l" '(lambda () ""  (interactive "*")  (r-insert-node "listitem" nil nil nil) (r-insert-node "para" nil t nil)))
 
   (define-key map  "\C-q\C-h" '(lambda () ""  (interactive "*")  (insert "<html/>")))
-  (define-key map  "\C-q\C-r" '(lambda () ""  (interactive "*")  (insert "<R/>")))
+;  (define-key map  "\C-q\C-r" '(lambda () ""  (interactive "*")  (insert "<R/>")))
   (define-key map  "\C-x\C-l" '(lambda () ""  (interactive "*")  (insert "<latex/>")))
   (define-key map  "\C-q\C-d" '(lambda () ""  (interactive "*")  (insert "<docbook/>")))
   (define-key map  "\C-q\C-r" '(lambda () ""  (interactive "*")  (insert "<r/>")))
@@ -503,6 +504,8 @@ This deals with a CDATA escape and extracts the contents from that."
 
   (define-key map "\C-l\C-o" '(lambda (cdata) "" (interactive "P") (r-insert-node "sh:output" (not cdata) t nil)))
 
+
+  (define-key map "\C-x\C-g" '(lambda () "" (interactive) (insert "<glossentry><glossterm></glossterm>\n<glossdef><para>\n\n</para></glossdef>\n</glossentry>")))
 
 
 ;  (define-key map  "\C-q\C-i" '(lambda (arg) "" (interactive "P") (r-insert-node "item" nil t)))
@@ -565,9 +568,12 @@ This deals with a CDATA escape and extracts the contents from that."
 
 (puthash (intern "css") "http://www.w3.org/Style/CSS/" rxml-namespaces)
 (puthash (intern "r") "http://www.r-project.org" rxml-namespaces)
+(puthash (intern "http") "http://www.w3.org/Protocols" rxml-namespaces)
 (puthash (intern "db") "http://docbook.org/ns/docbook" rxml-namespaces)
 (puthash (intern "sh") "http://www.shell.org" rxml-namespaces)
+(puthash (intern "sch") "http://www.w3.org/2001/XMLSchema" rxml-namespaces)
 (puthash (intern "omg") "http://www.omegahat.org" rxml-namespaces)
+(puthash (intern "curl") "http://curl.haxx.se" rxml-namespaces)
 (puthash (intern "make") "http://www.make.org" rxml-namespaces)
 (puthash (intern "mk") "http://www.make.org" rxml-namespaces)
 (puthash (intern "env") "http://www.shell-environments.org" rxml-namespaces)
