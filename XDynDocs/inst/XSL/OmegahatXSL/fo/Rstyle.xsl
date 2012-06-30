@@ -235,12 +235,12 @@ R
  <fo:inline font-family="italic"><xsl:apply-templates /></fo:inline>
 </xsl:template>
 
-<xsl:template match="s4">
- <fo:inline font-family="italic">S4</fo:inline>
+<xsl:template match="s4|s3">
+ <fo:inline font-family="italic"><xsl:value-of select="translate(local-name(), 's', 'S')"/></fo:inline>
 </xsl:template>
 
 
-<xsl:template match="s:keyword|r:keyword">
+<xsl:template match="s:keyword|r:keyword|r:sym">
   <fo:inline color="#ff0000" 
              font-weight="bold"
              xsl:use-attribute-sets="monospace.verbatim.properties">

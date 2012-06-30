@@ -23,6 +23,10 @@
  <fo:inline font-style="oblique" color="{$r.class.color}"><xsl:call-template name="inline.monoseq"/></fo:inline>
 </xsl:template>
 
+<xsl:template match="r:data.frame">
+ <fo:inline font-style="oblique" color="{$r.class.color}">  <fo:inline font-family="monospace" font-weight="bold">data.frame</fo:inline></fo:inline>
+</xsl:template>
+
 <xsl:param name="r.slot.color">red</xsl:param>
 <xsl:template match="r:slot">
  <fo:inline color="{$r.slot.color}" font-weight="bold"><xsl:call-template name="inline.monoseq"/></fo:inline>

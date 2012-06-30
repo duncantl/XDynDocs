@@ -54,7 +54,7 @@
 
 
 <xsl:param name="js.param.color">brown</xsl:param>
-<xsl:template match="js:param">
+<xsl:template match="js:param|js:arg">
   <xsl:call-template name="jsInline">
     <xsl:with-param name="color"><xsl:value-of select="$js.param.color"/></xsl:with-param>
   </xsl:call-template>
@@ -63,6 +63,12 @@
 <xsl:param name="js.var.color">brown</xsl:param>
 
 <xsl:template match="js:var">
+  <xsl:call-template name="jsInline">
+    <xsl:with-param name="color"><xsl:value-of select="$js.var.color"/></xsl:with-param>
+  </xsl:call-template>
+</xsl:template>
+
+<xsl:template match="json:array|json:number|json:boolean|json:string">
   <xsl:call-template name="jsInline">
     <xsl:with-param name="color"><xsl:value-of select="$js.var.color"/></xsl:with-param>
   </xsl:call-template>

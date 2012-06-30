@@ -39,6 +39,10 @@
 </xsl:template>
 
 
+<xsl:template match="xp:axis">
+ <fo:inline font-weight="bold"><xsl:apply-templates /></fo:inline>
+</xsl:template>
+
 <xsl:template match="xp:call">
  <fo:inline font-weight="bold"><xsl:apply-templates /></fo:inline>
 </xsl:template>
