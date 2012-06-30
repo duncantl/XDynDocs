@@ -240,6 +240,11 @@ R
 </xsl:template>
 
 
+<xsl:template match="r:el">
+ <fo:inline font-family="italic"><xsl:apply-templates/></fo:inline>
+</xsl:template>
+
+
 <xsl:template match="s:keyword|r:keyword|r:sym">
   <fo:inline color="#ff0000" 
              font-weight="bold"
