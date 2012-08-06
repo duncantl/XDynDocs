@@ -148,7 +148,7 @@ function(x, format = "HTML", verbose = TRUE, dir = character(), env = globalenv(
         x = xmlValue(x)
      
      expr <- parse(text = x)
-     x <- xwithVisible(expr, env) # eval(expr, env)
+     x <- withVisible(eval(expr, env)) # eval(expr, env)
      viz = x$visible
      if(!viz)
        return(NULL)
@@ -342,7 +342,7 @@ cat("Leaving grdevice open", dev.cur(), "\n")
                   # XXX what about the print attribute here.
 
                  expr = parse ( text = paste(txt, collapse = "\n"))
-                 ans = try({xwithVisible(expr, env)})  # eval(expr, envir = env)}) ## withVisible(eval(expr, globalenv()))
+                 ans = try({withVisible(eval(expr, env))})  # eval(expr, envir = env)}) ## withVisible(eval(expr, globalenv()))
                  if(inherits(ans, "try-error")) {
                     if(opts@stopOnError)
                            xslError(ans, context = context) # xslStop(context, ans)
@@ -376,7 +376,7 @@ cat("Leaving grdevice open", dev.cur(), "\n")
                # loop over the expressions and evaluate them separately
                # this way we can get the visibility of the last expression.
             for(i in ex) {
-              expr = try(xwithVisible(i, env))  # globalenv())))
+              expr = try(withVisible(eval(i, env)))  # globalenv())))
               if(inherits(expr, "try-error")) {
                  if(opts@stopOnError)
                       xslError(ans, context = context) # xslStop(context, ans)                
@@ -403,7 +403,7 @@ cat("Leaving grdevice open", dev.cur(), "\n")
                ans = textConnectionValue(output)
             } else {
 
-               ans = try(xwithVisible(expr, env)) # eval(expr, envir = env)
+               ans = try(withVisible(eval(expr, env))) #
                if(inherits(ans, "try-error")) {
                  if(opts@stopOnError)
                     xslError(ans, context = context) #xslStop(context, ans)                 
@@ -574,7 +574,7 @@ return(pre)
                     if(!visible) {
                        ans = eval(e, envir = env)
                     } else {
-                        ans = .Internal(eval.with.vis(e, env, env))  # use xwithVisible()?
+                        ans = withVisible(eval(e, env))  # use 
                         if(!ans$visible) {
                           newXMLTextNode("\n", parent = pre)
                           return(NULL)
@@ -1228,9 +1228,9 @@ function(node)
 }
  
 
-xwithVisible =
-function(expr, env)
-  .Internal(eval.with.vis(expr, env, env))  
+#xwithVisible =
+#function(expr, env)
+#  .Internal(eval.with.vis(expr, env, env))  
 
 
   
