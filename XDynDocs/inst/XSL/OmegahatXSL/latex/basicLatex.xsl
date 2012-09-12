@@ -10,7 +10,7 @@
 	xmlns:js="http://www.ecma-international.org/publications/standards/Ecma-262.htm"
         xmlns:str="http://exslt.org/strings"
 	exclude-result-prefixes="doc str" version='1.0'
-    >
+        xmlns:xp="http://www.w3.org/TR/xpath">
 
 <xsl:import href="dblatex.xsl"/>
 
@@ -249,7 +249,7 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 </xsl:template>
 
 <xsl:template match="caption">
-<xsl:if test="//r:expr|//r:formula">\cprotect</xsl:if>\caption{<xsl:apply-templates/>}
+<xsl:if test="//r:expr|//r:formula|xp:expr">\cprotect</xsl:if>\caption{<xsl:apply-templates/>}
 \label{<xsl:value-of select="ancestor::figure/@id"/>}
 </xsl:template>
 
@@ -287,12 +287,13 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 
 <xsl:template match="caption[.//listitem] | caption[count(.//para) > 1]">
 \captionsetup{singlelinecheck=off}
-\caption[list=off]{<xsl:apply-templates/>}
+\cprotect\caption[list=off]{<xsl:apply-templates/>}
 \label{<xsl:value-of select="ancestor::figure/@id"/>}
 </xsl:template>
 
 <xsl:template match="example">
-\begin{example}{<xsl:apply-templates select="./title" mode="eg"/>}\label{<xsl:value-of select="@id"/>}
+\begin{example}{<xsl:apply-templates select="./title" mode="eg"/>}
+<xsl:if test="@id">\label{<xsl:value-of select="@id"/>}</xsl:if>
 <xsl:apply-templates />  <!-- select="*[not(name() = 'title')] | text()"/>	 -->
 \end{example}
 </xsl:template>
@@ -322,17 +323,18 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 
 
 <xsl:template match="graphic">
-\includegraphics{<xsl:call-template name="makeFileRef"><xsl:with-param name="path"><xsl:value-of select="@fileref"/></xsl:with-param></xsl:call-template>}
+%\includegraphics{<xsl:call-template name="makeFileRef"><xsl:with-param name="path"><xsl:value-of select="@fileref"/></xsl:with-param></xsl:call-template>}
 </xsl:template>
 
 
 <xsl:template match="graphic[contains(@fileref, '.svg')]">
-\includegraphics{<xsl:call-template name="makeFileRef"><xsl:with-param name="path"><xsl:value-of select="substring-before(@fileref, '.svg')"/>.png</xsl:with-param></xsl:call-template>}
+%\includegraphics{<xsl:call-template name="makeFileRef"><xsl:with-param name="path"><xsl:value-of select="substring-before(@fileref, '.svg')"/>.png</xsl:with-param></xsl:call-template>}
 </xsl:template>
 
 
+
 <xsl:template match="graphic[contains(@fileref, '.jpg')]">
-\includegraphics{<xsl:call-template name="makeFileRef"><xsl:with-param name="path"><xsl:value-of select="@fileref"/></xsl:with-param></xsl:call-template>}
+%\includegraphics{<xsl:call-template name="makeFileRef"><xsl:with-param name="path"><xsl:value-of select="@fileref"/></xsl:with-param></xsl:call-template>}
 </xsl:template>
 
 

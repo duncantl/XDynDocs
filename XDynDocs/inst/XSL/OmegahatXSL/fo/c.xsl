@@ -86,4 +86,15 @@
  </fo:inline>
 </xsl:template>
 
+
+<xsl:template match="c:library" name="c:library">
+ <fo:inline color="#FF00" font-weight="bold" font-style="italic">
+  <xsl:apply-templates />
+ </fo:inline>
+</xsl:template>
+
+<xsl:template match="libxml2">
+ <xsl:call-template name="c:library"/>
+</xsl:template>
+
 </xsl:stylesheet>

@@ -4,9 +4,10 @@
 
 <xsl:template name="makeFileRef">
  <xsl:param name="path"/>
+<xsl:message># base = <xsl:value-of select="count(./ancestor::*[@xml:base])"/></xsl:message>
 <xsl:call-template name="normalize">
  <xsl:with-param name="path"><xsl:call-template name="dirname">
- <xsl:with-param name="path" select="./ancestor::*[@xml:base]/@xml:base"/>
+  <xsl:with-param name="path" select="./ancestor::*[@xml:base]/@xml:base"/>
 </xsl:call-template><xsl:value-of select="$path"/></xsl:with-param>
 </xsl:call-template>
 </xsl:template>
@@ -16,6 +17,7 @@
 <!-- From http://svn.apache.org/repos/asf/webservices/woden/Site/src/documentation/skins/common/xslt/html/pathutils.xsl  -->
 <xsl:template name="dirname">
   <xsl:param name="path" />
+<xsl:message>dirname: <xsl:value-of select="$path"/></xsl:message>
   <xsl:if test="contains($path, '/')">
     <xsl:value-of select="concat(substring-before($path, '/'), '/')" />
     <xsl:call-template name="dirname">
@@ -28,6 +30,8 @@
 <xsl:template name="normalize">
   <xsl:param name="path"/>
   <xsl:variable name="path-" select="translate($path, '\', '/')"/>
+<xsl:message>normalize: <xsl:value-of select="$path"/></xsl:message>
+
   <xsl:choose>
     <xsl:when test="contains($path-, '/../')">
 

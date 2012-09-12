@@ -60,9 +60,6 @@ itself.-->
 
 
 <xsl:template match="docbook">DocBook</xsl:template>
-<xsl:template match="perl"><proglang>PERL</proglang></xsl:template>
-<xsl:template match="json"><proglang>JSON</proglang></xsl:template>
-<xsl:template match="word">Microsoft Word</xsl:template>
 
 <xsl:template match="comment">
 <xsl:if test="$show.comments">
@@ -154,8 +151,8 @@ itself.-->
 <xsl:template match="section/topics"/>
 
 
-<xsl:template match="sed">sed</xsl:template>
-<xsl:template match="awk">awk</xsl:template>
+<xsl:template match="sed"><proglang>sed</proglang></xsl:template>
+<xsl:template match="awk"><proglang>awk</proglang></xsl:template>
 
 <xsl:template match="dtl"/>
 

@@ -149,6 +149,15 @@
 <fo:inline font-family="monospace" font-weight="bold">&lt;<xsl:apply-templates />&gt;</fo:inline>
 </xsl:template>
 
+<xsl:template match="xml:entity">
+<fo:inline font-family="monospace" font-weight="bold">&amp;<xsl:apply-templates />;</fo:inline>
+</xsl:template>
+
+<xsl:template match="highlight">
+<fo:inline font-weight="bold" color="green"><xsl:apply-templates /></fo:inline>
+</xsl:template>
+
+
 <xsl:template match="xml:attr">
   <fo:inline font-family="monospace" font-weight="italic"><xsl:apply-templates /></fo:inline>
 </xsl:template>
@@ -326,6 +335,7 @@
 <xsl:template match="latex">LaTeX</xsl:template>
 <xsl:template match="tex">TeX</xsl:template>
 <xsl:template match="html">HTML</xsl:template>
+<xsl:template match="xhtml">XHTML</xsl:template>
 <xsl:template match="html5">HTML5</xsl:template>
 
 

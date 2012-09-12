@@ -110,49 +110,6 @@
 -->
 
 
-<xsl:template match="ignore" />
-
-<xsl:template name="keyword">
-  <b class="${class}"><xsl:apply-templates/></b>
-</xsl:template>
-
-<xsl:template name="type">
-  <i class="$class"><xsl:apply-templates/></i>
-</xsl:template>
-
-
-<xsl:template match="r:numeric|r:vector|r:list|r:character|r:logical">
-  <b class="rkeyword"><xsl:value-of select="local-name()"/></b>
-</xsl:template>
-
-
-<xsl:template match="r:func[@name]|s:func[@name]|s:method[@name]">
-  <i>
-  <xsl:element name="a">
-   <xsl:attribute name="href"><xsl:value-of select="$rhelp.dir"/><xsl:value-of select="@name"/>.html</xsl:attribute>
-   <xsl:value-of select="@name"/>()
-  </xsl:element>
-  </i>
-</xsl:template>
-
-
-<xsl:template match="r:func|s:func|s:method|r:s3method" name="func">
- <i class="rfunc">
-<xsl:choose>
-<xsl:when test="$add.links.to.rfuncs">
-  <xsl:element name="a">
-   <xsl:attribute name="href"><xsl:value-of select="$rhelp.dir"/><xsl:value-of select="@pkg"/>/<xsl:value-of select="."/>.html</xsl:attribute>
-   <xsl:if test="@pkg"><xsl:attribute name="title"><xsl:value-of select="@pkg"/></xsl:attribute></xsl:if>
-  <xsl:call-template name="addTooltip"><xsl:with-param name="name" select="string(.)"/></xsl:call-template>
-   <xsl:apply-templates/>()</xsl:element>
-</xsl:when>
-<xsl:otherwise>
-  <xsl:apply-templates/>()
-</xsl:otherwise>
-</xsl:choose>
-  </i>
-</xsl:template>
-
 
 
 <xsl:template name="addTooltip">
@@ -218,52 +175,6 @@
   </xsl:element>
   </i>
 </xsl:template>
-
-
-<xsl:template match="s:field|r:field">
-  <i><xsl:apply-templates/></i>
-</xsl:template>
-
-<!-- Host name of CRAN repository -->
-<xsl:param name="CRAN.host">cran.r-project.org</xsl:param>
-
-<xsl:template match="r:pkg|r:package|s:package|s:library">
- <i>
-  <xsl:element name="a">
-   <xsl:attribute name="href">http://<xsl:value-of select="$CRAN.host"/>/web/packages/<xsl:value-of select="."/>/index.html</xsl:attribute>
-   <xsl:apply-templates/>
-  </xsl:element>
-  </i>
-</xsl:template>
-
-
-<!-- A package that has a non-standard URL specifies the url for the package via @url.
-      But we don't repeat this everywhere. So you only have to specify it once.
-      This template takes care of finding the non-degenerate @url for the package and uses that. -->
-<xsl:template match="r:pkg[@url]">
-  <xsl:param name="pkgName" select="string(.)"/>
- <i>
-  <xsl:element name="a">
-   <xsl:attribute name="href">
-      <xsl:if test="@url=''"><xsl:value-of select="//r:pkg[text() = $pkgName and not(@url = '')][1]/@url"/></xsl:if>
-      <xsl:if test="not(@url='')"><xsl:value-of select="@url"/></xsl:if>
-   </xsl:attribute>
-   <xsl:apply-templates/>
-  </xsl:element>
-  </i>
-</xsl:template>
-
-
-
-<xsl:template match="bioc:pkg">
- <i>
-  <xsl:element name="a">
-   <xsl:attribute name="href">http://www.bioconductor.org/packages/<xsl:value-of select="$bioc.release.number"/>/bioc/html/<xsl:value-of select="."/>.html</xsl:attribute>
-   <xsl:apply-templates/>
-  </xsl:element>
-  </i>
-</xsl:template>
-
 
 
 
@@ -360,15 +271,6 @@
 </xsl:template>
 
 
-<xsl:template match="r:code/r:output|r:test/r:output">
- <xsl:if test="not($runCode) or parent::*/@eval='false'">
-   <pre class="routput"><xsl:apply-templates/></pre>
- </xsl:if>
-</xsl:template>
-
-<xsl:template match="s:output|r:output" name="routput">
-   <pre class="routput"><xsl:apply-templates/></pre>
-</xsl:template>
 
 
 

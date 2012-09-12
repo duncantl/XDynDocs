@@ -35,7 +35,7 @@
              wrap-option="no-wrap"  white-space-treatment="preserve"
              linefeed-treatment='preserve'
              white-space-collapse = "false">
-          <xsl:attribute name="background-color"><xsl:value-of select="$xpath.code.color"/></xsl:attribute><xsl:apply-templates/></fo:block>
+          <xsl:attribute name="background-color"><xsl:value-of select="$xpath.code.color"/></xsl:attribute><xsl:call-template name="trim-left"><xsl:with-param name="contents" select="."/></xsl:call-template></fo:block>
 </xsl:template>
 
 

@@ -30,7 +30,8 @@
 
 
 <xsl:template match="s:expression|r:expression|r:expr">\verb|<xsl:apply-templates/>|</xsl:template>
-
+<!-- map new lines to spaces in r:expr.  Need to ensure this is used. Seems not to be. -->
+<xsl:template match="r:expr/text()"><xsl:message>expression text</xsl:message><xsl:value-of select="translate(string(.),'&#x0A;',' ')"/></xsl:template>
 
 <xsl:template match="r:formula">\verb!<xsl:apply-templates/>!</xsl:template>
 

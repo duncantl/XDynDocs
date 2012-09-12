@@ -8,8 +8,26 @@
 <xsl:template match="json"><proglang>JSON</proglang></xsl:template>
 <xsl:template match="r|R"><proglang>R</proglang></xsl:template>
 
+<xsl:template match="js"><proglang>JavaScript</proglang></xsl:template>
+<xsl:template match="xml"><proglang><acronym def="XML">XML</acronym></proglang></xsl:template>
+<xsl:template match="sgml"><proglang><acronym def="SGML">SGML</acronym></proglang></xsl:template>
+<xsl:template match="svg"><proglang>SVG</proglang></xsl:template>
+<xsl:template match="xslt"><proglang>XSLT</proglang></xsl:template>
+
+<xsl:template match="perl"><proglang>PERL</proglang></xsl:template>
+<xsl:template match="ruby"><proglang>Ruby</proglang></xsl:template>
+<xsl:template match="word">Microsoft Word</xsl:template>
+<xsl:template match="css"><proglang><acronym def="CSS">CSS</acronym></proglang></xsl:template>
+
+
+<xsl:template match="fo"><proglang>FO</proglang></xsl:template>
+
+
+
 <xsl:template match="JSON|json"><acronym def="JavaScript Object Notation">JSON</acronym></xsl:template>
 <xsl:template match="xpath"><acronym def="XPath">XPath</acronym></xsl:template>
+<xsl:template match="xinclude"><acronym def="XInclude">XInclude</acronym></xsl:template>
+<xsl:template match="markdown"><acronym def="markdown">Markdown</acronym></xsl:template>
 <xsl:template match="xsl"><acronym def="eXtensible Stylesheet Language">XSL</acronym></xsl:template>
 <xsl:template match="c"><acronym def="C programming language">C</acronym></xsl:template>
 <xsl:template match="cpp"><acronym def="C++ programming language">C++</acronym></xsl:template>
