@@ -29,7 +29,7 @@
 <xsl:template match="s:expression|r:expression|r:expr">\R<xsl:value-of select="local-name(.)"/>{<!--<xsl:apply-templates/>--><xsl:call-template name="scape"><xsl:with-param name="string" select="text()"/></xsl:call-template>}</xsl:template>
 
 
-<xsl:template match="s:expression|r:expression|r:expr">\verb|<xsl:apply-templates/>|</xsl:template>
+<xsl:template match="s:expression|r:expression|r:expr">\verb?<xsl:apply-templates/>?</xsl:template>
 <!-- map new lines to spaces in r:expr.  Need to ensure this is used. Seems not to be. -->
 <xsl:template match="r:expr/text()"><xsl:message>expression text</xsl:message><xsl:value-of select="translate(string(.),'&#x0A;',' ')"/></xsl:template>
 
@@ -120,6 +120,7 @@ Acronym &amp; Definition \\
 
 
 <xsl:template match="r:op">\Rop{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="r:op[string(.)='$']">\Rop{\$}</xsl:template>
 <xsl:template match="r:keyword">\Rkeyword{<xsl:apply-templates/>}</xsl:template>
 
 

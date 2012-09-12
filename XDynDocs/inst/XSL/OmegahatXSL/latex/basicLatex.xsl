@@ -292,10 +292,9 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 </xsl:template>
 
 <xsl:template match="example">
-\begin{example}{<xsl:apply-templates select="./title" mode="eg"/>}
-<xsl:if test="@id">\label{<xsl:value-of select="@id"/>}</xsl:if>
-<xsl:apply-templates />  <!-- select="*[not(name() = 'title')] | text()"/>	 -->
-\end{example}
+\begin{Example}{<xsl:apply-templates select="./title" mode="eg"/>}<xsl:if test="@id">\label{<xsl:value-of select="@id"/>}</xsl:if>
+<xsl:apply-templates /><!-- select="*[not(name() = 'title')] | text()"/> -->
+\end{Example}
 </xsl:template>
 
 <xsl:template match="example/title"/>
@@ -351,7 +350,6 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 \end{verbatim}</xsl:template>
 
 
-
 <xsl:template match="orderedlist">
 \begin{enumerate}<xsl:call-template name="orderedListFormat"/>
 <xsl:apply-templates />
@@ -359,9 +357,7 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 </xsl:template>
 
 <xsl:template name="orderedListFormat">
-<xsl:if test="@numeration">
-[<xsl:if test="@numeration = 'lowerroman'">i</xsl:if>]
-</xsl:if>
+<xsl:if test="@numeration">[<xsl:if test="@numeration = 'lowerroman'">i</xsl:if>]</xsl:if>
 </xsl:template>
 
 
