@@ -5,6 +5,7 @@
 		xmlns:r="http://www.r-project.org">
 
 <xsl:import href="html/shell.xsl"/>
+<xsl:import href="html/xml.xsl"/>
 
 <xsl:key name="topic" match="items/item[@topic]"
           use="concat(parent::items/parent::topic/title, @status)" />

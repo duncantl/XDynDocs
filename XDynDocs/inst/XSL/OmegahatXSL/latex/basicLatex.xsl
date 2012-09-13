@@ -320,7 +320,7 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
   </xsl:if>
 </xsl:template>
 
-
+<!-- See below -->
 <xsl:template match="graphic">
 %\includegraphics{<xsl:call-template name="makeFileRef"><xsl:with-param name="path"><xsl:value-of select="@fileref"/></xsl:with-param></xsl:call-template>}
 </xsl:template>
@@ -330,10 +330,26 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 %\includegraphics{<xsl:call-template name="makeFileRef"><xsl:with-param name="path"><xsl:value-of select="substring-before(@fileref, '.svg')"/>.png</xsl:with-param></xsl:call-template>}
 </xsl:template>
 
+<!-- XXXXX -->
+
+<xsl:template match="graphic">
+\includegraphics{<xsl:call-template name="nmakeFileRef"/>}
+</xsl:template>
+
+
+<xsl:template match="graphic[contains(@fileref, '.svg')]">
+\includegraphics{<xsl:call-template name="nmakeFileRef"><xsl:with-param name="filename"><xsl:value-of select="substring-before(@fileref, '.svg')"/></xsl:with-param></xsl:call-template>.png}
+</xsl:template>
+
 
 
 <xsl:template match="graphic[contains(@fileref, '.jpg')]">
-%\includegraphics{<xsl:call-template name="makeFileRef"><xsl:with-param name="path"><xsl:value-of select="@fileref"/></xsl:with-param></xsl:call-template>}
+\includegraphics{<xsl:call-template name="nmakeFileRef"></xsl:call-template>}
+</xsl:template>
+
+<xsl:template name="nmakeFileRef">
+<xsl:param name="filename" select="@fileref"/>
+<xsl:call-template name="xml.base.dirs"><xsl:with-param name="base.elem" select="."/></xsl:call-template><xsl:call-template name="strippath"><xsl:with-param name="filename" select="$filename"/></xsl:call-template>
 </xsl:template>
 
 
@@ -344,10 +360,13 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 -->
 
 
-
 <xsl:template match="programlisting">\begin{verbatim}
 <xsl:apply-templates /> 
 \end{verbatim}</xsl:template>
+
+<xsl:template match="programlisting[.//co]">\begin{alltt}
+<xsl:apply-templates /> 
+\end{alltt}</xsl:template>
 
 
 <xsl:template match="orderedlist">

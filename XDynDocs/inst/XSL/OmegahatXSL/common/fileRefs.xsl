@@ -2,9 +2,12 @@
                 version='1.0'>
 
 
-<xsl:template name="makeFileRef">
+<xsl:template name="old_makeFileRef">
  <xsl:param name="path"/>
+
+<xsl:message>xml.base.dirs: <xsl:call-template name="xml.base.dirs"><xsl:with-param name="base.elem" select="."/></xsl:call-template></xsl:message>
 <xsl:message># base = <xsl:value-of select="count(./ancestor::*[@xml:base])"/></xsl:message>
+
 <xsl:call-template name="normalize">
  <xsl:with-param name="path"><xsl:call-template name="dirname">
   <xsl:with-param name="path" select="./ancestor::*[@xml:base]/@xml:base"/>
@@ -12,6 +15,10 @@
 </xsl:call-template>
 </xsl:template>
 
+<xsl:template name="makeFileRef">
+ <xsl:param name="path"/>
+ <xsl:call-template name="xml.base.dirs"><xsl:with-param name="base.elem" select="."/></xsl:call-template>
+</xsl:template>
 
 
 <!-- From http://svn.apache.org/repos/asf/webservices/woden/Site/src/documentation/skins/common/xslt/html/pathutils.xsl  -->
