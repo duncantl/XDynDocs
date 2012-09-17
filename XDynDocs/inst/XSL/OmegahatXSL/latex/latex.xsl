@@ -31,7 +31,7 @@
 
 <xsl:template match="s:expression|r:expression|r:expr">\verb?<xsl:apply-templates/>?</xsl:template>
 <!-- map new lines to spaces in r:expr.  Need to ensure this is used. Seems not to be. -->
-<xsl:template match="r:expr/text()"><xsl:message>expression text</xsl:message><xsl:value-of select="translate(string(.),'&#x0A;',' ')"/></xsl:template>
+<xsl:template match="r:errorMsg/text() | r:expr/text()"><xsl:message>expression text</xsl:message><xsl:value-of select="translate(string(.),'&#x0A;',' ')"/></xsl:template>
 
 <xsl:template match="r:formula">\verb!<xsl:apply-templates/>!</xsl:template>
 
@@ -50,7 +50,7 @@
 
 <xsl:template match="s:param|r:param">\Sparam{<xsl:apply-templates/>}</xsl:template>
 
-<xsl:template match="r:output">\begin{verbatim}&#10;<xsl:apply-templates/>&#10;\end{verbatim}&#10;</xsl:template>
+<xsl:template match="r:output">\begin{ROutput}&#10;<xsl:apply-templates/>&#10;\end{ROutput}&#10;</xsl:template>
 
 <xsl:template match="r:dots|dots">\ldots</xsl:template>
 

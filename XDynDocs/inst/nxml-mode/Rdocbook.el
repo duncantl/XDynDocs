@@ -455,13 +455,22 @@ This deals with a CDATA escape and extracts the contents from that."
 
   (define-key map  "\C-ql" '(lambda () ""  (interactive "*")
 ;;;XXX if we have a selection, use this as the url attribute value
+                     (if mark-active
+                       (progn
+                         (save-excursion)
+                         (goto-char (region-end))
+                         (insert "\"/>")
+                         (goto-char (region-beginning))
+                         (insert "<ulink url=\"")
+                       )
+                       (progn
                                                  (r-insert-node "ulink" nil nil nil t) 
                                                  (backward-char 2)
                                                  (insert " url=\"\"")
                                                  (forward-char 2)
 ;                                                (r-insert-attribute-value "url" "")
                                                  (backward-char 3)
-                                            ))
+                                            ))))
 
   (define-key map  "\C-cf" '(lambda () ""  (interactive "*") (r-insert-node "c:func" nil)))
 

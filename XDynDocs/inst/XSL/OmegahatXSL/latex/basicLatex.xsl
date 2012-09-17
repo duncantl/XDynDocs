@@ -9,6 +9,7 @@
 	xmlns:svg="http://www.w3.org/2000/svg" 
 	xmlns:js="http://www.ecma-international.org/publications/standards/Ecma-262.htm"
         xmlns:str="http://exslt.org/strings"
+	xmlns:ltx="http://www.latex.org"
 	exclude-result-prefixes="doc str" version='1.0'
         xmlns:xp="http://www.w3.org/TR/xpath">
 
@@ -37,6 +38,8 @@
 
 <xsl:param name="latex.macro.file">latexMacros</xsl:param>
 <xsl:param name="load.cprotect" select="1"/>
+
+<xsl:param name="default.cite.cmd">cite</xsl:param>
 
 <!-- <xsl:strip-space elements="*"/>  -->
 <xsl:preserve-space elements="*"/>
@@ -276,7 +279,7 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 </xsl:template>
 
 
-<xsl:template match="biblioref">\citep{<xsl:value-of select="@linkend"/>}</xsl:template>
+<xsl:template match="biblioref">\<xsl:value-of select="$default.cite.cmd"/>{<xsl:value-of select="@linkend"/>}</xsl:template>
 
 
 <xsl:template match="quote">``<xsl:apply-templates/>''</xsl:template>
@@ -333,18 +336,22 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 <!-- XXXXX -->
 
 <xsl:template match="graphic">
-\includegraphics{<xsl:call-template name="nmakeFileRef"/>}
+\includegraphics[width=\textwidth]{<xsl:call-template name="nmakeFileRef"/>}
+</xsl:template>
+
+<xsl:template match="graphic[@ltx:width]">
+\includegraphics[width=<xsl:value-of select="@ltx:width"/>]{<xsl:call-template name="nmakeFileRef"/>}
 </xsl:template>
 
 
 <xsl:template match="graphic[contains(@fileref, '.svg')]">
-\includegraphics{<xsl:call-template name="nmakeFileRef"><xsl:with-param name="filename"><xsl:value-of select="substring-before(@fileref, '.svg')"/></xsl:with-param></xsl:call-template>.png}
+\includegraphics[width=\textwidth]{<xsl:call-template name="nmakeFileRef"><xsl:with-param name="filename"><xsl:value-of select="substring-before(@fileref, '.svg')"/></xsl:with-param></xsl:call-template>.png}
 </xsl:template>
 
 
 
 <xsl:template match="graphic[contains(@fileref, '.jpg')]">
-\includegraphics{<xsl:call-template name="nmakeFileRef"></xsl:call-template>}
+\includegraphics[width=\textwidth]{<xsl:call-template name="nmakeFileRef"></xsl:call-template>}
 </xsl:template>
 
 <xsl:template name="nmakeFileRef">
@@ -360,9 +367,19 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 -->
 
 
-<xsl:template match="programlisting">\begin{verbatim}
-<xsl:apply-templates /> 
-\end{verbatim}</xsl:template>
+
+<xsl:template match="programlisting">\begin{CodeChunk}
+\begin{CodeInput}
+<xsl:apply-templates />
+\end{CodeInput}
+\end{CodeChunk}
+</xsl:template>
+
+<xsl:template match="programlisting">\begin{Verbatim}[frame=single,fontsize=\relsize{-2}]
+<xsl:apply-templates />
+\end{Verbatim}
+</xsl:template>
+
 
 <xsl:template match="programlisting[.//co]">\begin{alltt}
 <xsl:apply-templates /> 
@@ -388,7 +405,7 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 
 
 <!-- Not certain why match="citation/biblioref" doesn't work -->
-<xsl:template match="citation[biblioref]">\citep{<xsl:value-of select="biblioref/@linkend"/>}</xsl:template>
+<xsl:template match="citation[biblioref]">\<xsl:value-of select="$default.cite.cmd"/>{<xsl:value-of select="biblioref/@linkend"/>}</xsl:template>
 
 
 <xsl:template match="fix|check"/>
