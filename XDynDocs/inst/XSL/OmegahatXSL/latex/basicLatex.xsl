@@ -39,7 +39,9 @@
 <xsl:param name="latex.macro.file">latexMacros</xsl:param>
 <xsl:param name="load.cprotect" select="1"/>
 
-<xsl:param name="default.cite.cmd">cite</xsl:param>
+<xsl:param name="programlisting.style"/>
+
+<xsl:param name="default.cite.cmd">citep</xsl:param>
 
 <!-- <xsl:strip-space elements="*"/>  -->
 <xsl:preserve-space elements="*"/>
@@ -59,7 +61,7 @@ itemizedlist itermset keycombo keywordset legalnotice listitem lot
 mediaobject mediaobjectco menuchoice msg msgentry msgexplan msginfo
 msgmain msgrel msgset msgsub msgtext note objectinfo
 orderedlist othercredit part partintro preface printhistory procedure
-programlistingco publisher qandadiv qandaentry qandaset question
+programlisting programlistingco publisher qandadiv qandaentry qandaset question
 refentry reference refmeta refnamediv refsect1 refsect1info refsect2
 refsect2info refsect3 refsect3info refsynopsisdiv refsynopsisdivinfo
 revhistory revision row sbr screenco screenshot sect1 sect1info sect2
@@ -95,7 +97,7 @@ simplemsgentry
 <xsl:template match="caption//comment()">%</xsl:template>
 
 
-<xsl:template match="text()[not(ancestor::r:code) and not(ancestor::r:output) and not(ancestor::xml:code) and not(ancestor::js:code) and not(ancestor::svg:code)]"><xsl:value-of select="str:replace(str:replace(str:replace(string(.), '&amp;', '\&amp;'), '_', '\_'), '#', '\#')"/></xsl:template>
+<xsl:template match="text()[not(ancestor::r:code) and not(ancestor::r:output) and not(ancestor::xml:code) and not(ancestor::js:code) and not(ancestor::svg:code) and not(ancestor::programlisting)]"><xsl:value-of select="str:replace(str:replace(str:replace(string(.), '&amp;', '\&amp;'), '_', '\_'), '#', '\#')"/></xsl:template>
 
 <xsl:template name="replace-leading-newlines">
 <xsl:param name="string"/>
@@ -368,6 +370,7 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 
 
 
+<!-- See below. -->
 <xsl:template match="programlisting">\begin{CodeChunk}
 \begin{CodeInput}
 <xsl:apply-templates />
@@ -375,13 +378,30 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 \end{CodeChunk}
 </xsl:template>
 
-<xsl:template match="programlisting">\begin{Verbatim}[frame=single,fontsize=\relsize{-2}]
+
+<xsl:template name="verbatimOptions">
+<xsl:if test="not($programlisting.style = '') or @ltx:fontsize"><xsl:text>[</xsl:text>
+ <xsl:value-of select="$programlisting.style"/>
+ <xsl:if test="@ltx:fontsize">
+  <xsl:if test="not($programlisting.style = '')">,</xsl:if>
+  <xsl:text>fontsize=</xsl:text><xsl:value-of select="@ltx:fontsize"/>
+</xsl:if>]</xsl:if>
+</xsl:template>
+
+<xsl:template name="removeVerbatimStartNewline">
+<xsl:if test="not(starts-with(., '&#10;'))"><xsl:message>adding new line to <xsl:value-of select="substring(., 0, 20)"/></xsl:message><xsl:text>&#10;</xsl:text></xsl:if><!--<xsl:text>&#10;</xsl:text>-->
+</xsl:template>
+
+<!-- fontsize=\relsize{-2} add a comment -->
+<xsl:template match="programlisting">\begin{Verbatim}<xsl:call-template name="verbatimOptions"/>
+<xsl:call-template name="removeVerbatimStartNewline"/>
 <xsl:apply-templates />
-\end{Verbatim}
+<xsl:if test="not(substring(., string-length(.)) = '&#10;')"><xsl:message>adding ending newline</xsl:message><xsl:text>&#10;</xsl:text></xsl:if>\end{Verbatim}
 </xsl:template>
 
 
-<xsl:template match="programlisting[.//co]">\begin{alltt}
+<xsl:template match="programlisting[.//co | .//highlight]">\begin{alltt}
+<xsl:call-template name="removeVerbatimStartNewline"/>
 <xsl:apply-templates /> 
 \end{alltt}</xsl:template>
 
