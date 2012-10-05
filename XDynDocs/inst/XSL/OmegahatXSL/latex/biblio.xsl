@@ -30,6 +30,9 @@
 
 <xsl:template match="text()"><xsl:value-of select="str:replace(str:replace(string(.), '_', '\_'), '&amp;', '\&amp;')"/></xsl:template>
 
+<xsl:template match="isbn">ISBN = {<xsl:apply-templates/>}<xsl:call-template name="comma"/></xsl:template>
+<xsl:template match="issn">ISSN = {<xsl:apply-templates/>}<xsl:call-template name="comma"/></xsl:template>
+
 
 <!--
 <xsl:template name="bibType">
@@ -46,11 +49,15 @@
 
 <xsl:template name="comma"><xsl:if test="not(position() = last())">,
 </xsl:if></xsl:template>
+<xsl:template name="comma-noline"><xsl:if test="not(position() = last())">, </xsl:if></xsl:template>
+
+<!-- The primary template for a biblioentry -->
+<xsl:template match="biblioentry[not(@id)]"/>
 
 <xsl:template match="biblioentry">
 @<xsl:apply-templates select="." mode="bibType"/>{<xsl:value-of select="@id"/>,
 <xsl:apply-templates/>
-<xsl:if test="not(./year) and not(./pubdate)">,
+<xsl:if test="not(.//year) and not(.//pubdate) and not(.//date)">,
 year = 2011</xsl:if>
 }
 </xsl:template>
@@ -64,8 +71,17 @@ year = 2011</xsl:if>
 <xsl:template match="title">title = {<xsl:apply-templates/><xsl:apply-templates select="../subtitle" mode="ti"/>}<xsl:call-template name="comma"/>
 </xsl:template>
 
-<xsl:template match="pubdate">year = "<xsl:value-of select="."/>"<xsl:call-template name="comma"/>
+<xsl:template match="biblioset/version">version = {<xsl:value-of select="."/>}<xsl:call-template name="comma"/></xsl:template>
+
+<xsl:template match="pubdate|year|date">year = "<xsl:value-of select="."/>"<xsl:call-template name="comma"/>
 </xsl:template>
+
+<xsl:template match="biblioentry/pubdate[../biblioset/year or ../biblioset/pubdate]"/>
+<xsl:template match="pubdate[@online='true']"/>
+
+<xsl:template match="month">month = <xsl:apply-templates/><xsl:call-template name="comma"/></xsl:template>
+<xsl:template match="day"/>
+
 
 <xsl:template name="makeAuthor">
 <xsl:apply-templates select="surname"/><xsl:if test="firstname">, <xsl:value-of select="firstname"/></xsl:if>
@@ -77,6 +93,7 @@ year = 2011</xsl:if>
 </xsl:template>
 
 <xsl:template match="biblioset"><xsl:apply-templates/></xsl:template>
+
 <xsl:template match="biblioset/title">journal = {<xsl:apply-templates />}<xsl:call-template name="comma"/>
 </xsl:template>
 
@@ -96,20 +113,21 @@ year = 2011</xsl:if>
 
 
 
-<xsl:template match="publisher">publisher = "<xsl:apply-templates select="publishername"/>"<xsl:if test="address"><xsl:call-template name="comma"/><xsl:apply-templates select="address"/></xsl:if><xsl:call-template name="comma"/>
+<xsl:template match="publisher">publisher = "<xsl:apply-templates select="publishername"/>"<xsl:if test="address">,
+<xsl:apply-templates select="address"/></xsl:if><xsl:call-template name="comma"/>
 </xsl:template>
 
 <xsl:template match="address">address = {<xsl:apply-templates/>}<xsl:call-template name="comma"/></xsl:template>
 
 <!--XXXX Need to inherit the processing of these elements, then put the comma in! -->
-<xsl:template match="*[parent::address]"><xsl:value-of select="."/><xsl:call-template name="comma"/></xsl:template>
+<xsl:template match="*[parent::address]"><xsl:value-of select="."/><xsl:call-template name="comma-noline"/></xsl:template>
 
 <!-- XXX what should the bibtex field name be for this. -->
 <xsl:template match="corpauthor">institution = "<xsl:apply-templates/>"<xsl:call-template name="comma"/>
 <xsl:if test="not(preceding-sibling::author) and not(following-sibling::author)">author = "{<xsl:apply-templates/>}"<xsl:call-template name="comma"/></xsl:if>
 </xsl:template>
 
-<xsl:template match="pagenums">pages = "<xsl:apply-templates/>"<xsl:call-template name="comma"/>
+<xsl:template match="pagenums|pages">pages = "<xsl:apply-templates/>"<xsl:call-template name="comma"/>
 </xsl:template>
 
 

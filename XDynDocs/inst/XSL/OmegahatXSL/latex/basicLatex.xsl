@@ -97,7 +97,7 @@ simplemsgentry
 <xsl:template match="caption//comment()">%</xsl:template>
 
 
-<xsl:template match="text()[not(ancestor::r:code) and not(ancestor::r:output) and not(ancestor::xml:code) and not(ancestor::js:code) and not(ancestor::svg:code) and not(ancestor::programlisting)]"><xsl:value-of select="str:replace(str:replace(str:replace(string(.), '&amp;', '\&amp;'), '_', '\_'), '#', '\#')"/></xsl:template>
+<xsl:template match="text()[not(ancestor::r:code) and not(ancestor::r:output) and not(ancestor::xml:code) and not(ancestor::js:code) and not(ancestor::svg:code) and not(ancestor::programlisting)]"><xsl:value-of select="str:replace(str:replace(str:replace(str:replace(string(.), '&amp;', '\&amp;'), '_', '\_'), '#', '\#'), '%', '\%')"/></xsl:template>
 
 <xsl:template name="replace-leading-newlines">
 <xsl:param name="string"/>
