@@ -10,11 +10,7 @@
                 exclude-result-prefixes="xp"
                 version="1.0">
 
-<xsl:template match="xp:code">
-\begin{verbatim}
-<xsl:apply-templates />
-\end{verbatim}
-</xsl:template>
+<xsl:template match="xp:code">\begin{XPathCode}<xsl:apply-templates />\end{XPathCode}</xsl:template>
 
 <xsl:template match="xp:func">\XP<xsl:value-of select="local-name()"/>{<xsl:apply-templates/>}</xsl:template>
 

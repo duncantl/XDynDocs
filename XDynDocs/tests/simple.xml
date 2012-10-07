@@ -1,0 +1,6 @@
+<article
+	 xmlns:r="http://www.r-project.org">
+<r:code>
+data.frame(x = 1:2, y = c("a", "b"))
+</r:code>
+</article>

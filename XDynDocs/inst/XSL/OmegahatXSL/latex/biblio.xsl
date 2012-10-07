@@ -130,6 +130,8 @@ year = 2011</xsl:if>
 <xsl:template match="pagenums|pages">pages = "<xsl:apply-templates/>"<xsl:call-template name="comma"/>
 </xsl:template>
 
+<xsl:template match="edition">edition = {<xsl:apply-templates />}<xsl:call-template name="comma"/>
+</xsl:template>
 
 
 

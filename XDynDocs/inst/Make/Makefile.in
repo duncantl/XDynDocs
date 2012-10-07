@@ -21,9 +21,12 @@ ifndef DB
  DB=$(DYN_DOCS)/XSL/docbook-xsl-current
 endif
 
+ifndef DB_DOC_LAYOUT
+DB_DOC_LAYOUT=toc index mainmatter 
+endif
 
 ifndef DBLATEX_PARAMS
-  DBLATEX_PARAMS= -stringparam doc.layout "mainmatter" \
+  DBLATEX_PARAMS= -stringparam doc.layout "$(DB_DOC_LAYOUT) " \
                   -param doc.collab.show 0 \
                   -param latex.use.hyperref 1 \
                   -stringparam latex.style Rdocbook 
@@ -264,9 +267,16 @@ endif
 
 ifdef USE_FO
 %.pdf: %.fo 
-	(export CLASSPATH=${CLASSPATH}:${BATIK_CLASSES} ; $(FOP) -fo $< -pdf $@)
+	(export CLASSPATH=${CLASSPATH}:${BATIK_CLASSES} ; $(FOP) $(FOP_ARGS) -fo $< -pdf $@)
 
 else
+
+ifndef run-tex
+define run-text
+ (export TEXINPUTS=$(JSS_STYLE_DIR):$(shell dirname $(LATEX_MACROS)):$(TEXINPUTS):: ; pdflatex $*)
+endef
+endif
+
 %.pdf: %.tex # $(JSS_STYLE_DIR)/jss.cls $(LATEX_MACROS)
 	(export TEXINPUTS=$(JSS_STYLE_DIR):$(shell dirname $(LATEX_MACROS)):$(TEXINPUTS):: ; pdflatex $*)
 	(export BSTINPUTS=$(JSS_STYLE_DIR):$(shell dirname $(LATEX_MACROS)):$(TEXINPUTS):: ; bibtex $*)

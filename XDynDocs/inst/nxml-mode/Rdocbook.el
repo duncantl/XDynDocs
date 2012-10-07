@@ -514,7 +514,7 @@ This deals with a CDATA escape and extracts the contents from that."
   (define-key map "\C-l\C-o" '(lambda (cdata) "" (interactive "P") (r-insert-node "sh:output" (not cdata) t nil)))
 
 
-  (define-key map "\C-x\C-g" '(lambda () "" (interactive) (insert "<glossentry><glossterm></glossterm>\n<glossdef><para>\n\n</para></glossdef>\n</glossentry>")))
+  (define-key map "\C-g\C-g" '(lambda () "" (interactive) (insert "<glossentry><glossterm></glossterm>\n<glossdef><para>\n\n</para></glossdef>\n</glossentry>")))
 
 
 ;  (define-key map  "\C-q\C-i" '(lambda (arg) "" (interactive "P") (r-insert-node "item" nil t)))

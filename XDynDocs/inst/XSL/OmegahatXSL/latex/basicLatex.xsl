@@ -97,7 +97,7 @@ simplemsgentry
 <xsl:template match="caption//comment()">%</xsl:template>
 
 
-<xsl:template match="text()[not(ancestor::r:code) and not(ancestor::r:output) and not(ancestor::xml:code) and not(ancestor::js:code) and not(ancestor::svg:code) and not(ancestor::programlisting)]"><xsl:value-of select="str:replace(str:replace(str:replace(str:replace(string(.), '&amp;', '\&amp;'), '_', '\_'), '#', '\#'), '%', '\%')"/></xsl:template>
+<xsl:template match="text()[not(ancestor::r:code) and not(ancestor::r:output) and not(ancestor::xml:code) and not(ancestor::js:code) and not(ancestor::svg:code) and not(ancestor::programlisting)]"><xsl:value-of select="str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(string(.), '&amp;', '\&amp;'), '_', '\_'), '#', '\#'), '%', '\%'), '{', '\lcurly'), '}', '\rcurly')"/></xsl:template>
 
 <xsl:template name="replace-leading-newlines">
 <xsl:param name="string"/>
@@ -275,7 +275,13 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 <xsl:otherwise>
 \clearpage
 
+\part{Bibliography}<glossentry><glossterm></glossterm>
+<glossdef><para>
+
+</para></glossdef>
+</glossentry>
 \bibliography{<xsl:value-of select="$bibliog.file"/>} 
+\bibliographystyle{plain}
 </xsl:otherwise>
 </xsl:choose>
 </xsl:template>

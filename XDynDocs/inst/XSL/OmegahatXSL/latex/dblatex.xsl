@@ -39,10 +39,6 @@
 </xsl:template>
 
 
-<xsl:template match="r:code">
-\begin{verbatim}
- <xsl:apply-templates />
-\end{verbatim}
-</xsl:template>
+<xsl:template match="r:code">\begin{verbatim}<xsl:apply-templates />\end{verbatim}</xsl:template>
 
 </xsl:stylesheet>

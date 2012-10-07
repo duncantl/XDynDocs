@@ -14,11 +14,14 @@
                 version="1.0"
 	xmlns:mk="http://www.make.org">
 
+
 <xsl:include href="../common/RCommonDocbook.xsl"/>
 <xsl:include href="../common/no-html.xsl"/>
 <xsl:include href="../common/no-fo.xsl"/>
+<xsl:include href="../common/utils.xsl"/>
 
 <xsl:include href="utils.xsl"/>
+
 
 <xsl:include href="css.xsl"/>
 <xsl:include href="languages.xsl"/>
@@ -50,7 +53,13 @@
 
 <xsl:template match="s:param|r:param">\Sparam{<xsl:apply-templates/>}</xsl:template>
 
-<xsl:template match="r:output">\begin{ROutput}&#10;<xsl:apply-templates/>&#10;\end{ROutput}&#10;</xsl:template>
+<!-- Used to have &#10; in several places -->
+<xsl:template match="r:output">\begin{ROutput}<xsl:apply-templates/>\end{ROutput}</xsl:template>
+
+<!-- trim white space.  Change to trim not normalize. -->
+<xsl:template match="r:output[not(*)]">\begin{ROutput}
+<xsl:call-template name="trim.text"/>
+\end{ROutput}</xsl:template>
 
 <xsl:template match="r:dots|dots">\ldots</xsl:template>
 
@@ -66,6 +75,8 @@
 <xsl:template match="r:code/r:output"><xsl:apply-templates/></xsl:template>
 
 <xsl:template match="r:output//text() | r:code//text()"><xsl:value-of select="."/></xsl:template>
+<!-- <xsl:template match="r:output//text() | r:code//text()"><xsl:call-template name="trim.text"/></xsl:template> -->
+
 
 <xsl:template match="r:function|r:code|s:code|s:plot|r:plot|r:test">\begin{CodeChunk}
 \begin{CodeInput}<xsl:apply-templates/>\end{CodeInput}
