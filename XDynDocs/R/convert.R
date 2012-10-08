@@ -6,9 +6,9 @@
   # or an R-level
 
 setGeneric("convert", function(from, opts = NULL, target, context = NULL) {
-                         standardGeneric("convert")
-#      .Call("R_clearNodeMemoryManagement", PACKAGE = "XML")
-#                          ans
+                        ans = standardGeneric("convert")
+                        .Call("R_clearNodeMemoryManagement", ans, PACKAGE = "XML")
+                        ans
 
            })
            

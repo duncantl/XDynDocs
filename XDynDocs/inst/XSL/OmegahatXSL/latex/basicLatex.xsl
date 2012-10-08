@@ -402,7 +402,7 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 <xsl:template match="programlisting">\begin{Verbatim}<xsl:call-template name="verbatimOptions"/>
 <xsl:call-template name="removeVerbatimStartNewline"/>
 <xsl:apply-templates />
-<xsl:if test="not(substring(., string-length(.)) = '&#10;')"><xsl:message>adding ending newline</xsl:message><xsl:text>&#10;</xsl:text></xsl:if>\end{Verbatim}
+<xsl:if test="not(substring(., string-length(.)) = '&#10;')"><xsl:text>&#10;</xsl:text></xsl:if>\end{Verbatim}
 </xsl:template>
 
 

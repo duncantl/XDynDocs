@@ -272,8 +272,8 @@ ifdef USE_FO
 else
 
 ifndef run-tex
-define run-text
- (export TEXINPUTS=$(JSS_STYLE_DIR):$(shell dirname $(LATEX_MACROS)):$(TEXINPUTS):: ; pdflatex $*)
+define run-tex
+ (export TEXINPUTS=$(JSS_STYLE_DIR):$(shell dirname $(LATEX_MACROS)):$(TEXINPUTS):: ; pdflatex $(@F:%.pdf=%))
 endef
 endif
 
