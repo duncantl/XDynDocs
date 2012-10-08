@@ -198,7 +198,7 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 </xsl:template>
 
 
-<xsl:template match="authorgroup">
+<xsl:template match="XXX_authorgroup">
 \author{<xsl:for-each select="./author"><xsl:apply-templates select="."/>
 <xsl:if test="not(position() = last())"><xsl:text> \And 
 </xsl:text></xsl:if></xsl:for-each>}

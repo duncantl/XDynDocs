@@ -22,7 +22,7 @@ ifndef DB
 endif
 
 ifndef DB_DOC_LAYOUT
-DB_DOC_LAYOUT=toc index mainmatter 
+DB_DOC_LAYOUT=toc index mainmatter coverpage
 endif
 
 ifndef DBLATEX_PARAMS

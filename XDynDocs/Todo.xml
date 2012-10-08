@@ -19,6 +19,7 @@
 <title>HTML</title>
 <items>
 
+
 <item>
 Need default dimensions for all device types as we may have a r:format
 specified in a node and so different from the 
@@ -272,6 +273,9 @@ people to select nested alternatives within that container.
 <topic>
 <title>Configuration</title>
 <items>
+<item>
+Make the catalog we build use full path names, not relative paths, relative to the file itself.
+</item>
 
 <item status="done">
 Get configuration correct if no catalog pointing to OmegahatXSL.
