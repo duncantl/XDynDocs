@@ -27,6 +27,8 @@
 <xsl:template match="mklang">\MarkupLang{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="svg">\MarkupLang{SVG}</xsl:template>
 <xsl:template match="kml">\MarkupLang{KML}</xsl:template>
+<xsl:template match="gml">\MarkupLang{GML}</xsl:template>
+<xsl:template match="markupLang">\MarkupLang{<xsl:apply-templates/>}</xsl:template>
 
 
 </xsl:stylesheet>

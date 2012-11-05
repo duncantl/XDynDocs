@@ -16,4 +16,6 @@
 
 <xsl:template match="xp:expr">\verb+<xsl:apply-templates/>+</xsl:template>
 
+<xsl:template match="xp:node-test">\XPathNodeTest{<xsl:apply-templates/>}</xsl:template>
+
 </xsl:stylesheet>
