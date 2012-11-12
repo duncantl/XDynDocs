@@ -58,7 +58,8 @@
 
 <!-- trim white space.  Change to trim not normalize. -->
 <xsl:template match="r:output[not(*)]">\begin{ROutput}
-<xsl:call-template name="trim.text"/>
+<xsl:call-template name="replace-leading-newlines"/>
+<!--<xsl:call-template name="trim.text"/>-->
 \end{ROutput}</xsl:template>
 
 <xsl:template match="r:dots|dots">\ldots</xsl:template>
@@ -70,7 +71,7 @@
 <xsl:template match="s:true|r:true|r:TRUE">\STRUE<xsl:call-template name="addBraces"/></xsl:template>
 
 <!-- Check to see if we need to add {} after a macro.Really want to check if the next element is text().  -->
-<xsl:template name="addBraces"><xsl:if test="starts-with(string(following-sibling::text()[1]), ' ')">{}</xsl:if></xsl:template>
+<xsl:template name="addBraces"><xsl:if test="starts-with(string(following-sibling::text()[1]), ' ')"></xsl:if></xsl:template>
 
 <xsl:template match="r:code/r:output"><xsl:apply-templates/></xsl:template>
 

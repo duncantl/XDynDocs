@@ -11,7 +11,9 @@
         xmlns:str="http://exslt.org/strings"
 	xmlns:ltx="http://www.latex.org"
 	exclude-result-prefixes="doc str" version='1.0'
-        xmlns:xp="http://www.w3.org/TR/xpath">
+        xmlns:xp="http://www.w3.org/TR/xpath"
+        xmlns:c="http://www.C.org"
+        xmlns:make="http://www.make.org">
 
 <xsl:import href="dblatex.xsl"/>
 
@@ -97,11 +99,16 @@ simplemsgentry
 <xsl:template match="caption//comment()">%</xsl:template>
 
 
-<xsl:template match="text()[not(ancestor::r:function) and not(ancestor::r:code) and not(ancestor::r:output) and not(ancestor::xml:code) and not(ancestor::js:code) and not(ancestor::svg:code) and not(ancestor::programlisting)]"><xsl:value-of select="str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(string(.), '&amp;', '\&amp;'), '_', '\_'), '#', '\#'), '%', '\%'), '{', '\lcurly'), '}', '\rcurly')"/></xsl:template>
+<!--  See if we can use the "scape" template and defaults in dblatex. -->
+<xsl:template match="text()[not(ancestor::c:code) and not(ancestor::r:function) and not(ancestor::r:code) and not(ancestor::r:output) and not(ancestor::xml:code) and not(ancestor::js:code) and not(ancestor::svg:code) and not(ancestor::programlisting)]"><xsl:value-of select="str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(string(.), '&amp;', '\&amp;'), '_', '\_'), '#', '\#'), '%', '\%'), '{', '\lcurly'), '}', '\rcurly')"/></xsl:template>
+
+<xsl:template match="text()[ancestor::programlisting or ancestor::xp:expr or ancestor::r:code or ancestor::r:output or ancestor::r:function or ancestor::xsl:code or ancestor::make:code or ancestor::literal]">
+<xsl:copy select="."/>
+</xsl:template>
 
 <xsl:template name="replace-leading-newlines">
 <xsl:param name="string"/>
-<xsl:message>string = '<xsl:value-of select="$string"/>'</xsl:message>
+<!--<xsl:message>string = '<xsl:value-of select="$string"/>'</xsl:message> -->
 <xsl:choose><xsl:when test="substring($string, 1, 1) = '&#10;'">
   <xsl:call-template name="replace-leading-newlines">
    <xsl:with-param name="string" select="substring($string, 2)"/>
@@ -311,8 +318,13 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 <xsl:template match="example/title"/>
 <xsl:template match="example/title" mode="eg"><xsl:apply-templates/></xsl:template>
 
-
+<!--  \section  -->
+<!--  <xsl:call-template name="makeheading"/>  -->
 <xsl:template match="section[./title/*]">
+<!--
+<xsl:call-template name="makeheading">
+<xsl:with-param name="level" select="count(ancestor::section)+1"/>
+</xsl:call-template>-->
 \section[<xsl:apply-templates select="./title/text()"/>]{<xsl:apply-templates select="./title/*|./title/text()"/>}\label{<xsl:value-of select="@id"/>}<xsl:apply-templates />					
 </xsl:template>
 
@@ -406,10 +418,8 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 </xsl:template>
 
 
-<xsl:template match="programlisting[.//co | .//highlight]">\begin{alltt}
-<xsl:call-template name="removeVerbatimStartNewline"/>
-<xsl:apply-templates /> 
-\end{alltt}</xsl:template>
+<xsl:template match="programlisting[.//co | .//highlight]">\begin{alltt}<xsl:call-template name="removeVerbatimStartNewline"/>
+<xsl:apply-templates />\end{alltt}</xsl:template>
 
 
 <xsl:template match="orderedlist">
