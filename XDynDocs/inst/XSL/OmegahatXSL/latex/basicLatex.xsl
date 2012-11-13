@@ -321,12 +321,16 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 <!--  \section  -->
 <!--  <xsl:call-template name="makeheading"/>  -->
 <xsl:template match="section[./title/*]">
-<!--
-<xsl:call-template name="makeheading">
-<xsl:with-param name="level" select="count(ancestor::section)+1"/>
-</xsl:call-template>-->
 \section[<xsl:apply-templates select="./title/text()"/>]{<xsl:apply-templates select="./title/*|./title/text()"/>}\label{<xsl:value-of select="@id"/>}<xsl:apply-templates />					
 </xsl:template>
+
+<xsl:template match="section[./title/*]">
+<xsl:call-template name="makeheading">
+<xsl:with-param name="level" select="count(ancestor::section)+1"/>
+</xsl:call-template>\label{<xsl:value-of select="@id"/>}<xsl:apply-templates />
+</xsl:template>
+
+
 
 <xsl:template match="appendix[./title/*]">
   <xsl:if test="not (preceding-sibling::appendix)">
