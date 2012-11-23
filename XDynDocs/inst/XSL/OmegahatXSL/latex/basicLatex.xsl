@@ -462,4 +462,8 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 
 <xsl:template match="directory|dir">\texttt{<xsl:apply-templates/>/}</xsl:template>
 
+<xsl:template match="lib">\DLL{<xsl:apply-templates/>/}</xsl:template>
+
+
+
 </xsl:stylesheet>

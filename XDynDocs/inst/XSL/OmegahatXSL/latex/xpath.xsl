@@ -13,6 +13,7 @@
 <xsl:template match="xp:code">\begin{XPathCode}<xsl:apply-templates />\end{XPathCode}</xsl:template>
 
 <xsl:template match="xp:func">\XP<xsl:value-of select="local-name()"/>{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="xsl:func|xsl:function">\XSL<xsl:value-of select="local-name()"/>{<xsl:apply-templates/>}</xsl:template>
 
 <xsl:template match="xp:expr">\verb+<xsl:apply-templates/>+</xsl:template>
 
