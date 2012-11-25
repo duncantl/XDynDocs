@@ -110,11 +110,32 @@ simplemsgentry
 <xsl:param name="string"/>
 <!--<xsl:message>string = '<xsl:value-of select="$string"/>'</xsl:message> -->
 <xsl:choose><xsl:when test="substring($string, 1, 1) = '&#10;'">
+<xsl:message>replace-leading-newlines in '<xsl:value-of select="substring($string, 2, 20)"/>'</xsl:message>
   <xsl:call-template name="replace-leading-newlines">
    <xsl:with-param name="string" select="substring($string, 2)"/>
   </xsl:call-template>
 </xsl:when>
-<xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
+<xsl:otherwise><xsl:value-of select="$string"/></xsl:otherwise>
+</xsl:choose>
+</xsl:template>
+
+<xsl:template name="trim-newlines">
+<xsl:param name="string"/>
+ <xsl:call-template name="replace-leading-newlines">
+   <xsl:with-param name="string">
+       <xsl:call-template name="replace-trailing-newlines"><xsl:with-param name="string" select="."/></xsl:call-template>
+   </xsl:with-param></xsl:call-template>
+</xsl:template>
+
+<xsl:template name="replace-trailing-newlines">
+<xsl:param name="string"/>
+<xsl:choose><xsl:when test="substring($string, string-length($string)) = '&#10;'">
+<xsl:message>replace-trailing-newlines in '<xsl:value-of select="substring($string, 2, 20)"/>'</xsl:message>
+  <xsl:call-template name="replace-trailing-newlines">
+   <xsl:with-param name="string" select="substring($string, 1, string-length($string)-1)"/>
+  </xsl:call-template>
+</xsl:when>
+<xsl:otherwise><xsl:value-of select="$string"/></xsl:otherwise>
 </xsl:choose>
 </xsl:template>
 
@@ -410,8 +431,9 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 </xsl:if>]</xsl:if>
 </xsl:template>
 
+<!-- <xsl:message>adding new line to <xsl:value-of select="substring(., 0, 20)"/></xsl:message> -->
 <xsl:template name="removeVerbatimStartNewline">
-<xsl:if test="not(starts-with(., '&#10;'))"><xsl:message>adding new line to <xsl:value-of select="substring(., 0, 20)"/></xsl:message><xsl:text>&#10;</xsl:text></xsl:if><!--<xsl:text>&#10;</xsl:text>-->
+<xsl:if test="not(starts-with(., '&#10;'))"><xsl:text>&#10;</xsl:text></xsl:if><!--<xsl:text>&#10;</xsl:text>-->
 </xsl:template>
 
 <!-- fontsize=\relsize{-2} add a comment -->

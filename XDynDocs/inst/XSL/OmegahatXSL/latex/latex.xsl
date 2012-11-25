@@ -54,12 +54,12 @@
 <xsl:template match="s:param|r:param">\Sparam{<xsl:apply-templates/>}</xsl:template>
 
 <!-- Used to have &#10; in several places -->
+<!-- Not called (at least for book.xml) -->
 <xsl:template match="r:output">\begin{ROutput}<xsl:apply-templates/>\end{ROutput}</xsl:template>
 
 <!-- trim white space.  Change to trim not normalize. -->
 <xsl:template match="r:output[not(*)]">\begin{ROutput}
-<xsl:call-template name="replace-leading-newlines"/>
-<!--<xsl:call-template name="trim.text"/>-->
+<xsl:call-template name="trim-newlines"><xsl:with-param name="string" select="string(.)"/></xsl:call-template>
 \end{ROutput}</xsl:template>
 
 <xsl:template match="r:dots|dots">\ldots</xsl:template>
