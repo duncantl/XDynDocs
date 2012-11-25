@@ -108,9 +108,7 @@ simplemsgentry
 
 <xsl:template name="replace-leading-newlines">
 <xsl:param name="string"/>
-<!--<xsl:message>string = '<xsl:value-of select="$string"/>'</xsl:message> -->
 <xsl:choose><xsl:when test="substring($string, 1, 1) = '&#10;'">
-<xsl:message>replace-leading-newlines in '<xsl:value-of select="substring($string, 2, 20)"/>'</xsl:message>
   <xsl:call-template name="replace-leading-newlines">
    <xsl:with-param name="string" select="substring($string, 2)"/>
   </xsl:call-template>
@@ -130,7 +128,6 @@ simplemsgentry
 <xsl:template name="replace-trailing-newlines">
 <xsl:param name="string"/>
 <xsl:choose><xsl:when test="substring($string, string-length($string)) = '&#10;'">
-<xsl:message>replace-trailing-newlines in '<xsl:value-of select="substring($string, 2, 20)"/>'</xsl:message>
   <xsl:call-template name="replace-trailing-newlines">
    <xsl:with-param name="string" select="substring($string, 1, string-length($string)-1)"/>
   </xsl:call-template>
