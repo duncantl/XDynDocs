@@ -7,9 +7,7 @@
                 xmlns:sh="http://www.shell.org"
                 version="1.0">
 
-<xsl:template match="sh:exec">
-\textsl{<xsl:apply-templates/>}
-</xsl:template>
+<xsl:template match="sh:exec">\textsl{<xsl:apply-templates/>}</xsl:template>
 
 </xsl:stylesheet>
 
