@@ -80,7 +80,7 @@
 
 
 <xsl:template match="r:function|r:code|s:code|s:plot|r:plot|r:test">\begin{CodeChunk}
-\begin{CodeInput}<xsl:apply-templates/>\end{CodeInput}
+\begin{R<xsl:value-of select="local-name()"/>}<xsl:apply-templates/>\end{R<xsl:value-of select="local-name()"/>}
 \end{CodeChunk}</xsl:template>
 
 
