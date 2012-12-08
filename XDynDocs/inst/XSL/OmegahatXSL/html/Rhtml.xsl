@@ -17,6 +17,15 @@
 <xsl:import href="../common/no-latex.xsl" />
 <xsl:import href="../common/no-fo.xsl" />
 
+<xsl:param name="showAcronyms" select="1"/>
+
+<xsl:template match="programlisting[@lang]">
+<pre>
+<xsl:attribute name="class">programlisting_<xsl:value-of select="@lang"/></xsl:attribute>
+<xsl:apply-templates/>
+</pre>
+</xsl:template>
+
 <xd:doc what="nothing">
 This is an example of some documentation for an XSL thing.
 </xd:doc>
@@ -53,7 +62,7 @@ This is an example of some documentation for an XSL thing.
 <xsl:param name="val" select="string(.)"/>
 <xsl:param name="def"><xsl:choose><xsl:when test="//acronymDef[@value = $val]"><xsl:value-of select="//acronymDef[@value = $val]"/></xsl:when><xsl:otherwise><xsl:value-of select="//acronym[@def and string(.) = $val]/@def"/></xsl:otherwise></xsl:choose></xsl:param>
 <b class="acronym"><xsl:attribute name="title"><xsl:value-of select="string($def)"/></xsl:attribute><xsl:apply-templates/></b>
-<xsl:if test="@def"><xsl:text> </xsl:text>(<xsl:value-of select="@def"/>)</xsl:if>
+<xsl:if test="$showAcronyms and not($def = '') and not($def = $val)"><xsl:text> </xsl:text>(<xsl:value-of select="$def"/>)</xsl:if>
 </xsl:template>
 
 

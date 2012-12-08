@@ -14,6 +14,8 @@
 </xsl:template>
 
 
+<xsl:template match="http:arg"><code class="httpArg"><xsl:apply-templates/></code></xsl:template>
+
 <xsl:template match="http:headerFieldName">
 <code color="httpHeaderField">'<xsl:apply-templates/>'</code>
 </xsl:template>

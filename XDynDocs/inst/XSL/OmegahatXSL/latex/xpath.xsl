@@ -10,7 +10,15 @@
                 exclude-result-prefixes="xp"
                 version="1.0">
 
-<xsl:template match="xp:code">\begin{XPathCode}<xsl:apply-templates />\end{XPathCode}</xsl:template>
+<xsl:template match="xp:code">\begin{XPathCode}<xsl:apply-templates/><xsl:if test="not(substring(., string-length(.)) = '&#10;')"><xsl:text>
+</xsl:text></xsl:if>\end{XPathCode}</xsl:template>
+
+
+<xsl:template match="xp:code[not(*)]">\begin{XPathCode}
+<xsl:call-template name="trim-newlines">
+ <xsl:with-param name="string" select="string(.)"/>
+</xsl:call-template>
+\end{XPathCode}</xsl:template>
 
 <xsl:template match="xp:func">\XP<xsl:value-of select="local-name()"/>{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="xsl:func|xsl:function">\XSL<xsl:value-of select="local-name()"/>{<xsl:apply-templates/>}</xsl:template>

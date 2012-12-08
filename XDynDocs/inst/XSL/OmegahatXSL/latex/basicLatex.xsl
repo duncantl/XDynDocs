@@ -278,10 +278,24 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 <xsl:apply-templates select="graphic"/>
 </xsl:template>
 
+<xsl:template match="figure/title[following-sibling::caption]"/>
+
+<xsl:template match="figure/title[following-sibling::caption]" mode="title">
+<xsl:apply-templates/>
+</xsl:template>
+
 <xsl:template match="caption">
 <xsl:if test="//r:expr|//r:formula|xp:expr">\cprotect</xsl:if>\caption{<xsl:apply-templates/>}
 \label{<xsl:value-of select="ancestor::figure/@id"/>}
 </xsl:template>
+
+
+<xsl:template match="figure[title]/caption">
+<xsl:if test=".//r:expr|.//r:formula|xp:expr|../title//r:expr|../title//r:formula|../title/xp:expr">\cprotect</xsl:if>\caption[<xsl:apply-templates select="../title" mode="title"/>]{<xsl:apply-templates select="../title" mode="title"/><xsl:if test="not(substring(normalize-space(title), string-length(normalize-space(title))) =  '.')">.  </xsl:if> <xsl:apply-templates/>}
+\label{<xsl:value-of select="ancestor::figure/@id"/>}
+</xsl:template>
+
+
 
 <xsl:template match="dyngraphic"/>
 <xsl:template match="comment"/>
@@ -319,11 +333,11 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 <xsl:template match="para"><xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="figure/title[following-sibling::caption]"/>
+
 
 <xsl:template match="caption[.//listitem] | caption[count(.//para) > 1]">
 \captionsetup{singlelinecheck=off}
-\cprotect\caption[list=off]{<xsl:apply-templates/>}
+\cprotect\caption[<xsl:if test="../title"><xsl:apply-templates select="../title" mode="title"/>,</xsl:if>list=off]{<xsl:apply-templates select="../title" mode="title"/>.  <xsl:apply-templates/>}
 \label{<xsl:value-of select="ancestor::figure/@id"/>}
 </xsl:template>
 

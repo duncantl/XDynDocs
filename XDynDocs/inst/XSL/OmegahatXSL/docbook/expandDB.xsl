@@ -9,8 +9,8 @@
 <xsl:template match="r|R"><proglang>R</proglang></xsl:template>
 
 <xsl:template match="js"><proglang>JavaScript</proglang></xsl:template>
-<xsl:template match="xml"><proglang><acronym def="XML">XML</acronym></proglang></xsl:template>
-<xsl:template match="sgml"><proglang><acronym def="SGML">SGML</acronym></proglang></xsl:template>
+<xsl:template match="xml"><proglang><acronym def="eXtensible Markup Language">XML</acronym></proglang></xsl:template>
+<xsl:template match="sgml"><proglang><acronym def="Structured Generalized Markup Language">SGML</acronym></proglang></xsl:template>
 <xsl:template match="svg"><proglang>SVG</proglang></xsl:template>
 <xsl:template match="xslt"><proglang>XSLT</proglang></xsl:template>
 
@@ -69,7 +69,7 @@
 
 <!-- Allow for a verbatim XML/HTML that is protected by putting  -->
 <xsl:template match="verbXML">
-<programlisting>
+<programlisting lang="xml">
 <xsl:text>&#10;</xsl:text>
 <xsl:call-template name="xml-to-string">
 <xsl:with-param name="node-set" select="./*[1]"/>

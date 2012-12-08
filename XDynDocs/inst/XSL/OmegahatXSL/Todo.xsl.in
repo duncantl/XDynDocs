@@ -4,6 +4,7 @@
 		xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 		xmlns:r="http://www.r-project.org">
 
+<xsl:import href="html/defs.xsl"/>
 <xsl:import href="html/shell.xsl"/>
 <xsl:import href="html/xml.xsl"/>
 
@@ -437,5 +438,7 @@
 <xsl:apply-templates/>
 </div>
 </xsl:template>
+
+<a><xsl:attribute name="href">#<xsl:value-of select="@linkend"/></xsl:attribute>here</a>
 
 </xsl:stylesheet>

@@ -119,7 +119,7 @@ var toggleCodeIds = [
 
 
 <xsl:template match="r:code|r:init|r:frag|r:load|r:test|r:commands" name="makeVerbatimCode">
- <xsl:param name="class" value=""/>
+ <xsl:param name="class">r<xsl:value-of select="local-name(.)"/></xsl:param>
  <xsl:param name="uid" select="generate-id(.)"/>
 
 <!-- <xsl:param name="uid">r-<xsl:value-of select="local-name(.)"/>-<xsl:value-of select="count(ancestor::*)"/>-<xsl:value-of select="count(preceding-sibling::*)"/></xsl:param> -->
