@@ -326,8 +326,6 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 </xsl:template>
 
 
-<xsl:template match="biblioref">\<xsl:value-of select="$default.cite.cmd"/>{<xsl:value-of select="@linkend"/>}</xsl:template>
-
 
 <xsl:template match="quote">``<xsl:apply-templates/>''</xsl:template>
 <xsl:template match="para"><xsl:apply-templates/>
@@ -477,9 +475,12 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 </xsl:template>
 
 
+<xsl:template match="biblioref">\<xsl:value-of select="$default.cite.cmd"/>{<xsl:value-of select="@linkend"/>}</xsl:template>
 <!-- Not certain why match="citation/biblioref" doesn't work -->
 <xsl:template match="citation[biblioref]">\<xsl:value-of select="$default.cite.cmd"/>{<xsl:value-of select="biblioref/@linkend"/>}</xsl:template>
 
+<!-- Allow multiple biblioref nodes within a single citation and put them into a \cite{a,b,c} -->
+<xsl:template match="citation[count(biblioref) > 1]">\<xsl:value-of select="$default.cite.cmd"/>{<xsl:for-each select="biblioref"><xsl:value-of select="@linkend"/><xsl:if test="not(position() = last())">,</xsl:if></xsl:for-each>}</xsl:template>
 
 <xsl:template match="fix|check"/>
 
@@ -498,5 +499,7 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 <xsl:template match="lib">\DLL{<xsl:apply-templates/>/}</xsl:template>
 
 
+<xsl:template match="markupLang">\MarkupLang{<xsl:apply-templates/>}</xsl:template>
 
 </xsl:stylesheet>
+

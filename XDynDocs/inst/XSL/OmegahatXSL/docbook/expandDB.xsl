@@ -5,14 +5,14 @@
 
 <xsl:template match="docbook">DocBook</xsl:template>
 <xsl:template match="perl"><proglang>PERL</proglang></xsl:template>
-<xsl:template match="json"><proglang>JSON</proglang></xsl:template>
 <xsl:template match="r|R"><proglang>R</proglang></xsl:template>
 
 <xsl:template match="js"><proglang>JavaScript</proglang></xsl:template>
 <xsl:template match="xml"><proglang><acronym def="eXtensible Markup Language">XML</acronym></proglang></xsl:template>
 <xsl:template match="sgml"><proglang><acronym def="Structured Generalized Markup Language">SGML</acronym></proglang></xsl:template>
 <xsl:template match="svg"><proglang>SVG</proglang></xsl:template>
-<xsl:template match="xslt"><proglang>XSLT</proglang></xsl:template>
+<xsl:template match="xsl"><proglang><acronym def="eXtensible Stylesheet Language">XSL</acronym></proglang></xsl:template>
+<xsl:template match="xslt"><proglang><acronym def="eXtensible Stylesheet Language Transformer">XSLT</acronym></proglang></xsl:template>
 
 <xsl:template match="perl"><proglang>PERL</proglang></xsl:template>
 <xsl:template match="ruby"><proglang>Ruby</proglang></xsl:template>
@@ -22,9 +22,8 @@
 
 <xsl:template match="fo"><proglang>FO</proglang></xsl:template>
 
-
-
-<xsl:template match="JSON|json"><acronym def="JavaScript Object Notation">JSON</acronym></xsl:template>
+<!-- Should this <format><acronym>..   or <acronym><format> -->
+<xsl:template match="JSON|json"><acronym def="JavaScript Object Notation"><markupLang>JSON</markupLang></acronym></xsl:template>
 <xsl:template match="xpath"><acronym def="XPath">XPath</acronym></xsl:template>
 <xsl:template match="xinclude"><acronym def="XInclude">XInclude</acronym></xsl:template>
 <xsl:template match="markdown"><acronym def="markdown">Markdown</acronym></xsl:template>
@@ -32,19 +31,19 @@
 <xsl:template match="c"><acronym def="C programming language">C</acronym></xsl:template>
 <xsl:template match="cpp"><acronym def="C++ programming language">C++</acronym></xsl:template>
 <xsl:template match="sql"><acronym def="Structured Query Language">SQL</acronym></xsl:template>
-<xsl:template match="oracle"><acronym def="Oracle Database System">SQL</acronym></xsl:template>
+<xsl:template match="oracle"><acronym def="Oracle Database System">Oracle</acronym></xsl:template>
 <xsl:template match="mysql"><acronym def="MySQL Database System">MySQL</acronym></xsl:template>
 <xsl:template match="postgres"><acronym def="Postgres Database System">Postgres</acronym></xsl:template>
-<xsl:template match="ecmascript"><acronym def="ECMAScript">ECMAScript</acronym></xsl:template>
-<xsl:template match="flash"><acronym def="Flash">Flash</acronym></xsl:template>
-<xsl:template match="actionscript"><acronym def="ActionScript">ActionScript</acronym></xsl:template>
+<xsl:template match="ecmascript"><proglang><acronym def="ECMAScript">ECMAScript</acronym></proglang></xsl:template>
+<xsl:template match="flash"><proglang><acronym def="Flash">Flash</acronym></proglang></xsl:template>
+<xsl:template match="actionscript"><proglang><acronym def="ActionScript">ActionScript</acronym></proglang></xsl:template>
 <xsl:template match="rss"><acronym def="Real Simple Syndication">RSS</acronym></xsl:template>
 <xsl:template match="atom"><acronym def="">Atom</acronym></xsl:template>
-<xsl:template match="kml"><acronym def="Keyhole Markup Language">KML</acronym></xsl:template>
+<xsl:template match="kml"><acronym def="Keyhole Markup Language"><markupLang>KML</markupLang></acronym></xsl:template>
 <xsl:template match="http"><acronym def="HyperText Transfer Protocol">HTTP</acronym></xsl:template>
-<xsl:template match="https"><acronym def="Secure HyperText Transfer Protocol">HTTPs</acronym></xsl:template>
+<xsl:template match="https"><acronym def="Secure HyperText Transfer Protocol">HTTPS</acronym></xsl:template>
 <xsl:template match="ftp"><acronym def="File Transfer Protocol">FTP</acronym></xsl:template>
-<xsl:template match="java"><acronym def="Java">Java</acronym></xsl:template>
+<xsl:template match="java"><proglang><acronym def="Java">Java</acronym></proglang></xsl:template>
 
 
 <xsl:include href="shorthand.xsl"/>
