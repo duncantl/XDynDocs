@@ -11,11 +11,12 @@
 
   <!-- For information on bibtex types, see http://en.wikipedia.org/wiki/BibTeX#Entry_Types  -->
 
+<xsl:import href="languages.xsl"/>
+
 <xsl:output method="text" omit-xml-declaration="yes"/>
 <xsl:strip-space elements="*"/>
 <xsl:preserve-space elements="title"/>
 
-<xsl:include href="languages.xsl"/>
 
 <xsl:template match="/">
 <xsl:apply-templates select=".//biblioentry"/>
@@ -46,6 +47,8 @@
 </xsl:choose>
 </xsl:template>
 -->
+
+<xsl:template match="indexterm"/>
 
 <xsl:template name="comma"><xsl:if test="not(position() = last())">,
 </xsl:if></xsl:template>
@@ -134,11 +137,11 @@ year = 2011</xsl:if>
 </xsl:template>
 
 
-
 <xsl:template match="seriesinfo">booktitle = "{<xsl:apply-templates select="title/* | title/text()"/><xsl:apply-templates select="../subtitle" mode="ti"/>}"<xsl:call-template name="comma"/><xsl:if test="./editor"><xsl:call-template name="editors"/></xsl:if>
 </xsl:template>
 
 
 <xsl:template match="releaseInfo">note={<xsl:apply-templates/>}<xsl:call-template name="comma"/></xsl:template>
+
 <xsl:template match="r:pkgVersion">note={\proglang{R}~package version~<xsl:apply-templates/>}<xsl:call-template name="comma"/></xsl:template>
 </xsl:stylesheet>

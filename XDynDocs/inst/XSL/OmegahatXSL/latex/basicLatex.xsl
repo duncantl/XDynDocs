@@ -340,10 +340,26 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 </xsl:template>
 
 <xsl:template match="example">
-\begin{Example}{<xsl:apply-templates select="./title" mode="eg"/>}<xsl:if test="@id">\label{<xsl:value-of select="@id"/>}</xsl:if>
+<xsl:message>An example</xsl:message>
+\begin{example}{<xsl:apply-templates select="./title" mode="eg"/>}<xsl:if test="@id">\label{<xsl:value-of select="@id"/>}</xsl:if>
+<!--\begin{example}\cprotect\caption{<xsl:apply-templates select="./title" mode="eg"/>}\end{example}-->
 <xsl:apply-templates /><!-- select="*[not(name() = 'title')] | text()"/> -->
-\end{Example}
+\end{example}
 </xsl:template>
+
+
+<xsl:template match="XXX_example">
+\begin{MyExample}[H]
+\caption[A false title]{}
+This is my example.
+\end{MyExample}
+<!--\begin{Example}<xsl:if test="@id">\label{<xsl:value-of select="@id"/>}</xsl:if>
+\cprotect\caption{<xsl:apply-templates select="./title" mode="eg"/>}
+<xsl:apply-templates />
+\end{Example}-->
+</xsl:template>
+
+
 
 <xsl:template match="example/title"/>
 <xsl:template match="example/title" mode="eg"><xsl:apply-templates/></xsl:template>

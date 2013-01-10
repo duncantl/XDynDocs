@@ -26,7 +26,7 @@
 <xsl:template match="JSON|json"><acronym def="JavaScript Object Notation"><markupLang>JSON</markupLang></acronym></xsl:template>
 <xsl:template match="xpath"><acronym def="XPath">XPath</acronym></xsl:template>
 <xsl:template match="xinclude"><acronym def="XInclude">XInclude</acronym></xsl:template>
-<xsl:template match="markdown"><acronym def="markdown">Markdown</acronym></xsl:template>
+<xsl:template match="markdown"><acronym def="markdown"><markupLang>Markdown</markupLang></acronym></xsl:template>
 <xsl:template match="xsl"><acronym def="eXtensible Stylesheet Language">XSL</acronym></xsl:template>
 <xsl:template match="c"><acronym def="C programming language">C</acronym></xsl:template>
 <xsl:template match="cpp"><acronym def="C++ programming language">C++</acronym></xsl:template>
