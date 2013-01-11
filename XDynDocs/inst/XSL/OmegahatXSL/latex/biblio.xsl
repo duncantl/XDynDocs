@@ -23,10 +23,12 @@
 </xsl:template>
 
 <xsl:template match="biblioentry" mode="bibType">misc</xsl:template>
-<xsl:template match="biblioentry[.//r:pkg] | biblioentry[.//omg:pkg] | biblioentry[.//bioc:pkg] | biblioentry[.//r:pkgVersion]" mode="bibType">Manual</xsl:template>
+<xsl:template match="biblioentry[.//r:pkg] | biblioentry[.//omg:pkg] | biblioentry[.//bioc:pkg] | biblioentry[.//r:pkgVersion]" mode="bibType">misc</xsl:template>
 <xsl:template match="biblioentry[.//@role='journal' or .//volume]" mode="bibType">article</xsl:template>
 <xsl:template match="biblioentry[.//publisher]" mode="bibType">book</xsl:template>
 <xsl:template match="biblioentry[.//seriesinfo]" mode="bibType">incollection</xsl:template>
+<xsl:template match="biblioentry[.//biblioset[@relation='journal']]" mode="bibType">article</xsl:template>
+<xsl:template match="biblioentry[.//biblioset[@relation='editedBook']]" mode="bibType">incollection</xsl:template>
 
 
 <xsl:template match="text()"><xsl:value-of select="str:replace(str:replace(string(.), '_', '\_'), '&amp;', '\&amp;')"/></xsl:template>
@@ -65,16 +67,29 @@ year = 2011</xsl:if>
 }
 </xsl:template>
 
-<xsl:template match="ulink">url = {<xsl:value-of select="@url"/>}<xsl:call-template name="comma"/>
+<!-- should be url and not note. Use biblatex -->
+<xsl:template match="ulink">howpublished = {\url{<xsl:value-of select="@url"/>}}<xsl:call-template name="comma"/>
 </xsl:template>
+<!-- Remove the github links when we already have a url -->
+<xsl:template match="ulink[contains(@url, 'github') and count(../ulink) > 1]"/>
 
 <xsl:template match="subtitle"/>
 <xsl:template match="subtitle" mode="ti">: <xsl:apply-templates/></xsl:template>
 
-<xsl:template match="title">title = {<xsl:apply-templates/><xsl:apply-templates select="../subtitle" mode="ti"/>}<xsl:call-template name="comma"/>
+<xsl:template match="title">title = {{<xsl:apply-templates/><xsl:apply-templates select="../subtitle" mode="ti"/>}}<xsl:call-template name="comma"/>
 </xsl:template>
 
 <xsl:template match="biblioset/version">version = {<xsl:value-of select="."/>}<xsl:call-template name="comma"/></xsl:template>
+
+<xsl:template match="biblioset/title">journal = {<xsl:apply-templates />}<xsl:call-template name="comma"/>
+</xsl:template>
+
+<xsl:template match="biblioset[@relation='journal']/title">journal = {{<xsl:apply-templates/>}}<xsl:call-template name="comma"/></xsl:template>
+<xsl:template match="biblioset[ @relation = 'editedBook']/title">booktitle = {{<xsl:apply-templates/>}}<xsl:call-template name="comma"/></xsl:template>
+
+
+<!-- <xsl:template match="biblioset/editor">editor = {<xsl:call-template name="makeAuthor"/>}<xsl:call-template name="comma"/>
+</xsl:template>-->
 
 <xsl:template match="pubdate|year|date">year = "<xsl:value-of select="."/>"<xsl:call-template name="comma"/>
 </xsl:template>
@@ -83,6 +98,7 @@ year = 2011</xsl:if>
 <xsl:template match="pubdate[@online='true']"/>
 
 <xsl:template match="month">month = <xsl:apply-templates/><xsl:call-template name="comma"/></xsl:template>
+<xsl:template match="month"/>				       <!--XXX just kill of for now. Or otherwise put into the year, e,g 2004 October .-->
 <xsl:template match="day"/>
 
 
@@ -97,8 +113,7 @@ year = 2011</xsl:if>
 
 <xsl:template match="biblioset"><xsl:apply-templates/></xsl:template>
 
-<xsl:template match="biblioset/title">journal = {<xsl:apply-templates />}<xsl:call-template name="comma"/>
-</xsl:template>
+
 
 <xsl:template match="volumenum">volume = {<xsl:apply-templates />}<xsl:call-template name="comma"/>
 </xsl:template>
@@ -111,7 +126,7 @@ year = 2011</xsl:if>
 <xsl:template match="authorgroup">author = {<xsl:for-each select="author"><xsl:call-template name="makeAuthor"/><xsl:if test="not(position() = last())"> and </xsl:if></xsl:for-each> }<xsl:call-template name="comma"/>
 </xsl:template>
 
-<xsl:template match="editors" name="editors">editor = {<xsl:for-each select="editor"><xsl:call-template name="makeAuthor"/><xsl:if test="not(position() = last())"> and </xsl:if></xsl:for-each> }<xsl:call-template name="comma"/>
+<xsl:template match="editors|editorgroup" name="editors">editor = {<xsl:for-each select="editor"><xsl:call-template name="makeAuthor"/><xsl:if test="not(position() = last())"> and </xsl:if></xsl:for-each> }<xsl:call-template name="comma"/>
 </xsl:template>
 
 
@@ -126,7 +141,7 @@ year = 2011</xsl:if>
 <xsl:template match="*[parent::address]"><xsl:value-of select="."/><xsl:call-template name="comma-noline"/></xsl:template>
 
 <!-- XXX what should the bibtex field name be for this. -->
-<xsl:template match="corpauthor">institution = "<xsl:apply-templates/>"<xsl:call-template name="comma"/>
+<xsl:template match="corpauthor">institution = "{<xsl:apply-templates/>}"<xsl:call-template name="comma"/>
 <xsl:if test="not(preceding-sibling::author) and not(following-sibling::author)">author = "{<xsl:apply-templates/>}"<xsl:call-template name="comma"/></xsl:if>
 </xsl:template>
 
