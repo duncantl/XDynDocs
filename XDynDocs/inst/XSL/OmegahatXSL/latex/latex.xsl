@@ -65,10 +65,10 @@
 <xsl:template match="r:dots|dots">\ldots</xsl:template>
 
 
-<xsl:template match="s:null|r:null">\Snull<xsl:call-template name="addBraces"/></xsl:template>
-<xsl:template match="s:NA|r:NA">\SNA<xsl:call-template name="addBraces"/></xsl:template>
-<xsl:template match="s:false|r:false|r:FALSE">\SFALSE<xsl:call-template name="addBraces"/></xsl:template>
-<xsl:template match="s:true|r:true|r:TRUE">\STRUE<xsl:call-template name="addBraces"/></xsl:template>
+<xsl:template match="s:null|r:null">\Snull{}<xsl:call-template name="addBraces"/></xsl:template>
+<xsl:template match="s:NA|r:NA">\SNA{}<xsl:call-template name="addBraces"/></xsl:template>
+<xsl:template match="s:false|r:false|r:FALSE">\SFALSE{}<xsl:call-template name="addBraces"/></xsl:template>
+<xsl:template match="s:true|r:true|r:TRUE">\STRUE{}<xsl:call-template name="addBraces"/></xsl:template>
 
 <!-- Check to see if we need to add {} after a macro.Really want to check if the next element is text().  -->
 <xsl:template name="addBraces"><xsl:if test="starts-with(string(following-sibling::text()[1]), ' ')"></xsl:if></xsl:template>

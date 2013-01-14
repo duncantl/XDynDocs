@@ -9,8 +9,6 @@
 <xsl:template match="sh:var">\ShellVar{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="sh:cmd">\ShellCmd{<xsl:apply-templates/>}</xsl:template>
 
-<xsl:template match="sh:exec">
-\textsl{<xsl:apply-templates/>}
-</xsl:template>
+<xsl:template match="sh:exec">\textsl{<xsl:apply-templates/>}</xsl:template>
 
 </xsl:stylesheet>

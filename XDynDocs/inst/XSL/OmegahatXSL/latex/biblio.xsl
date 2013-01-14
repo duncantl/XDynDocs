@@ -145,7 +145,7 @@ year = 2011</xsl:if>
 <xsl:if test="not(preceding-sibling::author) and not(following-sibling::author)">author = "{<xsl:apply-templates/>}"<xsl:call-template name="comma"/></xsl:if>
 </xsl:template>
 
-<xsl:template match="pagenums|pages">pages = "<xsl:apply-templates/>"<xsl:call-template name="comma"/>
+<xsl:template match="pagenums|pages|pagenum">pages = "<xsl:apply-templates/>"<xsl:call-template name="comma"/>
 </xsl:template>
 
 <xsl:template match="edition">edition = {<xsl:apply-templates />}<xsl:call-template name="comma"/>

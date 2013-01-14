@@ -286,13 +286,13 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 
 <xsl:template match="caption">
 <xsl:if test="//r:expr|//r:formula|xp:expr">\cprotect</xsl:if>\caption{<xsl:apply-templates/>}
-\label{<xsl:value-of select="ancestor::figure/@id"/>}
+<xsl:if test="ancestor::figure/@id">\label{<xsl:value-of select="ancestor::figure/@id"/>}</xsl:if>
 </xsl:template>
 
 
 <xsl:template match="figure[title]/caption">
 <xsl:if test=".//r:expr|.//r:formula|xp:expr|.//literal|.//title|../title//r:expr|../title//r:formula|../title/xp:expr|../title//literal">\cprotect</xsl:if>\caption[<xsl:apply-templates select="../title" mode="title"/>]{<xsl:apply-templates select="../title" mode="title"/><xsl:if test="not(substring(normalize-space(title), string-length(normalize-space(title))) =  '.')">.  </xsl:if> <xsl:apply-templates/>}
-\label{<xsl:value-of select="ancestor::figure/@id"/>}
+<xsl:if test="ancestor::figure/@id">\label{<xsl:value-of select="ancestor::figure/@id"/>}</xsl:if>
 </xsl:template>
 
 
@@ -306,6 +306,8 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 <xsl:template match="r:slot">\Rslot{<xsl:apply-templates/>}</xsl:template>
 
 
+<!-- Move this to springerLatex.xsl since it is specific unless Extrachap is part
+ of a regular latex package. -->
 <xsl:template match="bibliography">
 <xsl:choose>
 <xsl:when test="$bibliog.file = ''">
@@ -314,11 +316,8 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 <xsl:otherwise>
 \clearpage
 
-\part{Bibliography}<glossentry><glossterm></glossterm>
-<glossdef><para>
+\Extrachap{Bibliography}
 
-</para></glossdef>
-</glossentry>
 \bibliography{<xsl:value-of select="$bibliog.file"/>} 
 \bibliographystyle{plain}
 </xsl:otherwise>
@@ -336,7 +335,7 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 <xsl:template match="caption[.//listitem] | caption[count(.//para) > 1]">
 \captionsetup{singlelinecheck=off}
 \cprotect\caption[<xsl:if test="../title"><xsl:apply-templates select="../title" mode="title"/>,</xsl:if>list=off]{<xsl:apply-templates select="../title" mode="title"/>.  <xsl:apply-templates/>}
-\label{<xsl:value-of select="ancestor::figure/@id"/>}
+<xsl:if test="ancestor::figure/@id">\label{<xsl:value-of select="ancestor::figure/@id"/>}</xsl:if>
 </xsl:template>
 
 <xsl:template match="example">
@@ -345,6 +344,7 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 <!--\begin{example}\cprotect\caption{<xsl:apply-templates select="./title" mode="eg"/>}\end{example}-->
 <xsl:apply-templates /><!-- select="*[not(name() = 'title')] | text()"/> -->
 \end{example}
+\HRule
 </xsl:template>
 
 
@@ -367,13 +367,13 @@ This is my example.
 <!--  \section  -->
 <!--  <xsl:call-template name="makeheading"/>  -->
 <xsl:template match="section[./title/*]">
-\section[<xsl:apply-templates select="./title/text()"/>]{<xsl:apply-templates select="./title/*|./title/text()"/>}\label{<xsl:value-of select="@id"/>}<xsl:apply-templates />					
+\section[<xsl:apply-templates select="./title/text()"/>]{<xsl:apply-templates select="./title/*|./title/text()"/>}<xsl:if test="@id">\label{<xsl:value-of select="@id"/>}</xsl:if><xsl:apply-templates />					
 </xsl:template>
 
 <xsl:template match="section[./title/*]">
 <xsl:call-template name="makeheading">
 <xsl:with-param name="level" select="count(ancestor::section)+1"/>
-</xsl:call-template>\label{<xsl:value-of select="@id"/>}<xsl:apply-templates />
+</xsl:call-template><!--<xsl:if test="@id">\Ourlabel{<xsl:value-of select="@id"/>}</xsl:if>--><xsl:apply-templates />
 </xsl:template>
 
 
@@ -386,7 +386,7 @@ This is my example.
     <xsl:text>\begin{appendices}&#10;</xsl:text> 
     <xsl:text>\appendix&#10;</xsl:text>
   </xsl:if>
-\section[<xsl:apply-templates select="./title/text()"/>]{<xsl:apply-templates select="./title/*|./title/text()"/>}\label{<xsl:value-of select="@id"/>}<xsl:apply-templates />					
+\section[<xsl:apply-templates select="./title/text()"/>]{<xsl:apply-templates select="./title/*|./title/text()"/>}<xsl:if test="@id">\label{<xsl:value-of select="@id"/>}</xsl:if><xsl:apply-templates />					
 
   <xsl:if test="not (following-sibling::appendix)">
     <xsl:text>&#10;\end{appendices}&#10;</xsl:text>

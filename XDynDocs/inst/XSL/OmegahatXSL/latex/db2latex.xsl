@@ -40,7 +40,7 @@ define macros and change the way the LaTeX is processed.
  <xsl:include href="http://db2latex.sourceforge.net/current/xsl/docbook.xsl"/>
  <xsl:include href="latex.xsl"/>
  <xsl:include href="xml.xsl"/>
- <xsl:include href="shell.xsl"/>
+ <xsl:include href="sh.xsl"/>				       <!-- was shell.xsl  -->
 
 <xsl:template match="r:makePlot"></xsl:template>
 

@@ -11,6 +11,7 @@
 
 <!-- \verb+&lt;+\textit{}\verb+&gt;+ -->
 <xsl:template match="xml:tag|xml:node|xml:element">\XMLTag{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="xml:tag[./ancestor::title]|xml:node[./ancestor::title]|xml:element[./ancestor::title]">\XMLTagTitle{<xsl:apply-templates/>}</xsl:template>
 
 <xsl:template match="xml:attr">\XMLAttr{<xsl:apply-templates/>}</xsl:template>
 
