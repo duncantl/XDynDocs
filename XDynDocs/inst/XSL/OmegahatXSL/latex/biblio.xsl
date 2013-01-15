@@ -29,6 +29,7 @@
 <xsl:template match="biblioentry[.//seriesinfo]" mode="bibType">incollection</xsl:template>
 <xsl:template match="biblioentry[.//biblioset[@relation='journal']]" mode="bibType">article</xsl:template>
 <xsl:template match="biblioentry[.//biblioset[@relation='editedBook']]" mode="bibType">incollection</xsl:template>
+<xsl:template match="biblioentry[.//biblioset[@relation='proceedings']]" mode="bibType">inproceedings</xsl:template>
 
 
 <xsl:template match="text()"><xsl:value-of select="str:replace(str:replace(string(.), '_', '\_'), '&amp;', '\&amp;')"/></xsl:template>
@@ -83,6 +84,11 @@ year = 2011</xsl:if>
 
 <xsl:template match="biblioset/title">journal = {<xsl:apply-templates />}<xsl:call-template name="comma"/>
 </xsl:template>
+<!-- Uncomment this if we want the subtitle in the proceedings. -->
+<!--<xsl:template match="subtitle"><xsl:apply-templates/></xsl:template>-->
+
+<xsl:template match="biblioset[@relation='proceedings']/title">booktitle = {<xsl:apply-templates />. <xsl:apply-templates select="../subtitle"/>}<xsl:call-template name="comma"/>
+</xsl:template>
 
 <xsl:template match="biblioset[@relation='journal']/title">journal = {{<xsl:apply-templates/>}}<xsl:call-template name="comma"/></xsl:template>
 <xsl:template match="biblioset[ @relation = 'editedBook']/title">booktitle = {{<xsl:apply-templates/>}}<xsl:call-template name="comma"/></xsl:template>
@@ -103,7 +109,7 @@ year = 2011</xsl:if>
 
 
 <xsl:template name="makeAuthor">
-<xsl:apply-templates select="surname"/><xsl:if test="firstname">, <xsl:value-of select="firstname"/></xsl:if>
+<xsl:apply-templates select="surname"/><xsl:if test="firstname">, <xsl:value-of select="firstname"/></xsl:if><xsl:if test="othername"><xsl:text> </xsl:text><xsl:apply-templates select="othername"/></xsl:if>
 </xsl:template>
 
 <xsl:template match="surname"><xsl:choose><xsl:when test="contains(string(.), ' ')">{<xsl:apply-templates/>}</xsl:when><xsl:otherwise><xsl:apply-templates/></xsl:otherwise></xsl:choose></xsl:template>
@@ -139,6 +145,11 @@ year = 2011</xsl:if>
 
 <!--XXXX Need to inherit the processing of these elements, then put the comma in! -->
 <xsl:template match="*[parent::address]"><xsl:value-of select="."/><xsl:call-template name="comma-noline"/></xsl:template>
+
+<xsl:template match="biblioset[@relation='proceedings']"><xsl:apply-templates select="title|ulink|isbn"/></xsl:template>
+
+
+
 
 <!-- XXX what should the bibtex field name be for this. -->
 <xsl:template match="corpauthor">institution = "{<xsl:apply-templates/>}"<xsl:call-template name="comma"/>
