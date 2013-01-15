@@ -327,7 +327,11 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 
 
 <xsl:template match="quote">``<xsl:apply-templates/>''</xsl:template>
-<xsl:template match="para"><xsl:apply-templates/>
+<xsl:template match="para">
+<xsl:apply-templates/>
+</xsl:template>
+<xsl:template match="para[@noindent='true']">
+\noindent<xsl:apply-templates/>
 </xsl:template>
 
 
@@ -339,7 +343,6 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 </xsl:template>
 
 <xsl:template match="example">
-<xsl:message>An example</xsl:message>
 \begin{example}{<xsl:apply-templates select="./title" mode="eg"/>}<xsl:if test="@id">\label{<xsl:value-of select="@id"/>}</xsl:if>
 <!--\begin{example}\cprotect\caption{<xsl:apply-templates select="./title" mode="eg"/>}\end{example}-->
 <xsl:apply-templates /><!-- select="*[not(name() = 'title')] | text()"/> -->
