@@ -6,6 +6,7 @@
 	xmlns:omg="http://www.omegahat.org"
 	xmlns:bioc="http://www.bioconductor.org"
 	xmlns:str="http://exslt.org/strings"
+	xmlns:bib="http://bibtex.org"
 	exclude-result-prefixes="doc str" version='1.0'
     >
 
@@ -26,7 +27,8 @@
 <xsl:template match="biblioentry[.//r:pkg] | biblioentry[.//omg:pkg] | biblioentry[.//bioc:pkg] | biblioentry[.//r:pkgVersion]" mode="bibType">misc</xsl:template>
 <xsl:template match="biblioentry[.//@role='journal' or .//volume]" mode="bibType">article</xsl:template>
 <xsl:template match="biblioentry[.//publisher]" mode="bibType">book</xsl:template>
-<xsl:template match="biblioentry[.//seriesinfo]" mode="bibType">incollection</xsl:template>
+<xsl:template match="biblioentry[@bib:type]" mode="bibType"><xsl:value-of select="@bib:type"/></xsl:template>
+<xsl:template match="biblioentry[.//seriesinfo]" mode="bibType">book</xsl:template>
 <xsl:template match="biblioentry[.//biblioset[@relation='journal']]" mode="bibType">article</xsl:template>
 <xsl:template match="biblioentry[.//biblioset[@relation='editedBook']]" mode="bibType">incollection</xsl:template>
 <xsl:template match="biblioentry[.//biblioset[@relation='proceedings']]" mode="bibType">inproceedings</xsl:template>
@@ -71,8 +73,14 @@ year = 2011</xsl:if>
 <!-- should be url and not note. Use biblatex -->
 <xsl:template match="ulink">howpublished = {\url{<xsl:value-of select="@url"/>}}<xsl:call-template name="comma"/>
 </xsl:template>
+
+<!-- In a @manual, the howpublished seems to be ignored. So make the ulink a note for @manual. -->
+<xsl:template match="ulink[ancestor::biblioentry/@bib:type ='manual' or ancestor::biblioentry/@bib:type ='book']">note = {\url{<xsl:value-of select="@url"/>}}<xsl:call-template name="comma"/>
+</xsl:template>
+
 <!-- Remove the github links when we already have a url -->
 <xsl:template match="ulink[contains(@url, 'github') and count(../ulink) > 1]"/>
+
 
 <xsl:template match="subtitle"/>
 <xsl:template match="subtitle" mode="ti">: <xsl:apply-templates/></xsl:template>
