@@ -317,7 +317,14 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 \clearpage
 
 \Extrachap{Bibliography}
-
+%\addcontentsline{toc}{chapter}{Bibliography}
+%\setcounter{secnumdepth}{-1}
+%\setcounter{tocdepth}{4}
+%\renewcommand{\bibname}{Bibliography}
+%\renewcommand{\bibname}{}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
+\renewcommand{\bibname}{}
+\def\section*#1{\vskip-13em}
 \bibliography{<xsl:value-of select="$bibliog.file"/>} 
 \bibliographystyle{plain}
 </xsl:otherwise>
@@ -343,11 +350,10 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 </xsl:template>
 
 <xsl:template match="example">
-\begin{example}{<xsl:apply-templates select="./title" mode="eg"/>}<xsl:if test="@id">\label{<xsl:value-of select="@id"/>}</xsl:if>
+\begin{Example}{<xsl:apply-templates select="./title" mode="eg"/>}<xsl:if test="@id">\label{<xsl:value-of select="@id"/>}%</xsl:if>
 <!--\begin{example}\cprotect\caption{<xsl:apply-templates select="./title" mode="eg"/>}\end{example}-->
-<xsl:apply-templates /><!-- select="*[not(name() = 'title')] | text()"/> -->
-\end{example}
-\HRule
+\noindent <xsl:apply-templates /><!-- select="*[not(name() = 'title')] | text()"/> -->
+\end{Example}
 </xsl:template>
 
 
