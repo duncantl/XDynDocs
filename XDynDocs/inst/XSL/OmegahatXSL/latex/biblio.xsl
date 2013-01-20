@@ -73,6 +73,12 @@ year = 2011</xsl:if>
 <!-- should be url and not note. Use biblatex -->
 <xsl:template match="ulink">howpublished = {\url{<xsl:value-of select="@url"/>}}<xsl:call-template name="comma"/>
 </xsl:template>
+<!-- HERE -->
+<xsl:template match="ulink[ancestor::biblioentry/@bib:type='misc' and ../publisher]">note = {\url{<xsl:value-of select="@url"/>}}<xsl:call-template name="comma"/>
+</xsl:template>
+<xsl:template match="publisher[ancestor::biblioentry/@bib:type='misc' and ../publisher]">howpublished = {{<xsl:apply-templates select="publishername"/>}}<xsl:call-template name="comma"/>
+</xsl:template>
+
 
 <!-- In a @manual, the howpublished seems to be ignored. So make the ulink a note for @manual. -->
 <xsl:template match="ulink[ancestor::biblioentry/@bib:type ='manual' or ancestor::biblioentry/@bib:type ='book']">note = {\url{<xsl:value-of select="@url"/>}}<xsl:call-template name="comma"/>
