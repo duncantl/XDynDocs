@@ -24,7 +24,7 @@
 
 <!-- Should this <format><acronym>..   or <acronym><format> -->
 <xsl:template match="JSON|json"><acronym def="JavaScript Object Notation"><markupLang>JSON</markupLang></acronym></xsl:template>
-<xsl:template match="xpath"><acronym def="XPath">XPath</acronym></xsl:template>
+<xsl:template match="xpath"><acronym def="XPath"><xpath/></acronym></xsl:template>
 <xsl:template match="xinclude"><acronym def="XInclude">XInclude</acronym></xsl:template>
 <xsl:template match="markdown"><acronym def="markdown"><markupLang>Markdown</markupLang></acronym></xsl:template>
 <xsl:template match="xsl"><acronym def="eXtensible Stylesheet Language">XSL</acronym></xsl:template>
