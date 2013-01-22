@@ -17,7 +17,7 @@
 
 <xsl:template match="html">\proglang{HTML}</xsl:template>
 <xsl:template match="js">\proglang{JavaScript}</xsl:template>
-<xsl:template match="xpath"><xsl:message>XPath expansion</xsl:message>\proglang{XPath}</xsl:template>
+<xsl:template match="xpath">\proglang{XPath}</xsl:template>
 <xsl:template match="xml">\proglang{XML}</xsl:template>
 <xsl:template match="C">\proglang{C}</xsl:template>
 

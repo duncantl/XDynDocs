@@ -101,6 +101,12 @@ simplemsgentry
 <xsl:template match="extension">\textsl{<xsl:apply-templates/>}</xsl:template>
 
 
+<xsl:template match="protocol">\protocol{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="matlab">\proglang{MATLAB}</xsl:template>
+<xsl:template match="python">\proglang{Python}</xsl:template>
+<xsl:template match="fop">\ShApp{FOP}</xsl:template>
+
+
 <!--  See if we can use the "scape" template and defaults in dblatex. -->
 <xsl:template match="text()[not(ancestor::c:code) and not(ancestor::r:function) and not(ancestor::r:code) and not(ancestor::r:output) and not(ancestor::xml:code) and not(ancestor::js:code) and not(ancestor::svg:code) and not(ancestor::programlisting)]"><xsl:value-of select="str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(string(.), '&amp;', '\&amp;'), '_', '\_'), '#', '\#'), '%', '\%'), '{', '\lcurly'), '}', '\rcurly'), '$', '\$')"/></xsl:template>
 
