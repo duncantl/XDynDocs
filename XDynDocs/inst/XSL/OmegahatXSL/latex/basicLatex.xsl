@@ -308,8 +308,7 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 <xsl:template match="dyngraphic"/>
 <xsl:template match="comment"/>
 
-<xsl:template match="omg:pkg">\OmgPackage{<xsl:apply-templates/>}</xsl:template>
-<xsl:template match="bioc:pkg">\BioCPackage{<xsl:apply-templates/>}</xsl:template>
+
 
 <xsl:template match="r:slot">\Rslot{<xsl:apply-templates/>}</xsl:template>
 
@@ -329,7 +328,7 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 %\setcounter{secnumdepth}{-1}
 %\setcounter{tocdepth}{4}
 %\renewcommand{\bibname}{Bibliography}
-%\renewcommand{\bibname}{}
+\renewcommand{\bibname}{}
 \addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
 \renewcommand{\bibname}{}
 \def\section*#1{\vskip-13em}
@@ -340,7 +339,7 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 </xsl:template>
 
 
-
+<xsl:template match="squote">`<xsl:apply-templates/>'</xsl:template>
 <xsl:template match="quote">``<xsl:apply-templates/>''</xsl:template>
 <xsl:template match="para">
 <xsl:apply-templates/>

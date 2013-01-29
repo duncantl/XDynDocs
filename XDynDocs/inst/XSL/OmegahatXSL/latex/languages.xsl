@@ -8,7 +8,8 @@
 
 <xsl:template match="r:package|r:pkg|rpkg">\pkg{<xsl:apply-templates/>}</xsl:template>
 
-<xsl:template match="omg:pkg|bioc:pkg">\pkg{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="omg:pkg">\OmgPackage{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="bioc:pkg">\BioCPackage{<xsl:apply-templates/>}</xsl:template>
 
 <xsl:template match="r">\proglang{R}</xsl:template>
 <xsl:template match="latex[string(.) = '']">
