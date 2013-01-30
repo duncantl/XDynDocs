@@ -19,8 +19,8 @@
 
 <!-- FIXME.  Make this a LaTeX macro and have the color be set there. Have to avoid processing the text literally
    but treat it as verbatim. -->
-<xsl:template match="js:value | js:expr">{\color{jsexpr}\verb+<xsl:apply-templates/>+}</xsl:template>
-<xsl:template match="js:expr[contains(string(.), '+')]">{\color{jsexpr}\verb|<xsl:apply-templates/>|}</xsl:template>
+<xsl:template match="js:value | js:expr">{\color{jscolor}\verb+<xsl:apply-templates/>+}</xsl:template>
+<xsl:template match="js:expr[contains(string(.), '+')]">{\color{jscolor}\verb|<xsl:apply-templates/>|}</xsl:template>
 
 <xsl:template match="js:null">\verb+null+</xsl:template>
 
@@ -32,6 +32,6 @@
 <xsl:template match="js:code//text()"><xsl:value-of select="."/></xsl:template>
 
 <xsl:template match="js:code">\begin{JSCode}<xsl:call-template name="trim-right"><xsl:with-param name="contents" select="string(.)"/></xsl:call-template>
-\end{JSCode}</xsl:template>
+\end{JSCode}<xsl:if test="not(following-sibling::text())"><xsl:text>&#10;</xsl:text></xsl:if></xsl:template>
 
 </xsl:stylesheet>
