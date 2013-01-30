@@ -31,8 +31,7 @@
 
 <xsl:template match="js:code//text()"><xsl:value-of select="."/></xsl:template>
 
-<xsl:template match="js:code">\begin{JSCode}
-<xsl:apply-templates />\end{JSCode}
-</xsl:template>
+<xsl:template match="js:code">\begin{JSCode}<xsl:call-template name="trim-right"><xsl:with-param name="contents" select="string(.)"/></xsl:call-template>
+\end{JSCode}</xsl:template>
 
 </xsl:stylesheet>
