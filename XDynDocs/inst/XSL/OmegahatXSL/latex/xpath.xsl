@@ -23,7 +23,7 @@
 <xsl:template match="xp:func">\XP<xsl:value-of select="local-name()"/>{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="xsl:func|xsl:function">\XSL<xsl:value-of select="local-name()"/>{<xsl:apply-templates/>}</xsl:template>
 
-<xsl:template match="xp:expr">\verb+<xsl:apply-templates/>+</xsl:template>
+<xsl:template match="xp:expr">{\color{xpexpr}\verb+<xsl:apply-templates/>+}</xsl:template>
 
 <xsl:template match="xp:node-test">\XPathNodeTest{<xsl:apply-templates/>}</xsl:template>
 

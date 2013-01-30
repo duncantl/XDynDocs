@@ -17,8 +17,10 @@
 
 
 
-<xsl:template match="js:value | js:expr">\verb+<xsl:apply-templates/>+</xsl:template>
-<xsl:template match="js:expr[contains(string(.), '+')]">\verb|<xsl:apply-templates/>|</xsl:template>
+<!-- FIXME.  Make this a LaTeX macro and have the color be set there. Have to avoid processing the text literally
+   but treat it as verbatim. -->
+<xsl:template match="js:value | js:expr">{\color{jsexpr}\verb+<xsl:apply-templates/>+}</xsl:template>
+<xsl:template match="js:expr[contains(string(.), '+')]">{\color{jsexpr}\verb|<xsl:apply-templates/>|}</xsl:template>
 
 <xsl:template match="js:null">\verb+null+</xsl:template>
 
@@ -29,10 +31,8 @@
 
 <xsl:template match="js:code//text()"><xsl:value-of select="."/></xsl:template>
 
-<xsl:template match="js:code">
-\begin{verbatim}
-<xsl:apply-templates />
-\end{verbatim}
+<xsl:template match="js:code">\begin{JSCode}
+<xsl:apply-templates />\end{JSCode}
 </xsl:template>
 
 </xsl:stylesheet>
