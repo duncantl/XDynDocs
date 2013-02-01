@@ -36,7 +36,7 @@
 <!-- map new lines to spaces in r:expr.  Need to ensure this is used. Seems not to be. -->
 <xsl:template match="r:errorMsg/text() | r:expr/text()"><xsl:message>expression text</xsl:message><xsl:value-of select="translate(string(.),'&#x0A;',' ')"/></xsl:template>
 
-<xsl:template match="r:formula">\verb!<xsl:apply-templates/>!</xsl:template>
+<xsl:template match="r:formula">{\color{rformula}\verb!<xsl:apply-templates/>!}</xsl:template>
 
 
 <!-- <xsl:template match="text()"><xsl:value-of select="str:replace(str:replace(string(.), '_', '\_'), '&amp;', '\&amp;')"/>}</xsl:template>-->

@@ -3,7 +3,7 @@
 	xmlns:sh="http://www.shell.org"
         version="1.0">
 
-<xsl:template match="sh:code">\begin{ShCode}<xsl:apply-templates/>\end{ShCode}</xsl:template>
+<xsl:template match="sh:code | programlisting[@contentType = 'shell']">\begin{ShCode}<xsl:apply-templates/>\end{ShCode}</xsl:template>
 <xsl:template match="sh:output">\begin{ShOutput}<xsl:apply-templates/>\end{ShOutput}</xsl:template>
 
 <xsl:template match="sh:var">\ShellVar{<xsl:apply-templates/>}</xsl:template>

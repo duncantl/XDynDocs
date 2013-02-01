@@ -31,7 +31,8 @@
 
 <xsl:template match="js:code//text()"><xsl:value-of select="."/></xsl:template>
 
-<xsl:template match="js:code">\begin{JSCode}<xsl:call-template name="trim-right"><xsl:with-param name="contents" select="string(.)"/></xsl:call-template>
-\end{JSCode}<xsl:if test="not(following-sibling::text())"><xsl:text>&#10;</xsl:text></xsl:if></xsl:template>
+<xsl:template match="js:code|programlisting[@contentType = 'JavaScript']">
+<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">JSCode</xsl:with-param></xsl:call-template>
+</xsl:template>
 
 </xsl:stylesheet>
