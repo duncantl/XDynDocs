@@ -31,7 +31,7 @@
 
 <xsl:template match="js:code//text()"><xsl:value-of select="."/></xsl:template>
 
-<xsl:template match="js:code|programlisting[@contentType = 'JavaScript']">
+<xsl:template match="js:code | programlisting[@contentType = 'JavaScript']">
 <xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">JSCode</xsl:with-param></xsl:call-template>
 </xsl:template>
 

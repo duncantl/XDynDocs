@@ -17,8 +17,8 @@
 
 <xsl:import href="dblatex.xsl"/>
 
-<xsl:import href="js.xsl"/>
 <xsl:import href="xpath.xsl"/>
+<xsl:include href="js.xsl"/>
 
 
 <xsl:include href="latex.xsl"/>
@@ -356,12 +356,19 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 <xsl:if test="ancestor::figure/@id">\label{<xsl:value-of select="ancestor::figure/@id"/>}</xsl:if>
 </xsl:template>
 
+<!-- 
+\@writefile{loe}{\contentsline {example}{\numberline {1.1}{\ignorespaces <xsl:apply-templates select="title"/>}}{8}{figure.caption.3}}
+ -->
+<!-- \numberline{\theExample} -->
 <xsl:template match="example">
 \begin{Example}{<xsl:apply-templates select="./title" mode="eg"/>}<xsl:if test="@id">\label{<xsl:value-of select="@id"/>}%</xsl:if>
+\addcontentsline{ex}{Example}{\protect\numberline{\thesExampleCounter} <xsl:apply-templates select="title" mode="exampleTitle"/>}
 <!--\begin{example}\cprotect\caption{<xsl:apply-templates select="./title" mode="eg"/>}\end{example}-->
 \noindent <xsl:apply-templates /><!-- select="*[not(name() = 'title')] | text()"/> -->
 \end{Example}
 </xsl:template>
+
+<xsl:template match="title" mode="exampleTitle"><xsl:apply-templates/></xsl:template>
 
 
 <xsl:template match="XXX_example">
@@ -481,8 +488,11 @@ This is my example.
 <xsl:template match="programlisting">\begin{Verbatim}<xsl:call-template name="verbatimOptions"/>
 <xsl:call-template name="removeVerbatimStartNewline"/>
 <xsl:apply-templates />
-<xsl:if test="not(substring(., string-length(.)) = '&#10;')"><xsl:text>&#10;</xsl:text></xsl:if>\end{Verbatim}
+\end{Verbatim}
+<xsl:call-template name="forceBreakIf"/><!-- <xsl:if test="not(substring(., string-length(.)) = '&#10;')"><xsl:text>&#10;</xsl:text></xsl:if> -->
 </xsl:template>
+
+<xsl:template match="programlisting"><xsl:call-template name="makeCodeEnv"/></xsl:template>
 
 
 <xsl:template match="programlisting[.//co | .//highlight]">\begin{alltt}<xsl:call-template name="removeVerbatimStartNewline"/>

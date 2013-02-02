@@ -79,7 +79,7 @@
 <!-- <xsl:template match="r:output//text() | r:code//text()"><xsl:call-template name="trim.text"/></xsl:template> -->
 
 
-<xsl:template match="r:function|r:code|s:code|s:plot|r:plot|r:test">\begin{CodeChunk}
+<xsl:template match="r:function|r:code|s:code|s:plot|r:plot|r:test | programlisting[@contentType = 'R']">\begin{CodeChunk}
 \begin{R<xsl:value-of select="local-name()"/>}<xsl:apply-templates/>\end{R<xsl:value-of select="local-name()"/>}
 \end{CodeChunk}</xsl:template>
 
