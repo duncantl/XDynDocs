@@ -116,7 +116,7 @@ simplemsgentry
 
 <xsl:template name="replace-leading-newlines">
 <xsl:param name="string"/>
-<xsl:choose><xsl:when test="substring($string, 1, 1) = '&#10;'">
+<xsl:choose><xsl:when test="substring($string, 1, 1) = '&#10;' or substring($string, 1, 1) = ' '">
   <xsl:call-template name="replace-leading-newlines">
    <xsl:with-param name="string" select="substring($string, 2)"/>
   </xsl:call-template>
