@@ -62,11 +62,11 @@
 
 <xsl:template match="xml:code//text()"><xsl:value-of select="."/></xsl:template>
 
-<xsl:template match="kml:style">\verb+<xsl:apply-templates/>+</xsl:template>
-<xsl:template match="kml:style">\verb+<xsl:copy-of select="text()"/>+</xsl:template>
+<xsl:template match="kml:style">\<xsl:call-template name="verbName"/>+<xsl:apply-templates/>+</xsl:template>
+<xsl:template match="kml:style">\<xsl:call-template name="verbName"/>+<xsl:copy-of select="text()"/>+</xsl:template>
 
 
-<xsl:template match="quote[@ltx:verb = 'true' ]">\verb+<xsl:apply-templates/>+</xsl:template>
+<xsl:template match="quote[@ltx:verb = 'true' ]">\<xsl:call-template name="verbName"/>+<xsl:apply-templates/>+</xsl:template>
 
 <xsl:template match="xsl:param">\XSLparam{<xsl:value-of select="."/>}</xsl:template>
 

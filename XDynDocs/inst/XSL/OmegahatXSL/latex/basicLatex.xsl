@@ -91,6 +91,22 @@ simplemsgentry
    <xsl:preserve-space elements="text()"/>
 -->
 
+<xsl:template match="para[@sloppy]">
+
+\begin{sloppy}
+<xsl:apply-imports/>
+\end{sloppy}
+
+</xsl:template>
+
+<xsl:template name="verbName">
+<xsl:choose>
+<xsl:when test="ancestor::table">verb</xsl:when>
+<xsl:otherwise>spverb</xsl:otherwise>
+</xsl:choose>
+</xsl:template>
+
+
 <xsl:template match="comment()">%</xsl:template>
 <xsl:template match="comment()"/>
 <xsl:template match="comment()[following-sibling::figure]">%<xsl:text>&#10;</xsl:text>
@@ -116,7 +132,7 @@ simplemsgentry
 
 <xsl:template name="replace-leading-newlines">
 <xsl:param name="string"/>
-<xsl:choose><xsl:when test="substring($string, 1, 1) = '&#10;' or substring($string, 1, 1) = ' '">
+<xsl:choose><xsl:when test="substring($string, 1, 1) = '&#10;'"> <!-- or substring($string, 1, 1) = ''-->
   <xsl:call-template name="replace-leading-newlines">
    <xsl:with-param name="string" select="substring($string, 2)"/>
   </xsl:call-template>

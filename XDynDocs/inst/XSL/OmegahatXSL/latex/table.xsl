@@ -55,6 +55,11 @@
 </xsl:text></xsl:if></xsl:for-each>
 </xsl:template>
 
+<!--
+<xsl:template match="row"><xsl:for-each select="entry"><xsl:apply-templates select="."/><xsl:if test="following-sibling::entry"><xsl:text> &amp; </xsl:text></xsl:if></xsl:for-each><xsl:if test="true or not(position() = last())"> \\
+</xsl:if></xsl:template>
+-->
+
 
 <xsl:template match="row/entry"><xsl:apply-templates/></xsl:template>
 <xsl:template match="row/entry[@fmt]"><xsl:message>row/entry[@fmt]</xsl:message><xsl:apply-templates/></xsl:template>

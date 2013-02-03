@@ -19,10 +19,10 @@
 
 <!-- FIXME.  Make this a LaTeX macro and have the color be set there. Have to avoid processing the text literally
    but treat it as verbatim. -->
-<xsl:template match="js:value | js:expr">{\color{jscolor}\verb+<xsl:apply-templates/>+}</xsl:template>
-<xsl:template match="js:expr[contains(string(.), '+')]">{\color{jscolor}\verb|<xsl:apply-templates/>|}</xsl:template>
+<xsl:template match="js:value | js:expr">{\color{jscolor}\<xsl:call-template name="verbName"/>+<xsl:apply-templates/>+}</xsl:template>
+<xsl:template match="js:expr[contains(string(.), '+')]">{\color{jscolor}\<xsl:call-template name="verbName"/>|<xsl:apply-templates/>|}</xsl:template>
 
-<xsl:template match="js:null">\verb+null+</xsl:template>
+<xsl:template match="js:null">\JSNull{}</xsl:template>
 
 <!-- Make certain newlines don't mess up the verb+....+, so normalize-space for text() nodes within these -->
 <xsl:template match="text()[ancestor::js:expr]">

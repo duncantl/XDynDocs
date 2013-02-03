@@ -32,11 +32,11 @@
 <xsl:template match="s:expression|r:expression|r:expr">\R<xsl:value-of select="local-name(.)"/>{<!--<xsl:apply-templates/>--><xsl:call-template name="scape"><xsl:with-param name="string" select="text()"/></xsl:call-template>}</xsl:template>
 
 
-<xsl:template match="s:expression|r:expression|r:expr">{\color{rcolor}\verb?<xsl:apply-templates/>?}</xsl:template>
+<xsl:template match="s:expression|r:expression|r:expr">{\color{rcolor}\<xsl:call-template name="verbName"/>?<xsl:apply-templates/>?}</xsl:template>
 <!-- map new lines to spaces in r:expr.  Need to ensure this is used. Seems not to be. -->
 <xsl:template match="r:errorMsg/text() | r:expr/text()"><xsl:message>expression text</xsl:message><xsl:value-of select="translate(string(.),'&#x0A;',' ')"/></xsl:template>
 
-<xsl:template match="r:formula">{\color{rformula}\verb!<xsl:apply-templates/>!}</xsl:template>
+<xsl:template match="r:formula">{\color{rformula}\<xsl:call-template name="verbName"/>!<xsl:apply-templates/>!}</xsl:template>
 
 
 <!-- <xsl:template match="text()"><xsl:value-of select="str:replace(str:replace(string(.), '_', '\_'), '&amp;', '\&amp;')"/>}</xsl:template>-->
