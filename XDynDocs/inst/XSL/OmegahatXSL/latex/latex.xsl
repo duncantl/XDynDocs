@@ -45,6 +45,15 @@
 <!-- <xsl:call-template name="string-replace-uscore"/> -->
 <xsl:template match="r:var|s:variable|r:func">\R<xsl:value-of select="local-name(.)"/>{<xsl:value-of select="str:replace(string(.), '_', '\_')"/>}</xsl:template>
 
+<xsl:template match="r:func[contains(., '&lt;-')]">\RreplaceFunc{<xsl:value-of select="translate(., '&lt;-', '')"/>}</xsl:template>
+
+<xsl:template name="RfunctionMarkup">
+ <xsl:choose>
+   <xsl:when test="contains(., '&lt;-')">\RreplaceFunc</xsl:when>
+   <xsl:otherwise>\Rfunc</xsl:otherwise>
+ </xsl:choose>
+</xsl:template>
+
 <xsl:template match="s:func|s:functionRef">\Sfunc{<xsl:apply-templates/>}</xsl:template>
 
 <xsl:template match="s:arg|r:arg">\Sarg{<xsl:apply-templates/>}</xsl:template>
