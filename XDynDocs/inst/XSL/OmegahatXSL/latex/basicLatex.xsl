@@ -91,7 +91,8 @@ simplemsgentry
    <xsl:preserve-space elements="text()"/>
 -->
 
-<xsl:template match="para[@sloppy] | para[.//ulink[string-length(.) > 25]] | para[not(ancestor::title) and count(.//xml:tag) > 2] | para[ .//r:class[string-length(.) > 9]]">			       <!-- | para[ .//r:func | .//r:class | .//r:s3class]"-->
+<!--  Try to identify paragraphs that are sloppy -->
+<xsl:template match="para[@sloppy] | para[.//ulink[string-length(.) > 25]] | para[not(ancestor::title) and count(.//xml:tag) > 2] | para[ .//r:class[string-length(.) > 9]]">			   
 
 \begin{sloppy}
 <xsl:apply-imports/>
