@@ -15,6 +15,8 @@
 <xsl:template match="table[title]">
 \begin{center}
 \begin{table}
+<xsl:if test="@ltx:tabcolsep">\setlength{\tabcolsep}{<xsl:value-of select="@ltx:tabcolsep"/>}
+</xsl:if>
 \begin{tabularx}{\linewidth}{<xsl:call-template name="table-format-string"/>}
 <xsl:apply-templates select="tgroup/thead/row"/>
 <xsl:apply-templates select="tgroup/tbody/row"/>
