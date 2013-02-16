@@ -128,10 +128,11 @@
  </xsl:copy>
 </xsl:template>
 
-
+<!--
 <xsl:template match="libxml">
   <ulink url="http://www.xmlsoft.org">libxml2</ulink><xsl:call-template name="indexElement"/>
 </xsl:template>
+-->
 
 <!--
 <xsl:template match="no-xref">

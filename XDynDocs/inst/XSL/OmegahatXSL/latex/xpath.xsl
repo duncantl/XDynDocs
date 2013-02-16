@@ -28,6 +28,7 @@
 <xsl:template match="xp:expr">{\color{xpexpr}\<xsl:call-template name="verbName"/>+<xsl:apply-templates/>+}</xsl:template>
 
 
+
 <xsl:template match="xp:node-test">\XPathNodeTest{<xsl:apply-templates/>}</xsl:template>
 
 </xsl:stylesheet>

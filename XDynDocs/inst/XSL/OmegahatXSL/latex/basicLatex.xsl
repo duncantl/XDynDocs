@@ -92,12 +92,8 @@ simplemsgentry
 -->
 
 <!--  Try to identify paragraphs that are sloppy -->
-<xsl:template match="para[@sloppy] | para[.//ulink[string-length(.) > 25]] | para[not(ancestor::title) and count(.//xml:tag) > 2] | para[ .//r:class[string-length(.) > 9]]">			   
-
-\begin{sloppy}
-<xsl:apply-imports/>
-\end{sloppy}
-
+<xsl:template match="para[@sloppy] | para[.//ulink[string-length(.) > 25]] | para[not(ancestor::title) and count(.//xml:tag) > 2] | para[ .//r:class[string-length(.) > 9] and not(ancestor::summary)]">			   
+\begin{sloppy}<xsl:apply-imports/>\end{sloppy}
 </xsl:template>
 
 <xsl:template name="verbName">
@@ -108,12 +104,13 @@ simplemsgentry
 </xsl:template>
 
 
-<xsl:template match="comment()">%</xsl:template>
 <xsl:template match="comment()"/>
-<xsl:template match="comment()[following-sibling::figure]">%<xsl:text>&#10;</xsl:text>
-</xsl:template>
+<xsl:template match="comment() | invisible | ignore">% <xsl:call-template name="forceBreakIf"/></xsl:template>
+<!-- <xsl:template match="comment()[name( (./preceding-sibling::* | ./preceding-sibling::text())[1] ) = 'code']"><xsl:call-template name="forceBreakIf"/></xsl:template> -->
+<xsl:template match="comment()[following-sibling::figure]">%<xsl:text>&#10;</xsl:text></xsl:template>
 
-<xsl:template match="caption//comment()">%</xsl:template>
+<xsl:template match="caption//comment()">%
+</xsl:template>
 
 <xsl:template match="extension">\textsl{<xsl:apply-templates/>}</xsl:template>
 
@@ -198,7 +195,7 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 %\usepackage{fullpage}
 \usepackage{supertabular}
 
-<xsl:if test="(//caption//r:expr | //caption//r:formula) or $load.cprotect > 0">
+<xsl:if test="(//caption//r:expr | //caption//r:formula | //caption//xp:expr) or $load.cprotect > 0">
 \usepackage{cprotect}
 </xsl:if>
 
@@ -310,13 +307,13 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 </xsl:template>
 
 <xsl:template match="caption">
-<xsl:if test="//r:expr|//r:formula|xp:expr">\cprotect</xsl:if>\caption{<xsl:apply-templates/>}
+<xsl:if test="//r:expr|//r:formula|//xp:expr">\cprotect</xsl:if>\caption{<xsl:apply-templates/>}
 <xsl:if test="ancestor::figure/@id">\label{<xsl:value-of select="ancestor::figure/@id"/>}</xsl:if>
 </xsl:template>
 
 
 <xsl:template match="figure[title]/caption">
-<xsl:if test=".//r:expr|.//r:formula|xp:expr|.//literal|.//title|../title//r:expr|../title//r:formula|../title/xp:expr|../title//literal">\cprotect</xsl:if>\caption[<xsl:apply-templates select="../title" mode="title"/>]{<xsl:apply-templates select="../title" mode="title"/><xsl:if test="not(substring(normalize-space(title), string-length(normalize-space(title))) =  '.')">.  </xsl:if> <xsl:apply-templates/>}
+<xsl:if test=".//r:expr|.//r:formula|.//xp:expr|.//literal|.//title|../title//r:expr|../title//r:formula|../title/xp:expr|../title//literal">\cprotect</xsl:if>\caption[<xsl:apply-templates select="../title" mode="title"/>]{<xsl:apply-templates select="../title" mode="title"/><xsl:if test="not(substring(normalize-space(title), string-length(normalize-space(title))) =  '.')">.  </xsl:if> <xsl:apply-templates/>}
 <xsl:if test="ancestor::figure/@id">\label{<xsl:value-of select="ancestor::figure/@id"/>}</xsl:if>
 </xsl:template>
 
