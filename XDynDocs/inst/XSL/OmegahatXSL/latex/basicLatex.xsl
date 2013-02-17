@@ -414,6 +414,20 @@ This is my example.
 </xsl:call-template><!--<xsl:if test="@id">\Ourlabel{<xsl:value-of select="@id"/>}</xsl:if>--><xsl:apply-templates />
 </xsl:template>
 
+<xsl:template match="section[./altTitle]">
+<xsl:call-template name="map.sect.level">
+  <xsl:with-param name="level" select="count(ancestor::section)+1"/>
+<!--  <xsl:with-param name="name" select=""/>
+  <xsl:with-param name="num" select=""/>
+  <xsl:with-param name="allnum" select="$allnum"/>-->
+</xsl:call-template>[<xsl:apply-templates select="altTitle" mode="toc"/>]<xsl:apply-templates select="./title" mode="format.title"/><xsl:call-template name="label.id"/><xsl:apply-templates />
+</xsl:template>
+
+<xsl:template match="altTitle"/>
+<xsl:template match="altTitle" mode="toc">
+<xsl:apply-templates/>
+</xsl:template>
+
 
 
 <xsl:template match="appendix[./title/*]">

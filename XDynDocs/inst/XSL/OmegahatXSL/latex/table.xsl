@@ -13,18 +13,18 @@
 <xsl:param name="thead.bold" select="1" />
 
 <xsl:template match="table[title]">
-\begin{center}
-\begin{table}
-<xsl:if test="@ltx:tabcolsep">\setlength{\tabcolsep}{<xsl:value-of select="@ltx:tabcolsep"/>}
+\begin{table}<xsl:if test="@ltx:tabcolsep">\setlength{\tabcolsep}{<xsl:value-of select="@ltx:tabcolsep"/>}
 </xsl:if>
+\centering
+%\begin{center}
 \begin{tabularx}{\linewidth}{<xsl:call-template name="table-format-string"/>}
 <xsl:apply-templates select="tgroup/thead/row"/>
 <xsl:apply-templates select="tgroup/tbody/row"/>
 <xsl:apply-templates select="tgroup/tfoot"/>
 \end{tabularx}
 <xsl:apply-templates select="title"/>
+%\end{center}
 \end{table}
-\end{center}
 </xsl:template>
 
 <!-- was \tablecaption  -->
