@@ -96,6 +96,7 @@ simplemsgentry
 \begin{sloppy}<xsl:apply-imports/>\end{sloppy}
 </xsl:template>
 
+
 <xsl:template name="verbName">
 <xsl:choose>
 <xsl:when test="ancestor::table">verb</xsl:when>
