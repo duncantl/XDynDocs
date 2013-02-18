@@ -326,6 +326,11 @@ This deals with a CDATA escape and extracts the contents from that."
   (r-insert-node "r:code")
 )
 
+(defun insert-formal-para ()
+  (insert "<formalpara>\n<title></title>\n<para>\n\n</para>\n</formalpara>\n")
+  (previous-line)
+)
+
 (defun insert-itemized-list ()
   (insert "<itemizedlist>\n<listitem><para>\n\n</para></listitem>\n</itemizedlist>\n")
   (previous-line)
@@ -504,6 +509,8 @@ This deals with a CDATA escape and extracts the contents from that."
 
   (define-key map "\C-qe" '(lambda () "" (interactive "*") (r-insert-node "r:slot" nil)))
 
+  (define-key map "\C-q." '(lambda () "" (interactive "*") (r-insert-node "r:dots" nil nil nil t)))
+
 
   (define-key map "\C-l\C-c" '(lambda (cdata) "" (interactive "P") (r-insert-node "sh:code" cdata t t)))
   (define-key map "\C-lv" '(lambda () "" (interactive "*") (r-insert-node "sh:env" nil)))
@@ -514,7 +521,7 @@ This deals with a CDATA escape and extracts the contents from that."
   (define-key map "\C-l\C-o" '(lambda (cdata) "" (interactive "P") (r-insert-node "sh:output" (not cdata) t nil)))
 
 
-  (define-key map "\C-g\C-g" '(lambda () "" (interactive) (insert "<glossentry><glossterm></glossterm>\n<glossdef><para>\n\n</para></glossdef>\n</glossentry>")))
+ ; (define-key map "\C-g\C-g" '(lambda () "" (interactive) (insert "<glossentry><glossterm></glossterm>\n<glossdef><para>\n\n</para></glossdef>\n</glossentry>")))
 
 
 ;  (define-key map  "\C-q\C-i" '(lambda (arg) "" (interactive "P") (r-insert-node "item" nil t)))
