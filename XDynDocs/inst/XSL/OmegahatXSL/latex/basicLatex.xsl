@@ -92,8 +92,7 @@ simplemsgentry
 -->
 
 <!--  Try to identify paragraphs that are sloppy -->
-<xsl:template match="para[@sloppy] | para[.//ulink[string-length(.) > 25]] | para[not(ancestor::title) and count(.//xml:tag) > 2] | para[ .//r:class[string-length(.) > 9] and not(ancestor::summary)]">			   
-\begin{sloppy}<xsl:apply-imports/>\end{sloppy}
+<xsl:template match="para[@sloppy] | para[.//ulink[string-length(.) > 25]] | para[not(ancestor::title) and count(.//xml:tag) > 2] | para[ .//r:class[string-length(.) > 9] and not(ancestor::summary)]">\begin{sloppy}<xsl:if test="parent::example and count(preceding-sibling::para) = 0">\noindent\hskip-\parindent </xsl:if><xsl:apply-imports/>\end{sloppy}
 </xsl:template>
 
 
@@ -378,8 +377,7 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 <xsl:template match="example">
 \begin{Example}{<xsl:apply-templates select="./title" mode="eg"/>}<xsl:if test="@id">\label{<xsl:value-of select="@id"/>}%</xsl:if>
 \addcontentsline{ex}{Example}{\protect\numberline{\thesExampleCounter} <xsl:apply-templates select="title" mode="exampleTitle"/>}
-<!--\begin{example}\cprotect\caption{<xsl:apply-templates select="./title" mode="eg"/>}\end{example}-->
-\noindent <xsl:apply-templates /><!-- select="*[not(name() = 'title')] | text()"/> -->
+\noindent <xsl:apply-templates />
 \end{Example}
 </xsl:template>
 
