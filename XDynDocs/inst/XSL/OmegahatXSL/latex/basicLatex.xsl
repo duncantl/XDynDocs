@@ -378,6 +378,7 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 \begin{Example}{<xsl:apply-templates select="./title" mode="eg"/>}<xsl:if test="@id">\label{<xsl:value-of select="@id"/>}%</xsl:if>
 \addcontentsline{ex}{Example}{\protect\numberline{\thesExampleCounter} <xsl:apply-templates select="title" mode="exampleTitle"/>}
 \noindent <xsl:apply-templates />
+
 \end{Example}
 </xsl:template>
 
