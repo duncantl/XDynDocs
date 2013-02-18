@@ -15,13 +15,16 @@
 <xsl:template match="table[title]">
 \begin{table}<!--<xsl:if test="@ltx:tabcolsep">\setlength{\tabcolsep}{<xsl:value-of select="@ltx:tabcolsep"/>}
 </xsl:if>-->
-\centering
+%\centering
+\begin{center}
 \begin{tabularx}{\linewidth}{<xsl:call-template name="table-format-string"/>}
 <xsl:apply-templates select="tgroup/thead/row"/>
 <xsl:apply-templates select="tgroup/tbody/row"/>
 <xsl:apply-templates select="tgroup/tfoot"/>
 \end{tabularx}
 <xsl:apply-templates select="title"/>
+\end{center}
+<xsl:apply-templates select="caption/* | caption/text()"/>
 \end{table}
 </xsl:template>
 
