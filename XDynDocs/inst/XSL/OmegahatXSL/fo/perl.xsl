@@ -5,6 +5,11 @@
         xmlns:fo="http://www.w3.org/1999/XSL/Format"
         version="1.0">
 
+<xsl:template match="perl">
+<fo:inline><fo:basic-link external-destination="http://www.perl.org">PERL</fo:basic-link></fo:inline>
+</xsl:template>
+
+
 <xsl:template match="perl:class">
  <fo:inline color="green" font-style="italic">
   <xsl:apply-templates />
