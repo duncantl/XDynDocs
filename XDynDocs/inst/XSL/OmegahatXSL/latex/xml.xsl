@@ -45,6 +45,10 @@
 <xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">XMLCode</xsl:with-param></xsl:call-template>
 </xsl:template>
 
+<xsl:template match="programlisting[@contentType = 'latex' or @contentType = 'LaTeX'] | ltx:code">
+<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">LaTeXCode</xsl:with-param></xsl:call-template>
+</xsl:template>
+
 
 
 <xsl:template match="programlisting[@contentType='SVG' or @contentType='svg']">
