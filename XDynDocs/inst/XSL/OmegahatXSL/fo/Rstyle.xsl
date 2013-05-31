@@ -268,4 +268,13 @@ R
  <xsl:copy-of select="."/>
 </xsl:template>
 
+<xsl:template match="markupLang">
+  <fo:inline color="#e6e6fa" 
+             font-weight="bold"
+             xsl:use-attribute-sets="monospace.verbatim.properties">
+    <xsl:apply-templates />
+ </fo:inline>
+</xsl:template>
+
+
 </xsl:stylesheet>
