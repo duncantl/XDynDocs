@@ -511,4 +511,9 @@
 <fo:inline><xsl:apply-templates/></fo:inline>
 </xsl:template>
 
+
+<xsl:template match="python">
+<fo:inline><fo:basic-link external-destination="http://www.python.org">Python</fo:basic-link></fo:inline>
+</xsl:template>
+
 </xsl:stylesheet>
