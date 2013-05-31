@@ -12,9 +12,7 @@
 <xsl:template match="bioc:pkg">\BioCPackage{<xsl:apply-templates/>}</xsl:template>
 
 <xsl:template match="r|R">\proglang{R}</xsl:template>
-<xsl:template match="latex[string(.) = '']">
-\LaTeX{}
-</xsl:template>
+<xsl:template match="latex[string(.) = '']">\LaTeX{}</xsl:template>
 
 <xsl:template match="html|HTML">\proglang{HTML}</xsl:template>
 <xsl:template match="js">\proglang{JavaScript}</xsl:template>
