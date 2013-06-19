@@ -218,6 +218,8 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 \usepackage{float}
 \usepackage{tabularx}
 
+\usepackage{spverbatim}
+
 \def\hyperlabel#1{}
 
 <xsl:if test="//example">
