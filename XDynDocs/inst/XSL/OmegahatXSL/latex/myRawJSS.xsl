@@ -70,6 +70,15 @@
   <xsl:apply-templates select="affiliation"/>
 </xsl:template>
 
+<xsl:template match="author[not(ancestor::authorgroup)]">
+\author{<xsl:call-template name="author"/> \\
+  <xsl:apply-templates select="affiliation"/>}
+</xsl:template>
+
+<xsl:template match="orgdiv">
+\\
+<xsl:apply-templates/>
+</xsl:template>
 
 
 <xsl:template match="author/address">

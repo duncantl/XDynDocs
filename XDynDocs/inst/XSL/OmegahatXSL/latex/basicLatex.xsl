@@ -1,4 +1,5 @@
 <xsl:stylesheet 
+	exclude-result-prefixes="doc str" version='1.0'
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
         xmlns:s="http://cm.bell-labs.com/stat/S4"
         xmlns:r="http://www.r-project.org"
@@ -10,7 +11,6 @@
 	xmlns:js="http://www.ecma-international.org/publications/standards/Ecma-262.htm"
         xmlns:str="http://exslt.org/strings"
 	xmlns:ltx="http://www.latex.org"
-	exclude-result-prefixes="doc str" version='1.0'
         xmlns:xp="http://www.w3.org/TR/xpath"
         xmlns:c="http://www.C.org"
         xmlns:make="http://www.make.org">
@@ -183,6 +183,7 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 <xsl:param name="doc.class">{article}</xsl:param>
 
 <xsl:template match="/article">
+<xsl:message>Thanks for calling /article</xsl:message>
 \documentclass<xsl:value-of select="$doc.class"/>
 \usepackage[authoryear,round]{natbib}
 \usepackage{hyperref}

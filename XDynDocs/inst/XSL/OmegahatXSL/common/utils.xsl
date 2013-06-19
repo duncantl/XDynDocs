@@ -21,7 +21,7 @@
   <xsl:template name="trim-left">
     <xsl:param name="contents"/>
     <xsl:choose>
-      <xsl:when test="starts-with($contents,'&#10;') or                       starts-with($contents,'&#13;') or                       starts-with($contents,' ') or                       starts-with($contents,'&#9;')">
+      <xsl:when test="starts-with($contents,'&#10;') or starts-with($contents,'&#13;') or starts-with($contents,' ') or starts-with($contents,'&#9;')">
         <xsl:call-template name="trim-left">
           <xsl:with-param name="contents" select="substring($contents, 2)"/>
         </xsl:call-template>

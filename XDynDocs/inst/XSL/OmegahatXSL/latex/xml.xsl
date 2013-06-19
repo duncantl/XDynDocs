@@ -20,7 +20,7 @@
 
 <!-- <xsl:message>Adding space after <xsl:value-of select="$codeName"/> for <xsl:value-of select="local-name(following-sibling::*[1] | following-sibling::text()[1])"/></xsl:message> -->
 <xsl:template name="makeCodeEnv">
-  <xsl:param name="codeName">Verbatim</xsl:param>\begin{<xsl:value-of select="$codeName"/>}
+<xsl:param name="codeName">Verbatim</xsl:param>\begin{<xsl:value-of select="$codeName"/>}
 <xsl:call-template name="trim-newlines"><xsl:with-param name="contents" select="string(.)"/></xsl:call-template>
 \end{<xsl:value-of select="$codeName"/>}<xsl:call-template name="forceBreakIf"/></xsl:template>
 

@@ -531,11 +531,13 @@ This deals with a CDATA escape and extracts the contents from that."
 
 (defvar r-nxml-mode-init nil)
 
+
+;(setq ispell-skip-region-alist (append r-ispell-html-skip-alists ispell-skip-region-alist))
+;(setq ispell-html-skip-alists (append r-ispell-html-skip-alists ispell-html-skip-alists))
+
 (add-hook 'nxml-mode-hook
 	  '(lambda ()
             (if (not r-nxml-mode-init) (progn (r-nxml-keys-map nxml-mode-map) (setq r-nxml-mode-init t)))
-            (setq ispell-skip-region-alist (append r-ispell-html-skip-alists ispell-skip-region-alist))
-            (setq ispell-html-skip-alists (append r-ispell-html-skip-alists ispell-html-skip-alists))
 ;	    (flyspell-xml-lang-setup)
 ;	    (add-hook 'post-command-hook 'rnxml-switch-mode t)
 	    (when (and (and (file-exists-p r-default-nxml-file) 
@@ -677,6 +679,9 @@ This deals with a CDATA escape and extracts the contents from that."
      '(
 	("<r:code" . "</r:code>")
 	("<r:func>" . "</r:func>")
+	("<r:class>" . "</r:class>")
+	("<r:slot>" . "</r:slot>")
+	("<r:expr>" . "</r:expr>")
 	("<r:function" . "</r:function>")
 	("<r:commands" . "</r:commands>")
 	("<r:output" . "</r:output>")
@@ -689,10 +694,15 @@ This deals with a CDATA escape and extracts the contents from that."
 	("<sh:code" . "</sh:code>")
 	("<sh:expr>" . "</sh:expr>")
 	("<sh:exec>" . "</sh:exec>")
+	("<ignore>" . "</ignore>")
+	("<xml:tag>" . "</xml:tag>")
+	("<!-->" . "-->")
 	("<!\\[CDATA\\[" . "\\]\\]\\>")
    )))
 
-(add-to-list 'ispell-skip-region-alist '("^<r:func" . "^</r:func>"))
+;(add-to-list 'ispell-skip-region-alist '("^<r:func" . "^</r:func>"))
+
+(setq ispell-skip-region-alist r-ispell-html-skip-alists)
 
 (defvar current-date-format "%a %b %d %Y"
   "Format of date to insert with `insert-date-stamp' func")
