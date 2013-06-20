@@ -40,6 +40,8 @@
 
 <xsl:param name="latex.macro.file">latexMacros</xsl:param>
 <xsl:param name="load.cprotect" select="1"/>
+<xsl:param name="protect.captions" select="true"/>
+<xsl:param name="newline.before.caption" select="true"/>
 
 <xsl:param name="programlisting.style"/>
 
@@ -316,7 +318,8 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 
 
 <xsl:template match="figure[title]/caption">
-<xsl:if test=".//r:expr|.//r:formula|.//xp:expr|.//literal|.//title|../title//r:expr|../title//r:formula|../title/xp:expr|../title//literal">\cprotect</xsl:if>\caption[<xsl:apply-templates select="../title" mode="title"/>]{<xsl:apply-templates select="../title" mode="title"/><xsl:if test="not(substring(normalize-space(title), string-length(normalize-space(title))) =  '.')">.  </xsl:if> <xsl:apply-templates/>}
+<xsl:if test="$newline.before.caption"><xsl:text>&#10;</xsl:text></xsl:if>
+<xsl:if test="$protect.captions | @ltx:protect | .//r:expr|.//r:formula|.//xp:expr|.//literal|.//title|../title//r:expr|../title//r:formula|../title/xp:expr|../title//literal">\cprotect</xsl:if>\caption[<xsl:apply-templates select="../title" mode="title"/>]{<xsl:apply-templates select="../title" mode="title"/><xsl:if test="not(substring(normalize-space(title), string-length(normalize-space(title))) =  '.')">.  </xsl:if> <xsl:apply-templates/>}
 <xsl:if test="ancestor::figure/@id">\label{<xsl:value-of select="ancestor::figure/@id"/>}</xsl:if>
 </xsl:template>
 
@@ -520,7 +523,7 @@ This is my example.
 <xsl:call-template name="removeVerbatimStartNewline"/>
 <xsl:apply-templates />
 \end{Verbatim}
-<xsl:call-template name="forceBreakIf"/><!-- <xsl:if test="not(substring(., string-length(.)) = '&#10;')"><xsl:text>&#10;</xsl:text></xsl:if> -->
+<xsl:call-template name="forceBreakIf"/>
 </xsl:template>
 
 <xsl:template match="programlisting"><xsl:call-template name="makeCodeEnv"/></xsl:template>
