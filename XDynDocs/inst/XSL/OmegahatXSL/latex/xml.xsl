@@ -30,10 +30,10 @@
 <xsl:variable name="next" select="(following-sibling::* | following-sibling::text())[1]"/>
 <xsl:variable name="add" select="(count($next) > 0 or parent::sidebar) and (not(local-name($next) = '') or not(starts-with( translate(string($next), ' &#x09;', ''), '&#10;')))"/> 
 <!--
-<xsl:message>[forceBreakIf] (<xsl:value-of select="count($next)"/>)  <xsl:if test="not(@contentType)">(<xsl:value-of select="name()"/>)</xsl:if> <xsl:value-of select="@contentType"/>, add =  <xsl:value-of select="$add"/>,  count_p = <xsl:value-of select="count($next) > 0"/>,  local-name = <xsl:value-of select="not(local-name($next) = '')"/>,  starts-with = <xsl:value-of select="not(starts-with(translate(string($next), ' &#x09;', ''), '&#10;'))"/>,  <xsl:value-of select="not(local-name($next) = '') or starts-with(translate(string($next), ' &#x09;', ''), '&#10;')"/>, both = <xsl:value-of select="(not(local-name($next) = '') or not(starts-with(translate(string($next), ' &#x09;', ''), '&#10;')))"/>
+<xsl:message>[forceBreakIf] (count(next) = <xsl:value-of select="count($next)"/>)  <xsl:if test="not(@contentType)">(<xsl:value-of select="name()"/>)</xsl:if> <xsl:value-of select="@contentType"/>, add =  <xsl:value-of select="$add"/>,  count_p = <xsl:value-of select="count($next) > 0"/>,  local-name = <xsl:value-of select="not(local-name($next) = '')"/>,  starts-with = <xsl:value-of select="not(starts-with(translate(string($next), ' &#x09;', ''), '&#10;'))"/>,  <xsl:value-of select="not(local-name($next) = '') or starts-with(translate(string($next), ' &#x09;', ''), '&#10;')"/>, both = <xsl:value-of select="(not(local-name($next) = '') or not(starts-with(translate(string($next), ' &#x09;', ''), '&#10;')))"/>
 <xsl:if test="@contentType = 'text'">'<xsl:value-of select="$next"/>'  First='<xsl:value-of select="substring(translate(string($next), ' ', ''), 1, 3)"/>'
 </xsl:if>
-</xsl:message> -->
+</xsl:message>-->
 <xsl:if test="$add"><xsl:text>&#10;</xsl:text></xsl:if>
 </xsl:template>
 
