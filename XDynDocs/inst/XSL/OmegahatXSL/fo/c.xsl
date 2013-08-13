@@ -74,7 +74,7 @@
   </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="c:routineDef">
+<xsl:template match="c:routineDef|c:function">
   <xsl:call-template name="makeVerbatimCode">
     <xsl:with-param name="color">#e6e6aa</xsl:with-param>
   </xsl:call-template>

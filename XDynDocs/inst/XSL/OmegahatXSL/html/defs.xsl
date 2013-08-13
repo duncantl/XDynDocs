@@ -223,7 +223,7 @@
 </xsl:template>
 
 
-<xsl:template match="r:numeric|r:vector|r:list|r:character|r:logical">
+<xsl:template match="r:numeric|r:vector|r:list|r:character|r:logical|r:integer">
   <b class="rkeyword"><xsl:value-of select="local-name()"/></b>
 </xsl:template>
 

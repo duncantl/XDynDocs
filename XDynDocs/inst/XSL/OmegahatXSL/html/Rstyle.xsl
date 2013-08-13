@@ -296,6 +296,11 @@
  <b>Todo:</b><i class="todo"><xsl:apply-templates /></i> 
 </xsl:template>
 
+<xsl:template match="finish">
+<xsl:message>To FINISH: <xsl:apply-templates/></xsl:message>
+<xsl:call-template name="note"/>
+</xsl:template>
+
 <xsl:template match="r:data|r:object|r:value" />
 
 <xsl:template match="r:s3class|s3:class">
@@ -308,9 +313,8 @@
  <a href="http://www.docbook.org">DocBook</a>
 </xsl:template>
 
-<xsl:template match="unix">
- UNIX&#x00AE;
-</xsl:template>
+<xsl:template match="unix">UNIX&#x00AE;</xsl:template>
+<xsl:template match="linux">Linux</xsl:template>
 
 <xsl:template match="omegahat">
 <a href="http://www.omegahat.org">Omegahat</a>
@@ -325,5 +329,13 @@
 <xsl:template match="var">
 <code class="mathVar"><xsl:call-template name="addTooltip"/><xsl:apply-templates/></code>
 </xsl:template>
+
+<xsl:template match="llvm"><a href="http://llvm.org">LLVM</a></xsl:template>
+
+
+<xsl:template match="q"></xsl:template>
+
+<xsl:template match="s3">S3</xsl:template>
+
 
 </xsl:stylesheet>

@@ -53,6 +53,8 @@ $<xsl:apply-templates />
  <code class="shellArg"><xsl:apply-templates /></code>
 </xsl:template>
 
+<xsl:template match="sh:flag"><code class="shellArg">--<xsl:apply-templates /></code></xsl:template>
+
 
 <xsl:template match="sh:var">
  <code class="shellVar"><xsl:apply-templates /></code>

@@ -333,30 +333,7 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 <xsl:template match="r:slot">\Rslot{<xsl:apply-templates/>}</xsl:template>
 
 
-<!-- Move this to springerLatex.xsl since it is specific unless Extrachap is part
- of a regular latex package. -->
-<xsl:template match="bibliography">
-<xsl:choose>
-<xsl:when test="$bibliog.file = ''">
-<xsl:message>bibliography file not set (bibliog.file)</xsl:message>
-</xsl:when>
-<xsl:otherwise>
-\clearpage
 
-\Extrachap{Bibliography}
-%\addcontentsline{toc}{chapter}{Bibliography}
-%\setcounter{secnumdepth}{-1}
-%\setcounter{tocdepth}{4}
-%\renewcommand{\bibname}{Bibliography}
-\renewcommand{\bibname}{}
-\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
-\renewcommand{\bibname}{}
-\def\section*#1{\vskip-13em}
-\bibliography{<xsl:value-of select="$bibliog.file"/>} 
-\bibliographystyle{plain}
-</xsl:otherwise>
-</xsl:choose>
-</xsl:template>
 
 
 <xsl:template match="squote">`<xsl:apply-templates/>'</xsl:template>
@@ -408,8 +385,8 @@ This is my example.
 <xsl:template match="example/title" mode="eg"><xsl:apply-templates/></xsl:template>
 
 <!--  \section  -->
-<!--  <xsl:call-template name="makeheading"/>  -->
 <xsl:template match="section[./title/*]">
+<xsl:message>section with a title with markup</xsl:message>
 \section[<xsl:apply-templates select="./title/text()"/>]{<xsl:apply-templates select="./title/*|./title/text()"/>}<xsl:if test="@id">\label{<xsl:value-of select="@id"/>}</xsl:if><xsl:apply-templates />					
 </xsl:template>
 

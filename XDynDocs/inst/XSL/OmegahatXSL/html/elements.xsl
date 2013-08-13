@@ -5,7 +5,7 @@
 
 
 
-<xsl:template match="note">
+<xsl:template match="note" name="note">
  <p class="note"><xsl:apply-templates /></p>
 </xsl:template>
 

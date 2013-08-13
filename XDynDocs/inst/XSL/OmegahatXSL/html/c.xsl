@@ -22,7 +22,7 @@
 
 <xsl:template match="c:null"><b class="cnull">NULL</b></xsl:template>
 
-<xsl:template match="c:expr|cpp:expr">
+<xsl:template match="c:expr|cpp:expr|c:decl">
  <code class="C"><xsl:apply-templates/></code>
 </xsl:template>
 
@@ -45,9 +45,13 @@
 </xsl:template>
 
 <xsl:template match="c:arg|c:param">
-  <xsl:call-template name="code">
-    <xsl:with-param name="class">Carg</xsl:with-param>
-  </xsl:call-template>
+<code class="Carg"><xsl:apply-templates/></code>
 </xsl:template>
+
+<xsl:template match="lib">
+ <b class="nativeLibrary">lib<xsl:apply-templates/></b>
+</xsl:template>
+
+
 
 </xsl:stylesheet>

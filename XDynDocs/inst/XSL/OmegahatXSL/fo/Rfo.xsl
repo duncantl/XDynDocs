@@ -60,6 +60,7 @@
 
 <xsl:import href="emacsLisp.xsl"/>
 <xsl:import href="rest.xsl"/>
+<xsl:import href="regex.xsl"/>
 
 
 <xsl:import href="../common/no-latex.xsl" />
@@ -117,9 +118,8 @@
 <xsl:param name="targetFormat">HTML</xsl:param>
 <xsl:param name="runCode" select="0" />
 <xsl:param name="showCode" select="1"/>
-<!--
-<xsl:param name="imageDir">Foo</xsl:param>
--->
+<xsl:param name="imageDir">.</xsl:param>
+
 
 <xsl:param name="title.margin.left">0pt</xsl:param>
 <xsl:param name="body.start.indent">0pt</xsl:param>
@@ -132,9 +132,11 @@
 <xsl:template match="r:question"/>
 
 <xsl:template match="question">
- <fo:inline background-color="gray">
+ <fo:block border-width="30pt" border-color="#000000" text-indent="30pt">
+ <fo:inline background-color="#FFCBA4">		       <!--Deep peach-->
   <xsl:apply-templates/>
  </fo:inline>
+ </fo:block>
 </xsl:template>
 
 <xsl:template match="invisible/r:code|invisible/r:function">
@@ -255,10 +257,11 @@
 </xsl:template>
 
 
+
 <xsl:template match="r:plot">
 <xsl:message>Hi from r:plot <xsl:value-of select="$showCode"/></xsl:message>
  <xsl:if test="$showCode">
-    <xsl:call-template name="makeVerbatimCode"><xsl:with-param name="color" select="$r.code.color"/></xsl:call-template><xsl:text>&#010;</xsl:text>
+    <xsl:call-template name="makeVerbatimCode"><xsl:with-param name="color" select="$r.code.background.color"/></xsl:call-template><xsl:text>&#010;</xsl:text>
  </xsl:if>
  <xsl:choose>
    <xsl:when test="$runCode and function-available('r:graphicsEval')">
@@ -267,8 +270,9 @@
    <xsl:otherwise>
      <xsl:if test="@file">
        <fo:block>
+<xsl:message>extension: '<xsl:value-of select="substring(@file, string-length(@file) - 3, 1)"/>'</xsl:message>
 	 <xsl:element name="fo:external-graphic">
-	   <xsl:attribute name="src"><xsl:value-of select="$imageDir"/>/<xsl:value-of select="@file"/>.jpg</xsl:attribute>
+	   <xsl:attribute name="src"><xsl:value-of select="$imageDir"/>/<xsl:value-of select="@file"/><xsl:if test="not(substring(@file, string-length(@file) - 3, 1) = '.')">.jpg</xsl:if></xsl:attribute>
 <!--
        <xsl:attribute name="width">4.5in</xsl:attribute>
        <xsl:attribute name="height">3in</xsl:attribute>
@@ -513,7 +517,15 @@
 
 
 <xsl:template match="python">
-<fo:inline><fo:basic-link external-destination="http://www.python.org">Python</fo:basic-link></fo:inline>
+<fo:inline font-weight="bold"><fo:basic-link external-destination="http://www.python.org">Python</fo:basic-link></fo:inline>
+</xsl:template>
+
+<xsl:template match="matlab">
+<fo:inline font-weight="bold"><fo:basic-link external-destination="http://www.mathworks.com">MATLAB</fo:basic-link></fo:inline>
+</xsl:template>
+
+<xsl:template match="check|fix|q">
+<xsl:message><xsl:value-of select="translate(name(.), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/>: (<xsl:apply-templates select="ancestor::section[1]/title/text()"/>)  <xsl:apply-templates/> </xsl:message>
 </xsl:template>
 
 </xsl:stylesheet>

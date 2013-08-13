@@ -126,4 +126,24 @@
 \end{CodeChunk}
 </xsl:template>
 
+
+<xsl:template match="xxx.bibliography">
+<xsl:choose>
+<xsl:when test="$bibliog.file = ''">
+<xsl:message>bibliography file not set (bibliog.file)</xsl:message>
+</xsl:when>
+<xsl:otherwise>
+%\renewcommand{\bibname}{Bibliography}
+%\renewcommand{\bibname}{}
+%\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
+%\renewcommand{\bibname}{}
+%\def\section*#1{\vskip-13em}
+%\bibliographystyle{plain}
+\bibliography{<xsl:value-of select="$bibliog.file"/>} 
+</xsl:otherwise>
+</xsl:choose>
+</xsl:template>
+
+
+
 </xsl:stylesheet>

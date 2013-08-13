@@ -230,7 +230,7 @@ var toggleCodeIds = [
 </xsl:template>
 
 
-<xsl:template match="docbook:note">
+<xsl:template match="docbook:note" name="note">
 <div class="note">
 Note:
  <xsl:apply-templates/>

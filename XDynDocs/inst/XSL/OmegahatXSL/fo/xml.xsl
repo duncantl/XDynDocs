@@ -4,6 +4,7 @@
 		 xmlns:fo="http://www.w3.org/1999/XSL/Format"
 		 xmlns:kml="http://earth.google.com/kml/2.1"
 		 xmlns:sch="http://www.w3.org/2001/XMLSchema"
+		 exclude-result-prefixes="kml sch xp"
 		 version="1.0">
 
 <!-- this is a comment test and another one from duncan. And again -->
@@ -102,6 +103,10 @@
 
 <xsl:template match="xml">
 <fo:inline font-weight="bold">XML</fo:inline>
+</xsl:template>
+
+<xsl:template match="xpath">
+<fo:inline font-weight="bold">XPath</fo:inline>
 </xsl:template>
 
 <xsl:template match="js">

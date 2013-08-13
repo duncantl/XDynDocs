@@ -118,6 +118,9 @@
 <xsl:text>DocBook</xsl:text>
 </xsl:template>
 
+
+<xsl:template match="linux">Linux</xsl:template>
+
 <xsl:template match="unix">
 <xsl:text>UNIX</xsl:text>
 <xsl:call-template name="inline.charseq"/><xsl:call-template name="dingbat"><xsl:with-param name="dingbat" select="'registered'"/></xsl:call-template>

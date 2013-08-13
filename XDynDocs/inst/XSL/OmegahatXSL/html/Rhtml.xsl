@@ -122,5 +122,7 @@ This is an example of some documentation for an XSL thing.
 
 <xsl:template match="title/subtitle"><br/><xsl:apply-templates/></xsl:template>
 
+<xsl:template match="altTitle"/>
+
 </xsl:stylesheet>
 
