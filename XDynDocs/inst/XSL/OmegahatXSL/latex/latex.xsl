@@ -114,6 +114,9 @@
 \end{verbatim}</xsl:template>
 
 
+<xsl:template match="dash">---</xsl:template>
+
+
 <xsl:template match="makeGlossary">
 <xsl:if test="not(ancestor::glossary)">
 \section{Glossary}\label{sec:glossary}
