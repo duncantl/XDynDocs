@@ -29,4 +29,30 @@
 
 
 
+<xsl:template match="DTD|dtd">\proglang{DTD}\index{DTD}</xsl:template>
+<xsl:template match="xmlrpc">XML-RPC\index{XML-RPC}</xsl:template>
+<xsl:template match="cran">CRAN\index{CRAN}</xsl:template>
+<xsl:template match="es">\acronym{ElasticSearch}\index{ElasticSearch}</xsl:template>
+<xsl:template match="xlink">\proglang{XLink}\index{XLink@\proglang{XLink}}</xsl:template>
+<xsl:template match="xinclude">\proglang{XInclude}\index{XInclude@\proglang{XInclude}}</xsl:template>
+<xsl:template match="xquery">\proglang{XQuery}\index{XQuery@\proglang{XQuery}}</xsl:template>
+<xsl:template match="xpointer">\proglang{XPointer}\index{XPointer@\proglang{XPointer}}</xsl:template>
+<xsl:template match="xpath|proglang[. = 'XPath']">\proglang{XPath}\index{XPath@\proglang{XPath}}</xsl:template>
+<xsl:template match="ruby">\proglang{Ruby}\index{Ruby@\proglang{Ruby}}</xsl:template>
+<xsl:template match="omegahat">Omegahat</xsl:template>
+<xsl:template match="unix|UNIX">\acronym{UNIX}\index{UNIX}</xsl:template>
+
+<xsl:template match="wsdl">\WSDL\index{WSDL@\WSDL}</xsl:template>
+<xsl:template match="wadl">\WADL\index{WADL@\WADL}</xsl:template>
+<xsl:template match="oauth">\OAuth\index{OAuth@\OAuth}</xsl:template>
+<xsl:template match="oauth2">\OAuthTwo\index{OAuth2@\OAuthTwo}</xsl:template>
+<xsl:template match="ssl">\SSL\index{SSL@\SSL}</xsl:template>
+<xsl:template match="dsl">DSL\index{DSL}</xsl:template>
+<xsl:template match="uri|URI">URI\index{URI}</xsl:template>
+<xsl:template match="dcom|DCOM">\DCOM\index{DCOM@\DCOM}</xsl:template>
+<xsl:template match="sweave">\Sweave\index{Sweave@\Sweave}</xsl:template>
+<xsl:template match="knitr">\knitr\index{knitr@\knitr}</xsl:template>
+<xsl:template match="pandoc">\pandoc\index{pandoc@\pandoc}</xsl:template>
+
+
 </xsl:stylesheet>
