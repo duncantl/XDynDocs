@@ -12,11 +12,17 @@
 
   <!-- For information on bibtex types, see http://en.wikipedia.org/wiki/BibTeX#Entry_Types  -->
 
-<xsl:import href="languages.xsl"/>
+<xsl:include href="latex.xsl"/>
+<xsl:include href="js.xsl"/>
+<xsl:include href="svg.xsl"/>
+<xsl:include href="xpath.xsl"/>
+<xsl:include href="languages.xsl"/>
 
 <xsl:output method="text" omit-xml-declaration="yes"/>
 <xsl:strip-space elements="*"/>
 <xsl:preserve-space elements="title"/>
+
+<xsl:template match="*"><xsl:message>No template for <xsl:value-of select="local-name()"/></xsl:message></xsl:template>
 
 
 <xsl:template match="/">
@@ -126,10 +132,12 @@ year = 2011</xsl:if>
 <xsl:apply-templates select="surname"/><xsl:if test="firstname">, <xsl:value-of select="firstname"/></xsl:if><xsl:if test="othername"><xsl:text> </xsl:text><xsl:apply-templates select="othername"/></xsl:if>
 </xsl:template>
 
-<xsl:template match="surname"><xsl:choose><xsl:when test="contains(string(.), ' ')">{<xsl:apply-templates/>}</xsl:when><xsl:otherwise><xsl:apply-templates/></xsl:otherwise></xsl:choose></xsl:template>
+<xsl:template match="surname | firstname | othername"><xsl:choose><xsl:when test="contains(string(.), ' ')">{<xsl:apply-templates/>}</xsl:when><xsl:otherwise><xsl:apply-templates/></xsl:otherwise></xsl:choose></xsl:template>
 
 <xsl:template match="author">author = {<xsl:call-template name="makeAuthor"/>}<xsl:call-template name="comma"/>
 </xsl:template>
+
+<xsl:template match="editor"><xsl:apply-templates/></xsl:template>
 
 <xsl:template match="biblioset"><xsl:apply-templates/></xsl:template>
 
@@ -150,6 +158,7 @@ year = 2011</xsl:if>
 </xsl:template>
 
 
+<xsl:template match="publishername"><xsl:apply-templates/></xsl:template>
 
 <xsl:template match="publisher">publisher = "<xsl:apply-templates select="publishername"/>"<xsl:if test="address">,
 <xsl:apply-templates select="address"/></xsl:if><xsl:call-template name="comma"/>
@@ -184,4 +193,6 @@ year = 2011</xsl:if>
 <xsl:template match="releaseInfo">note={<xsl:apply-templates/>}<xsl:call-template name="comma"/></xsl:template>
 
 <xsl:template match="r:pkgVersion">note={\proglang{R}~package version~<xsl:apply-templates/>}<xsl:call-template name="comma"/></xsl:template>
+
+
 </xsl:stylesheet>

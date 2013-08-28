@@ -94,7 +94,7 @@ simplemsgentry
 -->
 
 <!--  Try to identify paragraphs that are sloppy -->
-<xsl:template match="para[@sloppy] | para[.//ulink[string-length(.) > 25]] | para[not(ancestor::title) and count(.//xml:tag) > 2] | para[ .//r:class[string-length(.) > 9] and not(ancestor::summary)]">\begin{sloppy}<xsl:if test="parent::example and count(preceding-sibling::para) = 0">\noindent\hskip-\parindent </xsl:if><xsl:apply-imports/>\end{sloppy}
+<xsl:template match="para[@sloppy] | para[.//ulink[string-length(.) > 25]] | para[not(ancestor::title) and count(.//xml:tag) > 2] | para[ .//r:class[string-length(.) > 9] and not(ancestor::summary)]">\begin{sloppy}<xsl:if test="false and parent::example and count(preceding-sibling::para) = 0">\noindent\hskip-\parindent </xsl:if><xsl:apply-imports/>\end{sloppy}
 </xsl:template>
 
 
@@ -123,12 +123,22 @@ simplemsgentry
 <xsl:template match="fop">\ShApp{FOP}</xsl:template>
 
 
+
 <!--  See if we can use the "scape" template and defaults in dblatex. -->
-<xsl:template match="text()[not(ancestor::c:code) and not(ancestor::r:function) and not(ancestor::r:code) and not(ancestor::r:output) and not(ancestor::xml:code) and not(ancestor::js:code) and not(ancestor::svg:code) and not(ancestor::programlisting) and not(ancestor::literal)]"><xsl:value-of select="str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(string(.), '&amp;', '\&amp;'), '_', '\_'), '#', '\#'), '%', '\%'), '{', '\lcurly'), '}', '\rcurly'), '$', '\$'), '\\', 'xxx'), ' - ', ' -- ')"/></xsl:template>
+<xsl:template name="textReplace" match="text()[not(ancestor::c:code) and not(ancestor::r:function) and not(ancestor::r:code) and not(ancestor::r:output) and not(ancestor::xml:code) and not(ancestor::js:code) and not(ancestor::svg:code) and not(ancestor::programlisting) and not(ancestor::literal)]"><xsl:value-of select="str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(string(.), '&amp;', '\&amp;'), '_', '\_'), '#', '\#'), '%', '\%'), '{', '\lcurly'), '}', '\rcurly'), '$', '\$'), '\\', '\\\\'), ' - ', ' -- ')"/></xsl:template>
+
 
 <xsl:template match="text()[ancestor::programlisting or ancestor::xp:expr or ancestor::r:code or ancestor::r:output or ancestor::r:function or ancestor::xsl:code or ancestor::make:code or ancestor::literal]">
 <xsl:copy select="."/>
 </xsl:template>
+
+<xsl:template match="example/para[position() = 1]/text()[1][starts-with(., '&#10;')] | callout/para[position() = 1]/text()[1][starts-with(., '&#10;')] | formalpara/para[position() = 1]/text()[1][starts-with(., '&#10;')]" priority="1000">
+<!--<xsl:message>text() inside an example that starts with a new-line: <xsl:value-of select="string(.)"/></xsl:message>-->
+<xsl:variable name="foo"><xsl:call-template name="textReplace"/></xsl:variable>
+<xsl:value-of select="substring($foo, 2)"/>
+</xsl:template>
+
+
 
 <xsl:template name="replace-leading-newlines">
 <xsl:param name="string"/>
@@ -358,9 +368,11 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
  -->
 <!-- \numberline{\theExample} -->
 <xsl:template match="example">
+\message{EXAMPLE <xsl:value-of select="@id"/>^^J}
 \begin{Example}{<xsl:apply-templates select="./title" mode="eg"/>}<xsl:if test="@id">\label{<xsl:value-of select="@id"/>}%</xsl:if>
 \addcontentsline{ex}{Example}{\protect\numberline{\thesExampleCounter} <xsl:apply-templates select="title" mode="exampleTitle"/>}
-\noindent <xsl:apply-templates />
+\noindent
+<xsl:apply-templates />
 
 \end{Example}
 </xsl:template>
@@ -542,17 +554,9 @@ This is my example.
 
 <xsl:template match="title/subtitle">\\<xsl:text>&#10;</xsl:text><xsl:apply-templates/></xsl:template>
 
-<xsl:template match="dso">\DSO{<xsl:apply-templates/>}</xsl:template>
-<xsl:template match="proj">\Project{<xsl:apply-templates/>}</xsl:template>
 
 <xsl:template match="r:na">\texttt{NA}</xsl:template>
 
-<xsl:template match="directory|dir">\texttt{<xsl:apply-templates/>/}</xsl:template>
-
-<xsl:template match="dll|dso|lib">\DLL{<xsl:apply-templates/>}</xsl:template>
-
-
-<xsl:template match="markupLang">\MarkupLang{<xsl:apply-templates/>}</xsl:template>
 
 
 <xsl:template match="math">$<xsl:apply-templates/>$</xsl:template>

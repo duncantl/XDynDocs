@@ -135,6 +135,8 @@ Acronym &amp; Definition \\
 <xsl:apply-templates /> &amp; <xsl:value-of select="@def"/> \\
 </xsl:template>
 
+<xsl:template match="acronym">\acronym{<xsl:apply-templates />}</xsl:template>
+
 <xsl:template match="r:help">?\texttt{<xsl:apply-templates/>}</xsl:template>
 
 

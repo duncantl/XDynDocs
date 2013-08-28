@@ -79,16 +79,9 @@
 
 <xsl:template match="dyngraphic"/>
 
-
-
 <xsl:template match="omg:pkg">\OmgPackage{<xsl:apply-templates/>}</xsl:template>
-
 <xsl:template match="r:slot">\Rslot{<xsl:apply-templates/>}</xsl:template>
 
-<xsl:template match="js">\proglang{JavaScript}</xsl:template>
-<xsl:template match="xpath">\proglang{XPath}</xsl:template>
-<xsl:template match="xml">\proglang{XML}</xsl:template>
-<xsl:template match="C">\proglang{C}</xsl:template>
 
 <xsl:template match="proglang">\proglang{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="mklang">\MarkupLang{<xsl:apply-templates/>}</xsl:template>

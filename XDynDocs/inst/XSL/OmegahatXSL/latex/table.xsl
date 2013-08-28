@@ -11,26 +11,46 @@
     >
 
 <xsl:param name="thead.bold" select="1" />
+<xsl:param name="TableCaptionsAtTop" select="1" />
 
 <xsl:template match="table[title]">
 \begin{table}<!--<xsl:if test="@ltx:tabcolsep">\setlength{\tabcolsep}{<xsl:value-of select="@ltx:tabcolsep"/>}
 </xsl:if>-->
 %\centering
+<xsl:if test="$TableCaptionsAtTop">
+\begin{center}
+<xsl:apply-templates select="title"/>
+\end{center}
+<xsl:apply-templates select="caption/* | caption/text()"/>
+</xsl:if>
 \begin{center}
 \begin{tabularx}{\linewidth}{<xsl:call-template name="table-format-string"/>}
 <xsl:apply-templates select="tgroup/thead/row"/>
 <xsl:apply-templates select="tgroup/tbody/row"/>
 <xsl:apply-templates select="tgroup/tfoot"/>
 \end{tabularx}
+<xsl:if test="not($TableCaptionsAtTop)">
 <xsl:apply-templates select="title"/>
+</xsl:if>
 \end{center}
+\nopagebreak
+<xsl:if test="not($TableCaptionsAtTop)">
 <xsl:apply-templates select="caption/* | caption/text()"/>
+</xsl:if>
+%\nopagebreak
 \end{table}
 </xsl:template>
 
 <!-- was \tablecaption  -->
 <xsl:template match="table[@ltx:multipage]/title">
+<xsl:choose>
+<xsl:when test="$TableCaptionsAtTop">
+\topcaption{<xsl:apply-templates/>}
+</xsl:when>
+<xsl:otherwise>
 \bottomcaption{<xsl:apply-templates/>}
+</xsl:otherwise>
+</xsl:choose>
 </xsl:template>
 
 <xsl:template match="table[title and @ltx:multipage]">
