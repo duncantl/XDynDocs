@@ -104,7 +104,7 @@
 
 <xsl:template match="png">\PNG\index{PNG@\PNG}</xsl:template>
 
-<xsl:template match="opengl">\proglang{opengl}</xsl:template>
+<xsl:template match="opengl">\proglang{OpenGL}</xsl:template>
 
 <xsl:template match="gcc">\ShApp{GCC}</xsl:template>
 

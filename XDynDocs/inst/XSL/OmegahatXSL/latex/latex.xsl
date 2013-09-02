@@ -114,7 +114,8 @@
 \end{verbatim}</xsl:template>
 
 
-<xsl:template match="dash">---</xsl:template>
+<xsl:template match="emdash|dash">---</xsl:template>
+<xsl:template match="ndash">--</xsl:template>
 
 
 <xsl:template match="makeGlossary">
