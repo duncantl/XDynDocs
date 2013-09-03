@@ -17,10 +17,10 @@
 
 <xsl:import href="dblatex.xsl"/>
 
-<xsl:import href="xpath.xsl"/>
+<xsl:include href="xpath.xsl"/>
 <xsl:include href="js.xsl"/>
 
-
+<!--<xsl:include href="languages.xsl"/>-->
 <xsl:include href="latex.xsl"/>
 <xsl:include href="entities.xsl"/>
 
@@ -33,7 +33,6 @@
 <xsl:include href="sh.xsl"/>
 <xsl:include href="xsl.xsl"/>
 
-<xsl:include href="languages.xsl"/>
 
 
 <xsl:output method="text" omit-xml-declaration="yes"/>
@@ -88,6 +87,7 @@ ooexception
 oointerface
 simplemsgentry
 "/>
+
 
 <!-- 
    <xsl:preserve-space elements="text()"/>

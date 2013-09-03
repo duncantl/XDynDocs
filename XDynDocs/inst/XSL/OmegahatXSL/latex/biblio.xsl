@@ -16,7 +16,7 @@
 <xsl:include href="js.xsl"/>
 <xsl:include href="svg.xsl"/>
 <xsl:include href="xpath.xsl"/>
-<xsl:include href="languages.xsl"/>
+<!--<xsl:include href="languages.xsl"/>-->
 
 <xsl:output method="text" omit-xml-declaration="yes"/>
 <xsl:strip-space elements="*"/>
