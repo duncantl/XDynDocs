@@ -137,6 +137,7 @@ Acronym &amp; Definition \\
 </xsl:template>
 
 <xsl:template match="acronym">\acronym{<xsl:apply-templates />}</xsl:template>
+<!-- <xsl:template match="acronym[. = 'XML']">XML</xsl:template> -->
 
 <xsl:template match="r:help">?\texttt{<xsl:apply-templates/>}</xsl:template>
 
@@ -148,6 +149,7 @@ Acronym &amp; Definition \\
 
 <xsl:template match="r:op">\Rop{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="r:op[string(.)='$']">\Rop{\$}</xsl:template>
+<xsl:template match="r:op[string(.)='~']">\Rop{\texttildelow}</xsl:template>
 <xsl:template match="r:keyword">\Rkeyword{<xsl:apply-templates/>}</xsl:template>
 
 
