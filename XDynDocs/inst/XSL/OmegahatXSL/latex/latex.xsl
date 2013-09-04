@@ -160,5 +160,10 @@ Acronym &amp; Definition \\
 <xsl:template match="index[not(primary) and @term]" priority="100">
 <xsl:value-of select="."/>\index{<xsl:value-of select="@term"/>}</xsl:template>
 
+<xsl:template match="index[@key]" priority="100">
+<xsl:message>index @key <xsl:value-of select="@key"/></xsl:message>
+<xsl:apply-templates/>\index{<xsl:value-of select="@key"/>@<xsl:choose><xsl:when test="@term"><xsl:value-of select="@term"/></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose>}</xsl:template>
+
+
 
 </xsl:stylesheet>
