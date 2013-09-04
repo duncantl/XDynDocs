@@ -27,13 +27,13 @@
 
 <!-- Should this <format><acronym>..   or <acronym><format> -->
 <xsl:template match="JSON|json"><acronym def="JavaScript Object Notation"><markupLang>JSON</markupLang></acronym></xsl:template>
-<xsl:template match="xpath"><acronym def="XPath"><xpath/></acronym></xsl:template>
-<xsl:template match="xinclude"><acronym def="XInclude">XInclude</acronym></xsl:template>
+<!--<xsl:template match="xpath"><acronym def="XPath"><xpath/></acronym></xsl:template>-->
+<xsl:template match="xinclude"><acronym def="XInclude"><markupLang>XInclude</markupLang></acronym></xsl:template>
 <xsl:template match="markdown"><acronym def="markdown"><markupLang>Markdown</markupLang></acronym></xsl:template>
-<xsl:template match="xsl"><acronym def="eXtensible Stylesheet Language">XSL</acronym></xsl:template>
-<xsl:template match="c"><acronym def="C programming language">C</acronym></xsl:template>
-<xsl:template match="cpp"><acronym def="C++ programming language">C++</acronym></xsl:template>
-<xsl:template match="sql"><acronym def="Structured Query Language">SQL</acronym></xsl:template>
+<!-- <xsl:template match="xsl"><acronym def="eXtensible Stylesheet Language" index="true"><xsl/></acronym></xsl:template>-->
+<xsl:template match="c"><acronym def="C programming language"><proglang>C</proglang></acronym></xsl:template>
+<xsl:template match="cpp"><acronym def="C++ programming language"><proglang>C++</proglang></acronym></xsl:template>
+<xsl:template match="sql"><acronym def="Structured Query Language"><proglang>SQL</proglang></acronym></xsl:template>
 <xsl:template match="oracle"><acronym def="Oracle Database System">Oracle</acronym></xsl:template>
 <xsl:template match="mysql"><acronym def="MySQL Database System">MySQL</acronym></xsl:template>
 <xsl:template match="postgres"><acronym def="Postgres Database System">Postgres</acronym></xsl:template>
