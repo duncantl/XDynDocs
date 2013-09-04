@@ -12,6 +12,7 @@
   Now in languages.xsl again.  latex.xsl is the only file that includes this.
   latex.xsl is included by basicLatex.xsl and also biblio.xsl  -->
 <xsl:template name="addIndexEntryString">
+  <!--  or ancestor::functionSummaryTable  -->
 <xsl:if test="ancestor::table or ancestor::title or ancestor::caption or ancestor::summary">\string</xsl:if>
 </xsl:template>
 
@@ -27,7 +28,7 @@
 <!--<xsl:template match="latex[string(.) = '']">\LaTeX{}</xsl:template>-->
 
 <xsl:template match="html|HTML">\proglang{HTML}</xsl:template>
-<xsl:template match="js">\proglang{JavaScript}\index{JavaScript}@\proglang{JavaScript}</xsl:template>
+<xsl:template match="js">\proglang{JavaScript}\index{JavaScript@\proglang{JavaScript}}</xsl:template>
 <xsl:template match="js[ancestor::title or ancestor::summary]">\proglang{JavaScript}</xsl:template>
 <xsl:template match="xpath">\proglang{XPath}\index{XPath@\proglang{XPath}}</xsl:template>
 <xsl:template match="xpath[ancestor::title or ancestor::summary]">\proglang{XPath}</xsl:template>
@@ -36,8 +37,12 @@
 <xsl:template match="xml[ancestor::title or ancestor::summary]">\proglang{XML}</xsl:template>
 <xsl:template match="C">\proglang{C}\index{C@\proglang{C}}</xsl:template>
 <xsl:template match="C[ancestor::title or ancestor::summary]">\proglang{C}</xsl:template>
-<xsl:template match="css">\proglang{CSS}\index{CSS@\proglang{CSS}}</xsl:template>
-<xsl:template match="css[ancestor::title or ancestor::summary]">\proglang{CSS}</xsl:template>
+
+<xsl:template match="css">\proglang{CSS}<xsl:if test="not(ancestor::biblioentry)">\index{CSS@<xsl:call-template name="addIndexEntryString"/>\CSS}</xsl:if></xsl:template>
+<!-- ancestor::caption     No need for formalpara. -->
+<xsl:template match="css[ancestor::caption and ancestor::figure and not(ancestor::example)]">\proglang{CSS}\index{CSS@\string\CSS}</xsl:template>
+<xsl:template match="css[ancestor::summary or ancestor::example]">\proglang{CSS}</xsl:template>
+<xsl:template match="css[ancestor::footnote]" priority="100"><xsl:message>CSS index for footnote</xsl:message>\proglang{CSS}\index{CSS@\string\CSS}</xsl:template>
 
 <xsl:template match="proglang">\proglang{<xsl:apply-templates/>}\index{<xsl:apply-templates/>@\proglang{<xsl:apply-templates/>}}</xsl:template>
 <xsl:template match="proglang[acronym]">\proglang{<xsl:apply-templates/>}\index{<xsl:value-of select="acronym/text()"/>@\proglang{<xsl:apply-templates/>}}</xsl:template>
@@ -45,8 +50,10 @@
 
 <xsl:template match="proglang[string(.) = 'R' or string(.) = 'XML']">\proglang{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="proglang[ancestor::title or ancestor::summary]">\proglang{<xsl:apply-templates/>}</xsl:template>
-<xsl:template match="mklang">\MarkupLang{<xsl:apply-templates/>}</xsl:template>
-<xsl:template match="markupLang">\MarkupLang{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="mklang">\MarkupLang{<xsl:apply-templates/>}\index{<xsl:value-of select="."/>}</xsl:template>
+<xsl:template match="markupLang"><xsl:message>markupLang: <xsl:value-of select="."/></xsl:message>\MarkupLang{<xsl:apply-templates/>}\index{<xsl:value-of select="."/>}</xsl:template>
+<!--<xsl:template match="markupLang">\MarkupLang{<xsl:apply-templates/>}</xsl:template>-->
+
 <xsl:template match="svg">\MarkupLang{SVG}\index{SVG@\MarkupLang{SVG}}</xsl:template>
 <xsl:template match="svg[ancestor::title or ancestor::summary]">\MarkupLang{SVG}</xsl:template>
 <xsl:template match="kml">\MarkupLang{KML}\index{KML@\MarkupLang{KML}}</xsl:template>
@@ -91,7 +98,7 @@
 <xsl:template match="dso">\DSO{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="proj">\Project{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="directory|dir">\texttt{<xsl:apply-templates/>/}</xsl:template>
-<xsl:template match="markupLang">\MarkupLang{<xsl:apply-templates/>}</xsl:template>
+
 
 <xsl:template match="s4">\acronym{S4}</xsl:template>
 <xsl:template match="s3">\acronym{S3}</xsl:template>
@@ -99,8 +106,8 @@
 
 <xsl:template match="soap">\acronym{SOAP}\index{SOAP}</xsl:template>
 <xsl:template match="pdf">\acronym{PDF}\index{PDF}</xsl:template>
-<xsl:template match="html5">\acronym{HTML5}\index{<xsl:call-template name="addIndexEntryString"/>\proglang{HTML5}}</xsl:template>
-<xsl:template match="xhtml">\acronym{XHTML}\index{<xsl:call-template name="addIndexEntryString"/>\proglang{XHTML}}</xsl:template>
+<xsl:template match="html5">\acronym{HTML5}\index{HTML5@<xsl:call-template name="addIndexEntryString"/>\proglang{HTML5}}</xsl:template>
+<xsl:template match="xhtml">\acronym{XHTML}\index{XHTML@<xsl:call-template name="addIndexEntryString"/>\proglang{XHTML}}</xsl:template>
 
 <xsl:template match="dblatex">\textit{dblatex}</xsl:template>
 
@@ -129,7 +136,7 @@
 
 <!-- Were in springerLatex.xsl -->
 <xsl:template match="sfc">\textit{San Francisco Chronicle}</xsl:template>
-<xsl:template match="nyt">\textit{New York Times}</xsl:template>
+<xsl:template match="nyt">\textit{New York Times}\index{New\ York\ Times@\textit{New York Times}}</xsl:template>
 <xsl:template match="jss">\textit{Journal of Statistical Software}</xsl:template>
 
 </xsl:stylesheet>
