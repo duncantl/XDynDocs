@@ -17,7 +17,10 @@
 <xsl:template match="perl"><proglang>PERL</proglang></xsl:template>
 <xsl:template match="ruby"><proglang>Ruby</proglang></xsl:template>
 <xsl:template match="word">Microsoft Word</xsl:template>
+
+<!--
 <xsl:template match="css"><proglang><acronym def="CSS">CSS</acronym></proglang></xsl:template>
+-->
 
 
 <xsl:template match="fo"><proglang>FO</proglang></xsl:template>
@@ -37,12 +40,12 @@
 <xsl:template match="ecmascript"><proglang><acronym def="ECMAScript">ECMAScript</acronym></proglang></xsl:template>
 <xsl:template match="flash"><proglang><acronym def="Flash">Flash</acronym></proglang></xsl:template>
 <xsl:template match="actionscript"><proglang><acronym def="ActionScript">ActionScript</acronym></proglang></xsl:template>
-<xsl:template match="rss"><acronym def="Real Simple Syndication">RSS</acronym></xsl:template>
+<xsl:template match="rss"><acronym def="Real Simple Syndication" index="true">RSS</acronym></xsl:template>
 <xsl:template match="atom"><acronym def="">Atom</acronym></xsl:template>
-<xsl:template match="kml"><acronym def="Keyhole Markup Language"><markupLang>KML</markupLang></acronym></xsl:template>
-<xsl:template match="http"><acronym def="HyperText Transfer Protocol">HTTP</acronym></xsl:template>
-<xsl:template match="https"><acronym def="Secure HyperText Transfer Protocol">HTTPS</acronym></xsl:template>
-<xsl:template match="ftp"><acronym def="File Transfer Protocol">FTP</acronym></xsl:template>
+<xsl:template match="kml"><acronym def="Keyhole Markup Language" index="true"><markupLang>KML</markupLang></acronym></xsl:template>
+<xsl:template match="http"><acronym def="HyperText Transfer Protocol" index="true">HTTP</acronym></xsl:template>
+<xsl:template match="https"><acronym def="Secure HyperText Transfer Protocol" index="true">HTTPS</acronym></xsl:template>
+<xsl:template match="ftp"><acronym def="File Transfer Protocol" index="true">FTP</acronym></xsl:template>
 <xsl:template match="java"><proglang><acronym def="Java">Java</acronym></proglang></xsl:template>
 
 
@@ -76,6 +79,12 @@
 <xsl:text>&#10;</xsl:text>
 </programlisting>
 </xsl:template>
+
+<!--
+<xsl:template match="index[not(primary)]">
+<xsl:copy-of select="."/><indexterm><primary><xsl:copy-of select="."/></primary></indexterm>
+</xsl:template>
+-->
 
 
 </xsl:stylesheet>
