@@ -64,6 +64,9 @@
 <xsl:template match="gml[ancestor::title or ancestor::summary]">\MarkupLang{GML}</xsl:template>
 
 
+<xsl:template match="amazonS3">Amazon S3\index{Amazon!S3@S3}</xsl:template>
+
+
 <xsl:template match="DTD|dtd">\proglang{DTD}\index{DTD}</xsl:template>
 <xsl:template match="xmlrpc">XML-RPC\index{XML-RPC}</xsl:template>
 <xsl:template match="cran">CRAN\index{CRAN}</xsl:template>
