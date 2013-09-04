@@ -51,8 +51,10 @@
 <xsl:template match="proglang[string(.) = 'R' or string(.) = 'XML']">\proglang{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="proglang[ancestor::title or ancestor::summary]">\proglang{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="mklang">\MarkupLang{<xsl:apply-templates/>}\index{<xsl:value-of select="."/>}</xsl:template>
-<xsl:template match="markupLang"><xsl:message>markupLang: <xsl:value-of select="."/></xsl:message>\MarkupLang{<xsl:apply-templates/>}\index{<xsl:value-of select="."/>}</xsl:template>
+<xsl:template match="markupLang">\MarkupLang{<xsl:apply-templates/>}\index{<xsl:value-of select="."/>}</xsl:template>
 <!--<xsl:template match="markupLang">\MarkupLang{<xsl:apply-templates/>}</xsl:template>-->
+
+<xsl:template match="xsl">\MarkupLang{XSL}\index{XSL@\MarkupLang{XSL}}</xsl:template>
 
 <xsl:template match="svg">\MarkupLang{SVG}\index{SVG@\MarkupLang{SVG}}</xsl:template>
 <xsl:template match="svg[ancestor::title or ancestor::summary]">\MarkupLang{SVG}</xsl:template>
