@@ -137,7 +137,7 @@ Acronym &amp; Definition \\
 </xsl:template>
 
 <xsl:template match="acronym">\acronym{<xsl:apply-templates />}</xsl:template>
-<xsl:template match="acronym[markupLang]"><xsl:message>acronym[markupLang] <xsl:value-of select="markupLang/text()"/></xsl:message><xsl:apply-templates /></xsl:template>
+<xsl:template match="acronym[markupLang]"><xsl:apply-templates /></xsl:template>
 <xsl:template match="acronym[@index = 'true']">\acronym{<xsl:apply-templates />}\index{<xsl:value-of select="."/>}</xsl:template>
 <!-- <xsl:template match="acronym[. = 'XML']">XML</xsl:template> -->
 
