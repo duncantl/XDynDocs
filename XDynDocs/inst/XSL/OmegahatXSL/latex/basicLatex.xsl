@@ -125,7 +125,9 @@ simplemsgentry
 
 
 <!--  See if we can use the "scape" template and defaults in dblatex. -->
-<xsl:template name="textReplace" match="text()[not(ancestor::c:code) and not(ancestor::r:function) and not(ancestor::r:code) and not(ancestor::r:output) and not(ancestor::xml:code) and not(ancestor::js:code) and not(ancestor::svg:code) and not(ancestor::programlisting) and not(ancestor::literal)]"><xsl:value-of select="str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(string(.), '&amp;', '\&amp;'), '_', '\_'), '#', '\#'), '%', '\%'), '{', '\lcurly'), '}', '\rcurly'), '$', '\$'), '\\', '\\\\'), ' - ', ' -- ')"/></xsl:template>
+<xsl:template name="textReplace" match="text()[not(ancestor::c:code) and not(ancestor::r:function) and not(ancestor::r:code) and not(ancestor::r:output) and not(ancestor::xml:code) and not(ancestor::js:code) and not(ancestor::svg:code) and not(ancestor::programlisting) and not(ancestor::literal)]">
+<xsl:param name="str" value="string(.)"/>
+<xsl:value-of select="str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(str:replace($str, '&amp;', '\&amp;'), '_', '\_'), '#', '\#'), '%', '\%'), '{', '\lcurly'), '}', '\rcurly'), '$', '\$'), '\\', '\\\\'), ' - ', ' -- ')"/></xsl:template>
 
 
 <xsl:template match="text()[ancestor::programlisting or ancestor::xp:expr or ancestor::r:code or ancestor::r:output or ancestor::r:function or ancestor::xsl:code or ancestor::make:code or ancestor::literal]">
@@ -539,10 +541,16 @@ This is my example.
 \end{quote}
 </xsl:template>
 
+<!--
+<xsl:template match="text()[(. = ' ' or . = '&#10;') and following-sibling::citation]">
+<xsl:message>trimming before citation</xsl:message>
+<xsl:call-template name="textReplace"><xsl:with-param name="str"><xsl:call-template name="trim-right"><xsl:with-param name="contents" select="string(.)"/></xsl:call-template></xsl:with-param></xsl:call-template>
+</xsl:template>
+-->
 
 <xsl:template match="biblioref">\<xsl:value-of select="$default.cite.cmd"/>{<xsl:value-of select="@linkend"/>}</xsl:template>
 <!-- Not certain why match="citation/biblioref" doesn't work -->
-<xsl:template match="citation[biblioref]">\<xsl:value-of select="$default.cite.cmd"/>{<xsl:value-of select="biblioref/@linkend"/>}</xsl:template>
+<xsl:template match="citation[biblioref]">~\<xsl:value-of select="$default.cite.cmd"/>{<xsl:value-of select="biblioref/@linkend"/>}</xsl:template>
 
 <!-- Allow multiple biblioref nodes within a single citation and put them into a \cite{a,b,c} -->
 <xsl:template match="citation[count(biblioref) > 1]">\<xsl:value-of select="$default.cite.cmd"/>{<xsl:for-each select="biblioref"><xsl:value-of select="@linkend"/><xsl:if test="not(position() = last())">,</xsl:if></xsl:for-each>}</xsl:template>
