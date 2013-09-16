@@ -11,16 +11,18 @@
     >
 
 <xsl:param name="thead.bold" select="1" />
-<xsl:param name="TableCaptionsAtTop" select="1" />
+<xsl:param name="TableCaptionsAtTop" select="0" />
 
 <xsl:template match="table[title]">
+\message{TABLE^^J}
 \begin{table}<!--<xsl:if test="@ltx:tabcolsep">\setlength{\tabcolsep}{<xsl:value-of select="@ltx:tabcolsep"/>}
 </xsl:if>-->
 %\centering
-<xsl:if test="$TableCaptionsAtTop">
 \begin{center}
 <xsl:apply-templates select="title"/>
 \end{center}
+<xsl:if test="$TableCaptionsAtTop">
+<xsl:message>TableCaptionsAtTop = <xsl:value-of select="$TableCaptionsAtTop"/></xsl:message>
 <xsl:apply-templates select="caption/* | caption/text()"/>
 </xsl:if>
 \begin{center}
@@ -29,9 +31,7 @@
 <xsl:apply-templates select="tgroup/tbody/row"/>
 <xsl:apply-templates select="tgroup/tfoot"/>
 \end{tabularx}
-<xsl:if test="not($TableCaptionsAtTop)">
-<xsl:apply-templates select="title"/>
-</xsl:if>
+<xsl:if test="not($TableCaptionsAtTop)"><!--<xsl:apply-templates select="title"/>--></xsl:if>
 \end{center}
 \nopagebreak
 <xsl:if test="not($TableCaptionsAtTop)">
