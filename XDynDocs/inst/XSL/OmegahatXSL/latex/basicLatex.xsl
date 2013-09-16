@@ -126,8 +126,9 @@ simplemsgentry
 
 <!--  See if we can use the "scape" template and defaults in dblatex. -->
 <xsl:template name="textReplace" match="text()[not(ancestor::c:code) and not(ancestor::r:function) and not(ancestor::r:code) and not(ancestor::r:output) and not(ancestor::xml:code) and not(ancestor::js:code) and not(ancestor::svg:code) and not(ancestor::programlisting) and not(ancestor::literal)]">
-<xsl:param name="str" value="string(.)"/>
-<xsl:value-of select="str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(str:replace($str, '&amp;', '\&amp;'), '_', '\_'), '#', '\#'), '%', '\%'), '{', '\lcurly'), '}', '\rcurly'), '$', '\$'), '\\', '\\\\'), ' - ', ' -- ')"/></xsl:template>
+<xsl:param name="xstr" select="string(.)"/>
+<!--<xsl:message>textReplace: <xsl:value-of select="$xstr"/></xsl:message>-->
+<xsl:value-of select="str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(str:replace(str:replace($xstr, '&amp;', '\&amp;'), '_', '\_'), '#', '\#'), '%', '\%'), '{', '\lcurly'), '}', '\rcurly'), '$', '\$'), '\\', '\\\\'), ' - ', ' -- ')"/></xsl:template>
 
 
 <xsl:template match="text()[ancestor::programlisting or ancestor::xp:expr or ancestor::r:code or ancestor::r:output or ancestor::r:function or ancestor::xsl:code or ancestor::make:code or ancestor::literal]">
