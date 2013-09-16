@@ -97,8 +97,9 @@
  <xsl:value-of select="r:call('date')"/>
 </xsl:template>
 
+<!--<xsl:text>&#010;</xsl:text>-->
 <xsl:template match="ltx:*|tex|latex[string(.) != '']|ltx:literal">
- <xsl:copy-of select="."/><xsl:text>&#010;</xsl:text>
+ <xsl:copy-of select="."/>
 </xsl:template>
 
 <xsl:template match="ltx:eqn"><xsl:apply-templates/></xsl:template>
@@ -160,7 +161,7 @@ Acronym &amp; Definition \\
 <xsl:template match="index[not(primary) and @term]" priority="100">
 <xsl:value-of select="."/>\index{<xsl:value-of select="@term"/>}</xsl:template>
 
-<xsl:template match="title//index"><xsl:apply-templates/></xsl:template>
+<xsl:template match="title//index"></xsl:template>
 
 <xsl:template match="index[@key]" priority="100">
 <xsl:apply-templates/>\index{<xsl:value-of select="@key"/>@<xsl:choose><xsl:when test="@term"><xsl:value-of select="@term"/></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose>}</xsl:template>
