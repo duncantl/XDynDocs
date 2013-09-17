@@ -56,7 +56,7 @@
 
 <xsl:template match="s:func|s:functionRef">\Sfunc{<xsl:apply-templates/>}</xsl:template>
 
-<xsl:template match="s:arg|r:arg">\Sarg{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="s:arg|r:arg" name="rarg">\Sarg{<xsl:apply-templates/>}</xsl:template>
 
 <xsl:template match="r:class">\Rclass{<xsl:apply-templates/>}</xsl:template>
 
@@ -166,6 +166,10 @@ Acronym &amp; Definition \\
 <xsl:template match="index[@key]" priority="100">
 <xsl:apply-templates/>\index{<xsl:value-of select="@key"/>@<xsl:choose><xsl:when test="@term"><xsl:value-of select="@term"/></xsl:when><xsl:otherwise><xsl:value-of select="."/></xsl:otherwise></xsl:choose>}</xsl:template>
 
+
+<xsl:template match="r:arg[@func]">
+<xsl:call-template name="rarg"/>\sindex[Rfunc]{<xsl:value-of select="@func"/>@\Rfunc{<xsl:value-of select="@func"/>}!<xsl:value-of select="string(.)"/>@<xsl:call-template name="rarg"/>}
+</xsl:template>
 
 
 </xsl:stylesheet>
