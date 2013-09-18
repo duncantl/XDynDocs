@@ -59,6 +59,8 @@
 <xsl:apply-templates select="tgroup/tbody/row"/>
 <xsl:apply-templates select="tgroup/tfoot"/>
 \end{supertabular}
+
+{\small <xsl:apply-templates select="caption/* | caption/text()"/>}
 </xsl:template>
 
 
