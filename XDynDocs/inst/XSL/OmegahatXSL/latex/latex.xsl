@@ -168,7 +168,7 @@ Acronym &amp; Definition \\
 
 
 <xsl:template match="r:arg[@func]">
-<xsl:call-template name="rarg"/>\sindex[Rfunc]{<xsl:value-of select="@func"/>@\Rfunc{<xsl:value-of select="@func"/>}!<xsl:value-of select="string(.)"/>@<xsl:call-template name="rarg"/>}
+<xsl:call-template name="rarg"/>\sindex[Rfunc]{<xsl:value-of select="@func"/>@\Rfunc{<xsl:value-of select="@func"/>}!<xsl:value-of select="string(.)"/>@<xsl:call-template name="rarg"/><xsl:text>}</xsl:text>
 </xsl:template>
 
 
