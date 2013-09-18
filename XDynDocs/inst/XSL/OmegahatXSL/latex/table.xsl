@@ -44,7 +44,7 @@
 <!-- was \tablecaption  -->
 <xsl:template match="table[@ltx:multipage]/title">
 <xsl:choose>
-<xsl:when test="$TableCaptionsAtTop">
+<xsl:when test="$TableCaptionsAtTop or 1">
 \topcaption{<xsl:apply-templates/>}
 </xsl:when>
 <xsl:otherwise>
