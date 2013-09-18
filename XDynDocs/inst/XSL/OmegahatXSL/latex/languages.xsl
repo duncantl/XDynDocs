@@ -111,8 +111,8 @@
 
 <xsl:template match="soap">\acronym{SOAP}\index{SOAP}</xsl:template>
 <xsl:template match="pdf">\acronym{PDF}\index{PDF}</xsl:template>
-<xsl:template match="html5">\acronym{HTML5}\index{HTML5@<xsl:call-template name="addIndexEntryString"/>\proglang{HTML5}}</xsl:template>
-<xsl:template match="xhtml">\acronym{XHTML}\index{XHTML@<xsl:call-template name="addIndexEntryString"/>\proglang{XHTML}}</xsl:template>
+<xsl:template match="html5">\proglang{HTML5}\index{HTML5@<xsl:call-template name="addIndexEntryString"/>\proglang{HTML5}}</xsl:template>
+<xsl:template match="xhtml">\proglang{XHTML}\index{XHTML@<xsl:call-template name="addIndexEntryString"/>\proglang{XHTML}}</xsl:template>
 
 <xsl:template match="dblatex">\textit{dblatex}</xsl:template>
 
