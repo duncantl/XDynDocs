@@ -23,7 +23,7 @@
 \end{center}
 <xsl:if test="$TableCaptionsAtTop">
 <xsl:message>TableCaptionsAtTop = <xsl:value-of select="$TableCaptionsAtTop"/></xsl:message>
-<xsl:apply-templates select="caption/* | caption/text()"/>
+{\it <xsl:apply-templates select="caption/* | caption/text()"/>}
 </xsl:if>
 \begin{center}
 \begin{tabularx}{\linewidth}{<xsl:call-template name="table-format-string"/>}
@@ -34,8 +34,7 @@
 <xsl:if test="not($TableCaptionsAtTop)"><!--<xsl:apply-templates select="title"/>--></xsl:if>
 \end{center}
 \nopagebreak
-<xsl:if test="not($TableCaptionsAtTop)">
-<xsl:apply-templates select="caption/* | caption/text()"/>
+<xsl:if test="not($TableCaptionsAtTop)">{\it <xsl:apply-templates select="caption/* | caption/text()"/>}
 </xsl:if>
 %\nopagebreak
 \end{table}
@@ -59,8 +58,7 @@
 <xsl:apply-templates select="tgroup/tbody/row"/>
 <xsl:apply-templates select="tgroup/tfoot"/>
 \end{supertabular}
-
-{\small <xsl:apply-templates select="caption/* | caption/text()"/>}
+{\it <xsl:apply-templates select="caption/* | caption/text()"/>}
 </xsl:template>
 
 
