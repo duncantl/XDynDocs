@@ -34,7 +34,8 @@
 <xsl:if test="not($TableCaptionsAtTop)"><!--<xsl:apply-templates select="title"/>--></xsl:if>
 \end{center}
 \nopagebreak
-<xsl:if test="not($TableCaptionsAtTop)">{\it <xsl:apply-templates select="caption/* | caption/text()"/>}
+<xsl:if test="not($TableCaptionsAtTop)">
+{\it <xsl:apply-templates select="caption/* | caption/text()"/>}
 </xsl:if>
 %\nopagebreak
 \end{table}
@@ -58,6 +59,8 @@
 <xsl:apply-templates select="tgroup/tbody/row"/>
 <xsl:apply-templates select="tgroup/tfoot"/>
 \end{supertabular}
+\hfill\break
+
 {\it <xsl:apply-templates select="caption/* | caption/text()"/>}
 </xsl:template>
 
