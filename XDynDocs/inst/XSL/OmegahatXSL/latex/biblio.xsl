@@ -194,5 +194,4 @@ year = 2011</xsl:if>
 
 <xsl:template match="r:pkgVersion">note={\proglang{R}~package version~<xsl:apply-templates/>}<xsl:call-template name="comma"/></xsl:template>
 
-
 </xsl:stylesheet>

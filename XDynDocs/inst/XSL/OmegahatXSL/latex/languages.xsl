@@ -144,4 +144,6 @@
 <xsl:template match="nyt">\textit{New York Times}\index{New\ York\ Times@\textit{New York Times}}</xsl:template>
 <xsl:template match="jss">\textit{Journal of Statistical Software}</xsl:template>
 
+<xsl:template match="rest">\acronym{REST}</xsl:template>
+
 </xsl:stylesheet>
