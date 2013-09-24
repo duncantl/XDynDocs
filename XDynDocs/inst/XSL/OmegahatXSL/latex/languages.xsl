@@ -24,6 +24,9 @@
 <xsl:template match="r|R">\proglang{R}</xsl:template>
 <!--<xsl:template match="proglang[. = 'R']">\proglang{R}</xsl:template>-->
 
+<xsl:template match="docbook">\MarkupLang{DocBook}<xsl:if test="not(ancestor::title) and not(ancestor::summary) and not(ancestor::caption)">\index{DocBook@\MarkupLang{DocBook}}</xsl:if></xsl:template>
+<xsl:template match="rdocbook">\MarkupLang{RDocBook}\index{RDocBook@\MarkupLang{RDocBook}}</xsl:template>
+
 <xsl:template match="latex[string(.) = '']">\LaTeX{}\index{LaTeX@\LaTeX}</xsl:template>
 <!--<xsl:template match="latex[string(.) = '']">\LaTeX{}</xsl:template>-->
 

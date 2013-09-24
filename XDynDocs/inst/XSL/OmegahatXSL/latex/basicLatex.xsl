@@ -554,7 +554,7 @@ This is my example.
 <xsl:template match="citation[biblioref]">~\<xsl:value-of select="$default.cite.cmd"/>{<xsl:value-of select="biblioref/@linkend"/>}</xsl:template>
 
 <!-- Allow multiple biblioref nodes within a single citation and put them into a \cite{a,b,c} -->
-<xsl:template match="citation[count(biblioref) > 1]">\<xsl:value-of select="$default.cite.cmd"/>{<xsl:for-each select="biblioref"><xsl:value-of select="@linkend"/><xsl:if test="not(position() = last())">,</xsl:if></xsl:for-each>}</xsl:template>
+<xsl:template match="citation[count(biblioref) > 1]">~\<xsl:value-of select="$default.cite.cmd"/>{<xsl:for-each select="biblioref"><xsl:value-of select="@linkend"/><xsl:if test="not(position() = last())">,</xsl:if></xsl:for-each>}</xsl:template>
 
 <xsl:template match="fix|check"/>
 
