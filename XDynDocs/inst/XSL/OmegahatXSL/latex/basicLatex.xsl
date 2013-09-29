@@ -94,8 +94,9 @@ simplemsgentry
 -->
 
 <!--  Try to identify paragraphs that are sloppy -->
-<xsl:template match="para[@sloppy] | para[.//ulink[string-length(.) > 25]] | para[not(ancestor::title) and count(.//xml:tag) > 2] | para[ .//r:class[string-length(.) > 9] and not(ancestor::summary)]">\begin{sloppy}<xsl:if test="false and parent::example and count(preceding-sibling::para) = 0">\noindent\hskip-\parindent </xsl:if><xsl:apply-imports/>\end{sloppy}
+<xsl:template match="para[@sloppy] | para[.//ulink[string-length(.) > 25]] | para[not(ancestor::title) and count(.//xml:tag) > 2] | para[ .//r:class[string-length(.) > 9] and not(ancestor::summary)]">\begin{sloppy}<xsl:if test="parent::example and count(preceding-sibling::para) = 0">\noindent</xsl:if><xsl:apply-imports/>\end{sloppy}
 </xsl:template>
+<!-- \hskip-\parindent -->
 
 
 <xsl:template name="verbName">

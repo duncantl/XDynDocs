@@ -59,7 +59,7 @@ itself.-->
 <xsl:template match="implement"/>
 
 
-<xsl:template match="docbook">DocBook</xsl:template>
+<!--<xsl:template match="docbook">DocBook</xsl:template> -->
 
 <xsl:template match="comment">
 <xsl:if test="$show.comments">

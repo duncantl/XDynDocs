@@ -3,7 +3,7 @@
 	version='1.0'
 	 xmlns:xi="http://www.w3.org/2003/XInclude">
 
-<xsl:template match="docbook">DocBook</xsl:template>
+<!-- <xsl:template match="docbook">DocBook</xsl:template> -->
 <xsl:template match="perl"><proglang>PERL</proglang></xsl:template>
 <xsl:template match="r|R"><proglang>R</proglang></xsl:template>
 
