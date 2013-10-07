@@ -8,4 +8,6 @@
 \end{verbatim}
 </xsl:template>
 
+<xsl:template match="xsl:template">\XSLtemplate{<xsl:apply-templates/>}</xsl:template>
+
 </xsl:stylesheet>

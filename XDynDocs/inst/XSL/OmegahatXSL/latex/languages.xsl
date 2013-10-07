@@ -136,7 +136,7 @@
 <xsl:template match="bz2">\FileExt{bz2}</xsl:template>
 
 <xsl:template match="png">\PNG\index{PNG@\PNG}</xsl:template>
-<xsl:template match="jpeg">\JPEG\index{JPEG@\JPEG}</xsl:template>
+<xsl:template match="jpeg|jpg">\JPEG\index{JPEG@\JPEG}</xsl:template>
 
 <xsl:template match="opengl">\proglang{OpenGL}</xsl:template>
 
