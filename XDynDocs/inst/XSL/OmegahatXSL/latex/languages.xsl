@@ -55,6 +55,8 @@
 <xsl:template match="proglang[ancestor::title or ancestor::summary]">\proglang{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="mklang">\MarkupLang{<xsl:apply-templates/>}\index{<xsl:value-of select="."/>}</xsl:template>
 <xsl:template match="markupLang">\MarkupLang{<xsl:apply-templates/>}\index{<xsl:value-of select="."/>}</xsl:template>
+<xsl:template match="s|S">\MarkupLang{S}\index{S}</xsl:template>
+<xsl:template match="splus|s-plus">\MarkupLang{S-Plus}\index{S-Plus}</xsl:template>
 <!--<xsl:template match="markupLang">\MarkupLang{<xsl:apply-templates/>}</xsl:template>-->
 
 <xsl:template match="xsl">\MarkupLang{XSL}\index{XSL@\MarkupLang{XSL}}</xsl:template>
@@ -82,6 +84,7 @@
 <xsl:template match="ruby">\proglang{Ruby}\index{Ruby@\proglang{Ruby}}</xsl:template>
 <xsl:template match="omegahat">Omegahat</xsl:template>
 <xsl:template match="unix|UNIX">\acronym{UNIX}\index{UNIX}</xsl:template>
+<xsl:template match="linux|Linux">\acronym{Linux}\index{Linux}</xsl:template>
 
 <xsl:template match="wsdl">\WSDL\index{WSDL@<xsl:call-template name="addIndexEntryString"/>\WSDL}</xsl:template>
 <!--<xsl:template match="wsdl[ancestor::title or ancestor::summary]">\WSDL</xsl:template>-->

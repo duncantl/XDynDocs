@@ -11,4 +11,10 @@
 
 <xsl:template match="sh:exec">\textsl{<xsl:apply-templates/>}</xsl:template>
 
+<xsl:template match="sh:glob">\textbf{<xsl:apply-templates/>}</xsl:template>
+
+<xsl:template match="sh:expr">\texttt{<xsl:apply-templates/>}</xsl:template>
+
+<xsl:template match="sh:op">\textbf{<xsl:apply-templates/>}</xsl:template>
+
 </xsl:stylesheet>
