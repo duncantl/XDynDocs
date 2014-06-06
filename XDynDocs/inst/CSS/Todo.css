@@ -48,6 +48,13 @@ div.todoItem {
       padding: 4pt;
 }
 
+/* We are padding the wrong element. We want a sub-element which contains just the sub-items. But works for now. */
+div.nestedItems { 
+/*    background: yellow;
+      border: red 3px solid; */
+      padding-left: 24pt;
+}
+
 div.topic-table { border: red 0px solid;}
 
 i.done, P.done, BR.done { color: red; }
