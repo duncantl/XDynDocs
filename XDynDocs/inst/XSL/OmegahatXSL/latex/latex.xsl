@@ -46,7 +46,7 @@
 
 <!-- Was <xsl:apply-templates/>  rather than value-of select=replace() -->
 <!-- <xsl:call-template name="string-replace-uscore"/> -->
-<xsl:template match="r:var|s:variable|r:func">\R<xsl:value-of select="local-name(.)"/>{<xsl:value-of select="str:replace(string(.), '_', '\_')"/>}</xsl:template>
+<xsl:template match="r:var|s:variable|r:func">\R<xsl:value-of select="local-name(.)"/>{<xsl:value-of select="str:replace(str:replace(string(.), '_', '\_'), '%', '\%')"/>}</xsl:template>
 
 <xsl:template match="r:func[contains(., '&lt;-')]">\RreplaceFunc{<xsl:value-of select="translate(., '&lt;-', '')"/>}</xsl:template>
 
@@ -70,6 +70,9 @@
 <xsl:template match="r:output">\begin{ROutput}<xsl:apply-templates/>\end{ROutput}</xsl:template>
 
 <!-- trim white space.  Change to trim not normalize. -->
+<!-- 
+<xsl:if test="@id"><xsl:message>Routput: <xsl:value-of select="."/> + <xsl:value-of select="following-sibling::* | following-sibling::text()"/></xsl:message></xsl:if><xsl:if test="following-sibling::text()"><xsl:text>&#10;</xsl:text></xsl:if>
+ -->
 <xsl:template match="r:output[not(*)]">\begin{ROutput}
 <xsl:call-template name="trim-newlines"><xsl:with-param name="string" select="string(.)"/></xsl:call-template>
 \end{ROutput}</xsl:template>
@@ -174,5 +177,8 @@ Acronym &amp; Definition \\
 <xsl:call-template name="rarg"/>\sindex[Rfunc]{<xsl:value-of select="@func"/>@\Rfunc{<xsl:value-of select="@func"/>}!<xsl:value-of select="string(.)"/>@<xsl:call-template name="rarg"/><xsl:text>}</xsl:text>
 </xsl:template>
 
+
+<xsl:template match="squote">`<xsl:apply-templates/>'</xsl:template>
+<xsl:template match="quote">``<xsl:apply-templates/>''</xsl:template>
 
 </xsl:stylesheet>
