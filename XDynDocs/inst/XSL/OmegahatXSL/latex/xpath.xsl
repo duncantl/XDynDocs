@@ -24,9 +24,11 @@
 <xsl:template match="xsl:func|xsl:function">\XSL<xsl:value-of select="local-name()"/>{<xsl:apply-templates/>}</xsl:template>
 
 <!-- spverb causes problems in tabularx apparently, so ... -->
+<!--
 <xsl:template match="xp:expr">{\color{xpexpr}\<xsl:call-template name="verbName"/>+<xsl:apply-templates/>+}</xsl:template>
 <xsl:template match="xp:expr">{\color{xpexpr}\<xsl:call-template name="verbName"/>+<xsl:apply-templates/>+}</xsl:template>
-
+-->
+<xsl:template match="xp:expr">{\color{xpexpr}\PVerb{<xsl:apply-templates/>}}</xsl:template>
 
 
 <xsl:template match="xp:node-test">\XPathNodeTest{<xsl:apply-templates/>}</xsl:template>

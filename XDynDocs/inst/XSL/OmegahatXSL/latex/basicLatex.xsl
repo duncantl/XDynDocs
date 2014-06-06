@@ -105,7 +105,14 @@ simplemsgentry
 <xsl:template name="verbName">
 <xsl:choose>
 <xsl:when test="ancestor::table">verb</xsl:when>
-<xsl:otherwise>spverb</xsl:otherwise>
+<xsl:otherwise>PVerb</xsl:otherwise>			       <!--Was spverb-->
+<!--
+<xsl:otherwise>
+  <xsl:choose>
+    <xsl:when test="ancestor::varlistentry">PVerb</xsl:when>
+  </xsl:choose>
+</xsl:otherwise>
+-->
 </xsl:choose>
 </xsl:template>
 
@@ -353,8 +360,7 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 
 
 
-<xsl:template match="squote">`<xsl:apply-templates/>'</xsl:template>
-<xsl:template match="quote">``<xsl:apply-templates/>''</xsl:template>
+
 <xsl:template match="para">
 <xsl:apply-templates/>
 </xsl:template>
