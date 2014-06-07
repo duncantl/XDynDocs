@@ -60,7 +60,7 @@
 <xsl:apply-templates select="tgroup/tfoot"/>
 \end{supertabular}
 \hfill\break
-
+<xsl:if test="not(caption)"><xsl:message>No caption for table</xsl:message></xsl:if>
 {\it <xsl:apply-templates select="caption/* | caption/text()"/>}
 </xsl:template>
 
