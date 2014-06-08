@@ -42,6 +42,7 @@
 
 <xsl:output method="text" omit-xml-declaration="yes"/>
 
+<xsl:param name="use.code.marginnote.identifiers" select="false"/>
 <xsl:param name="latex.macro.file">latexMacros</xsl:param>
 <xsl:param name="load.cprotect" select="1"/>
 <xsl:param name="protect.captions" select="true"/>

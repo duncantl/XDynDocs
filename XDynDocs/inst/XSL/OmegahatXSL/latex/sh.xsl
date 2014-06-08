@@ -3,7 +3,13 @@
 	xmlns:sh="http://www.shell.org"
         version="1.0">
 
-<xsl:template match="sh:code | programlisting[@contentType = 'shell']">\begin{ShCode}<xsl:apply-templates/>\end{ShCode}</xsl:template>
+<xsl:template match="sh:code | programlisting[@contentType = 'shell']">
+<xsl:if test="$use.code.marginnote.identifiers">\begin{ShCodePar}</xsl:if>
+<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">ShCode</xsl:with-param></xsl:call-template>
+<xsl:if test="$use.code.marginnote.identifiers">\end{ShCodePar}</xsl:if>
+</xsl:template>
+<!-- <xsl:template match="sh:code | programlisting[@contentType = 'shell']">\begin{ShCode}<xsl:apply-templates/>\end{ShCode}</xsl:template> -->
+
 <xsl:template match="sh:output">\begin{ShOutput}<xsl:apply-templates/>\end{ShOutput}</xsl:template>
 
 <xsl:template match="sh:var">\ShellVar{<xsl:apply-templates/>}</xsl:template>

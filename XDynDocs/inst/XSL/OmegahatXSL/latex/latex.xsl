@@ -155,7 +155,6 @@ Acronym &amp; Definition \\
 \author{<xsl:apply-templates/>}
 </xsl:template>
 
-
 <xsl:template match="r:op">\Rop{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="r:op[string(.)='$']">\Rop{\$}</xsl:template>
 <xsl:template match="r:op[string(.)='~']">\Rop{\texttildelow}</xsl:template>
