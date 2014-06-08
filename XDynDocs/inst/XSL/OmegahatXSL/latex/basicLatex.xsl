@@ -23,6 +23,7 @@
 <xsl:include href="js.xsl"/>
 
 <xsl:include href="c.xsl"/>
+<xsl:include href="py.xsl"/>
 
 <!--<xsl:include href="languages.xsl"/>-->
 <xsl:include href="latex.xsl"/>
