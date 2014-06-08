@@ -9,6 +9,10 @@
 <xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">CCode</xsl:with-param></xsl:call-template>
 </xsl:template>
 
+<xsl:template match="c:function">
+<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">CRoutine</xsl:with-param></xsl:call-template>
+</xsl:template>
+
 <xsl:template match="c:func|c:routine">\Cfunc{<xsl:apply-templates/>}</xsl:template>
 
 <xsl:template match="c:keyword">\Ckeyword{<xsl:apply-templates/>}</xsl:template>
@@ -17,5 +21,7 @@
 
 <xsl:template match="c:arg">\Carg{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="c:var">\Cvar{<xsl:apply-templates/>}</xsl:template>
+
+<xsl:template match="c:expr">\Cexpr{<xsl:apply-templates/>}</xsl:template>
 
 </xsl:stylesheet>

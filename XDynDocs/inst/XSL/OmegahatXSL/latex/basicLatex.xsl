@@ -22,6 +22,8 @@
 <xsl:include href="xpath.xsl"/>
 <xsl:include href="js.xsl"/>
 
+<xsl:include href="c.xsl"/>
+
 <!--<xsl:include href="languages.xsl"/>-->
 <xsl:include href="latex.xsl"/>
 <xsl:include href="entities.xsl"/>
