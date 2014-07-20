@@ -2,6 +2,7 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:xi="http://www.w3.org/2003/XInclude"
 	exclude-result-prefixes="c" version='1.0'
+	xmlns:cpp="http://www.C++.org"
         xmlns:c="http://www.C.org">
 
 <xsl:param name="use.code.marginnote.identifiers" select="false"/>
@@ -29,6 +30,11 @@
 <xsl:template match="c:var">\Cvar{<xsl:apply-templates/>}</xsl:template>
 
 <xsl:template match="c:expr">\Cexpr{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="c:null">\Cnull</xsl:template>
+<xsl:template match="c:double">\Cdouble</xsl:template>
+<xsl:template match="c:int">\Cint</xsl:template>
+
+<xsl:template match="cpp:class">\CppClass{<xsl:apply-templates/>}</xsl:template>
 
 
 

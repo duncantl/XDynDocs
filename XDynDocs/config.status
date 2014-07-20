@@ -513,7 +513,7 @@ s,@FOP@,|#_!!_#|"/Users/duncan/fop-0.95/fop",g
 s,@FOP_CMD@,|#_!!_#|"/Users/duncan/fop-0.95/fop",g
 s,@BATIK_CLASSES@,|#_!!_#|,g
 s,@BATIK_DIR@,|#_!!_#|,g
-s,@R_PACKAGE_DIR@,|#_!!_#|,g
+s,@R_PACKAGE_DIR@,|#_!!_#|/Users/duncan/Rpackages/XDynDocs,g
 s,@NXML_MODE_DIR@,|#_!!_#|/Users/duncan/Emacs/Contrib/nxml-mode-20041004/,g
 s,@LIBOBJS@,|#_!!_#|,g
 s,@LTLIBOBJS@,|#_!!_#|,g

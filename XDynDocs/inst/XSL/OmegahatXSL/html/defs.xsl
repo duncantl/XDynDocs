@@ -145,8 +145,12 @@
  <b><a href="library/base/html/NA.html">NA</a></b>
 </xsl:template>
 
-<xsl:template match="NaN">
+<xsl:template match="NaN|r:nan">
  <b>NaN</b>
+</xsl:template>
+
+<xsl:template match="r:inf">
+ <b class="rVar">Inf</b>
 </xsl:template>
 
 
@@ -223,9 +227,14 @@
 </xsl:template>
 
 
-<xsl:template match="r:numeric|r:vector|r:list|r:character|r:logical|r:integer">
+<xsl:template match="r:numeric|r:vector|r:list|r:character|r:logical|r:integer|r:raw|r:factor">
   <b class="rkeyword"><xsl:value-of select="local-name()"/></b>
 </xsl:template>
+
+<xsl:template match="r:attr">
+  <b class="rAttribute"><xsl:apply-templates/></b>
+</xsl:template>
+
 
 
 <xsl:template match="r:func[@name]|s:func[@name]|s:method[@name]">

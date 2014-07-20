@@ -250,8 +250,8 @@ endif
 DB2BIB_XSL=$(DYN_DOCS)/XSL/OmegahatXSL/latex/biblio.xsl
 LATEX_MACROS=$(DYN_DOCS)/XSL/OmegahatXSL/latex/latexMacros.tex
 
-%.bib: %.xml $(DB2BIB_XSL)  GNUmakefile
-	$(XSLTPROC) $(XSLT_OPTS) -o $@ $(DB2BIB_XSL) $<
+#%.bib: %.xml $(DB2BIB_XSL)  GNUmakefile
+#	$(XSLTPROC) $(XSLT_OPTS) -o $@ $(DB2BIB_XSL) $<
 
 %.bib: %.Rdb $(DB2BIB_XSL)  GNUmakefile
 	$(XSLTPROC) $(XSLT_OPTS) -o $@ $(DB2BIB_XSL) $<

@@ -60,7 +60,7 @@ displayed using XML elements such as <xml:tag>r:code</xml:tag>, <xml:tag>r:plot<
 <xml:tag>r:test</xml:tag>, <xml:tag>r:init</xml:tag>, <xml:tag>r:expr</xml:tag>, 
 <xml:tag>r:dynOptions</xml:tag>, <xml:tag>r:func</xml:tag>, <xml:tag>r:var</xml:tag>, <xml:tag>r:pkg</xml:tag>.  The purpose
 of each of these is described in table <xref
-linkend="tab:r-elements"/>.
+linkend="tab:rElements"/>.
 <!-- want this to span multiple pages and float -->
 <footnote>
 <para>
@@ -76,7 +76,7 @@ The r:output node supports an r:format attribute indicating
 the style of serialization.
 </para>
 </footnote>
-<table id="tab:r-elements" width="100%">
+<table id="tab:rElements" width="100%">
 <title>R-related XML elements for Docbook</title>
 <?dbfo keep-together="auto" ?>	  <!--http://www.sagehill.net/docbookxsl/PageBreaking.html-->
 <tgroup cols='3'>
@@ -92,7 +92,7 @@ the style of serialization.
 </thead>
 <tbody>
 <row>
-<entry>r:code</entry>
+<entry><xml:tag>r:code</xml:tag></entry>
 <entry>
 This identifies R code, typically to be executed.
 It supports and eval attribute which can have a value false or true to indicate
@@ -106,7 +106,7 @@ any R options, e.g. digits.
 </row>
 
 <row>
-<entry>r:commands</entry>
+<entry><xml:tag>r:commands</xml:tag></entry>
 <entry>
 takes a block of R code and parses it into expressions
 and then evaluates each expression in turn
@@ -117,12 +117,12 @@ global XSL parameter or can be specified via the xslParam
 argument in R.
 </entry>
 <entry>
-r:prompt - defaults to XSL top-level/global parameter r:prompt defined in dynamic.xsl
+<xml:attr>r:prompt</xml:attr> - defaults to XSL top-level/global parameter r:prompt defined in dynamic.xsl
 </entry>
 </row>
 
 <row>
-<entry>r:function</entry>
+<entry><xml:tag>r:function</xml:tag></entry>
 <entry>A code block that defines a function.
 This could define more than one function, but
 the intent is that we can easily evaluate
@@ -133,7 +133,7 @@ id, eval
 </entry>
 </row>
 <row>
-<entry>r:plot</entry>
+<entry><xml:tag>r:plot</xml:tag></entry>
 <entry>The code creates a plot.
 This allows us to format the result
 properly in HTML, PDF, etc. by inserting 
@@ -165,7 +165,7 @@ originalFile - gives the name of the file that contains the plot that is to be u
 </entry>
 </row>
 <row>
-<entry>r:test</entry>
+<entry><xml:tag>r:test</xml:tag></entry>
 <entry>
 This is for code that validates the computations
 and ensures that things are working correctly.
@@ -181,7 +181,7 @@ id, eval
 </entry>
 </row>
 <row>
-<entry>r:init</entry>
+<entry><xml:tag>r:init</xml:tag></entry>
 <entry>R code that is essentially initialization
 code that defines the inputs for the 
 document or a section.
@@ -195,7 +195,7 @@ id, eval
 </entry>
 </row>
 <row>
-<entry>r:dynOptions</entry>
+<entry><xml:tag>r:dynOptions</xml:tag></entry>
 <entry><para>A node that specifies new values
 to be set via the R <r:func>options</r:func> function.
 The values can be given via attributes,
@@ -216,7 +216,7 @@ to <r:func>options</r:func>.
 
 
 <row>
-<entry>r:frag</entry>
+<entry><xml:tag>r:frag</xml:tag></entry>
 <entry>
 short-hand for fragment, this is intended to be used when the code in
 this element is referenced from another block of code and this code is
@@ -229,7 +229,7 @@ attribute eval set to "false".
 
 
 <row>
-<entry>r:expr</entry>
+<entry><xml:tag>r:expr</xml:tag></entry>
 <entry>This is intended
 for use within regular text
 (i.e. not in a separate verbatim box)
@@ -247,7 +247,7 @@ eval, R-level options such as digits.
 </row>
 
 <row>
-<entry>r:value</entry>
+<entry><xml:tag>r:value</xml:tag></entry>
 <entry>
 a node that contains one or more serialized R objects, often via dput
 but also as a binary RDA file that is then base64-encoded to be added
@@ -255,7 +255,6 @@ to the XML document as text.
 </entry>
 <entry>
 <para>
-
 </para>
 </entry>
 </row>
@@ -263,7 +262,7 @@ to the XML document as text.
 
 
 <row>
-<entry>r:output</entry>
+<entry><xml:tag>r:output</xml:tag></entry>
 <entry>
 This is intended to be a child of
 the r:code, r:output, r:init, r:test, etc.
@@ -279,7 +278,7 @@ This is optional.
 </row>
 
 <row>
-<entry>r:func</entry>
+<entry><xml:tag>r:func</xml:tag></entry>
 <entry>reference to an R function.
 This is used to identify the reference
 to the function rather than having any
@@ -295,7 +294,7 @@ This is optional.
 </entry>
 </row>
 <row>
-<entry>r:var</entry>
+<entry><xml:tag>r:var</xml:tag></entry>
 <entry>referring to an R variable.
 Like r:func, this is used for  rendering and not evaluation.</entry>
 <entry>
@@ -305,8 +304,17 @@ e.g.
 </entry>
 </row>
 
+<row><entry><xml:tag>r:sym</xml:tag></entry><entry>markup for representing an <r/> symbol.
+This is very similar to an <r/> variable and hence <xml:tag>r:var</xml:tag></entry></row>
+
+<row><entry><xml:tag>r:op</xml:tag></entry><entry>markup for an <r/> operator such
+as +, -, [, $</entry></row>
+
+<row><entry><xml:tag>r:keyword</xml:tag></entry><entry>markup for an <r/> keyword
+such as <r:keyword>function</r:keyword>, <r:keyword>in</r:keyword>, <r:keyword>for</r:keyword>.</entry></row>
+
 <row>
-<entry>r:arg</entry>
+<entry><xml:tag>r:arg</xml:tag> or <xml:tag>r:param</xml:tag></entry>
 <entry>
 a reference to an R function parameter.
 </entry>
@@ -316,21 +324,21 @@ r:func identifying the R function by name.
 </row>
 
 <row>
-<entry>r:pkg</entry>
+<entry><xml:tag>r:pkg</xml:tag></entry>
 <entry>
 a reference to an R package.
 </entry>
 </row>
 
 <row>
-<entry>omg:pkg</entry>
+<entry><xml:tag>omg:pkg</xml:tag></entry>
 <entry>
 a reference to an Omegahat package.
 </entry>
 </row>
 
 <row>
-<entry>bioc:pkg</entry>
+<entry><xml:tag>bioc:pkg</xml:tag></entry>
 <entry>
 a reference to a BioConductor package.
 </entry>
@@ -338,7 +346,7 @@ a reference to a BioConductor package.
 
 
 <row>
-<entry>r:opt</entry>
+<entry><xml:tag>r:opt</xml:tag>, <xml:tag>r:option</xml:tag></entry>
 <entry>
 a reference to an R session-level option, i.e. accessible via <r:func>options</r:func> 
 </entry>
@@ -347,7 +355,7 @@ a reference to an R session-level option, i.e. accessible via <r:func>options</r
 
 
 <row>
-<entry>invisible</entry>
+<entry><xml:tag>invisible</xml:tag></entry>
 <entry>
 a container node which causes the content/children 
 to be evaluated but not displayed.
@@ -357,7 +365,7 @@ on the r:code, r:plot, etc. node
 </row>
 
 <row>
-<entry>ignore</entry>
+<entry><xml:tag>ignore</xml:tag></entry>
 <entry>
 a container node which causes the content/children 
 to be entirely omitted from the processed
@@ -367,7 +375,7 @@ a portion of a document.
 </row>
 
 <row>
-<entry>data, datalisting
+<entry><xml:tag>data</xml:tag>, <xml:tag>datalisting</xml:tag>
 </entry>
 <entry>
 container for displaying verbatim data.
@@ -379,7 +387,7 @@ This is equivalent to <xml:expr>&lt;programlisting lang="data"&gt;....</xml:expr
 
 <row>
 <entry>
-show, do
+<xml:tag>show</xml:tag>, <xml:tag>do</xml:tag>
 </entry>
 <entry>
 Used to display one piece of code but
@@ -400,7 +408,7 @@ a title:
 </row>
 
 <row>
-<entry>r:remove, r:rm</entry>
+<entry><xml:tag>r:remove</xml:tag>, <xml:tag>r:rm</xml:tag></entry>
 <entry>identify R objects that can be garbage collected.
 The content is raw text given as a comma-separated list of
 R names, or alternatively a sequence of
@@ -425,7 +433,68 @@ These act as hints for the evaluator/processor.
 </row>
 
 
+<row>
+<entry><xml:tag>r:attr</xml:tag></entry>
+<entry>an <r/> attribute, e.g. <r:attr>names</r:attr>, <r:attr>dim</r:attr></entry>
+</row>
 
+<row>
+<entry><xml:tag>r:vector</xml:tag>, <xml:tag>r:logical</xml:tag>, <xml:tag>r:integer</xml:tag>, <xml:tag>r:numeric</xml:tag>, <xml:tag>r:character</xml:tag>, 
+<xml:tag>r:list</xml:tag></entry>
+<entry>
+elements for referring to a fundamental <r/> data type
+</entry>
+</row>
+
+<row><entry><xml:tag>r:factor</xml:tag></entry><entry>markup for <r/>'s <r:factor/> type</entry></row>
+<row><entry><xml:tag>r:raw</xml:tag></entry><entry>markup for <r/>'s <r:raw/> type</entry></row>
+
+
+<row>
+<entry><xml:tag>class</xml:tag>, <xml:tag>r:s3class</xml:tag></entry>
+<entry>reference to an S4 and S3 class respectively</entry>
+</row>
+
+<row>
+<entry><xml:tag>r:slot</xml:tag></entry>
+<entry>markup for the name of a slot in an S4 class</entry>
+</row>
+
+<row>
+<entry><xml:tag>r:el</xml:tag>, <xml:tag>r:field</xml:tag></entry>
+<entry>the name of an element in an <r/> list, i.e. corresponding to <r:expr eval="false">obj$el</r:expr>.
+This could also be used to refer to the name of an element in a vector. <xml:tag>r:field</xml:tag>
+is intended for referring to a named element of list, not a vector.</entry>
+</row>
+
+
+
+<row><entry><xml:tag>r:false</xml:tag>, <xml:tag>r:true</xml:tag></entry><entry>markup for <r/>'s <r:false/> and <r:true/></entry></row>
+
+<row><entry><xml:tag>r:null</xml:tag></entry><entry>markup for <r/>'s <r:null/></entry></row>
+<row><entry><xml:tag>r:dots</xml:tag></entry><entry>markup for <r/>'s variable argument parameter <r:dots/></entry></row>
+<row><entry><xml:tag>r:na</xml:tag></entry><entry>markup for <r/>'s missing value symbol <r:na/></entry></row>
+<row><entry><xml:tag>r:nan</xml:tag></entry><entry>markup for <r/>'s <r:nan/>, not a number</entry></row>
+<row><entry><xml:tag>r:inf</xml:tag></entry><entry>markup for <r/>'s infinity <r:inf/></entry></row>
+
+<row><entry><xml:tag>r:error</xml:tag>, <xml:tag>r:errorMsg</xml:tag></entry><entry>markup for representing the content of an error message
+in <r/>.  <xml:tag>r:errorMsg</xml:tag> is intended for inlined text rather than a message which will be displayed
+verbatim and on its own line(s) (similar to the difference between <xml:tag>r:code</xml:tag> and <xml:tag>r:expr</xml:tag>).</entry></row>
+<row><entry><xml:tag>r:warning</xml:tag></entry><entry>markup for representing the content of a warning message
+in <r/></entry></row>
+<row><entry><xml:tag>r:formula</xml:tag></entry><entry>markup for an <r/> formula</entry></row>
+
+
+<row><entry><xml:tag>r:pkgVersion</xml:tag></entry><entry>markup for the version of an <r/> package.
+This is currently just a string. However, it could also be represented with child nodes or attributes
+such as <xml:tag>major</xml:tag>, <xml:tag>minor</xml:tag> and <xml:tag>patch</xml:tag></entry></row>
+<row><entry><xml:tag>r:errorClass</xml:tag></entry><entry>markup for the name of a class representing an 
+<r/> error, i.e. a condition type in <r/>'s condition/warning/error mechanism.</entry></row>
+
+<!--
+<row><entry></entry><entry></entry></row>
+<row><entry></entry><entry></entry></row>
+-->
 </tbody>
 </tgroup>
 </table>

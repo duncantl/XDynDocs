@@ -4,7 +4,7 @@
       xmlns:html="http://www.w3.org/TR/html401"
       xmlns:ltx="http://www.latex.org"
       xmlns:mml="http://www.w3.org/1998/Math/MathML"
-   xmlns:xd="http://www.xsldoc.org"
+      xmlns:xd="http://www.xsldoc.org"
       exclude-result-prefixes="svg xsl html ltx mml r"
       xmlns:r="http://www.r-project.org"
       version="1.0">

@@ -338,4 +338,6 @@
 <xsl:template match="s3">S3</xsl:template>
 
 
+<xsl:template match="ol|li"><xsl:copy select="."><xsl:apply-templates/></xsl:copy></xsl:template>
+
 </xsl:stylesheet>

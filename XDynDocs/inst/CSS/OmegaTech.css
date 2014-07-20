@@ -76,7 +76,7 @@ A.within-doc-rfunction { color: green; }
 
 DIV.literallayout  { color: purple ; }
 
-PRE  { color: brown ; }
+PRE  { color: brown ; padding: .5em;}
 PRE.Scode  { color: red ; }
 PRE.S, PRE.rcode, PRE.exampleCode, div.r-commands {
        color: green; 
@@ -86,15 +86,16 @@ PRE.S, PRE.rcode, PRE.exampleCode, div.r-commands {
        margin: .5em .5em .5em .5em;
        overflow: auto ;
      }
-PRE.C  { color: #b22222 ; background-color: #e6e6fa;  }
+PRE.C  { color: #b22222 ; background-color: #e6e6fa; padding: .5em;}
 PRE.soutput, PRE.routput  { 
       color: blue ; 
       clear: both;
  }
-PRE.cpp  { color: #b22222 ; background-color: #e6e6fa; }
+PRE.cpp  { color: #b22222 ; background-color: #e6e6fa; padding: .5em; }
 
 PRE.rerror  { color: red ;
               background-color: #f0ffff;
+              padding: .5em;
             }
 
 PRE.rwarning, PRE.swarning  { color: blue ; background-color: #dcdcdc}

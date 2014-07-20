@@ -159,6 +159,10 @@ Acronym &amp; Definition \\
 <xsl:template match="r:op[string(.)='$']">\Rop{\$}</xsl:template>
 <xsl:template match="r:op[string(.)='~']">\Rop{\texttildelow}</xsl:template>
 <xsl:template match="r:keyword">\Rkeyword{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="r:if">\Rkeyword{if}</xsl:template>
+<xsl:template match="r:else">\Rkeyword{else}</xsl:template>
+<xsl:template match="r:for">\Rkeyword{for}</xsl:template>
+<xsl:template match="r:in">\Rkeyword{in}</xsl:template>
 
 <xsl:template match="index[not(primary)]">
 <xsl:copy-of select="./* | ./text()"/>\index{<xsl:copy-of select="."/>}</xsl:template>

@@ -116,6 +116,18 @@
 
 <xsl:if test="count(//ltx:eqn) > 0">
 <!--<link rel="stylesheet" type="text/css" media="all" href="http://www.mathjax.org/wp-content/themes/mathjax/style.css" />-->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/1.1-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full"></script>
 </xsl:if>
 
