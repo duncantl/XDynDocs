@@ -468,7 +468,7 @@ This is my example.
 <!-- XXXXX -->
 
 <xsl:template match="graphic">
-\includegraphics[width=\textwidth]{<xsl:call-template name="nmakeFileRef"/>}
+\includegraphics[width=\textwidth,<xsl:for-each select="@*[namespace-uri() = 'http://www.latex.org']"><xsl:message><xsl:value-of select="name()"/></xsl:message><xsl:value-of select="local-name(.)"/>=<xsl:value-of select="."/><xsl:if test="not(position() = last())">,</xsl:if></xsl:for-each>]{<xsl:call-template name="nmakeFileRef"/>}
 </xsl:template>
 
 <xsl:template match="graphic[@ltx:width]">
