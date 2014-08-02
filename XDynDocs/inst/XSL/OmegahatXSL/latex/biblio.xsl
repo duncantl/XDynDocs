@@ -68,6 +68,7 @@
 <!-- The primary template for a biblioentry -->
 <xsl:template match="biblioentry[not(@id)]"/>
 
+<!-- <xsl:message>biblioentry: <xsl:value-of select="@id"/></xsl:message>  -->
 <xsl:template match="biblioentry">
 @<xsl:apply-templates select="." mode="bibType"/>{<xsl:value-of select="@id"/>,
 <xsl:apply-templates/>
