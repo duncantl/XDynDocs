@@ -32,7 +32,7 @@
 <xsl:template match="s:expression|r:expression|r:expr">\R<xsl:value-of select="local-name(.)"/>{<!--<xsl:apply-templates/>--><xsl:call-template name="scape"><xsl:with-param name="string" select="text()"/></xsl:call-template>}</xsl:template>
 
 
-<xsl:template match="s:expression|r:expression|r:expr">{\color{rcolor}\<xsl:call-template name="verbName"/>?<xsl:apply-templates/>?}</xsl:template>
+<xsl:template match="s:expression|r:expression|r:expr">{\color{rcolor}\<xsl:call-template name="verbName"/>{<xsl:apply-templates/>}}</xsl:template>
 
 <!-- <xsl:template match="r:expr[ancestor::footnote]">{\color{rcolor}\<xsl:call-template name="verbName"/>?<xsl:apply-templates/>}</xsl:template> -->
 
@@ -77,7 +77,8 @@
 <xsl:call-template name="trim-newlines"><xsl:with-param name="string" select="string(.)"/></xsl:call-template>
 \end{ROutput}</xsl:template>
 
-<xsl:template match="r:dots|dots">\ldots</xsl:template>
+<!-- Want to be able to determine if next element is text and does not start with punctuation. If so, add a {}. -->
+<xsl:template match="r:dots|dots">\ldots<xsl:if test="not(@nospace)">{}</xsl:if></xsl:template>
 
 
 <xsl:template match="s:null|r:null">\Snull{}<xsl:call-template name="addBraces"/></xsl:template>
@@ -104,7 +105,7 @@
 </xsl:template>
 
 <!--<xsl:text>&#010;</xsl:text>-->
-<xsl:template match="ltx:*|tex|latex[string(.) != '']|ltx:literal">
+<xsl:template match="ltx:*|tex|ltx|latex[string(.) != '']|ltx:literal">
  <xsl:copy-of select="."/>
 </xsl:template>
 
@@ -163,6 +164,8 @@ Acronym &amp; Definition \\
 <xsl:template match="r:else">\Rkeyword{else}</xsl:template>
 <xsl:template match="r:for">\Rkeyword{for}</xsl:template>
 <xsl:template match="r:in">\Rkeyword{in}</xsl:template>
+
+<xsl:template match="r:numeric|r:vector|r:list|r:character|r:logical|r:integer|r:raw|r:factor">\Rtype{<xsl:value-of select="local-name()"/>}</xsl:template>
 
 <xsl:template match="index[not(primary)]">
 <xsl:copy-of select="./* | ./text()"/>\index{<xsl:copy-of select="."/>}</xsl:template>

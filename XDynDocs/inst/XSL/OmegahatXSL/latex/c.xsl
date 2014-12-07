@@ -31,7 +31,7 @@
 
 <xsl:template match="c:expr">\Cexpr{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="c:null">\Cnull</xsl:template>
-<xsl:template match="c:double">\Cdouble</xsl:template>
+<xsl:template match="c:double">\Cdouble{}</xsl:template>
 <xsl:template match="c:int">\Cint</xsl:template>
 
 <xsl:template match="cpp:class">\CppClass{<xsl:apply-templates/>}</xsl:template>

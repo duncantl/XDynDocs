@@ -346,7 +346,7 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 
 <xsl:template match="figure[title]/caption">
 <xsl:if test="$newline.before.caption"><xsl:text>&#10;</xsl:text></xsl:if>
-<xsl:if test="$protect.captions | @ltx:protect | .//r:expr|.//r:formula|.//xp:expr|.//literal|.//title|../title//r:expr|../title//r:formula|../title/xp:expr|../title//literal">\cprotect</xsl:if>\caption[<xsl:apply-templates select="../title" mode="title"/>]{<xsl:apply-templates select="../title" mode="title"/><xsl:if test="not(substring(normalize-space(title), string-length(normalize-space(title))) =  '.')">.  </xsl:if> <xsl:apply-templates/>}
+<xsl:if test="$protect.captions | @ltx:protect | .//r:expr|.//r:formula|.//xp:expr|.//literal|.//title|../title//r:expr|../title//r:formula|../title/xp:expr|../title//literal">\cprotect</xsl:if>\caption[<xsl:apply-templates select="../title" mode="title"/>]{<xsl:apply-templates select="../title" mode="title"/><xsl:if test="not(substring(normalize-space(title), string-length(normalize-space(title))) =  '.')">.  </xsl:if>\textit{<xsl:apply-templates/>}}
 <xsl:if test="ancestor::figure/@id">\label{<xsl:value-of select="ancestor::figure/@id"/>}</xsl:if>
 </xsl:template>
 
@@ -468,11 +468,11 @@ This is my example.
 <!-- XXXXX -->
 
 <xsl:template match="graphic">
-\includegraphics[width=\textwidth,<xsl:for-each select="@*[namespace-uri() = 'http://www.latex.org']"><xsl:message><xsl:value-of select="name()"/></xsl:message><xsl:value-of select="local-name(.)"/>=<xsl:value-of select="."/><xsl:if test="not(position() = last())">,</xsl:if></xsl:for-each>]{<xsl:call-template name="nmakeFileRef"/>}
+\includegraphics[width=\textwidth<xsl:for-each select="@*[namespace-uri() = 'http://www.latex.org']"><xsl:message><xsl:value-of select="name()"/></xsl:message>,<xsl:value-of select="local-name(.)"/>=<xsl:value-of select="."/><xsl:if test="not(position() = last())">,</xsl:if></xsl:for-each>]{<xsl:call-template name="nmakeFileRef"/>}
 </xsl:template>
 
 <xsl:template match="graphic[@ltx:width]">
-\includegraphics[width=<xsl:value-of select="@ltx:width"/>]{<xsl:call-template name="nmakeFileRef"/>}
+\includegraphics[width=<xsl:value-of select="@ltx:width"/><xsl:if test="@ltx:height">,height=<xsl:value-of select="@ltx:height"/></xsl:if>]{<xsl:call-template name="nmakeFileRef"/>}
 </xsl:template>
 
 
@@ -581,11 +581,11 @@ This is my example.
 
 
 <xsl:template match="math">$<xsl:apply-templates/>$</xsl:template>
+<xsl:template match="math[ancestor::programlisting or ancestor::caption]">\(<xsl:apply-templates/>\)</xsl:template>
 <xsl:template match="displaymath">$$<xsl:apply-templates/>$$
 </xsl:template>
 
 <xsl:template match="text()[parent::math or parent::displaymath]"><xsl:copy-of select="."/></xsl:template>
-
 
 </xsl:stylesheet>
 

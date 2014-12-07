@@ -54,6 +54,8 @@ This is an example of some documentation for an XSL thing.
 <b class="proglang"><xsl:apply-templates/></b>
 </xsl:template>
 
+<xsl:template match="markupLang"><b class="proglang"><xsl:apply-templates/></b></xsl:template>
+
 
 <!-- Take over the definition of acronym.  Acronym can have a def attribute and we will add that.
      Alternatively you can use acronymDef with a value attribute and then free form content 
@@ -123,6 +125,11 @@ This is an example of some documentation for an XSL thing.
 <xsl:template match="title/subtitle"><br/><xsl:apply-templates/></xsl:template>
 
 <xsl:template match="altTitle"/>
+
+<xsl:template match="math">\(<xsl:apply-templates/>\)</xsl:template>
+
+
+<xsl:template match="b|i|u"><xsl:copy><xsl:apply-templates/></xsl:copy></xsl:template>
 
 </xsl:stylesheet>
 

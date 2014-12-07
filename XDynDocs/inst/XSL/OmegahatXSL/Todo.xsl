@@ -211,49 +211,54 @@
       <xsl:apply-templates/>
     </a>
   </xsl:template>
-  <xsl:template name="item">
+  <xsl:template name="item" match="item/item">
     <div class="todoItem">
-      <xsl:element name="dt">
-        <xsl:attribute name="class">
-          <xsl:value-of select="@status"/>
-        </xsl:attribute>
-        <!--   [<xsl:value-of select="position()"/>]    -->
-        <li>
+      <div>
+        <xsl:if test="./item">
+          <xsl:attribute name="class">nestedItems</xsl:attribute>
+        </xsl:if>
+        <xsl:element name="dt">
           <xsl:attribute name="class">
             <xsl:value-of select="@status"/>
           </xsl:attribute>
-          <xsl:attribute name="title">
-            <xsl:value-of select="@status"/>
-          </xsl:attribute>
-          <a>
-            <xsl:attribute name="name">
-              <xsl:value-of select="concat(@topic, '::', @status)"/>
+          <!--   [<xsl:value-of select="position()"/>]    -->
+          <li>
+            <xsl:attribute name="class">
+              <xsl:value-of select="@status"/>
             </xsl:attribute>
-          </a>
-          <xsl:if test="@id">
+            <xsl:attribute name="title">
+              <xsl:value-of select="@status"/>
+            </xsl:attribute>
             <a>
               <xsl:attribute name="name">
-                <xsl:value-of select="@id"/>
+                <xsl:value-of select="concat(@topic, '::', @status)"/>
               </xsl:attribute>
             </a>
-          </xsl:if>
-          <xsl:if test="@status = 'confirm'">
-            <b class="confirm">Ok?</b>
-          </xsl:if>
-          <xsl:if test="@status = 'partial'">
-            <img src="inst/Icons/ConstructionIcon.jpg" width="32" height="32"/>
-          </xsl:if>
-          <xsl:apply-templates select="*|solution|br|p|para|issue|pre|text()|xref|check|r:output|r:code|r:func|r:class|reply|q"/>
-        </li>
-      </xsl:element>
-      <xsl:if test="not(@status='done')">
-        <xsl:element name="dd">
-          <xsl:attribute name="class">
-            <xsl:value-of select="@status"/>
-          </xsl:attribute>
-          <xsl:apply-templates select="comment"/>
+            <xsl:if test="@id">
+              <a>
+                <xsl:attribute name="name">
+                  <xsl:value-of select="@id"/>
+                </xsl:attribute>
+              </a>
+            </xsl:if>
+            <xsl:if test="@status = 'confirm'">
+              <b class="confirm">Ok?</b>
+            </xsl:if>
+            <xsl:if test="@status = 'partial'">
+              <img src="inst/Icons/ConstructionIcon.jpg" width="32" height="32"/>
+            </xsl:if>
+            <xsl:apply-templates select="*|solution|br|p|para|issue|pre|text()|xref|check|r:output|r:code|r:func|r:class|reply|q"/>
+          </li>
         </xsl:element>
-      </xsl:if>
+        <xsl:if test="not(@status='done')">
+          <xsl:element name="dd">
+            <xsl:attribute name="class">
+              <xsl:value-of select="@status"/>
+            </xsl:attribute>
+            <xsl:apply-templates select="comment"/>
+          </xsl:element>
+        </xsl:if>
+      </div>
     </div>
   </xsl:template>
   <xsl:template match="item[@status='check' or @status='partial']">

@@ -45,6 +45,9 @@
 <xsl:template match="isbn">ISBN = {<xsl:apply-templates/>}<xsl:call-template name="comma"/></xsl:template>
 <xsl:template match="issn">ISSN = {<xsl:apply-templates/>}<xsl:call-template name="comma"/></xsl:template>
 
+<xsl:template match="number">number = {<xsl:apply-templates/>}<xsl:call-template name="comma"/></xsl:template>
+<xsl:template match="institution">institution = {<xsl:apply-templates/>}<xsl:call-template name="comma"/></xsl:template>
+
 
 <!--
 <xsl:template name="bibType">

@@ -106,6 +106,7 @@
   <xsl:text>&#010;</xsl:text>
   <script type="text/javascript"><xsl:attribute name="src"><xsl:value-of select="$yahoo.tab.utils.js"/></xsl:attribute></script>
   <xsl:text>&#010;</xsl:text>
+
 </xsl:if>
 
                                    <!-- The code to toggle an HTML's visible or not.  -->
@@ -114,7 +115,8 @@
   <xsl:text>&#010;</xsl:text>
 </xsl:if>
 
-<xsl:if test="count(//ltx:eqn) > 0">
+<xsl:if test="count(//ltx:eqn[not(ancestor::ignore)] | //math[not(ancestor::ignore)]) > 0">
+<xsl:message>Adding mathjax</xsl:message>
 <!--<link rel="stylesheet" type="text/css" media="all" href="http://www.mathjax.org/wp-content/themes/mathjax/style.css" />-->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({

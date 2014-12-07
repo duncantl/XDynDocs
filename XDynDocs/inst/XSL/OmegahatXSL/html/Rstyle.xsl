@@ -17,7 +17,7 @@
 		xmlns:sh="http://www.shell.org"
                 xmlns:xi="http://www.w3.org/2001/XInclude"
 		xmlns:html="http://www.w3.org/TR/html401"
-		exclude-result-prefixes="s r c python bioc gtk com sh java omegahat perl vb statdocs html cpp xi s3 "
+		exclude-result-prefixes="s r c python bioc gtk com sh java omegahat perl vb statdocs html cpp xi s3"
                 version="1.0">
 <!-- Customization layer -->
 

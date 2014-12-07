@@ -20,6 +20,7 @@ sql:opt
 <xsl:template match="sql:var">\SQLVar{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="sql:arg">\SQLArg{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="sql:op">\SQLOp{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="sql:column">\SQLColumn{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="sql:table">\SQLTable{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="sql:fun|sql:func">\SQLFun{<xsl:apply-templates/>}</xsl:template>
 
@@ -31,4 +32,16 @@ sql:opt
 <xsl:template match="sql:code">\begin{CodeChunk}
 \begin{SQLcode}<xsl:apply-templates/>\end{SQLcode}
 \end{CodeChunk}</xsl:template>
+
+
+<xsl:template match="sql:code">
+<xsl:if test="$use.code.marginnote.identifiers">\begin{SQLCodePar}[<xsl:value-of select="(string-length() - string-length(translate(., '&#xA;', '')) - 1) div 2"/>]
+<xsl:message>Num lines: <xsl:value-of select="string-length() - string-length(translate(., '&#xA;', '')) - 1"/></xsl:message>
+</xsl:if>
+<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">SQLCode</xsl:with-param></xsl:call-template>
+<xsl:if test="$use.code.marginnote.identifiers">
+\end{SQLCodePar}</xsl:if>
+</xsl:template>
+
+
 </xsl:stylesheet>

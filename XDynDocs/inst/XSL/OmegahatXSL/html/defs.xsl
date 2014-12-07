@@ -10,6 +10,7 @@
 		xmlns:bioc="http://www.bioconductor.org"
                 xmlns:java="http://www.java.com"
 		xmlns:sql="http://www.sql.org"
+		exclude-result-prefixes="s py perl vb omegahat bioc java sql"
                 version="1.0">
 
 
@@ -248,8 +249,7 @@
 
 
 <xsl:template match="r:func|s:func|s:method|r:s3method" name="func">
- <i class="rfunc">
-<xsl:choose>
+ <i class="rfunc"><xsl:choose>
 <xsl:when test="$add.links.to.rfuncs">
   <xsl:element name="a">
    <xsl:attribute name="href"><xsl:value-of select="$rhelp.dir"/><xsl:value-of select="@pkg"/>/<xsl:value-of select="."/>.html</xsl:attribute>
@@ -258,10 +258,8 @@
    <xsl:apply-templates/>()</xsl:element>
 </xsl:when>
 <xsl:otherwise>
-  <xsl:apply-templates/>()
-</xsl:otherwise>
-</xsl:choose>
-  </i>
+  <xsl:apply-templates/>()</xsl:otherwise>
+</xsl:choose></i>
 </xsl:template>
 
 

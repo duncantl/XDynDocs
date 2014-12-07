@@ -40,7 +40,7 @@
 
 <xsl:template name="var">
   <xsl:param name="class">var</xsl:param>
-  <b class="${class}">  <xsl:call-template name="addTooltip"><xsl:with-param name="name" select="string(.)"/></xsl:call-template><xsl:apply-templates/></b>
+  <b><xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute>  <xsl:call-template name="addTooltip"><xsl:with-param name="name" select="string(.)"/></xsl:call-template><xsl:apply-templates/></b>
 </xsl:template>
 
 
