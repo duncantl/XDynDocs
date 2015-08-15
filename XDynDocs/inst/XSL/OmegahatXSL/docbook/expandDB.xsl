@@ -87,6 +87,12 @@
 -->
 
 
+<!--
+<xsl:template match="a[@href]">
+<ulink><xsl:attribute name="url"><xsl:value-of select="@href"/></xsl:attribute><xsl:apply-templates/></ulink>
+</xsl:template>
+-->
+
 </xsl:stylesheet>
 
 

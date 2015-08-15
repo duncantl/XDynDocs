@@ -38,7 +38,7 @@
       <xsl:value-of select="substring($contents, string-length($contents), 1)"/>
     </xsl:variable>
     <xsl:choose>
-      <xsl:when test="($last-char = '&#10;') or  ($last-char = '&#13;') or  ($last-char = ' ') or  ($last-char = '&#9;')">
+      <xsl:when test="($last-char = '&#10;') or ($last-char = '&#13;') or  ($last-char = ' ') or  ($last-char = '&#9;')">
         <xsl:call-template name="trim-right">
           <xsl:with-param name="contents" select="substring($contents, 1, string-length($contents) - 1)"/>
         </xsl:call-template>

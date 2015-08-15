@@ -221,8 +221,7 @@
    <xsl:apply-templates />
  </pre>
 <p/>
-<xsl:if test="@img and not(@img='')"> 
-<xsl:message>Making plot</xsl:message>
+<xsl:if test="@img and not(@img='')"> <!--<xsl:message>Making plot</xsl:message>-->
  <xsl:element name="img">
   <xsl:attribute name="src"><xsl:value-of select="@img"/></xsl:attribute>
  </xsl:element>

@@ -11,6 +11,9 @@
  <xsl:param name="yahoo.tab.utils.js">http://www.omegahat.org/Rdocbook/YahooTabUtils.js</xsl:param>
 
 
+ <xsl:param name="JS.highlight.dir" select="''"/>
+
+
 <xsl:template match="altApproaches">
              <!-- XXX want the index of this altApproaches relative to the entire document to get a unique name -->
   <xsl:param name="tabId">tab<xsl:value-of select="generate-id()"/></xsl:param>  <!-- <xsl:value-of select="position()"/> -->
@@ -131,6 +134,14 @@
   });
 </script>
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/1.1-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML-full"></script>
+</xsl:if>
+
+
+<xsl:if test="not($JS.highlight.dir = '')">
+<xsl:message>Using JS.highlight.dir</xsl:message>
+<link rel="stylesheet" href="${JS.highlight.dir}/styles/default.css"/>
+<script src="${JS.highlight.dir}/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 </xsl:if>
 
 </xsl:template>
