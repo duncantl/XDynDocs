@@ -16,7 +16,8 @@
 <xsl:include href="js.xsl"/>
 <xsl:include href="svg.xsl"/>
 <xsl:include href="xpath.xsl"/>
-<!--<xsl:include href="languages.xsl"/>-->
+<!-- <xsl:include href="languages.xsl"/> -->
+
 
 <xsl:output method="text" omit-xml-declaration="yes"/>
 <xsl:strip-space elements="*"/>
@@ -26,7 +27,7 @@
 
 
 <xsl:template match="/">
-<xsl:apply-templates select=".//biblioentry"/>
+<xsl:apply-templates select=".//biblioentry | .//bibitem"/>
 </xsl:template>
 
 <xsl:template match="biblioentry" mode="bibType">misc</xsl:template>

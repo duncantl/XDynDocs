@@ -32,7 +32,7 @@
 <xsl:template match="s:expression|r:expression|r:expr">\R<xsl:value-of select="local-name(.)"/>{<!--<xsl:apply-templates/>--><xsl:call-template name="scape"><xsl:with-param name="string" select="text()"/></xsl:call-template>}</xsl:template>
 
 
-<xsl:template match="s:expression|r:expression|r:expr">{\color{rcolor}\<xsl:call-template name="verbName"/>{<xsl:apply-templates/>}}</xsl:template>
+<xsl:template match="s:expression|r:expression|r:expr"><xsl:call-template name="addErrorMargin"/>{\color{rcolor}\<xsl:call-template name="verbName"/>{<xsl:apply-templates/>}}</xsl:template>
 
 <!-- <xsl:template match="r:expr[ancestor::footnote]">{\color{rcolor}\<xsl:call-template name="verbName"/>?<xsl:apply-templates/>}</xsl:template> -->
 
@@ -46,7 +46,7 @@
 
 <!-- Was <xsl:apply-templates/>  rather than value-of select=replace() -->
 <!-- <xsl:call-template name="string-replace-uscore"/> -->
-<xsl:template match="r:var|s:variable|r:func">\R<xsl:value-of select="local-name(.)"/>{<xsl:value-of select="str:replace(str:replace(string(.), '_', '\_'), '%', '\%')"/>}</xsl:template>
+<xsl:template match="r:var|s:variable|r:func">\R<xsl:value-of select="local-name(.)"/>{<xsl:value-of select="str:replace(str:replace(str:replace(str:replace(string(.), '_', '\_'), '%', '\%'), '{', '\{'), '&amp;', '\&amp;')"/>}</xsl:template>
 
 <xsl:template match="r:func[contains(., '&lt;-')]">\RreplaceFunc{<xsl:value-of select="translate(., '&lt;-', '')"/>}</xsl:template>
 
@@ -95,7 +95,9 @@
 <!-- <xsl:template match="r:output//text() | r:code//text()"><xsl:call-template name="trim.text"/></xsl:template> -->
 
 
-<xsl:template match="r:function|r:code|s:code|s:plot|r:plot|r:test">\begin{CodeChunk}
+<xsl:template name="addErrorMargin"><xsl:if test="@error = 'true'">\marginnote{\includegraphics{MarginImages/no-symbol-hi_48.png}}</xsl:if></xsl:template>
+
+<xsl:template match="r:function|r:code|s:code|s:plot|r:plot|r:test"><xsl:call-template name="addErrorMargin"/>\begin{CodeChunk}
 \begin{R<xsl:value-of select="local-name()"/>}<xsl:apply-templates/>\end{R<xsl:value-of select="local-name()"/>}
 \end{CodeChunk}</xsl:template>
 
@@ -156,6 +158,8 @@ Acronym &amp; Definition \\
 \author{<xsl:apply-templates/>}
 </xsl:template>
 
+
+
 <xsl:template match="r:op">\Rop{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="r:op[string(.)='$']">\Rop{\$}</xsl:template>
 <xsl:template match="r:op[string(.)='~']">\Rop{\texttildelow}</xsl:template>
@@ -167,11 +171,16 @@ Acronym &amp; Definition \\
 
 <xsl:template match="r:numeric|r:vector|r:list|r:character|r:logical|r:integer|r:raw|r:factor">\Rtype{<xsl:value-of select="local-name()"/>}</xsl:template>
 
+<xsl:template match="r:type">\Rtype{<xsl:apply-templates/>}</xsl:template>
+
 <xsl:template match="index[not(primary)]">
-<xsl:copy-of select="./* | ./text()"/>\index{<xsl:copy-of select="."/>}</xsl:template>
+<xsl:apply-templates/>\index{<xsl:apply-templates/>}</xsl:template>
 
 <xsl:template match="index[not(primary) and @term]" priority="100">
 <xsl:value-of select="."/>\index{<xsl:value-of select="@term"/>}</xsl:template>
+
+<xsl:template match="index[@visible='false']" priority="100">
+\index{<xsl:apply-templates/>}</xsl:template>
 
 <xsl:template match="title//index"><xsl:apply-templates/></xsl:template>
 

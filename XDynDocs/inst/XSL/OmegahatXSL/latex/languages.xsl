@@ -111,8 +111,8 @@
 <xsl:template match="directory|dir">\texttt{<xsl:apply-templates/>/}</xsl:template>
 
 
-<xsl:template match="s4">\acronym{S4}</xsl:template>
-<xsl:template match="s3">\acronym{S3}</xsl:template>
+<xsl:template match="s4">\acronym{S4}\index{S4}</xsl:template>
+<xsl:template match="s3">\acronym{S3}\index{S3}</xsl:template>
 <xsl:template match="r:s3class">\S3class{<xsl:apply-templates/>}</xsl:template>
 
 <xsl:template match="soap">\acronym{SOAP}\index{SOAP}</xsl:template>

@@ -19,14 +19,14 @@ sql:opt
 
 <xsl:template match="sql:var">\SQLVar{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="sql:arg">\SQLArg{<xsl:apply-templates/>}</xsl:template>
-<xsl:template match="sql:op">\SQLOp{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="sql:op">\SQLOp{<xsl:apply-templates/>}\index{<xsl:apply-templates/>@\SQLOp{<xsl:apply-templates/>}}</xsl:template>
 <xsl:template match="sql:column">\SQLColumn{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="sql:table">\SQLTable{<xsl:apply-templates/>}</xsl:template>
-<xsl:template match="sql:fun|sql:func">\SQLFun{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="sql:fun|sql:func">\SQLFun{<xsl:apply-templates/>}\index{<xsl:apply-templates/>@\SQLFun{<xsl:apply-templates/>}}</xsl:template>
 
 <xsl:template match="sql:clause|sql:expr">\SQLExpr{<xsl:apply-templates/>}</xsl:template>
 
-<xsl:template match="sql:opt|sql:keyword">\SQLKeyword{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="sql:opt|sql:keyword|sql:kw">\SQLKeyword{<xsl:apply-templates/>}\index{<xsl:apply-templates/>@\SQLKeyword{<xsl:apply-templates/>}}</xsl:template>
 
 <!-- proglisting. See r:code. Is there a general way we do this -->
 <xsl:template match="sql:code">\begin{CodeChunk}

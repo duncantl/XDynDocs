@@ -29,12 +29,18 @@
 <xsl:template match="c:arg">\Carg{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="c:var">\Cvar{<xsl:apply-templates/>}</xsl:template>
 
+<xsl:template match="c:el">\Cfield{<xsl:apply-templates/>}</xsl:template>
+
 <xsl:template match="c:expr">\Cexpr{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="c:null">\Cnull</xsl:template>
 <xsl:template match="c:double">\Cdouble{}</xsl:template>
 <xsl:template match="c:int">\Cint</xsl:template>
+<xsl:template match="c:float">\Cfloat</xsl:template>
 
-<xsl:template match="cpp:class">\CppClass{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="cpp:class | c:class">\CppClass{<xsl:apply-templates/>}</xsl:template>
+
+
+<xsl:template match="clang">\Clang</xsl:template>
 
 
 
