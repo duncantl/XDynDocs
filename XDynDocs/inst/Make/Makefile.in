@@ -1,3 +1,7 @@
+ifndef LATEX
+ LATEX=pdflatex
+endif
+
 ifndef XML_CATALOG_FILES
 # $(warning "no value for XML_CATALOG_FILES. You most likely need to set this.")
  XML_CATALOG_FILES=@DEFAULT_XML_CATALOG_FILES@
@@ -178,7 +182,7 @@ config:
 
 
 define html-from-rdb 
-   $(XSLTPROC) $(XSLT_OPTS) -xinclude $(TO_DOCBOOK_XSL) $< | $(XSLTPROC) -o $@ $(XSLT_FLAGS) $(XSLT_OPTS) $(DB_OPTS) $(R_DB_OPTS) $(XSLT_ARGS) $(HTML_XSL_ARGS) $(XSTYLE) -
+   $(XSLTPROC) $(XSLT_OPTS) -xinclude $(TO_DOCBOOK_XSL) $< | $(XSLTPROC) -o $@ $(XSLT_FLAGS) $(XSLT_OPTS) $(DB_OPTS) $(R_DB_OPTS) $(XSLT_ARGS) $(XSLT_XTRA_ARGS) $(HTML_XSL_ARGS) $(XSTYLE) -
 endef
 
 R_DB_OPTS=-stringparam yahoo.tab.utils.js "$(YAHOO_UI_DIR)/yahooTabUtils.js"

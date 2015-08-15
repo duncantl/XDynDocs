@@ -390,6 +390,7 @@ This deals with a CDATA escape and extracts the contents from that."
   (define-key map "\C-qa" '(lambda () "" (interactive "*") (r-insert-node "r:arg" nil)))
   (define-key map "\C-qx" 'r-insert-rexpr)
   (define-key map "\C-qv" '(lambda () "" (interactive "*") (r-insert-node "r:var" nil)))
+  (define-key map "\C-qm" '(lambda () "" (interactive "*") (r-insert-node "r:el" nil)))
   (define-key map "\C-qp" '(lambda (omg) "" (interactive "P") (r-insert-node (if omg "omg:pkg" "r:pkg") nil)))
   (define-key map "\C-qf" 'r-insert-func)
   (define-key map "\C-qk" '(lambda () "" (interactive "*") (r-insert-node "r:keyword" nil)))
@@ -401,7 +402,7 @@ This deals with a CDATA escape and extracts the contents from that."
   (define-key map "\C-q\C-c" '(lambda (cdata) "" (interactive "P") (r-insert-node "r:code" cdata t nil))) ; was t t
   (define-key map "\C-x\C-q\C-c" '(lambda () "" (interactive "*") (r-insert-node "r:function" t t nil) (goto-char (nxml-token-after)) (r-insert-node "r:output" t t)))
   (define-key map "\C-x\C-q\C-f" '(lambda () "" (interactive "*") (r-insert-node "r:function" t t nil) (r-insert-node "r:output" t t)))
-
+  (define-key map "\C-cx" '(lambda () "" (interactive "*") (insert "<xref linkend=\"fig:\"/>") (backward-char 3)))
 
 
 ; Okay to here.
@@ -448,6 +449,7 @@ This deals with a CDATA escape and extracts the contents from that."
                                    (r-insert-node "para" nil t)
                                  ))
 
+  (define-key map  "\C-qo" '(lambda () ""  (interactive "*") (r-insert-node "r:op" nil)))
   (define-key map  "\C-qt" '(lambda () ""  (interactive "*") (insert "<r:true/>")))
   (define-key map  "\C-qT" '(lambda () ""  (interactive "*") (insert "<r:true/>")))
   (define-key map  "\C-qF" '(lambda (arg) ""  (interactive "P") (insert "<r:false/>")))
@@ -495,10 +497,13 @@ This deals with a CDATA escape and extracts the contents from that."
   (define-key map  "\C-q\C-d" '(lambda () ""  (interactive "*")  (insert "<docbook/>")))
   (define-key map  "\C-q\C-r" '(lambda () ""  (interactive "*")  (insert "<r/>")))
 
+  (define-key map  "\C-q\C-r" '(lambda () ""  (interactive "*")  (insert "<r/>")))
+
 
   (define-key map  "\C-x\C-j" '(lambda () ""  (interactive "*") (r-insert-node "note") (r-insert-node "para" nil t nil)))
 
   (define-key map  "\C-qb" 'insert-bib)
+
   (define-key map  "\C-qn" 'r-add-namespace-def)
   (define-key map  "\C-qi" 'r-insert-id)
   (define-key map  "\C-q\C-l" 'insert-list)
@@ -739,6 +744,11 @@ This deals with a CDATA escape and extracts the contents from that."
                  (if (and (> (length id) 3)  (string-equal (substring id 1 4) "bib:")) id (concat "bib:" id)) 
                "'/></citation>"))
 )
+
+(defun insert-footnote (id)
+   (interactive)
+   (insert "<footnote><para> </para></footnote>"))
+           
 
 
 (provide 'Rdocbook)

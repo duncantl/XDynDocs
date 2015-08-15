@@ -28,6 +28,6 @@ inst/examples/.*\.haux
 inst/examples/.*\.rel
 inst/examples/.*\.cb2?
 inst/tests/.*\.svg
-code
+code/
 autom4te.cache.*
 XDynDocsXSL.tar.gz

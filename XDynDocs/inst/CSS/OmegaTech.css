@@ -24,7 +24,7 @@ H3 {
 }
 
 
-B { color: green; } 
+B.S, B.R, B.rvar { color: green; } 
 B.object { color: red; }
 
 CODE { color: brown; font-family: Courier; }
