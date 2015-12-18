@@ -52,6 +52,11 @@
   </xsl:call-template>
 </xsl:template>
 
+<xsl:template match="sql:output">
+<pre class="sqlOutput">
+<xsl:apply-templates />
+</pre>
+</xsl:template>
 
 <xsl:template match="sql:code|sql:cmd">
   <xsl:call-template name="code">
@@ -63,6 +68,18 @@
   <xsl:element name="code">
     <xsl:attribute name="class">SQL</xsl:attribute><xsl:value-of select="." />
   </xsl:element>
+</xsl:template>
+
+<xsl:template match="sql:expr">
+<code class="sqlExpr"><xsl:apply-templates/></code>
+</xsl:template>
+
+<xsl:template match="sql:field">
+<code class="sqlField"><xsl:apply-templates/></code>
+</xsl:template>
+
+<xsl:template match="sql:table">
+<code class="sqlTable"><xsl:apply-templates/></code>
 </xsl:template>
 
 <xsl:template match="invisible"/>
