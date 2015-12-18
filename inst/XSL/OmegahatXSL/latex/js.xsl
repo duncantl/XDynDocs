@@ -37,4 +37,6 @@
 <xsl:if test="$use.code.marginnote.identifiers">\end{JSCodePar}</xsl:if>
 </xsl:template>
 
+<xsl:template match="js:el">\JSEl{<xsl:apply-templates/>}</xsl:template>
+
 </xsl:stylesheet>
