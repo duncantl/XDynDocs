@@ -117,6 +117,7 @@ var toggleCodeIds = [
 
 
 
+<xsl:template match="highlight"><code class="highlight"><xsl:apply-templates/></code></xsl:template>
 
 <xsl:template match="r:code|r:init|r:frag|r:load|r:test|r:commands" name="makeVerbatimCode">
  <xsl:param name="class">r<xsl:value-of select="local-name(.)"/></xsl:param>
@@ -188,9 +189,9 @@ var toggleCodeIds = [
 </xsl:template>
 
 <xsl:template match="r:function">
-<pre class="rfunction">
+<pre class="rfunction"><code class="r">
  <xsl:apply-templates />
-</pre>
+</code></pre>
 </xsl:template>
 
 <!-- root.messages -->
