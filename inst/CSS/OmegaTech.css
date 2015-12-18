@@ -1,4 +1,5 @@
 @import "html.css";
+@import "sql.css";
 
 BODY {
   background: #FFF;
@@ -269,3 +270,10 @@ code.xpath-func {
 code.xpath {
       
 }
+
+
+code.highlight {
+ color: orange;
+}
+
+
