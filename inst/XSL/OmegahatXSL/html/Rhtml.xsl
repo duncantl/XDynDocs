@@ -96,9 +96,14 @@ This is an example of some documentation for an XSL thing.
 
 <xsl:template match="html"><b class="progLang">HTML</b></xsl:template>
 
+<xsl:template match="css"><b class="progLang">CSS</b></xsl:template>
+
 <!-- math in HTML via MathJAX-->
 <xsl:template match="ltx:eqn[starts-with(normalize-space(string(.)), '\[')]"><xsl:apply-templates/></xsl:template>
 <xsl:template match="ltx:eqn">\(<xsl:apply-templates/>\)</xsl:template>
+<xsl:template match="ltx:displayeqn">\[<xsl:apply-templates/>\]</xsl:template>
+<xsl:template match="ltx:displayeqn/br">\\</xsl:template>
+
 
 <xsl:template match="mml:eqn[./math]"><xsl:copy-of select="./*"/></xsl:template>
 <xsl:template match="mml:eqn"><math display="block"><xsl:copy-of select="./*"/></math></xsl:template>

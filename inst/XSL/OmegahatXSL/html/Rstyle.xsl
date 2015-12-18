@@ -86,10 +86,11 @@
 
 <xsl:template name="code">
 <xsl:param name="class">code</xsl:param>
+<xsl:param name="lang">r</xsl:param>
 <xsl:if test="@xml:id"><xsl:element name="a"><xsl:attribute name="name"><xsl:value-of select="@xml:id"/></xsl:attribute></xsl:element></xsl:if>
-<pre class="{string($class)}">
+<pre class="{string($class)}"><code><xsl:attribute name="class"><xsl:value-of select="$lang"/></xsl:attribute>	 <!--for highlight.js-->
    <xsl:apply-templates/>
-</pre>
+</code></pre>
 
 <!--
  <table border="{$codebox}">
