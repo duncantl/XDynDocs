@@ -12,6 +12,8 @@
 
 
  <xsl:param name="JS.highlight.dir" select="''"/>
+<!-- <xsl:param name="JS.highlight.css"><xsl:value-of select="$JS.highlight.dir"/>/styles/default.css</xsl:param> -->
+ <xsl:param name="JS.highlight.css" select="$JS.highlight.dir"/>
 
 
 <xsl:template match="altApproaches">
@@ -138,10 +140,10 @@
 
 
 <xsl:if test="not($JS.highlight.dir = '')">
-<xsl:message>Using JS.highlight.dir</xsl:message>
-<link rel="stylesheet" href="${JS.highlight.dir}/styles/default.css"/>
-<script src="${JS.highlight.dir}/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+<xsl:message>Using JS.highlight.dir <xsl:value-of select="$JS.highlight.dir"/></xsl:message>
+<link rel="stylesheet"><xsl:attribute name="href"><xsl:value-of select="$JS.highlight.css"/></xsl:attribute></link><xsl:text>&#10;</xsl:text>
+<script><xsl:attribute name="src"><xsl:value-of select="$JS.highlight.dir"/>/highlight.pack.js</xsl:attribute></script><xsl:text>&#10;</xsl:text>
+<script>hljs.initHighlightingOnLoad();</script><xsl:text>&#10;</xsl:text>
 </xsl:if>
 
 </xsl:template>
