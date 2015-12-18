@@ -39,6 +39,11 @@
 <xsl:include href="sql.xsl"/>
 <xsl:include href="xsl.xsl"/>
 
+<xsl:include href="regex.xsl"/>
+
+
+<xsl:template match="em">\textit{<xsl:apply-templates/>}</xsl:template>
+
 
 
 <xsl:output method="text" omit-xml-declaration="yes"/>
