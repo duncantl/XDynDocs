@@ -24,7 +24,7 @@
 </xsl:template>
 
 <xsl:template match="c:func|c:routine">\Croutine{<xsl:apply-templates/>}</xsl:template>
-<xsl:template match="c:keyword">\Ckeyword{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="c:keyword | c:op">\Ckeyword{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="c:struct|c:type">\Ctype{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="c:arg">\Carg{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="c:var">\Cvar{<xsl:apply-templates/>}</xsl:template>
