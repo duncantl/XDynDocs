@@ -599,5 +599,8 @@ This is my example.
 
 <xsl:template match="text()[parent::math or parent::displaymath]"><xsl:copy-of select="."/></xsl:template>
 
+
+<xsl:template match="para/title">\textbf{<xsl:apply-templates/>} </xsl:template>
+
 </xsl:stylesheet>
 
