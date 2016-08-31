@@ -41,6 +41,10 @@
 <xsl:template match="C">\proglang{C}\index{C@\proglang{C}}</xsl:template>
 <xsl:template match="C[ancestor::title or ancestor::summary]">\proglang{C}</xsl:template>
 
+<xsl:template match="api">API\index{API}</xsl:template>
+
+
+
 <xsl:template match="css">\proglang{CSS}<xsl:if test="not(ancestor::biblioentry)">\index{CSS@<xsl:call-template name="addIndexEntryString"/>\CSS}</xsl:if></xsl:template>
 <!-- ancestor::caption     No need for formalpara. -->
 <xsl:template match="css[ancestor::caption and ancestor::figure and not(ancestor::example)]">\proglang{CSS}\index{CSS@\string\CSS}</xsl:template>
@@ -145,6 +149,8 @@
 
 <xsl:template match="gcc">\ShApp{GCC}</xsl:template>
 
+
+<xsl:template match="spark">\proglang{Spark}\index{Spark@<xsl:call-template name="addIndexEntryString"/>\proglang{Spark}}</xsl:template>
 
 <!-- Were in springerLatex.xsl -->
 <xsl:template match="sfc">\textit{San Francisco Chronicle}</xsl:template>
