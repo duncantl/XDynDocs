@@ -23,15 +23,15 @@
 \end{CRoutinePar}</xsl:if>
 </xsl:template>
 
-<xsl:template match="c:func|c:routine">\Croutine{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="c:func|c:routine|cpp:routine">\Croutine{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="c:keyword | c:op">\Ckeyword{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="c:struct|c:type">\Ctype{<xsl:apply-templates/>}</xsl:template>
-<xsl:template match="c:arg">\Carg{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="c:arg|c:param">\Carg{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="c:var">\Cvar{<xsl:apply-templates/>}</xsl:template>
 
 <xsl:template match="c:el">\Cfield{<xsl:apply-templates/>}</xsl:template>
 
-<xsl:template match="c:expr">\Cexpr{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="c:expr|cpp:expr">\Cexpr{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="c:null">\Cnull</xsl:template>
 <xsl:template match="c:double">\Cdouble{}</xsl:template>
 <xsl:template match="c:int">\Cint</xsl:template>
@@ -39,11 +39,20 @@
 
 <xsl:template match="cpp:class | c:class">\CppClass{<xsl:apply-templates/>}</xsl:template>
 
+<xsl:template match="cpp:this">\CppThis</xsl:template>
 
 <xsl:template match="clang">\Clang</xsl:template>
 
+<xsl:template match="cpp:method">\CppMethod{<xsl:apply-templates/>}</xsl:template>
 
 
+<xsl:template match="cpp:code">
+<xsl:if test="$use.code.marginnote.identifiers">\begin{CRoutinePar}
+</xsl:if>
+<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">CppCode</xsl:with-param></xsl:call-template>
+<xsl:if test="$use.code.marginnote.identifiers">
+\end{CRoutinePar}</xsl:if>
+</xsl:template>
 
 
 </xsl:stylesheet>
