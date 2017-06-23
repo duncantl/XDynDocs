@@ -44,4 +44,6 @@ sql:opt
 </xsl:template>
 
 
+<xsl:template match="sqlite">SQLite3</xsl:template>
+
 </xsl:stylesheet>

@@ -55,4 +55,7 @@
 </xsl:template>
 
 
+<xsl:template match="gdb">GDB</xsl:template>
+<xsl:template match="lldb">LLDB</xsl:template>
+
 </xsl:stylesheet>
