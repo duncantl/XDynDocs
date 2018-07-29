@@ -590,6 +590,7 @@ This is my example.
 
 
 <xsl:template match="r:na">\texttt{NA}</xsl:template>
+<xsl:template match="r:level">\Rlevel{<xsl:apply-templates/>}</xsl:template>
 
 
 <xsl:template match="math">$<xsl:apply-templates/>$</xsl:template>
