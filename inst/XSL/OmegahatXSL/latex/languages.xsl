@@ -38,11 +38,10 @@
 <!--<xsl:template match="xml">\proglang{XML}\index{XML}@\proglang{XML}</xsl:template>-->
 <xsl:template match="xml">\proglang{XML}</xsl:template>
 <xsl:template match="xml[ancestor::title or ancestor::summary]">\proglang{XML}</xsl:template>
-<xsl:template match="C">\proglang{C}\index{C@\proglang{C}}</xsl:template>
+<xsl:template match="c|C">\proglang{C}\index{C@\proglang{C}}</xsl:template>
 <xsl:template match="C[ancestor::title or ancestor::summary]">\proglang{C}</xsl:template>
 
 <xsl:template match="api">API\index{API}</xsl:template>
-
 
 
 <xsl:template match="css">\proglang{CSS}<xsl:if test="not(ancestor::biblioentry)">\index{CSS@<xsl:call-template name="addIndexEntryString"/>\CSS}</xsl:if></xsl:template>
@@ -89,6 +88,7 @@
 <xsl:template match="omegahat">Omegahat</xsl:template>
 <xsl:template match="unix|UNIX">\acronym{UNIX}\index{UNIX}</xsl:template>
 <xsl:template match="linux|Linux">\acronym{Linux}\index{Linux}</xsl:template>
+<xsl:template match="osx">\acronym{OSX}\index{OSX}</xsl:template>
 
 <xsl:template match="wsdl">\WSDL\index{WSDL@<xsl:call-template name="addIndexEntryString"/>\WSDL}</xsl:template>
 <!--<xsl:template match="wsdl[ancestor::title or ancestor::summary]">\WSDL</xsl:template>-->
