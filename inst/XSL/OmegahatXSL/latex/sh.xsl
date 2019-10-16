@@ -10,9 +10,9 @@
 <xsl:if test="$use.code.marginnote.identifiers">
 \end{ShCodePar}</xsl:if>
 </xsl:template>
-<!-- <xsl:template match="sh:code | programlisting[@contentType = 'shell']">\begin{ShCode}<xsl:apply-templates/>\end{ShCode}</xsl:template> -->
 
-<xsl:template match="sh:output">\begin{ShOutput}<xsl:apply-templates/>\end{ShOutput}</xsl:template>
+
+<xsl:template match="sh:output">\begin{ShOutput}<xsl:if test="@size">[fontsize=\<xsl:value-of select="@size"/>]</xsl:if><xsl:apply-templates/>\end{ShOutput}</xsl:template>
 
 <xsl:template match="sh:var">\ShellVar{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="sh:cmd">\ShellCmd{<xsl:apply-templates/>}</xsl:template>
