@@ -199,4 +199,6 @@ Acronym &amp; Definition \\
 <xsl:template match="squote">`<xsl:apply-templates/>'</xsl:template>
 <xsl:template match="quote">``<xsl:apply-templates/>''</xsl:template>
 
+<xsl:template match="i">\textit{<xsl:apply-templates/>}</xsl:template>
+
 </xsl:stylesheet>
