@@ -3,6 +3,7 @@
 	xmlns:xi="http://www.w3.org/2003/XInclude"
 	exclude-result-prefixes="c" version='1.0'
 	xmlns:cpp="http://www.C++.org"
+	xmlns:cpre="http://www.preprocessor.org"	
         xmlns:c="http://www.C.org">
 
 <xsl:param name="use.code.marginnote.identifiers" select="false"/>
@@ -24,7 +25,7 @@
 </xsl:template>
 
 <xsl:template match="c:func|c:routine|cpp:routine">\Croutine{<xsl:apply-templates/>}</xsl:template>
-<xsl:template match="c:keyword | c:op">\Ckeyword{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="c:keyword | c:op | cpp:keyword">\Ckeyword{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="c:struct|c:type">\Ctype{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="c:arg|c:param">\Carg{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="c:var">\Cvar{<xsl:apply-templates/>}</xsl:template>
@@ -41,9 +42,16 @@
 
 <xsl:template match="cpp:this">\CppThis</xsl:template>
 
+<xsl:template match="cpre:define">\CPreKeyword{\#define}</xsl:template>
+<xsl:template match="cpre:var">\CPreVar{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="cpre:macro">\CPreMacro{<xsl:apply-templates/>}</xsl:template>
+
 <xsl:template match="clang">\Clang</xsl:template>
 
 <xsl:template match="cpp:method">\CppMethod{<xsl:apply-templates/>}</xsl:template>
+
+
+<xsl:template match="c:header">\CHeaderFile{<xsl:apply-templates/>}</xsl:template>
 
 
 <xsl:template match="cpp:code">
