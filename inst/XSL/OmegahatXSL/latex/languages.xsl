@@ -142,6 +142,7 @@
 <xsl:template match="tsv">TSV\index{TSV}</xsl:template>
 <xsl:template match="bz2">\FileExt{bz2}</xsl:template>
 
+<xsl:template match="tiff">\Tiff\index{Tiff@\Tiff}</xsl:template>
 <xsl:template match="png">\PNG\index{PNG@\PNG}</xsl:template>
 <xsl:template match="jpeg|jpg">\JPEG\index{JPEG@\JPEG}</xsl:template>
 
