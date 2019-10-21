@@ -97,6 +97,10 @@
  <i>Java</i>
 </xsl:template>
 
+<xsl:template match="fortran">
+ <i>FORTRAN</i>
+</xsl:template>
+
 <xsl:template match="Python">
  <i>Python</i>
 </xsl:template>
