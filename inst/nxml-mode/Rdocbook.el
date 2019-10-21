@@ -393,6 +393,10 @@ This deals with a CDATA escape and extracts the contents from that."
   (define-key map "\C-qm" '(lambda () "" (interactive "*") (r-insert-node "r:el" nil)))
   (define-key map "\C-qp" '(lambda (omg) "" (interactive "P") (r-insert-node (if omg "omg:pkg" "r:pkg") nil)))
   (define-key map "\C-qf" 'r-insert-func)
+  (define-key map "\C-c\C-ao" '(lambda () "" (interactive "*") (r-insert-node "ol" nil t)))
+  (define-key map "\C-c\C-au" '(lambda () "" (interactive "*") (r-insert-node "ul" nil t)))
+  (define-key map "\C-c\C-al" '(lambda () "" (interactive "*") (r-insert-node "li" nil)))
+  (define-key map "\C-c\C-a\C-a" '(lambda () "" (interactive "*") (insert "<a href=\"\"></a>") (backward-char 6)))
   (define-key map "\C-qk" '(lambda () "" (interactive "*") (r-insert-node "r:keyword" nil)))
   (define-key map "\C-qs" '(lambda () "" (interactive "*") (r-insert-node "r:s3method" nil)))
   (define-key map "\C-q\C-o" '(lambda (cdata) "" (interactive "P") (r-insert-node "r:output" (not cdata) t nil)))
@@ -402,7 +406,14 @@ This deals with a CDATA escape and extracts the contents from that."
   (define-key map "\C-q\C-c" '(lambda (cdata) "" (interactive "P") (r-insert-node "r:code" cdata t nil))) ; was t t
   (define-key map "\C-x\C-q\C-c" '(lambda () "" (interactive "*") (r-insert-node "r:function" t t nil) (goto-char (nxml-token-after)) (r-insert-node "r:output" t t)))
   (define-key map "\C-x\C-q\C-f" '(lambda () "" (interactive "*") (r-insert-node "r:function" t t nil) (r-insert-node "r:output" t t)))
-  (define-key map "\C-cx" '(lambda () "" (interactive "*") (insert "<xref linkend=\"fig:\"/>") (backward-char 3)))
+  (define-key map "\C-q\C-q" '(lambda () "" (interactive "*") (r-insert-node "sql:code" nil t nil) ))
+  (define-key map "\C-x\C-q\C-e" '(lambda () "" (interactive "*") (r-insert-node "sql:expr" nil nil nil) ))
+  (define-key map "\C-x\C-q\C-x" '(lambda () "" (interactive "*") (r-insert-node "sql:expr" nil nil nil) ))
+  (define-key map "\C-x\C-q\C-q" '(lambda () "" (interactive "*") (r-insert-node "sql:code" nil t nil) ))
+  (define-key map "\C-x\C-q\C-o" '(lambda () "" (interactive "*") (r-insert-node "sql:output" nil t nil) ))
+  (define-key map "\C-x\C-q\C-t" '(lambda () "" (interactive "*") (r-insert-node "sql:table" nil nil nil) ))
+  (define-key map "\C-x\C-q\C-f" '(lambda () "" (interactive "*") (r-insert-node "sql:field" nil nil nil) ))
+  (define-key map "\C-c\C-r" '(lambda () "" (interactive "*") (insert "<xref linkend=\"\"/>") (backward-char 3)))
 
 
 ; Okay to here.
@@ -477,9 +488,19 @@ This deals with a CDATA escape and extracts the contents from that."
                                                  (forward-char 2)
 ;                                                (r-insert-attribute-value "url" "")
                                                  (backward-char 3)
-                                            ))))
+						 ))))
 
+
+  (define-key map  "\C-ce" '(lambda () ""  (interactive "*") (r-insert-node "c:expr" nil)))      
+  (define-key map  "\C-ck" '(lambda () ""  (interactive "*") (r-insert-node "cpp:class" nil)))      
+  (define-key map  "\C-ct" '(lambda () ""  (interactive "*") (r-insert-node "c:type" nil)))
+  (define-key map  "\C-ca" '(lambda () ""  (interactive "*") (r-insert-node "c:arg" nil)))          
+  (define-key map  "\C-cv" '(lambda () ""  (interactive "*") (r-insert-node "c:var" nil)))  
   (define-key map  "\C-cf" '(lambda () ""  (interactive "*") (r-insert-node "c:func" nil)))
+  (define-key map  "\C-cw" '(lambda () ""  (interactive "*") (r-insert-node "c:keyword" nil)))
+  (define-key map  "\C-co" '(lambda () ""  (interactive "*") (r-insert-node "c:op" nil)))
+  (define-key map  "\C-ch" '(lambda () ""  (interactive "*") (r-insert-node "c:header" nil)))      
+  (define-key map  "\C-c\C-c" '(lambda (omg) ""  (interactive "P") (r-insert-node (if omg "c:routine" "c:code") nil t))) 
 
 ; Put in a <programlisting> but add white space to avoid reformatting messing it up.
   (define-key map  "\C-x\C-p" '(lambda () ""  (interactive "*") (insert "\n") (r-insert-node "programlisting" t t nil) (save-excursion (forward-sexp) (goto-char (nxml-token-after))  (goto-char (nxml-token-after))  (insert "\n\n"))))
@@ -493,19 +514,20 @@ This deals with a CDATA escape and extracts the contents from that."
 
   (define-key map  "\C-q\C-h" '(lambda () ""  (interactive "*")  (insert "<html/>")))
 ;  (define-key map  "\C-q\C-r" '(lambda () ""  (interactive "*")  (insert "<R/>")))
-  (define-key map  "\C-x\C-l" '(lambda () ""  (interactive "*")  (insert "<latex/>")))
-  (define-key map  "\C-q\C-d" '(lambda () ""  (interactive "*")  (insert "<docbook/>")))
+;  (define-key map  "\C-x\C-l" '(lambda () ""  (interactive "*")  (insert "<latex/>")))
+					;  (define-key map  "\C-q\C-d" '(lambda () ""  (interactive "*")  (insert "<docbook/>")))
+  
   (define-key map  "\C-q\C-r" '(lambda () ""  (interactive "*")  (insert "<r/>")))
 
-  (define-key map  "\C-q\C-r" '(lambda () ""  (interactive "*")  (insert "<r/>")))
-
-
-  (define-key map  "\C-x\C-j" '(lambda () ""  (interactive "*") (r-insert-node "note") (r-insert-node "para" nil t nil)))
+; Not quite correct!
+  (define-key map  "\C-x\C-j" '(lambda () ""  (interactive "*") (r-insert-node "note" nil t) (r-insert-node "para" nil t nil)))
 
   (define-key map  "\C-qb" 'insert-bib)
 
   (define-key map  "\C-qn" 'r-add-namespace-def)
   (define-key map  "\C-qi" 'r-insert-id)
+  
+; insert-list gives an error after the <ol>. Need C-u number before C-qC-l
   (define-key map  "\C-q\C-l" 'insert-list)
 
     ; for Todo.xml files. Put separately.
@@ -608,6 +630,7 @@ This deals with a CDATA escape and extracts the contents from that."
 (puthash (intern "java") "http://www.java.com" rxml-namespaces)
 (puthash (intern "dcom") "http://www.microsoft.com/DCOM" rxml-namespaces)
 (puthash (intern "c") "http://www.C.org" rxml-namespaces)
+(puthash (intern "cpp") "http://www.C++.org" rxml-namespaces)
 (puthash (intern "s") "http://cm.bell-labs.com/stat/S4" rxml-namespaces)
 (puthash (intern "rx") "http://www.regex.org" rxml-namespaces)
 (puthash (intern "c") "http://www.C.org" rxml-namespaces)
@@ -627,6 +650,7 @@ This deals with a CDATA escape and extracts the contents from that."
 (puthash (intern "ltx") "http://www.latex.org" rxml-namespaces)
 (puthash (intern "mml") "http://www.w3.org/1998/Math/MathML" rxml-namespaces)
 (puthash (intern "html") "http://www.w3.org/TR/html401" rxml-namespaces)
+(puthash (intern "sql") "http://www.sql.org" rxml-namespaces)
 
 
 (defun r-nxml-insert-at-namespace (prefix val)
@@ -749,6 +773,12 @@ This deals with a CDATA escape and extracts the contents from that."
    (interactive)
    (insert "<footnote><para> </para></footnote>"))
            
+
+
+(defun insert-figure ()
+  (interactive "")
+   (insert "<figure id='fig:'>\n<title></title>\n<graphic fileref='' format=''/>\n<caption><para>\n</para>\n</caption>\n</figure>")
+)
 
 
 (provide 'Rdocbook)
