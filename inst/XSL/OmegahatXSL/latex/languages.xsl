@@ -31,7 +31,7 @@
 <!--<xsl:template match="latex[string(.) = '']">\LaTeX{}</xsl:template>-->
 
 <xsl:template match="html|HTML">\proglang{HTML}</xsl:template>
-<xsl:template match="js">\proglang{JavaScript}\index{JavaScript@\proglang{JavaScript}}</xsl:template>
+<xsl:template match="js|javascript">\proglang{JavaScript}\index{JavaScript@\proglang{JavaScript}}</xsl:template>
 <xsl:template match="js[ancestor::title or ancestor::summary]">\proglang{JavaScript}</xsl:template>
 <xsl:template match="xpath">\proglang{XPath}\index{XPath@\proglang{XPath}}</xsl:template>
 <xsl:template match="xpath[ancestor::title or ancestor::summary]">\proglang{XPath}</xsl:template>
@@ -88,7 +88,9 @@
 <xsl:template match="omegahat">Omegahat</xsl:template>
 <xsl:template match="unix|UNIX">\acronym{UNIX}\index{UNIX}</xsl:template>
 <xsl:template match="linux|Linux">\acronym{Linux}\index{Linux}</xsl:template>
+<xsl:template match="gnu">\acronym{GNU}\index{GNU}</xsl:template>
 <xsl:template match="osx">\acronym{OSX}\index{OSX}</xsl:template>
+<xsl:template match="windows">\textsl{Microsoft Windows}\index{Microsoft Windows}</xsl:template>
 
 <xsl:template match="wsdl">\WSDL\index{WSDL@<xsl:call-template name="addIndexEntryString"/>\WSDL}</xsl:template>
 <!--<xsl:template match="wsdl[ancestor::title or ancestor::summary]">\WSDL</xsl:template>-->
@@ -130,7 +132,7 @@
 <xsl:template match="libxml|libxml2">\DLL{xml2}\index{libxml2@\DLL{xml2}}</xsl:template>
 <xsl:template match="libxslt">\DLL{libxslt}</xsl:template>
 
-
+<xsl:template match="solr">\Solr\index{Solr@\Solr}</xsl:template>
 <xsl:template match="nosql">\NoSQL\index{NoSQL@\NoSQL}</xsl:template>
 <xsl:template match="nosql[ancestor::title or ancestor::summary]">\NoSQL</xsl:template>
 <xsl:template match="ext">\FileExt{<xsl:apply-templates/>}</xsl:template>
