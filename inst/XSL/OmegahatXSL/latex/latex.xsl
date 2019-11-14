@@ -9,6 +9,7 @@
 		xmlns:r="http://www.r-project.org"
 		xmlns:str="http://exslt.org/strings"
 		xmlns:mml="http://www.w3.org/1998/Math/MathML"
+		xmlns:github="https://github.com"
                 extension-element-prefixes="r"
                 exclude-result-prefixes="r s ltx str mml"
                 version="1.0"
@@ -70,15 +71,20 @@
 
 <!-- Used to have &#10; in several places -->
 <!-- Not called (at least for book.xml) -->
-<xsl:template match="r:output">\begin{ROutput}<xsl:apply-templates/>\end{ROutput}</xsl:template>
+<xsl:template match="r:output">\begin{tcboppbox}
+\begin{ROutput}<xsl:apply-templates/>\end{ROutput}
+\end{tcboppbox}</xsl:template>
 
 <!-- trim white space.  Change to trim not normalize. -->
 <!-- 
 <xsl:if test="@id"><xsl:message>Routput: <xsl:value-of select="."/> + <xsl:value-of select="following-sibling::* | following-sibling::text()"/></xsl:message></xsl:if><xsl:if test="following-sibling::text()"><xsl:text>&#10;</xsl:text></xsl:if>
  -->
-<xsl:template match="r:output[not(*)]">\begin{ROutput}
+<xsl:template match="r:output[not(*)]">\begin{tcboppbox}
+\begin{ROutput}
 <xsl:call-template name="trim-newlines"><xsl:with-param name="string" select="string(.)"/></xsl:call-template>
-\end{ROutput}</xsl:template>
+\end{ROutput}
+\end{tcboppbox}
+</xsl:template>
 
 <!-- Want to be able to determine if next element is text and does not start with punctuation. If so, add a {}. -->
 <xsl:template match="r:dots|dots">\ldots<xsl:if test="not(@nospace)">{}</xsl:if></xsl:template>
@@ -200,5 +206,7 @@ Acronym &amp; Definition \\
 <xsl:template match="quote">``<xsl:apply-templates/>''</xsl:template>
 
 <xsl:template match="i">\textit{<xsl:apply-templates/>}</xsl:template>
+
+<xsl:template match="github:repos">\textsl{<xsl:apply-templates/>}</xsl:template>
 
 </xsl:stylesheet>
