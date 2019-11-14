@@ -12,6 +12,7 @@
 </xsl:template>
 
 
+<!-- <xsl:message>sh:output: <xsl:apply-templates/></xsl:message>  -->
 <xsl:template match="sh:output">\begin{ShOutput}<xsl:if test="@size">[fontsize=\<xsl:value-of select="@size"/>]</xsl:if><xsl:apply-templates/>\end{ShOutput}</xsl:template>
 
 <xsl:template match="sh:var">\ShellVar{<xsl:apply-templates/>}</xsl:template>

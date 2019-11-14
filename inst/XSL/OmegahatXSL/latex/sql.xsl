@@ -23,6 +23,7 @@ sql:opt
 <xsl:template match="sql:column">\SQLColumn{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="sql:table">\SQLTable{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="sql:fun|sql:func">\SQLFun{<xsl:apply-templates/>}\index{<xsl:apply-templates/>@\SQLFun{<xsl:apply-templates/>}}</xsl:template>
+<xsl:template match="sql:cmd">\SQLCmd{<xsl:apply-templates/>}\index{<xsl:apply-templates/>@\SQLFun{<xsl:apply-templates/>}}</xsl:template>
 
 <xsl:template match="sql:clause|sql:expr">\SQLExpr{<xsl:apply-templates/>}</xsl:template>
 
@@ -43,7 +44,11 @@ sql:opt
 \end{SQLCodePar}</xsl:if>
 </xsl:template>
 
+<xsl:template match="sql:exec">\SQLExec{<xsl:apply-templates/>}</xsl:template>
 
 <xsl:template match="sqlite">SQLite3</xsl:template>
+
+
+<xsl:template match="sql:output">\begin{SqlOutput}<xsl:if test="@size">[fontsize=\<xsl:value-of select="@size"/>]</xsl:if><xsl:apply-templates/>\end{SqlOutput}</xsl:template>
 
 </xsl:stylesheet>
