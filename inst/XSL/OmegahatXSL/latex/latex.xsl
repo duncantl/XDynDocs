@@ -10,6 +10,7 @@
 		xmlns:str="http://exslt.org/strings"
 		xmlns:mml="http://www.w3.org/1998/Math/MathML"
 		xmlns:github="https://github.com"
+		xmlns:git="https://git-scm.com"
                 extension-element-prefixes="r"
                 exclude-result-prefixes="r s ltx str mml"
                 version="1.0"
@@ -98,7 +99,9 @@
 <!-- Check to see if we need to add {} after a macro.Really want to check if the next element is text().  -->
 <xsl:template name="addBraces"><xsl:if test="starts-with(string(following-sibling::text()[1]), ' ')"></xsl:if></xsl:template>
 
-<xsl:template match="r:code/r:output"><xsl:apply-templates/></xsl:template>
+<!--  temporarily disable this Dec 21 2019
+  <xsl:template match="r:code/r:output"><xsl:apply-templates/></xsl:template>
+-->
 
 <xsl:template match="r:output//text() | r:code//text()"><xsl:value-of select="."/></xsl:template>
 <!-- <xsl:template match="r:output//text() | r:code//text()"><xsl:call-template name="trim.text"/></xsl:template> -->
@@ -208,5 +211,14 @@ Acronym &amp; Definition \\
 <xsl:template match="i">\textit{<xsl:apply-templates/>}</xsl:template>
 
 <xsl:template match="github:repos">\textsl{<xsl:apply-templates/>}</xsl:template>
+
+<xsl:template match="git">\textsl{git}\index{G@git}</xsl:template>
+<xsl:template match="git:*">\textbf{<xsl:value-of select='local-name()'/>}\index{<xsl:value-of select='local-name()'/>}</xsl:template>
+
+<xsl:template match="quotation">
+\begin{displayquote}
+<xsl:apply-templates/>
+\end{displayquote}  
+</xsl:template>
 
 </xsl:stylesheet>
