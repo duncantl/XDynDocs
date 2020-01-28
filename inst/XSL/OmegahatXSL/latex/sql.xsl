@@ -46,7 +46,7 @@ sql:opt
 
 <xsl:template match="sql:exec">\SQLExec{<xsl:apply-templates/>}</xsl:template>
 
-<xsl:template match="sqlite">SQLite3</xsl:template>
+<xsl:template match="sqlite|sqlite3">SQLite3</xsl:template>
 
 
 <xsl:template match="sql:output">\begin{SqlOutput}<xsl:if test="@size">[fontsize=\<xsl:value-of select="@size"/>]</xsl:if><xsl:apply-templates/>\end{SqlOutput}</xsl:template>
