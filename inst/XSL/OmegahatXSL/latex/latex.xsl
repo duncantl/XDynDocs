@@ -84,8 +84,7 @@
 \begin{ROutput}
 <xsl:call-template name="trim-newlines"><xsl:with-param name="string" select="string(.)"/></xsl:call-template>
 \end{ROutput}
-\end{tcboppbox}
-</xsl:template>
+\end{tcboppbox}</xsl:template>
 
 <!-- Want to be able to determine if next element is text and does not start with punctuation. If so, add a {}. -->
 <xsl:template match="r:dots|dots">\ldots<xsl:if test="not(@nospace)">{}</xsl:if></xsl:template>
