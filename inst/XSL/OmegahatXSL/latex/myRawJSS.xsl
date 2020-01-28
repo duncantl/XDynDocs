@@ -54,7 +54,10 @@
 </xsl:template>
 
 <!-- Like to be able to do this more generically -->
-<xsl:template match="js" mode="plain">JavaScript</xsl:template>
+<!-- See laguages.xsl for the better version -->
+<!--
+<xsl:template match="js|javascript" mode="plain">\JavaScript\index{JavaScript@\JavaScript}</xsl:template>
+-->
 
 
 <xsl:template match="author/affiliation">
