@@ -1,11 +1,10 @@
-XSL_DB_Opts <-structure(c("http://docbook.sourceforge.net/release/xsl/current/images/draft.png", 
-"http://docbook.sourceforge.net/release/xsl/current/images/callouts/", 
-"1", "http://docbook.sourceforge.net/release/xsl/current/images/", 
-".svg", "1"), .Names = c("draft.watermark.image", "callout.graphics.path", 
-"admon.graphics", "admon.graphics.path", "admon.graphics.extension", 
-"bibliography.numbered"))
+XSL_DB_Opts <-c(draft.watermark.image = "http://docbook.sourceforge.net/release/xsl/current/images/draft.png", 
+callout.graphics.path = "http://docbook.sourceforge.net/release/xsl/current/images/callouts/", 
+admon.graphics = "1", admon.graphics.path = "http://docbook.sourceforge.net/release/xsl/current/images/", 
+admon.graphics.extension = ".svg", bibliography.numbered = "1"
+)
 
-XSL_FO_Opts <-structure(c("0", "1", "0", "1", "yes", "1", "'0 5 0'", "8"), .Names = c("fop.extensions", 
-"fop1.extensions", "ulink.show", "index.on.type", "insert.xref.page.number", 
-"header.rule", "header.column.widths", "toc.section.depth"))
+XSL_FO_Opts <-c(fop.extensions = "0", fop1.extensions = "1", ulink.show = "0", 
+index.on.type = "1", insert.xref.page.number = "yes", header.rule = "1", 
+header.column.widths = "'0 5 0'", toc.section.depth = "8")
 
