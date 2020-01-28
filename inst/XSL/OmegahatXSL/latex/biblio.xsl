@@ -23,7 +23,7 @@
 <xsl:strip-space elements="*"/>
 <xsl:preserve-space elements="title"/>
 
-<xsl:template match="*"><xsl:message>No template for <xsl:value-of select="local-name()"/></xsl:message></xsl:template>
+<xsl:template match="*"><xsl:message>No template for <xsl:value-of select="local-name()"/> in <xsl:value-of select="ancestor::chapter/@id"/></xsl:message></xsl:template>
 
 
 <xsl:template match="/">
