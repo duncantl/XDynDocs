@@ -16,7 +16,7 @@
 <xsl:template match="sh:output">\begin{ShOutput}<xsl:if test="@size">[fontsize=\<xsl:value-of select="@size"/>]</xsl:if><xsl:apply-templates/>\end{ShOutput}</xsl:template>
 
 <xsl:template match="sh:var">\ShellVar{<xsl:apply-templates/>}</xsl:template>
-<xsl:template match="sh:cmd">\ShellCmd{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="sh:cmd|sh:script">\ShellCmd{<xsl:apply-templates/>}</xsl:template>
 
 <xsl:template match="sh:exec">\textsl{<xsl:apply-templates/>}</xsl:template>
 
