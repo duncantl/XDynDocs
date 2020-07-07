@@ -214,6 +214,16 @@ Acronym &amp; Definition \\
 <xsl:template match="git">\textsl{git}\index{G@git}</xsl:template>
 <xsl:template match="git:*">\textbf{<xsl:value-of select='local-name()'/>}\index{<xsl:value-of select='local-name()'/>}</xsl:template>
 
+
+<xsl:template match="msword|word">\textsl{Microsoft Word}\index{Word}</xsl:template>
+<xsl:template match="msexcel|excel">\textsl{Microsoft Excel}\index{Excel}</xsl:template>
+<xsl:template match="mspowerpoint|powerpoint|msppt">\textsl{Microsoft PowerPoint}\index{PowerPoint}</xsl:template>
+<xsl:template match="keynote">\textsl{Keynote}\index{Keynote}</xsl:template>
+
+<xsl:template match="firefox">\textsl{Firefox}\index{Firefox}</xsl:template>
+
+<xsl:template match="apache">\textsl{Apache}\index{Apache}</xsl:template>
+
 <xsl:template match="quotation">
 \begin{displayquote}
 <xsl:apply-templates/>

@@ -66,4 +66,6 @@
 <xsl:template match="gdb">GDB</xsl:template>
 <xsl:template match="lldb">LLDB</xsl:template>
 
+<xsl:template match="c:lib">\Clib{<xsl:apply-templates/>}</xsl:template>
+
 </xsl:stylesheet>
