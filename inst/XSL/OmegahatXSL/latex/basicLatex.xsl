@@ -611,5 +611,9 @@ This is my example.
 
 <xsl:template match="para/title">\textbf{<xsl:apply-templates/>} </xsl:template>
 
+
+<xsl:template match="r:attr">\RAttr{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="r:el|r:field">\REl{<xsl:apply-templates/>}</xsl:template>
+
 </xsl:stylesheet>
 
