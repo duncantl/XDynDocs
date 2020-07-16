@@ -16,7 +16,9 @@
 
 <xsl:template match="perl"><proglang>PERL</proglang></xsl:template>
 <xsl:template match="ruby"><proglang>Ruby</proglang></xsl:template>
+<!-- 
 <xsl:template match="word">Microsoft Word</xsl:template>
+-->
 
 <!--
 <xsl:template match="css"><proglang><acronym def="CSS">CSS</acronym></proglang></xsl:template>
