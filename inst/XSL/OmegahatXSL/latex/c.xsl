@@ -28,9 +28,10 @@
 <xsl:template match="c:keyword | c:op | cpp:keyword">\Ckeyword{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="c:struct|c:type">\Ctype{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="c:arg|c:param">\Carg{<xsl:apply-templates/>}</xsl:template>
-<xsl:template match="c:var">\Cvar{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="c:var|cpp:var">\Cvar{<xsl:apply-templates/>}</xsl:template>
 
-<xsl:template match="c:el">\Cfield{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="c:field|c:el">\Cfield{<xsl:apply-templates/>}</xsl:template>
+
 
 <xsl:template match="c:expr|cpp:expr">\Cexpr{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="c:null">\Cnull</xsl:template>
