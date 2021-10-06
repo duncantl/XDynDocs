@@ -9,6 +9,7 @@
 		xmlns:s="http://cm.bell-labs.com/stat/S4"
 		xmlns:r="http://www.r-project.org"
 		xmlns:str="http://exslt.org/strings"
+		xmlns:wasm="http://webassembly.org"
                 extension-element-prefixes="r js"
                 exclude-result-prefixes="r s ltx js str"
                 version="1.0">
@@ -39,4 +40,8 @@
 
 <xsl:template match="js:el">\JSEl{<xsl:apply-templates/>}</xsl:template>
 
+<xsl:template match="js:then">\JSfunc{then}</xsl:template>
+
+
+<xsl:template match="wasm:func">\WASMfunc{<xsl:value-of select="str:replace(string(.), '_', '\_')"/>}</xsl:template>
 </xsl:stylesheet>
