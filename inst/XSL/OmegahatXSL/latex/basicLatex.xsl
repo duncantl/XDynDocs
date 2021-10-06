@@ -568,7 +568,7 @@ This is my example.
 </xsl:template>
 
 
-<xsl:template match="note">
+<xsl:template match="note|aside">
 \begin{quote}
  Note: <xsl:apply-templates/>
 \end{quote}
