@@ -136,6 +136,7 @@
 
 
 <xsl:template match="emdash|dash">---</xsl:template>
+<xsl:template match="emdash[./* or ./text()]|dash[./* or ./text()]">--- <xsl:apply-templates/> ---</xsl:template>
 <xsl:template match="ndash">--</xsl:template>
 
 
@@ -205,7 +206,7 @@ Acronym &amp; Definition \\
 
 
 <xsl:template match="squote">`<xsl:apply-templates/>'</xsl:template>
-<xsl:template match="quote">``<xsl:apply-templates/>''</xsl:template>
+<xsl:template match="quote|dquote|dQuote">``<xsl:apply-templates/>''</xsl:template>
 
 <xsl:template match="i">\textit{<xsl:apply-templates/>}</xsl:template>
 
@@ -230,4 +231,13 @@ Acronym &amp; Definition \\
 \end{displayquote}  
 </xsl:template>
 
+<xsl:template match="hr">
+\noindent\rule{\textwidth}{1pt}
+</xsl:template>
+
+
+<xsl:template match="red">{\color{RED}<xsl:apply-templates/>}</xsl:template>
+
+
 </xsl:stylesheet>
+
