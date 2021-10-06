@@ -3,6 +3,7 @@
 	xmlns:r="http://www.r-project.org"
 	xmlns:omg="http://www.omegahat.org"
 	xmlns:bioc="http://www.bioconductor.org"
+	xmlns:gh="http://github.com"
         version="1.0">
 
 
@@ -32,6 +33,7 @@
 
 <xsl:template match="html|HTML">\proglang{HTML}</xsl:template>
 <xsl:template match="js|javascript">\proglang{JavaScript}\index{JavaScript@\proglang{JavaScript}}</xsl:template>
+<xsl:template match="wasm|WASM">\proglang{WASM}\index{WASM@\proglang{WASM}}</xsl:template>
 <xsl:template match="js[ancestor::title or ancestor::summary]">\proglang{JavaScript}</xsl:template>
 <xsl:template match="xpath">\proglang{XPath}\index{XPath@\proglang{XPath}}</xsl:template>
 <xsl:template match="xpath[ancestor::title or ancestor::summary]">\proglang{XPath}</xsl:template>
@@ -40,6 +42,9 @@
 <xsl:template match="xml[ancestor::title or ancestor::summary]">\proglang{XML}</xsl:template>
 <xsl:template match="c|C">\proglang{C}\index{C@\proglang{C}}</xsl:template>
 <xsl:template match="C[ancestor::title or ancestor::summary]">\proglang{C}</xsl:template>
+<xsl:template match="objc">\proglang{Objective-C}\index{Objective-C@\proglang{Objective-C}}</xsl:template>
+<xsl:template match="go">\proglang{Go}\index{GoObjective-C@\proglang{Go}}</xsl:template>
+
 
 <xsl:template match="api">API\index{API}</xsl:template>
 
@@ -111,10 +116,19 @@
 <xsl:template match="knitr">\knitr\index{knitr@\knitr}</xsl:template>
 <xsl:template match="pandoc">\pandoc\index{pandoc@\pandoc}</xsl:template>
 
+<xsl:template match="dll[text()]|dso[text()]|lib[text()]">\DllWord{}</xsl:template>
+
 <xsl:template match="dll|dso|lib">\DLL{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="dso">\DSO{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="proj">\Project{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="directory|dir">\texttt{<xsl:apply-templates/>/}</xsl:template>
+
+
+<xsl:template match="gh:repos[@url]">\GithubRepos2{<xsl:apply-templates/>}{<xsl:apply-templates select="@url"/>}</xsl:template>
+<xsl:template match="gh:repos">\GithubRepos{<xsl:apply-templates/>}</xsl:template>
+
+
+<xsl:template match="github">\Github{}</xsl:template>
 
 
 <xsl:template match="s4">\acronym{S4}\index{S4}</xsl:template>
@@ -140,9 +154,12 @@
 <xsl:template match="xlsx">\FileExt{xlsx}</xsl:template>
 <xsl:template match="gzip">\FileExt{gz}</xsl:template>
 
-<xsl:template match="CSV|csv">CSV\index{CSV}</xsl:template>
-<xsl:template match="tsv">TSV\index{TSV}</xsl:template>
+<xsl:template match="CSV|csv">\FileExt{CSV}\index{CSV}</xsl:template>
+<xsl:template match="tsv">\FileExt{TSV}\index{TSV}</xsl:template>
 <xsl:template match="bz2">\FileExt{bz2}</xsl:template>
+
+<xsl:template match="rds">\FileExt{Rds}\index{Rds}</xsl:template>
+<xsl:template match="rda">\FileExt{Rda}\index{Rda}</xsl:template>
 
 <xsl:template match="tiff">\Tiff\index{Tiff@\Tiff}</xsl:template>
 <xsl:template match="png">\PNG\index{PNG@\PNG}</xsl:template>
