@@ -64,6 +64,8 @@
 </xsl:template>
 
 
+<xsl:template match="cpp">\cplusplus</xsl:template>
+
 <xsl:template match="gdb">GDB</xsl:template>
 <xsl:template match="lldb">LLDB</xsl:template>
 
