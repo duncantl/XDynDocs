@@ -225,6 +225,8 @@ Acronym &amp; Definition \\
 
 <xsl:template match="apache">\textsl{Apache}\index{Apache}</xsl:template>
 
+<xsl:template match="rstudio">\textsl{RStudio}\index{RStudio}</xsl:template>
+
 <xsl:template match="quotation">
 \begin{displayquote}
 <xsl:apply-templates/>
