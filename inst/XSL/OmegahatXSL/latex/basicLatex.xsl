@@ -114,7 +114,7 @@ simplemsgentry
 <xsl:template name="verbName">
 <xsl:choose>
 <xsl:when test="ancestor::table">verb</xsl:when>
-<xsl:otherwise>PVerb</xsl:otherwise>			       <!--Was spverb-->
+<xsl:otherwise>PVerb[]</xsl:otherwise>			       <!--Was PVerb, prior to that spverb -->
 <!--
 <xsl:otherwise>
   <xsl:choose>
@@ -165,8 +165,7 @@ simplemsgentry
 
 
 <xsl:template match="text()[ancestor::programlisting or ancestor::xp:expr or ancestor::r:code or ancestor::r:output or ancestor::r:function or ancestor::xsl:code or ancestor::make:code or ancestor::literal or ancestor::sql:code or ancestor::r:plot]">
-<xsl:copy select="."/>
-</xsl:template>
+<xsl:copy select="."/></xsl:template>
 
 <xsl:template match="example/para[position() = 1]/text()[1][starts-with(., '&#10;')] | callout/para[position() = 1]/text()[1][starts-with(., '&#10;')] | formalpara/para[position() = 1]/text()[1][starts-with(., '&#10;')]" priority="1000">
 <!--<xsl:message>text() inside an example that starts with a new-line: <xsl:value-of select="string(.)"/></xsl:message>-->
