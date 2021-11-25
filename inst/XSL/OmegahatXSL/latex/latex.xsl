@@ -31,10 +31,11 @@
 
 <xsl:template match="latex">\LaTeX</xsl:template>
 
+
 <xsl:template match="s:expression|r:expression|r:expr">\R<xsl:value-of select="local-name(.)"/>{<!--<xsl:apply-templates/>--><xsl:call-template name="scape"><xsl:with-param name="string" select="text()"/></xsl:call-template>}</xsl:template>
 
 
-<xsl:template match="s:expression|r:expression|r:expr"><xsl:call-template name="addErrorMargin"/>{\color{rcolor}\<xsl:call-template name="verbName"/>{<xsl:apply-templates/>}}</xsl:template>
+<xsl:template match="s:expression|r:expression|r:expr"><xsl:call-template name="addErrorMargin"/>{\color{rcolor}\<xsl:call-template name="verbName"/>|<xsl:apply-templates/>|}</xsl:template>
 
 <!-- <xsl:template match="r:expr[ancestor::footnote]">{\color{rcolor}\<xsl:call-template name="verbName"/>?<xsl:apply-templates/>}</xsl:template> -->
 
@@ -52,6 +53,8 @@
 
 
 <xsl:template match="r:env">\Renv{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="r:globalenv">\Renv{globalenv}</xsl:template>
+
 
 <xsl:template match="r:func[contains(., '&lt;-')]">\RreplaceFunc{<xsl:value-of select="translate(., '&lt;-', '')"/>}</xsl:template>
 
@@ -131,8 +134,7 @@
 
 <xsl:template match="var">\var{<xsl:apply-templates/>}</xsl:template>
 
-<xsl:template match="mk:code">\begin{verbatim}<xsl:apply-templates/>
-\end{verbatim}</xsl:template>
+<xsl:template match="mk:code">\begin{verbatim}<xsl:apply-templates/>\end{verbatim}</xsl:template>
 
 
 <xsl:template match="emdash|dash">---</xsl:template>
@@ -185,6 +187,10 @@ Acronym &amp; Definition \\
 
 <xsl:template match="r:type">\Rtype{<xsl:apply-templates/>}</xsl:template>
 
+
+<xsl:template match="r:nla|r:ggets">\Rnla</xsl:template>
+
+
 <xsl:template match="index[not(primary)]">
 <xsl:apply-templates/>\index{<xsl:apply-templates/>}</xsl:template>
 
@@ -226,6 +232,7 @@ Acronym &amp; Definition \\
 <xsl:template match="apache">\textsl{Apache}\index{Apache}</xsl:template>
 
 <xsl:template match="rstudio">\textsl{RStudio}\index{RStudio}</xsl:template>
+
 
 <xsl:template match="quotation">
 \begin{displayquote}
