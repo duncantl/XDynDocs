@@ -15,7 +15,7 @@
         xmlns:c="http://www.C.org"
         xmlns:make="http://www.make.org"
         xmlns:sql="http://www.sql.org"
-	 xmlns:sh="http://www.shell.org">
+        xmlns:sh="http://www.shell.org">
 
 <xsl:import href="dblatex.xsl"/>
 
@@ -114,7 +114,7 @@ simplemsgentry
 <xsl:template name="verbName">
 <xsl:choose>
 <xsl:when test="ancestor::table">verb</xsl:when>
-<xsl:otherwise>PVerb[]</xsl:otherwise>			       <!--Was PVerb, prior to that spverb -->
+<xsl:otherwise>verb</xsl:otherwise>			       <!--Was PVerb[], PVerb, prior to that spverb -->
 <!--
 <xsl:otherwise>
   <xsl:choose>
