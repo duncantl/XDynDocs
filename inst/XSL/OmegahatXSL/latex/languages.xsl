@@ -180,4 +180,11 @@
 
 <xsl:template match="rest">\acronym{REST}</xsl:template>
 
+
+
+<xsl:template match="ast">\gls{ast}</xsl:template>
+<xsl:template match="api">\gls{api}</xsl:template>
+<xsl:template match="gui">\gls{gui}</xsl:template>
+<xsl:template match="oop">\gls{gui}</xsl:template>
+
 </xsl:stylesheet>
