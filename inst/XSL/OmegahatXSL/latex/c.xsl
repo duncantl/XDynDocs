@@ -11,7 +11,7 @@
 <xsl:template match="c:code">
 <xsl:if test="$use.code.marginnote.identifiers">\begin{CRoutinePar}
 </xsl:if>
-<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">CCode</xsl:with-param></xsl:call-template>
+<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">CCode</xsl:with-param><xsl:with-param name="lang">C</xsl:with-param></xsl:call-template>
 <xsl:if test="$use.code.marginnote.identifiers">
 \end{CRoutinePar}</xsl:if>
 </xsl:template>
@@ -19,7 +19,7 @@
 <xsl:template match="c:function">
 <xsl:if test="$use.code.marginnote.identifiers">\begin{CRoutinePar}
 </xsl:if>
-<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">CRoutine</xsl:with-param></xsl:call-template>
+<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">CRoutine</xsl:with-param><xsl:with-param name="lang">C</xsl:with-param></xsl:call-template>
 <xsl:if test="$use.code.marginnote.identifiers">
 \end{CRoutinePar}</xsl:if>
 </xsl:template>
@@ -58,7 +58,7 @@
 <xsl:template match="cpp:code">
 <xsl:if test="$use.code.marginnote.identifiers">\begin{CRoutinePar}
 </xsl:if>
-<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">CppCode</xsl:with-param></xsl:call-template>
+<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">CppCode</xsl:with-param><xsl:with-param name="lang">C++</xsl:with-param></xsl:call-template>
 <xsl:if test="$use.code.marginnote.identifiers">
 \end{CRoutinePar}</xsl:if>
 </xsl:template>

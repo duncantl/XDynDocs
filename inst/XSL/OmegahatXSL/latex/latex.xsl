@@ -28,9 +28,11 @@
 <xsl:include href="css.xsl"/>
 <xsl:include href="languages.xsl"/>
 
+<!-- https://pygments.org/  -->
+<xsl:param name="use.minted" select="1"/>
+
 
 <xsl:template match="latex">\LaTeX</xsl:template>
-
 
 <xsl:template match="s:expression|r:expression|r:expr">\R<xsl:value-of select="local-name(.)"/>{<!--<xsl:apply-templates/>--><xsl:call-template name="scape"><xsl:with-param name="string" select="text()"/></xsl:call-template>}</xsl:template>
 
@@ -134,7 +136,7 @@
 
 <xsl:template match="var">\var{<xsl:apply-templates/>}</xsl:template>
 
-<xsl:template match="mk:code">\begin{verbatim}<xsl:apply-templates/>\end{verbatim}</xsl:template>
+<xsl:template match="mk:code">\begin<xsl:choose><xsl:when test="$use.minted">{minted}{Makefile}</xsl:when><xsl:otherwise>{verbatim}</xsl:otherwise></xsl:choose><xsl:apply-templates/>\end{<xsl:choose><xsl:when test="$use.minted">minted</xsl:when><xsl:otherwise>verbatim</xsl:otherwise></xsl:choose>}</xsl:template>
 
 
 <xsl:template match="emdash|dash">---</xsl:template>

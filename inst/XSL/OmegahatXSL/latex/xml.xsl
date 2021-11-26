@@ -20,10 +20,11 @@
 
 <!-- <xsl:message>Adding space after <xsl:value-of select="$codeName"/> for <xsl:value-of select="local-name(following-sibling::*[1] | following-sibling::text()[1])"/></xsl:message> -->
 <xsl:template name="makeCodeEnv">
-<xsl:param name="codeName">Verbatim</xsl:param>\begin{<xsl:value-of select="$codeName"/>}<xsl:if test="@size">[fontsize=\<xsl:value-of select="@size"/>]</xsl:if>
+<xsl:param name="lang">text</xsl:param>
+<xsl:param name="codeName">Verbatim</xsl:param>\begin<xsl:choose><xsl:when test="$use.minted"><xsl:if test="@size">[fontsize=\<xsl:value-of select="@size"/>]</xsl:if>{minted}{<xsl:value-of select="$lang"/>}</xsl:when><xsl:otherwise>{<xsl:value-of select="$codeName"/>}<xsl:if test="@size">[fontsize=\<xsl:value-of select="@size"/>]</xsl:if></xsl:otherwise></xsl:choose>
 <xsl:text>&#10;</xsl:text>
 <xsl:call-template name="trim-newlines"><xsl:with-param name="contents" select="string(.)"/></xsl:call-template>
-\end{<xsl:value-of select="$codeName"/>}<xsl:call-template name="forceBreakIf"/></xsl:template>
+\end{<xsl:choose><xsl:when test="$use.minted">minted</xsl:when><xsl:otherwise><xsl:value-of select="$codeName"/></xsl:otherwise></xsl:choose>}<xsl:call-template name="forceBreakIf"/></xsl:template>
 
 <!-- Add a new line to the output if there is a following sibling
   and it is either a node or text that doesn't start with white space. -->
@@ -43,25 +44,25 @@
 
 
 <xsl:template match="programlisting[@contentType = 'XML' or @contentType = 'xml'] | xml:code">
-<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">XMLCode</xsl:with-param></xsl:call-template>
+<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">XMLCode</xsl:with-param><xsl:with-param name="lang">xml</xsl:with-param></xsl:call-template>
 </xsl:template>
 
 <xsl:template match="programlisting[@contentType = 'latex' or @contentType = 'LaTeX'] | ltx:code">
-<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">LaTeXCode</xsl:with-param></xsl:call-template>
+<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">LaTeXCode</xsl:with-param><xsl:with-param name="lang">latex</xsl:with-param></xsl:call-template>
 </xsl:template>
 
 
 
 <xsl:template match="programlisting[@contentType='SVG' or @contentType='svg']">
-<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">SVGCode</xsl:with-param></xsl:call-template>
+<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">SVGCode</xsl:with-param><xsl:with-param name="lang">xml</xsl:with-param></xsl:call-template>
 </xsl:template>
 
 <xsl:template match="programlisting[@contentType='HTML' or @contentType='html']">
-<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">HTMLCode</xsl:with-param></xsl:call-template>
+<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">HTMLCode</xsl:with-param><xsl:with-param name="lang">html</xsl:with-param></xsl:call-template>
 </xsl:template>
 
 <xsl:template match="programlisting[@contentType='KML' or @contentType='kml']">
-<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">KMLCode</xsl:with-param></xsl:call-template>
+<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">KMLCode</xsl:with-param><xsl:with-param name="lang">xml</xsl:with-param></xsl:call-template>
 </xsl:template>
 
 
@@ -75,7 +76,4 @@
 
 <xsl:template match="xsl:param">\XSLparam{<xsl:value-of select="."/>}</xsl:template>
 
-
 </xsl:stylesheet>
-
-

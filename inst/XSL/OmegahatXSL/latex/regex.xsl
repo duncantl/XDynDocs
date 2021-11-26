@@ -7,7 +7,7 @@
 <xsl:template match="rx:expr">\RegeEx{<xsl:apply-templates/>}</xsl:template>
 
 <xsl:template match="rx:code">
-<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">RegexCode</xsl:with-param></xsl:call-template>
+<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">RegexCode</xsl:with-param><xsl:with-param name="lang">regex</xsl:with-param></xsl:call-template>
 </xsl:template>
 
 <xsl:template match="rx:op">\RegeExOp{<xsl:apply-templates/>}</xsl:template>

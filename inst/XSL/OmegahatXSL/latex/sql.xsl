@@ -39,7 +39,7 @@ sql:opt
 <xsl:if test="$use.code.marginnote.identifiers">\begin{SQLCodePar}[<xsl:value-of select="(string-length() - string-length(translate(., '&#xA;', '')) - 1) div 2"/>]
 <!-- <xsl:message>[sql:code] Num lines: <xsl:value-of select="string-length() - string-length(translate(., '&#xA;', '')) - 1"/></xsl:message>-->
 </xsl:if>
-<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">SQLCode</xsl:with-param></xsl:call-template>
+<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">SQLCode</xsl:with-param><xsl:with-param name="lang">sql</xsl:with-param></xsl:call-template>
 <xsl:if test="$use.code.marginnote.identifiers">
 \end{SQLCodePar}</xsl:if>
 </xsl:template>

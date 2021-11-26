@@ -6,7 +6,7 @@
 <xsl:template match="sh:code | programlisting[@contentType = 'shell']">
 <xsl:if test="$use.code.marginnote.identifiers">\begin{ShCodePar}
 </xsl:if>
-<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">ShCode</xsl:with-param></xsl:call-template>
+<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">ShCode</xsl:with-param><xsl:with-param name="lang">bash</xsl:with-param></xsl:call-template>
 <xsl:if test="$use.code.marginnote.identifiers">
 \end{ShCodePar}</xsl:if>
 </xsl:template>

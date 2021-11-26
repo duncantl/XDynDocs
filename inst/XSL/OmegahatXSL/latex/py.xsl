@@ -11,7 +11,7 @@
 <xsl:template match="py:code">
 <xsl:if test="$use.code.marginnote.identifiers">\begin{PyCodePar}
 </xsl:if>
-<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">PyCode</xsl:with-param></xsl:call-template>
+<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">PyCode</xsl:with-param><xsl:with-param name="lang">python</xsl:with-param></xsl:call-template>
 <xsl:if test="$use.code.marginnote.identifiers">
 \end{PyCodePar}</xsl:if>
 </xsl:template>

@@ -34,7 +34,7 @@
 
 <xsl:template match="js:code | programlisting[@contentType = 'JavaScript']">
 <xsl:if test="$use.code.marginnote.identifiers">\begin{JSCodePar}</xsl:if>
-<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">JSCode</xsl:with-param></xsl:call-template>
+<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">JSCode</xsl:with-param><xsl:with-param name="lang">javascript</xsl:with-param></xsl:call-template>
 <xsl:if test="$use.code.marginnote.identifiers">\end{JSCodePar}</xsl:if>
 </xsl:template>
 
