@@ -364,7 +364,7 @@ substring(., string-length(.) -1, string-length(.)) = '&#10;']"><xsl:message>tra
 
 <xsl:template match="figure[title]/caption">
 <xsl:if test="$newline.before.caption"><xsl:text>&#10;</xsl:text></xsl:if>
-<xsl:if test="$protect.captions | @ltx:protect | .//r:expr|.//r:formula|.//xp:expr|.//literal|.//title|../title//r:expr|../title//r:formula|../title/xp:expr|../title//literal">\cprotect</xsl:if>\caption[<xsl:apply-templates select="../title" mode="title"/>]{<xsl:apply-templates select="../title" mode="title"/><xsl:if test="not(substring(normalize-space(title), string-length(normalize-space(title))) =  '.')">.  </xsl:if>\textit{<xsl:apply-templates/>}}
+<xsl:if test="$protect.captions | @ltx:protect | .//r:expr|.//r:formula|.//xp:expr|.//literal|.//title|../title//r:expr|../title//r:formula|../title/xp:expr|../title//literal">\cprotect</xsl:if>\caption[<xsl:apply-templates select="../title" mode="title"/>]{<xsl:apply-templates select="../title" mode="title"/><xsl:if test="not(substring(normalize-space(title), string-length(normalize-space(title))) =  '.')">.  </xsl:if>{\itshape <xsl:apply-templates/>}}
 <xsl:if test="ancestor::figure/@id">\label{<xsl:value-of select="ancestor::figure/@id"/>}</xsl:if>
 </xsl:template>
 
