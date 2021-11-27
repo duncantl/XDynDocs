@@ -950,9 +950,9 @@ Why do we end up creating an .svg and a .SVG file.
 We don't any more.
 
 <r:code>
-x = dynDoc("~/Classes/StatComputing/XDynDocs/tests/simple.xml", "HTML",
+x = dynDoc("~/GitWorkingArea/XDynDocs/tests/simple.xml", "HTML",
             force = TRUE, xslParams = c(showCode = "1", "use.existing.data" = 1, 'r:verbose' = 1),
-            xsl = "~/Classes/StatComputing/XDynDocs/inst/XSL/html.xsl", )
+            xsl = "~/GitWorkingArea/XDynDocs/inst/XSL/html.xsl", )
 </r:code>
 </item>
 
