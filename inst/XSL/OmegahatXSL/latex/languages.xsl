@@ -43,7 +43,8 @@
 <xsl:template match="c|C">\proglang{C}\index{C@\proglang{C}}</xsl:template>
 <xsl:template match="C[ancestor::title or ancestor::summary]">\proglang{C}</xsl:template>
 <xsl:template match="objc">\proglang{Objective-C}\index{Objective-C@\proglang{Objective-C}}</xsl:template>
-<xsl:template match="go">\proglang{Go}\index{GoObjective-C@\proglang{Go}}</xsl:template>
+<xsl:template match="go">\proglang{Go}\index{Go@\proglang{Go}}</xsl:template>
+<xsl:template match="rust">\proglang{Rust}\index{Rust@\proglang{Rust}}</xsl:template>
 
 
 <xsl:template match="api">API\index{API}</xsl:template>
