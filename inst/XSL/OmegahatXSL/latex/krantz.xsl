@@ -58,6 +58,8 @@
 
 <xsl:param name="code.line.numbers" select="true"></xsl:param>
 
+<xsl:param name="book.macros">bookMacros</xsl:param> 
+
 <!--
 <xsl:template match="*"><xsl:message>No template for <xsl:value-of select="local-name()"/> in <xsl:value-of select="ancestor::chapter/@id"/></xsl:message></xsl:template>
 -->
@@ -397,7 +399,7 @@ San Francisco Bay Area, December 2021\hfill
 \newcommand{\Extrachap}[1]{\chapter{#1}}
 
 
-\input{bookMacros}
+\input{<xsl:value-of select="$book.macros"/>}
 
 %%%%%%%%%%%%
 
