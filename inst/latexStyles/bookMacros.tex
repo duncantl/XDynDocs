@@ -1,0 +1,671 @@
+\usepackage[many]{tcolorbox}
+\usepackage{morewrites}
+\usepackage{minted}
+
+\input{latexSettings}
+  
+\newtcolorbox{tcboppbox}[1][]{
+  breakable,
+  enhanced,
+  arc=0pt,
+  boxrule=0pt,
+  outer arc=0pt,
+  /tcb/left=1pt,
+  /tcb/right=-10pt,
+  /tcb/top=1pt,
+  /tcb/bottom=-10pt,    
+  overlay unbroken={
+    \draw[#1] ([yshift=0pt]frame.north west) -- ++(0,-.25cm);
+    \draw[#1] ([xshift=.25cm]frame.north west) -- ++(-.25cm,0pt);
+    \draw[#1] ([yshift=0pt]frame.south east) -- ++(0,.25cm);
+    \draw[#1] ([xshift=-.25cm,yshift=0pt]frame.south east) -- ++(.25cm,0pt);
+  },
+  colback=white,
+  colframe=white % remove the faint dashed line around entire box.  
+}
+
+\DeclareDocumentEnvironment{MyFrame}{O{1cm}O{0.4pt}O{0.8cm}O{black}O{3}O{2ex}}
+ {\par\noindent\hskip-#3\bgroup\color{#4}%
+   \rule{#1}{#2}\hskip-\dimexpr#1-\dimexpr#1/#5-#2\relax%
+   \rule[-\dimexpr#1-\dimexpr#1/#5\relax]{#2}{#1}\egroup
+   \hfill\rlap{%
+     \bgroup\color{#4}%
+     \hskip-\dimexpr#1-#3\relax\rule{#1}{#2}%
+     \hskip-\dimexpr#1/#5\relax\rule[-\dimexpr#1-\dimexpr#1/#5\relax]{#2}{#1}%
+     \egroup
+   }%
+   \vskip-\dimexpr#1/#5+\dimexpr#1/#5-#6\relax%
+ }
+ {\par\nobreak\offinterlineskip\vskip-\dimexpr#1/#5+\dimexpr#1/#5-#6\relax\noindent%
+   \hskip-#3\bgroup\color{#4}%
+   \rule{#1}{#2}\hskip-\dimexpr#1-\dimexpr#1/#5-#2\relax%
+   \rule[-\dimexpr#1/#5-#2\relax]{#2}{#1}\egroup
+   \hfill\rlap{%
+     \bgroup\color{#4}%
+     \hskip-\dimexpr#1-#3\relax\rule{#1}{#2}%
+     \hskip-\dimexpr#1/#5\relax\rule[-\dimexpr#1/#5-#2\relax]{#2}{#1}%
+     \egroup
+   }%
+   \par
+}
+
+
+\def\proglang#1{\textsl{#1}}
+\def\acronym#1{\textsl{#1}}
+
+\def\hyperlabel#1{}
+
+\def\lcurly{\texttt{\{}}
+\def\lcurlyNew{\texttt{\{}}
+\def\rcurly{\texttt{\}}}
+
+% Colors - all choices are printer friendly
+% blue 117,112,179; magenta 231,41,138; orange 217,95,2;
+% brown 166,97,26; green 127,201,127; teal green 27,158, 119
+% purple 122,1,119; another green 0,136,55
+% Both color blind safe and color printer friendly:
+% blue-purple 117,112,179; magenta 197,27,138; orange 217,95,2;
+% brown 166,97,26; green 44,162,95; teal green 27,158, 119
+% purple 136,86,167; blue 31,120,180
+
+% Color-blind safe and photo-copyable from sequential palette
+% magenta 221,28,119
+% teal green 28,144,153
+% orange 217,95,14
+% green 49,163,84
+% purple 136,86,167 
+% blue 48,130,189
+
+% blue-purple 43,140,190
+% red-purple 197,27,138
+% brown 166,97,26
+
+% sequential BuGreen 44, 162, 95; Bupurple 136, 86, 167; Orange 230,85,13; 
+
+%\definecolor{highlight}{RGB}{186,18,105} % fuschia hsv=(329,0.823,40)
+\definecolor{highlight}{RGB}{0,0,0}
+
+\definecolor{margincolor}{RGB}{188,245,218}
+%\definecolor{margincolor}{RGB}{229,245,249}
+
+
+%\definecolor{soapcolor}{RGB}{31,120,180}%XXX FIX
+\definecolor{soapcolor}{RGB}{0,0,0}
+
+%\definecolor{htmlcolor}{RGB}{191,37,13}% Orange Red hsv=(8,87,40) 
+\definecolor{htmlcolor}{RGB}{0,0,0}
+\definecolor{xmlcolor}{RGB}{0,0,0}%XXX FIX
+%\definecolor{jsoncolor}{RGB}{194,10,96}%dark pink hsv=(332,90,40)
+\definecolor{jsoncolor}{RGB}{0,0,0}
+
+ % For C code
+%\definecolor{ccolor}{RGB}{31,120,180}%XXX FIX 
+%\definecolor{ccolor}{RGB}{128,128,0}
+\definecolor{ccolor}{RGB}{0,0,0}
+\definecolor{ccode}{RGB}{0,0,0}
+ 
+ % For MIME types
+%\definecolor{mimecolor}{RGB}{31,120,180}%XXX FIX
+\definecolor{mimecolor}{RGB}{0,0,0}
+
+
+\definecolor{code}{RGB}{0,0,0} 
+
+%\definecolor{routput}{RGB}{67,162,202} %{31,120,180}
+%\definecolor{routput}{RGB}{20,173,184} %Teal HSV=(184,80,40)
+\definecolor{routput}{RGB}{0,0,0} 
+%\definecolor{rcode}{RGB}{28,144,153} %{117,112,179}
+%\definecolor{rcode}{RGB}{15,130,138} %Teal HSV=(184,80,30)
+%%\definecolor{rcode}{RGB}{106,37,116} % 69,64,140}
+\definecolor{rcode}{RGB}{152,78,163} % 69,64,140} 
+\definecolor{rcolor}{RGB}{152,78,163} % 69,64,140} 
+%\definecolor{rcolor}{RGB}{28,144,153}
+%\definecolor{rcolor}{RGB}{15,130,138} %Teal HSV=(184,80,30)
+%\definecolor{rcolor}{RGB}{0,0,0} %Teal HSV=(184,80,30)
+%\definecolor{rformula}{RGB}{28,144,153}
+%\definecolor{rformula}{RGB}{15,130,138} %Teal HSV=(184,80,30)
+\definecolor{rformula}{RGB}{0,0,0}
+%\definecolor{rop}{RGB}{15,130,138}
+\definecolor{rop}{RGB}{0,0,0}
+
+\definecolor{sqlcolor}{RGB}{0,0,0}
+
+\definecolor{lldbcolor}{RGB}{255,0,0}
+
+%XXX  set properly
+%\definecolor{rcode}{RGB}{150,130,130} %Teal HSV=(184,80,30)
+
+%\definecolor{xpcolor}{RGB}{49,163,84} %{27,158,119}
+%\definecolor{xpcolor}{RGB}{151,67,2} %dark orange HSV=(26, 98, 30)
+\definecolor{xpcolor}{RGB}{0,0,0} 
+%\definecolor{xpexpr}{RGB}{49,163,84}
+%\definecolor{xpexpr}{RGB}{151,67,2} %dark orange HSV=(26, 98, 30)
+\definecolor{xpexpr}{RGB}{0,0,0}
+%\definecolor{xpcode}{RGB}{49,163,84}
+%\definecolor{xpcode}{RGB}{151,67,2} %dark orange HSV=(26, 98, 30)
+\definecolor{xpcode}{RGB}{0,0,0}
+
+%\definecolor{jscolor}{RGB}{231,41,138}
+%\definecolor{jscolor}{RGB}{106,37,116} % magenta hsv = (292, 52, 30)
+\definecolor{jscolor}{RGB}{0,0,0}
+
+%\definecolor{shcolor}{RGB}{166,97,26}
+%\definecolor{shcolor}{RGB}{139,95,14} %brown hsv = (39,0.825,30)
+\definecolor{shcolor}{RGB}{0,0,0}
+
+\definecolor{darkgrey}{RGB}{102,139,139}
+\definecolor{lightgray}{RGB}{211,211,211}
+
+%\definecolor{omgpkg}{RGB}{217,95,14}
+%\definecolor{omgpkg}{RGB}{13,140,102} % dark green hsv = (162,83,30)
+\definecolor{omgpkg}{RGB}{0,0,0}
+%\definecolor{biocpkg}{RGB}{117,112,179}
+%\definecolor{biocpkg}{RGB}{141,49,155} %magenta50 hsv = (292, 52,40)
+\definecolor{biocpkg}{RGB}{0,0,0}
+%\definecolor{rpkg}{RGB}{28,144,153}
+%\definecolor{rpkg}{RGB}{106,37,116} %magenta40 hsv=(292,52,30)
+\definecolor{rpkg}{RGB}{0,0,0}
+
+%\definecolor{xmlexpr}{RGB}{69,64,140} %purple60 hsv=(244, 0.374, 40)
+%\definecolor{xmlentity}{RGB}{69,64,140} %purple60 hsv=(244, 0.374, 40)
+%\definecolor{xmlns}{RGB}{69,64,140} %purple60 hsv=(244, 0.374, 40)
+%\definecolor{xmlnsprefix}{RGB}{69,64,140} %purple60 hsv=(244, 0.374,40)
+
+%\definecolor{pycolor}{RGB}{150,130,138} %Teal HSV=(184,80,30)
+\definecolor{pycolor}{RGB}{0,0,0} %Teal HSV=(184,80,30)
+
+\definecolor{lldbcolor}{RGB}{10,100,100}
+
+\definecolor{xmlexpr}{RGB}{0,0,0} 
+\definecolor{xmlentity}{RGB}{0,0,0} 
+\definecolor{xmlns}{RGB}{0,0,0} 
+\definecolor{xmlnsprefix}{RGB}{0,0,0} 
+
+%XXX - DEB - define a color for XSL.
+%\definecolor{xslcode}{RGB}{69,64,140} %purple60 hsv=(244, 0.374, 40)
+%\definecolor{xslfunc}{RGB}{69,64,140} %purple60 hsv=(244, 0.374, 40)
+%\definecolor{xslparam}{RGB}{69,64,140} %purple60 hsv=(244, 0.374, 40)
+%\definecolor{xsltemplate}{RGB}{69,64,140} %purple60 hsv=(244, 0.374, 40)
+
+\definecolor{xslcode}{RGB}{0,0,0}
+\definecolor{xslfunc}{RGB}{0,0,0}
+\definecolor{xslparam}{RGB}{0,0,0}
+\definecolor{xsltemplate}{RGB}{0,0,0}
+
+%\definecolor{httpColor}{RGB}{23,59,130} % blue hsv = (220, 70, 30)
+\definecolor{httpColor}{RGB}{0,0,0}
+%\definecolor{httpOp}{RGB}{23,59,130} % blue hsv = (220, 70, 30
+\definecolor{httpOp}{RGB}{0,0,0}
+%\definecolor{httpfieldname}{RGB}{23,59,130} % blue hsv = (220, 70, 30
+\definecolor{httpfieldname}{RGB}{0,0,0}
+%\definecolor{httpArgColor}{RGB}{23,59,130} % blue hsv = (220, 70, 30
+%\definecolor{httpArgColor}{RGB}{27,158,119}
+\definecolor{httpArgColor}{RGB}{0,0,0}
+
+%\definecolor{curlopt}{RGB}{23,59,130} % blue hsv = (220, 70, 30
+\definecolor{curlopt}{RGB}{0,0,0}
+
+%\definecolor{htmlformarg}{RGB}{102,102,102}
+\definecolor{htmlformarg}{RGB}{0,0,0}
+%\definecolor{htmlclass}{RGB}{102,102,102}
+\definecolor{htmlclass}{RGB}{0,0,0}
+
+%\definecolor{callout}{RGB}{20,20,184} % blue hsv=(240,80,40)
+\definecolor{callout}{RGB}{0,0,0}
+
+%\definecolor{ubiattr}{RGB}{202,202,202}
+\definecolor{ubiattr}{RGB}{0,0,0}
+
+
+%\definecolor{red}{RGB}{255,0,0}
+\definecolor{red}{RGB}{77,175,74}
+\definecolor{RED}{RGB}{255,0,0}
+\definecolor{rcomment}{RGB}{77,175,74}
+
+
+\definecolor{regexcolor}{RGB}{177,175,24} %XXX FIX
+
+
+
+
+\def\HTTPHeaderLine#1{\texttt{#1}}
+
+\def\FuncSummaryName#1{\underline{{\color{rcolor}#1}}}
+
+\def\ROption#1{\textsl{\color{rcolor}#1}}
+\def\Ropt#1{\ROption{#1}}
+\def\Rop#1{{\texttt{\color{rcolor}#1}}}
+\def\Rfunc#1{{\texttt{\color{rcolor}#1~()}}}
+\def\Renv#1{{\textsl{\color{rcolor}#1}}}
+\def\RreplaceFunc#1{{\texttt{\color{rcolor}#1\textless~-~()}}}
+% To change font we can specify the font family, fontencoding, fontseries, fontshape
+%  and then use \selectfont to switch to that font.
+\def\Rfunc#1{{\fontfamily{ppl}\selectfont\color{rcolor}#1()}}
+\def\Rvar#1{{\fontfamily{cmtt}\selectfont\color{rcolor}#1}}
+\def\Rexpr#1{{\fontfamily{cmtt}\selectfont\color{rcolor}#1}}
+\def\Rarg#1{{\fontfamily{cmtt}\selectfont\textsl{\color{rcolor}#1}}}
+\def\Rlevel#1{{\fontfamily{cmtt}\selectfont\textit{\color{rcolor}#1}}}
+\def\Rclass#1{{\color{rcolor}\protect\path{#1}}} % was \texttt
+\def\RAttr#1{{\fontfamily{cmtt}\selectfont\color{rcolor}#1}}
+\def\RErrorMsg#1{\texttt{\color{routput}#1}}
+
+
+\def\Cvar#1{{\fontfamily{cmtt}\selectfont\color{ccolor}#1}}
+\def\Carg#1{{\fontfamily{ppl}\selectfont\color{ccolor}#1}}
+\def\Cexpr#1{{\fontfamily{cmtt}\selectfont\color{ccolor}#1}}
+\def\Cint#1{{\fontfamily{cmtt}\selectfont\color{ccolor}int}}
+\def\Cdouble#1{{\fontfamily{cmtt}\selectfont\color{ccolor}double}}
+
+
+\def\CppClass#1{\textbf{\fontfamily{cmtt}\selectfont\color{ccolor}#1}}
+
+\def\Clib#1{{\fontfamily{cmtt}\selectfont\color{ccolor}#1}}
+
+
+
+\def\Pyexpr#1{{\fontfamily{cmtt}\selectfont\color{pycolor}#1}}
+\def\Pyclass#1{{\color{pycolor}\protect\path{#1}}} %
+\def\Pykeyword#1{\texttt{\color{pycolor}#1}}
+\def\Pyvar#1{{\fontfamily{cmtt}\selectfont\color{pycolor}#1}}
+\def\Pymodule#1{\textbf{\color{pycolor}#1}}
+
+
+\def\LLDBCmd#1{\textbf{\color{lldbcolor}#1}}
+
+\let\SamePkgColor\true
+\ifx\SamePkgColor\true
+\message{Using the same colors for packages}
+\def\OmgPackage#1{{\fontfamily{ptm}\selectfont\color{rpkg} #1}}
+\def\BioCPackage#1{{\fontfamily{phv}\selectfont\color{rpkg} #1}}
+\def\pkg#1{{\fontfamily{pcr}\selectfont\color{rpkg} #1}}
+\else
+\def\OmgPackage#1{{\fontfamily{phv}\selectfont\color{omgpkg} #1}}
+\def\BioCPackage#1{{\fontfamily{phv}\selectfont\color{biocpkg} #1}}
+\def\pkg#1{{\fontfamily{pag}\selectfont\color{rpkg} #1}}
+\fi
+
+\def\Sparam#1{\textsl{\color{rcolor}#1}}
+\def\Sarg#1{\Sparam{\color{rcolor}#1}}
+\def\S3class#1{\textit{\color{rcolor}#1}}
+\def\STRUE{\texttt{TRUE}}
+\def\SFALSE{\texttt{FALSE}}
+\def\Snull{\texttt{NULL}}
+\def\SNA{\texttt{NA}}
+\def\Rnan{\texttt{NaN}}
+
+\def\Rtype#1{\textsl{\color{rcolor}#1}}
+\def\RSym#1{\texttt{\color{rcolor}#1}}
+\def\REl#1{\texttt{\color{rcolor}#1}}
+\def\Rslot#1{\textsl{\color{rcolor}#1}}
+\def\Rkeyword#1{\texttt{\color{rcolor}#1}}
+\def\RErrorType#1{\textbf{\color{routput}#1}}
+
+\def\SchemaType#1{\texttt{#1}}
+
+\def\Ckeyword#1{\texttt{#1}}
+\def\Croutine#1{\texttt{#1}}
+\def\Ctype#1{\textsl{#1}}
+
+\def\JSMethod#1{\textsl{\color{jscolor}#1}}
+\def\JSmethod#1{\JSMethod{\color{jscolor}#1}}
+\def\JSfunc#1{\textsl{\color{jscolor}#1()}}
+\def\JSVar#1{\textsl{\color{jscolor}#1}}
+\def\JSvar#1{\JSVar{\color{jscolor}#1}}
+\def\JSfield#1{\texttt{\color{jscolor}#1}}
+\def\JSexpr#1{\textsl{\color{jscolor}#1}}
+\def\JSNull{\texttt{\color{jsoncolor}null}}
+
+\def\MarkupLang#1{\textit{#1}}
+\def\markuplang#1{\MarkupLang{#1}}
+
+\def\XMLTagTitle#1{\texttt{<\textsl{#1}>}}
+\def\XMLTag#1{\texttt{<\textsl{#1}>}}
+\def\XMLKeyword#1{\texttt{<\textsl{\color{xmlcolor}#1}>}}
+%\def\XMLTag#1{\textsl{\path{<#1>}}}
+\def\XMLname#1{\textbf{#1}}
+\def\XMLAttr#1{\textsl{#1}}
+\def\XMLattribute#1{\XMLAttr{#1}}
+
+\def\XMLexpr#1{\texttt{\color{xmlexpr}#1}}
+\def\XMLentity#1{\textsl{\color{xmlentity}\&#1;}}
+\def\XMLnamespace#1{{\color{xmlns}\path{#1}}}
+\def\XMLnamespaceprefix#1{{\color{xmlnsprefix}\texttt{#1}}}
+\def\XMLnsprefix#1{\XMLnamespaceprefix{#1}}
+
+\def\XSLtemplate#1{\texttt{\color{xslfunc}#1}}
+\def\XSLfunc#1{\texttt{\color{xslfunc}#1()}}
+\def\XSLfunction#1{\XSLfunc{#1}}
+\def\XSLparam#1{\textit{\color{xslfunc}#1}}
+
+\def\XPfunc#1{\texttt{\color{xpcolor}#1()}}
+\def\XPexpr#1{\texttt{\color{xpcolor}#1()}}
+\def\XPathAxis#1{\textbf{\color{xpcolor}#1}}
+\def\XPathNodeTest#1{\textbf{\color{xpcolor}#1}}
+\def\XPathTrue{\texttt{\color{xpcolor}true}}
+
+\def\DLL#1{\texttt{lib#1}}
+
+\def\JSONArray#1{\textsl{\color{jscolor}#1}}
+\def\JSONBool#1{\textsl{\color{jscolor}#1}}
+\def\JSONNumber#1{\textsl{\color{jscolor}#1}}
+\def\JSONString#1{\textsl{\color{jscolor}#1}}
+\def\JSONNull#1{\textsl{\color{jscolor}null}}
+\def\JSONExpr#1{\texttt{\color{jscolor}#1}}
+\def\JSONField#1{\texttt{\color{jscolor}#1}}
+
+\def\TeXCmd#1{\\#1}
+
+\def\protocol#1{\textbf{#1}}
+
+\def\ShFunc#1{\texttt{\color{shcolor}#1}}
+\def\ShellVar#1{\textsl{\color{shcolor}#1}}
+\def\ShellCmd#1{\texttt{\color{shcolor}#1}}
+\def\ShApp#1{\texttt{\color{shcolor}#1}}
+\def\ShFlag#1{\textit{\color{shcolor}#1}}
+
+\def\HTTPOp#1{\textbf{\color{curlopt}#1}}
+\def\HTTPHeaderFieldName#1{\textsl{\color{httpfieldname}#1}}
+
+\def\RCurlOpt#1{\textsl{\color{curlopt}#1}}
+
+\def\RestMethod#1{\textsl{#1}}
+\def\RestParam#1{\textsl{#1}}
+
+\def\XMLRPCMethod#1{\textsl{#1()}}
+
+\def\SOAPMethod#1{\textsl{\color{soapcolor}#1()}}
+
+\def\project#1{\textbf{#1}}
+
+
+\def\REST{\acronym{REST}}
+\def\NoSQL{\acronym{NoSQL}}
+\def\Solr{\textbf{Solr}}
+\def\CouchDB{\textbf{CouchDB}}
+
+\def\WADL{\acronym{WADL}}
+\def\WSDL{\acronym{WSDL}}
+\def\DCOM{\acronym{DCOM}}
+\def\SSL{\acronym{SSL}}
+\def\CSS{\proglang{CSS}}
+\def\OAuth{\textit{OAuth}}
+\def\OAuthTwo{\textit{OAuth2}}
+\def\PNG{PNG}
+\def\Tiff{Tiff}
+\def\JPEG{JPEG}
+\def\Sweave{Sweave}
+\def\knitr{knitr}
+\def\pandoc{pandoc}
+
+\def\HTMLFormArg#1{\texttt{\color{htmlformarg}#1}}
+
+\def\XSLParamName#1{\texttt{\color{xslparam}#1}}
+\def\XSLTemplateName#1{\textsl{\color{xsltemplate}#1}}
+
+\usepackage{fancyvrb}
+\usepackage{csquotes}
+
+\newenvironment{CodeChunk}{}{}
+
+% Can add fontsize=\small
+\DefineVerbatimEnvironment{Code}{Verbatim}{}
+\DefineVerbatimEnvironment{CodeInput}{Verbatim}{fontshape=sl}
+\DefineVerbatimEnvironment{CodeOutput}{Verbatim}{}
+
+\DefineVerbatimEnvironment{Rfunction}{Verbatim}{formatcom=\color{rcolor}}
+\DefineVerbatimEnvironment{Rplot}{Verbatim}{formatcom=\color{rcolor}}
+
+%\DefineVerbatimEnvironment{Rcode}{Verbatim}{formatcom=\color{rcode}}
+%\DefineVerbatimEnvironment{ROutput}{Verbatim}{formatcom=\color{routput}}
+
+\DefineVerbatimEnvironment{RcodeX}{Verbatim}{formatcom=\color{rcode},numbers=left}
+\DefineVerbatimEnvironment{ROutputX}{Verbatim}{formatcom=\color{routput}}
+
+% http://tex.stackexchange.com/questions/184019/how-to-suppress-extra-vertical-space-before-after-fancy-verbatim-environments
+\ifUseMinted
+\newenvironment{Rcode}
+  {\VerbatimEnvironment
+   \par\vspace{\dimexpr-1\topsep-2\partopsep\relax}
+   \begin{minted}[numbers=left]{R}}    %\RcodeX}
+   {\end{minted}\vskip1sp}
+   %  {\endRcodeX\vskip1sp}
+\else
+\newenvironment{Rcode}
+  {\VerbatimEnvironment
+   \par\vspace{\dimexpr-1\topsep-2\partopsep\relax}
+    \RcodeX}
+  {\endRcodeX\vskip1sp}
+\fi   
+\newenvironment{ROutput}
+  {\VerbatimEnvironment
+ %  \par\ifdim\lastskip=1sp\vspace{\dimexpr-2\topsep-2\partopsep\relax}\fi
+%  \par\vspace{\dimexpr-2\topsep-2\partopsep\relax}
+    \par\ifdim\lastskip=1sp\vspace{\dimexpr-2\topsep-2\partopsep\relax}\fi
+    \ROutputX}
+  {\endROutputX\vskip-.9\baselineskip}
+
+
+\DefineVerbatimEnvironment{XPathCode}{Verbatim}{formatcom=\color{xpcolor}}
+
+\def\MarginLangBox#1{\colorbox{margincolor}{#1}}
+
+\DefineVerbatimEnvironment{XMLCode}{Verbatim}{formatcom=\color{xmlcolor}}
+\newenvironment{XMLCodePar}{\marginnote{\MarginLangBox{XML}}[1.75\baselineskip]\ignorespaces}{}
+
+\DefineVerbatimEnvironment{SVGCode}{Verbatim}{formatcom=\color{xmlcolor}}
+\newenvironment{SVGCodePar}{\marginnote{\MarginLangBox{SVG}}[1.75\baselineskip]\ignorespaces}{}
+\DefineVerbatimEnvironment{KMLCode}{Verbatim}{formatcom=\color{xmlcolor}}
+\newenvironment{KMLCodePar}{\marginnote{\MarginLangBox{KML}}[1.75\baselineskip]\ignorespaces}{}
+
+\DefineVerbatimEnvironment{JSONCode}{Verbatim}{formatcom=\color{jsoncolor}}
+\newenvironment{JSONCodePar}{\marginnote{\MarginLangBox{JSON}}[1.75\baselineskip]\ignorespaces}{}
+\DefineVerbatimEnvironment{HTMLCode}{Verbatim}{formatcom=\color{htmlcolor}}
+\newenvironment{HTMLCodePar}{\marginnote{\MarginLangBox{HTML}}[1.75\baselineskip]\ignorespaces}{}
+
+\DefineVerbatimEnvironment{CCode}{Verbatim}{formatcom=\color{ccolor}}
+\DefineVerbatimEnvironment{CRoutine}{Verbatim}{formatcom=\color{ccolor}}
+\newenvironment{CRoutinePar}{\marginnote{\MarginLangBox{C}}[1.75\baselineskip]\ignorespaces}{}
+
+\DefineVerbatimEnvironment{PyCode}{Verbatim}{formatcom=\color{ccolor}}
+\newenvironment{PyCodePar}{\marginnote{\MarginLangBox{Python}}[1.75\baselineskip]\ignorespaces}{}
+
+\DefineVerbatimEnvironment{ShCode}{Verbatim}{formatcom=\color{shcolor}}
+\DefineVerbatimEnvironment{ShOutput}{Verbatim}{formatcom=\color{shcolor}}
+\newenvironment{ShCodePar}{\marginnote{{\MarginLangBox{Shell}}}[1.75\baselineskip]\ignorespaces}{}
+
+
+
+\DefineVerbatimEnvironment{JSCode}{Verbatim}{formatcom=\color{jscolor}}
+\newenvironment{JSCodePar}{\marginnote{\MarginLangBox{JavaScript}}[1.75\baselineskip]\ignorespaces}{}
+
+\DefineVerbatimEnvironment{SqlOutput}{Verbatim}{formatcom=\color{sqlcolor}}
+\DefineVerbatimEnvironment{SQLCode}{Verbatim}{formatcom=\color{sqlcolor}}
+% one optional argument and it defaults to 1.5
+\newenvironment{SQLCodePar}[1][2]{\marginnote{\MarginLangBox{SQL}}[1.75\baselineskip]\ignorespaces}{}
+
+
+\DefineVerbatimEnvironment{LLDBOutput}{Verbatim}{formatcom=\color{lldbcolor}}
+\DefineVerbatimEnvironment{LLDBCode}{Verbatim}{formatcom=\color{lldbcolor}}
+\newenvironment{LLDBCodePar}[1][2]{\marginnote{\MarginLangBox{LLDB}}[1.75\baselineskip]\ignorespaces}{}
+
+
+\DefineVerbatimEnvironment{HTTPCode}{Verbatim}{formatcom=\color{httpColor}}
+\newenvironment{HTTPCodePar}{\marginnote{{\Large HTTP}}[1.75\baselineskip]\ignorespaces}{}
+
+\DefineVerbatimEnvironment{VerbatimCode}{Verbatim}{fontshape=sl}
+\DefineVerbatimEnvironment{RError}{Verbatim}{}
+\DefineVerbatimEnvironment{RWarning}{Verbatim}{}
+
+\DefineVerbatimEnvironment{LaTeXCode}{Verbatim}{fontshape=sl}
+
+\DefineVerbatimEnvironment{XSLcode}{Verbatim}{formatcom=\color{xslcode}}
+
+\newcounter{sExampleCounter}[chapter]
+\def\theExampleCounter{\thechapter-\arabic{sExampleCounter}}
+\renewcommand{\thesExampleCounter}{\thechapter-\arabic{sExampleCounter}}
+\def\ResetChapter{\setcounter{sExampleCounter}{0}}
+
+\def\HRule{\leavevmode\hfill{\rule{.5\textwidth}{1pt}}\hfill}
+% replace \nopagebreak with \nobreak\@afterheading
+% http://tex.stackexchange.com/questions/16729/defining-a-new-environment-without-spreading-over-two-pages
+
+\newenvironment{Example}[1]{\refstepcounter{sExampleCounter}\vskip .5em{{\parindent=0pt\textit{Example~\thesExampleCounter} \textsl{#1}}}\hfill\break\vskip -1em\nopagebreak}{\widowpenalty=10000\endgraf\penalty10000\ignorespacesafterend\hfill$\blacksquare$}  % \leavevmode\vskip1em
+
+%\newenvironment{Example}[1]{\refstepcounter{sExampleCounter}\vskip .5em{{\parindent=0pt\textit{Example~\thesExampleCounter} \textsl{#1}}}\hfill\break\vskip -1em\nopagebreak}{\widowpenalty=10000\endgraf\penalty10000\ignorespacesafterend\samepage\nopagebreak\HRule\vspace{1em}\ignorespacesafterend}  % \leavevmode\vskip1em
+
+%\newenvironment{Example}[1]{\refstepcounter{sExampleCounter}\par\vskip .5em
+%{{\parindent=0pt\textit{Example~\thesExampleCounter} \textsl{#1}}}\hfill\break
+%\vskip-1em\penalty\widowpenalty\nopagebreak}
+%{\widowpenalty=10000\endgraf\penalty10000\ignorespacesafterend\samepage\nopagebreak\HRule\vspace{0em}\ignorespacesafterend}  % \leavevmode\vskip1em
+
+%\newenvironment{Example}[1]{%
+%\refstepcounter{sExampleCounter}%
+%\vskip .5em{{\parindent=0pt\textit{Example~\thesExampleCounter} \textsl{#1}}}\hfill\break%
+%\vskip -1em\nopagebreak}{\widowpenalty=10000\endgraf\penalty10000\ignorespacesafterend\samepage\nopagebreak\HRule\vspa%ce{0em}\ignorespacesafterend}  % \leavevmode\vskip1em
+
+
+
+\mdfdefinestyle{QASidebar}{roundcorner=10pt}
+
+%\newenvironment{sidebar}{\begin{svgraybox}}{\end{svgraybox}}
+\definecolor{lightgray40}{RGB}{220,220,220}
+\newenvironment{sidebar}{\begin{mdframed}[backgroundcolor=lightgray40,skipabove=12pt,skipbelow=10pt,innertopmargin=10pt,innerbottommargin=10pt,splitbottomskip=10pt,splittopskip=10pt]}{\end{mdframed}}
+%\newmdenv[backgroundcolor=yellow]{sidebar}
+
+
+\newenvironment{Alternative}{\begin{mdframed}[frametitle={\colorbox{white}{\space Alternative Approach\space}},innertopmargin=10pt,frametitleaboveskip=-\ht\strutbox,frametitlealignment=\center,roundcorner=10pt,backgroundcolor=lightgray40,skipabove=12pt,skipbelow=10pt,splitbottomskip=0pt,splittopskip=0pt]}{\end{mdframed}}
+%\newenvironment{Alternative}{\begin{mdframed}[frametitle={\colorbox{white}{\space Alternative Approach\space}},innertopmargin=10pt,frametitleaboveskip=-\ht\strutbox,frametitlealignment=\center,roundcorner=10pt,backgroundcolor=lightgray40,skipabove=12pt,skipbelow=10pt,splitbottomskip=0pt,splittopskip=0pt]}{\end{mdframed}}
+
+%\newenvironment{CropFrame}{\par\hfill\rlap{\kern-0.5cm\rule{1cm}{0.4pt}\kern-0.2cm\rule[-0.8cm]{0.4pt}{1cm}}\vskip-\baselineskip}%
+%{\par\kern-0.5cm\hskip-0.9cm\rule{0.4pt}{1cm}\kern-0.2cm\rule[0.2cm]{1cm}{0.4pt}\par}
+
+\DeclareDocumentEnvironment{CropFrame}{O{1cm}O{0.4pt}O{0.8cm}O{black}O{3}O{2ex}}
+  {\par\hfill\rlap{%
+      \bgroup\color{#4}%
+      \hskip-\dimexpr#1-#3\relax\rule{#1}{#2}%
+      \hskip-\dimexpr#1/#5\relax\rule[-\dimexpr#1-\dimexpr#1/#5\relax]{#2}{#1}%
+      \egroup
+    }%
+   \vskip-\dimexpr#1/#5+\dimexpr#1/#5-#6\relax%
+  }
+  {\par\nobreak\offinterlineskip\vskip-\dimexpr#1/#5+\dimexpr#1/#5-#6\relax\noindent%
+      \hskip-#3\bgroup\color{#4}%
+      \rule{#1}{#2}\hskip-\dimexpr#1-\dimexpr#1/#5-#2\relax%
+      \rule[-\dimexpr#1/#5-#2\relax]{#2}{#1}\egroup\par
+  }
+
+
+%%%%%%%%XXXX Fix this. See dbk_callout.sty
+\def\conum#1{{\color{blue}#1}}
+%\def\Callout#1{{\textsl{\color{callout}#1}}}
+\def\Callout#1#2{\hyperref[#2]{\circled{#1}}}
+%\def\Callout#1#2{\circled{#1}}
+%\renewcommand{\Callout}[1]{\circled{#1}}
+
+\def\cplusplus{C++}
+
+%\def\JSONArray#1{\textsl{\verb|#1|}}
+
+
+\def\HTMLClass#1{\texttt{\color{htmlclass}#1}}
+
+\def\httpArg#1{\texttt{\color{httpArgColor}#1}}
+
+\def\UbiAttr#1{\texttt{\color{ubiattr}#1}}
+
+
+% @DEB: Add a color, etc. if you want
+\def\FileExt#1{\textbf{#1}}
+
+%\def\href#1#2{#1(\texttt{#1})}
+
+
+\def\SQLColumn#1{\textit{#1}}
+\def\SQLVar#1{\textbf{#1}}
+\def\SQLArg#1{\textsl{#1}}
+\def\SQLOp#1{\texttt{#1}}
+\def\SQLTable#1{\texttt{#1}}
+\def\SQLFun#1{\textsl{#1}()}
+
+\def\SQLExpr#1{\textsl{#1}}
+
+\def\SQLKeyword#1{\texttt{\textsl{#1}}}
+
+% XXX Temporary!
+%\definecolor{sqlcode}{RGB}{128,128,128}
+\definecolor{sqlcode}{RGB}{0,0,0}
+
+\DefineVerbatimEnvironment{SQLcode}{Verbatim}{formatcom=\color{sqlcode}}
+
+
+% remove this when we get to user hyperref package.
+\def\nolinkurl#1{\textsl{#1}}
+
+
+%\newenvironment{exercisePar}{\marginnote{\includegraphics{Images/help_16.png}}[\baselineskip]\ignorespaces}{}
+%  https://www.iconfinder.com/icons/105209/help_mark_query_question_support_icon#size=32
+%  1420432165_Question_mark_48.png
+%\newenvironment{exercisePar}{\marginnote{\nopagebreak\vskip-15pt{\includegraphics{MarginImages/questionMark_48.png}}\nopagebreak}[\baselineskip]\ignorespaces\noindent}{}
+%\newenvironment{exercisePar}{\marginnote{\nopagebreak\includegraphics{MarginImages/questionMark_48.png}}\ignorespaces\noindent\nopagebreak}{}
+\newenvironment{exercisePar}{}{}
+
+%\reversemarginpar\marginpar{\begin{flushright}\includegraphics[width=24px]{atencion.png}\end{flushright}} 
+
+
+\def\llvm{LLVM}
+\def\lldb{LLDB}
+\def\FORTRAN{\proglang{FORTRAN}}
+
+\def\Julia{\proglang{Julia}}
+\def\LISP{\proglang{LISP}}
+\def\CXXR{\textbf{CXXR}}
+\def\FastR{\textbf{FastR}}
+
+\def\Cnull{\texttt{NULL}}
+
+
+
+
+\def\Lucene{\textbf{Lucene}}
+\def\Hadoop{Hadoop}
+
+
+%%\def\R{\textit{R}}
+
+\def\RegEx#1{\texttt{\color{regexcolor}#1}}
+
+\def\JSEl#1{\texttt{\color{jscolor}#1}}
+
+
+\def\SO{\textit{StackOverflow}}
+
+\def\Autoconf{\textit{Autoconf}}
+\def\CMake{\textit{CMake}}
+
+\def\Make{\textit{Make}}
+
+\def\BigQuery{\textsl{BigQuery}\index{BigQuery}}
+\def\Google{\textsl{Google}}
+\def\Amazon{\textsl{Amazon}}
+\def\Facebook{\textsl{Facebook}}
+
+
+\def\SQLCmd#1{\textbf{#1}}
+\def\SQLiteCmd#1{\textbf{#1}}
+\def\SQLiteParam#1{\textit{#1}}
+
+\def\SQLExec#1{\textbf{#1}}
+
+\parindent=0pt
+\parskip=5pt
+%1.2\parskip
+
+
+\def\Cfield#1{\textsl{#1}}
+\def\CPreMacro#1{\textbf{#1}}
+
+
+\def\Rnla{\Rkeyword{$<<-$}}
+
+
+\input{acronymsGlossaryDefs}
