@@ -51,6 +51,9 @@
 <xsl:template match="ftp"><acronym def="File Transfer Protocol" index="true">FTP</acronym></xsl:template>
 <xsl:template match="java"><proglang>Java</proglang></xsl:template>
 
+<xsl:template match="posix|gpu|simd|jit"><acronym><xsl:value-of select="local-name(.)"/></acronym></xsl:template>
+
+
 
 <xsl:include href="shorthand.xsl"/>
 <xsl:include href="glossaryTable.xsl"/>
