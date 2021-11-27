@@ -30,25 +30,26 @@
 <!-- Should this <format><acronym>..   or <acronym><format> -->
 <xsl:template match="JSON|json"><acronym def="JavaScript Object Notation"><markupLang>JSON</markupLang></acronym></xsl:template>
 <!--<xsl:template match="xpath"><acronym def="XPath"><xpath/></acronym></xsl:template>-->
-<xsl:template match="xinclude"><acronym def="XInclude"><markupLang>XInclude</markupLang></acronym></xsl:template>
-<xsl:template match="markdown"><acronym def="markdown"><markupLang>Markdown</markupLang></acronym></xsl:template>
+<xsl:template match="xinclude"><markupLang>XInclude</markupLang></xsl:template>
+<xsl:template match="markdown"><markupLang>Markdown</markupLang></xsl:template>
 <!-- <xsl:template match="xsl"><acronym def="eXtensible Stylesheet Language" index="true"><xsl/></acronym></xsl:template>-->
-<xsl:template match="c"><acronym def="C programming language"><proglang>C</proglang></acronym></xsl:template>
-<xsl:template match="cpp"><acronym def="C++ programming language"><proglang>C++</proglang></acronym></xsl:template>
-<xsl:template match="sql"><acronym def="Structured Query Language"><proglang>SQL</proglang></acronym></xsl:template>
-<xsl:template match="oracle"><acronym def="Oracle Database System">Oracle</acronym></xsl:template>
-<xsl:template match="mysql"><acronym def="MySQL Database System">MySQL</acronym></xsl:template>
-<xsl:template match="postgres"><acronym def="Postgres Database System">Postgres</acronym></xsl:template>
+<xsl:template match="c"><proglang>C</proglang></xsl:template>
+<!-- leave the C++ to be expanded by HTML/LaTeX. But need to deal with the C++ in the @def -->
+<xsl:template match="cpp"><cpp/></xsl:template>
+<xsl:template match="sql"><acronym def="Structured Query Language">SQL</acronym></xsl:template>
+<xsl:template match="oracle">Oracle</xsl:template>
+<xsl:template match="mysql">MySQL</xsl:template>
+<xsl:template match="postgres">Postgres</xsl:template>
 <xsl:template match="ecmascript"><proglang><acronym def="ECMAScript">ECMAScript</acronym></proglang></xsl:template>
-<xsl:template match="flash"><proglang><acronym def="Flash">Flash</acronym></proglang></xsl:template>
-<xsl:template match="actionscript"><proglang><acronym def="ActionScript">ActionScript</acronym></proglang></xsl:template>
+<xsl:template match="flash"><proglang>Flash</proglang></xsl:template>
+<xsl:template match="actionscript"><proglang>ActionScript</proglang></xsl:template>
 <xsl:template match="rss"><acronym def="Real Simple Syndication" index="true">RSS</acronym></xsl:template>
-<xsl:template match="atom"><acronym def="">Atom</acronym></xsl:template>
+<xsl:template match="atom">Atom</xsl:template>
 <xsl:template match="kml"><acronym def="Keyhole Markup Language" index="true"><markupLang>KML</markupLang></acronym></xsl:template>
 <xsl:template match="http"><acronym def="HyperText Transfer Protocol" index="true">HTTP</acronym></xsl:template>
 <xsl:template match="https"><acronym def="Secure HyperText Transfer Protocol" index="true">HTTPS</acronym></xsl:template>
 <xsl:template match="ftp"><acronym def="File Transfer Protocol" index="true">FTP</acronym></xsl:template>
-<xsl:template match="java"><proglang><acronym def="Java">Java</acronym></proglang></xsl:template>
+<xsl:template match="java"><proglang>Java</proglang></xsl:template>
 
 
 <xsl:include href="shorthand.xsl"/>
