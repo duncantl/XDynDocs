@@ -21,7 +21,7 @@
 <!-- <xsl:message>Adding space after <xsl:value-of select="$codeName"/> for <xsl:value-of select="local-name(following-sibling::*[1] | following-sibling::text()[1])"/></xsl:message> -->
 <xsl:template name="makeCodeEnv">
 <xsl:param name="lang">text</xsl:param>
-<xsl:param name="codeName">Verbatim</xsl:param>\begin<xsl:choose><xsl:when test="$use.minted"><xsl:if test="@size">[fontsize=\<xsl:value-of select="@size"/>]</xsl:if>{minted}{<xsl:value-of select="$lang"/>}</xsl:when><xsl:otherwise>{<xsl:value-of select="$codeName"/>}<xsl:if test="@size">[fontsize=\<xsl:value-of select="@size"/>]</xsl:if></xsl:otherwise></xsl:choose>
+<xsl:param name="codeName">Verbatim</xsl:param>\begin<xsl:choose><xsl:when test="$use.minted">{minted}<xsl:if test="@size">[fontsize=\<xsl:value-of select="@size"/>]</xsl:if>{<xsl:value-of select="$lang"/>}</xsl:when><xsl:otherwise>{<xsl:value-of select="$codeName"/>}<xsl:if test="@size">[fontsize=\<xsl:value-of select="@size"/>]</xsl:if></xsl:otherwise></xsl:choose>
 <xsl:text>&#10;</xsl:text>
 <xsl:call-template name="trim-newlines"><xsl:with-param name="contents" select="string(.)"/></xsl:call-template>
 \end{<xsl:choose><xsl:when test="$use.minted">minted</xsl:when><xsl:otherwise><xsl:value-of select="$codeName"/></xsl:otherwise></xsl:choose>}<xsl:call-template name="forceBreakIf"/></xsl:template>
