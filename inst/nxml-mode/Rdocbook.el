@@ -301,9 +301,12 @@ This deals with a CDATA escape and extracts the contents from that."
   (interactive  (list (or current-prefix-arg nil)))
   (r-insert-node "r:expr" nil) 
   (if evalFalse 
-      (progn (backward-char) 
+      (progn ; (r-insert-attribute-value "eval" "false")
+    	(backward-sexp)
+	(search-forward "<r:expr")
              (insert-attribute "eval" "false") 
-             (forward-char))))
+	     (search-forward "</r:expr>")
+	)))
 
 (defun r-insert-class (s3) 
    "" 
@@ -478,6 +481,9 @@ This deals with a CDATA escape and extracts the contents from that."
                                    (r-insert-node "para" nil t)
                                  ))
 
+  
+  (define-key map  "\C-l\C-l" '(lambda () ""  (interactive "*") (r-insert-node "literal" nil)))
+  
   (define-key map  "\C-qo" '(lambda () ""  (interactive "*") (r-insert-node "r:op" nil)))
   (define-key map  "\C-qt" '(lambda () ""  (interactive "*") (insert "<r:true/>")))
   (define-key map  "\C-qT" '(lambda () ""  (interactive "*") (insert "<r:true/>")))
@@ -687,6 +693,7 @@ This deals with a CDATA escape and extracts the contents from that."
 (puthash (intern "gh") "http://github.com" rxml-namespaces)
 (puthash (intern "as") "http://www.assemblycode.org" rxml-namespaces)
 (puthash (intern "wasm") "http://webassembly.org" rxml-namespaces)
+(puthash (intern "cpre") "http://www.preprocessor.org" rxml-namespaces)
 
 
 (defun r-nxml-insert-at-namespace (prefix val)
@@ -722,7 +729,7 @@ This deals with a CDATA escape and extracts the contents from that."
 )
 
 (defun r-insert-attribute-value (name val)
-   "insert an id=val attribute in the current node"
+   "insert an name=val attribute in the current node"
   (interactive "sEnter value for node id: ")
   (save-excursion
      (nxml-backward-up-element)
@@ -820,6 +827,8 @@ This deals with a CDATA escape and extracts the contents from that."
    (interactive)
    (insert "<author><firstname></firstname><surname></surname></author>"))
 
+
+(setq nxml-child-indent 0)
 
 (provide 'Rdocbook)
 
