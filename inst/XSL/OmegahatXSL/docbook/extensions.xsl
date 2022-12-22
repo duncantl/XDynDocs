@@ -187,6 +187,7 @@
 
 <xsl:template match="keywords/text()"/>
 
+<xsl:template match="ram"><acronym>RAM</acronym></xsl:template>
 
 <xsl:template match="matt|dtl"><xsl:message><xsl:value-of select='local-name()'/></xsl:message></xsl:template>
 <!-- 
