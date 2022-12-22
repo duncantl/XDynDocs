@@ -4,6 +4,7 @@
 	xmlns:omg="http://www.omegahat.org"
 	xmlns:bioc="http://www.bioconductor.org"
 	xmlns:gh="http://github.com"
+        xmlns:sh="http://www.shell.org"
         version="1.0">
 
 
@@ -122,7 +123,7 @@
 <xsl:template match="dll|dso|lib">\DLL{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="dso">\DSO{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="proj">\Project{<xsl:apply-templates/>}</xsl:template>
-<xsl:template match="directory|dir">\texttt{<xsl:apply-templates/>/}</xsl:template>
+<xsl:template match="sh:dir|directory|dir">\texttt{<xsl:apply-templates/>/}</xsl:template>
 
 
 <xsl:template match="gh:repos[@url]">\GithubRepos2{<xsl:apply-templates/>}{<xsl:apply-templates select="@url"/>}</xsl:template>

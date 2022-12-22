@@ -15,7 +15,10 @@
 <!-- <xsl:message>sh:output: <xsl:apply-templates/></xsl:message>  -->
 <xsl:template match="sh:output">\begin{ShOutput}<xsl:if test="@size">[fontsize=\<xsl:value-of select="@size"/>]</xsl:if><xsl:apply-templates/>\end{ShOutput}</xsl:template>
 
-<xsl:template match="sh:var">\ShellVar{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="sh:error">\begin{ShError}<xsl:if test="@size">[fontsize=\<xsl:value-of select="@size"/>]</xsl:if><xsl:apply-templates/>\end{ShError}</xsl:template>
+
+
+<xsl:template match="sh:var|sh:env">\ShellVar{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="sh:cmd|sh:script">\ShellCmd{<xsl:apply-templates/>}</xsl:template>
 
 <xsl:template match="sh:exec">\textsl{<xsl:apply-templates/>}</xsl:template>
@@ -25,5 +28,7 @@
 <xsl:template match="sh:expr">\texttt{<xsl:apply-templates/>}</xsl:template>
 
 <xsl:template match="sh:op">\textbf{<xsl:apply-templates/>}</xsl:template>
+
+
 
 </xsl:stylesheet>
