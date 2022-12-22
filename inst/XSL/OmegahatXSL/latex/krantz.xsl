@@ -441,7 +441,7 @@ San Francisco Bay Area, December 2021\hfill
 
 
 <xsl:template match="programlisting[@contentType='JSON' or @contentType='json']">
-<xsl:call-template name="makeCodeEnv"><xsl:with-param name="codeName">JSONCode</xsl:with-param></xsl:call-template>
+<xsl:call-template name="makeCodeEnv"><xsl:with-param name="lang">json</xsl:with-param><xsl:with-param name="codeName">JSONCode</xsl:with-param></xsl:call-template>
 </xsl:template>
 
 <xsl:template match="programlisting[@contentType='HTTP' or @contentType='http']">
@@ -1277,7 +1277,7 @@ Q. \theExerciseCounter{} <xsl:if test="@id">\label{<xsl:value-of select="@id"/>}
 <xsl:template match="sqlite:cmd">\SQLiteCmd{<xsl:apply-templates/>}</xsl:template>
 <xsl:template match="sqlite:param">\SQLiteParam{<xsl:apply-templates/>}</xsl:template>
 
-<xsl:template match="py:mod">\PyModule{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="py:mod">\Pymodule{<xsl:apply-templates/>}</xsl:template>
 
 <xsl:template match="lldb:cmd">\LLDBCmd{<xsl:apply-templates/>}</xsl:template>
 
@@ -1305,8 +1305,7 @@ Q. \theExerciseCounter{} <xsl:if test="@id">\label{<xsl:value-of select="@id"/>}
   <xsl:text>}</xsl:text>
 </xsl:template>
 
-<xsl:template match="r:class[. = '{'] | literal[. = '{']">$\lbrace$
-</xsl:template>
+<xsl:template match="r:class[. = '{'] | literal[. = '{']">$\lbrace$ </xsl:template>
 
 <xsl:template match="moved"/>
 
