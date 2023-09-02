@@ -176,6 +176,9 @@
 <xsl:template match="fix|fixme"><xsl:if test="$show.fix"><xsl:message>&lt;fix&gt; ***FIXME*** <xsl:value-of select="ancestor::chapter/@id"/>: <xsl:if test="$show.fix.content"><xsl:value-of select="normalize-space(.)"/></xsl:if></xsl:message></xsl:if><fix/></xsl:template>
 <xsl:template match="fixCode"><xsl:message>&lt;fixCode&gt; Fix code</xsl:message>%</xsl:template>
 
+
+<xsl:template match="move"><xsl:if test="$show.fix"><xsl:message>&lt;fix&gt; ***MOVE CONTENT*** <xsl:value-of select="ancestor::chapter/@id"/>: <xsl:if test="$show.fix.content"><xsl:value-of select="normalize-space(.)"/></xsl:if></xsl:message></xsl:if><fix/></xsl:template>
+
 <xsl:template match="finish"><xsl:message>Finish!!!</xsl:message></xsl:template>
 
 <xsl:template match="fo">FO</xsl:template>
@@ -203,4 +206,6 @@
 <xsl:template match="api"><acronym id="api" defn="application programming interface">API</acronym></xsl:template>
 <!-- -->
 
+
+<xsl:template match="ranon|r:anon"><r:func>&lt;Anonymous&gt;</r:func></xsl:template>
 </xsl:stylesheet>
