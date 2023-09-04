@@ -304,9 +304,29 @@ This deals with a CDATA escape and extracts the contents from that."
       (progn ; (r-insert-attribute-value "eval" "false")
     	(backward-sexp)
 	(search-forward "<r:expr")
-             (insert-attribute "eval" "false") 
-	     (search-forward "</r:expr>")
+        (insert-attribute "eval" "false") 
+	(search-forward "</r:expr>")
 	)))
+
+(defun r-insert-rexpr1 (evalFalse)
+  "insert r:expr node, optionally with eval='false'"
+  (interactive  (list (or current-prefix-arg nil)))
+  (let ((p1 (region-beginning))
+	(p2 (region-end))
+	(has-region (use-region-p)))
+    
+    (r-insert-node "r:expr" nil) 
+    (if evalFalse 
+	(progn ; (r-insert-attribute-value "eval" "false")
+	  (if (eq p1 p2)
+	      (r-insert-attribute-value "eval" "false")
+    	    (progn (backward-sexp)
+		   (search-forward "<r:expr")
+		   (insert-attribute "eval" "false") 
+		   (search-forward "</r:expr>")
+		   ))))))
+
+
 
 (defun r-insert-class (s3) 
    "" 
@@ -526,7 +546,7 @@ This deals with a CDATA escape and extracts the contents from that."
   (define-key map  "\C-co" '(lambda () ""  (interactive "*") (r-insert-node "c:op" nil)))
   (define-key map  "\C-cs" '(lambda () ""  (interactive "*") (r-insert-node "c:struct" nil)))  
   (define-key map  "\C-ch" '(lambda () ""  (interactive "*") (r-insert-node "c:header" nil)))
-  (define-key map  "\C-c\C-c" '(lambda (omg) ""  (interactive "P") (r-insert-node (if omg "c:routine" "c:code") nil t))) 
+  (define-key map  "\C-c\C-c" '(lambda (omg) ""  (interactive "P") (r-insert-node (if omg "c:routine" "c:code") t t nil))) 
 
 ; Put in a <programlisting> but add white space to avoid reformatting messing it up.
   (define-key map  "\C-x\C-p" '(lambda () ""  (interactive "*") (insert "\n") (r-insert-node "programlisting" t t nil) (save-excursion (forward-sexp) (goto-char (nxml-token-after))  (goto-char (nxml-token-after))  (insert "\n\n"))))
@@ -571,7 +591,7 @@ This deals with a CDATA escape and extracts the contents from that."
   (define-key map "\C-lv" '(lambda () "" (interactive "*") (r-insert-node "sh:env" nil)))
   (define-key map "\C-la" '(lambda () "" (interactive "*") (r-insert-node "sh:arg" nil)))
   (define-key map "\C-xt" '(lambda () "" (interactive "*") (r-insert-node "xml:tag" nil)))
-;  (define-key map "\C-xa" '(lambda () "" (interactive "*") (r-insert-node "xml:attr" nil)))
+  (define-key map "\C-xa" '(lambda () "" (interactive "*") (r-insert-node "xml:attr" nil)))
 
   (define-key map "\C-l\C-o" '(lambda (cdata) "" (interactive "P") (r-insert-node "sh:output" (not cdata) t nil)))
 
@@ -587,6 +607,7 @@ This deals with a CDATA escape and extracts the contents from that."
  ; (define-key map "\C-g\C-g" '(lambda () "" (interactive) (insert "<glossentry><glossterm></glossterm>\n<glossdef><para>\n\n</para></glossdef>\n</glossentry>")))
 
 
+   ; bound to ignore
 ;  (define-key map  "\C-q\C-i" '(lambda (arg) "" (interactive "P") (r-insert-node "item" nil t)))
 
 ;  (define-key map  "\C-r\C-r" 'isearch-backward)
@@ -769,6 +790,7 @@ This deals with a CDATA escape and extracts the contents from that."
 	("<ignore>" . "</ignore>")
 	("<xml:tag>" . "</xml:tag>")
 	("<!-->" . "-->")
+	("^```" . "^```")	
 	("<!\\[CDATA\\[" . "\\]\\]\\>")
    )))
 
