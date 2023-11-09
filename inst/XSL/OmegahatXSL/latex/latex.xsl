@@ -219,6 +219,7 @@ Acronym &amp; Definition \\
 <xsl:template match="i">\textit{<xsl:apply-templates/>}</xsl:template>
 
 <xsl:template match="github:repos">\textsl{<xsl:apply-templates/>}</xsl:template>
+<xsl:template match="github:hash">\texttt{<xsl:apply-templates/>}</xsl:template>
 
 <xsl:template match="git">\textsl{git}\index{G@git}</xsl:template>
 <xsl:template match="git:*">\textbf{<xsl:value-of select='local-name()'/>}\index{<xsl:value-of select='local-name()'/>}</xsl:template>
