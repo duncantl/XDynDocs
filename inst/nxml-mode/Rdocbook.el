@@ -260,7 +260,7 @@ This deals with a CDATA escape and extracts the contents from that."
  (unwind-protect
    (progn 
       (setq oldfilter (process-filter proc))
-      (set-process-filter proc '(lambda (proc output) 
+      (set-process-filter proc #'(lambda (proc output) 
                                     (setq value (concat value output))
                                     (ordinary-insertion-filter proc output)))
       (ess-eval-region (nth 0 cmd) (nth 1 cmd)  nil)
@@ -408,75 +408,75 @@ This deals with a CDATA escape and extracts the contents from that."
 (defun r-nxml-keys-map (map)
   "register key bindings for R-related nodes (i.e. r:...) in XML documents"
   (interactive "*")
-  (define-key map "\C-ix" '(lambda () "" (interactive "*") (insert "<xi:include href=\"\"/>")))  
-  (define-key map "\C-qr" '(lambda () "" (interactive "*") (insert "<r/>")))
+  (define-key map "\C-ix" #'(lambda () "" (interactive "*") (insert "<xi:include href=\"\"/>")))  
+  (define-key map "\C-qr" #'(lambda () "" (interactive "*") (insert "<r/>")))
   (define-key map "\C-qc" 'r-insert-class)
-  (define-key map "\C-qa" '(lambda () "" (interactive "*") (r-insert-node "r:arg" nil)))
+  (define-key map "\C-qa" #'(lambda () "" (interactive "*") (r-insert-node "r:arg" nil)))
   (define-key map "\C-qx" 'r-insert-rexpr)
-  (define-key map "\C-qv" '(lambda () "" (interactive "*") (r-insert-node "r:var" nil)))
-  (define-key map "\C-qm" '(lambda () "" (interactive "*") (r-insert-node "r:el" nil)))
-  (define-key map "\C-qp" '(lambda (omg) "" (interactive "P") (r-insert-node (if omg "omg:pkg" "r:pkg") nil)))
+  (define-key map "\C-qv" #'(lambda () "" (interactive "*") (r-insert-node "r:var" nil)))
+  (define-key map "\C-qm" #'(lambda () "" (interactive "*") (r-insert-node "r:el" nil)))
+  (define-key map "\C-qp" #'(lambda (omg) "" (interactive "P") (r-insert-node (if omg "omg:pkg" "r:pkg") nil)))
   (define-key map "\C-qf" 'r-insert-func)
-  (define-key map "\C-c\C-ao" '(lambda () "" (interactive "*") (r-insert-node "ol" nil t)))
-  (define-key map "\C-c\C-au" '(lambda () "" (interactive "*") (r-insert-node "ul" nil t)))
-  (define-key map "\C-c\C-al" '(lambda () "" (interactive "*") (r-insert-node "li" nil)))
-  (define-key map "\C-c\C-a\C-a" '(lambda () "" (interactive "*") (insert "<a href=\"\"></a>") (backward-char 6)))
-  (define-key map "\C-qk" '(lambda () "" (interactive "*") (r-insert-node "r:keyword" nil)))
-  (define-key map "\C-qs" '(lambda () "" (interactive "*") (r-insert-node "r:s3method" nil)))
-  (define-key map "\C-q\C-o" '(lambda (cdata) "" (interactive "P") (r-insert-node "r:output" (not cdata) t nil)))
-  (define-key map "\C-q\C-e" '(lambda (cdata) "" (interactive "P") (r-insert-node "r:error" (not cdata) t nil)))
-  (define-key map "\C-q\C-w" '(lambda (cdata) "" (interactive "P") (r-insert-node "r:warning" (not cdata) t nil)))
+  (define-key map "\C-c\C-ao" #'(lambda () "" (interactive "*") (r-insert-node "ol" nil t)))
+  (define-key map "\C-c\C-au" #'(lambda () "" (interactive "*") (r-insert-node "ul" nil t)))
+  (define-key map "\C-c\C-al" #'(lambda () "" (interactive "*") (r-insert-node "li" nil)))
+  (define-key map "\C-c\C-a\C-a" #'(lambda () "" (interactive "*") (insert "<a href=\"\"></a>") (backward-char 6)))
+  (define-key map "\C-qk" #'(lambda () "" (interactive "*") (r-insert-node "r:keyword" nil)))
+  (define-key map "\C-qs" #'(lambda () "" (interactive "*") (r-insert-node "r:s3method" nil)))
+  (define-key map "\C-q\C-o" #'(lambda (cdata) "" (interactive "P") (r-insert-node "r:output" (not cdata) t nil)))
+  (define-key map "\C-q\C-e" #'(lambda (cdata) "" (interactive "P") (r-insert-node "r:error" (not cdata) t nil)))
+  (define-key map "\C-q\C-w" #'(lambda (cdata) "" (interactive "P") (r-insert-node "r:warning" (not cdata) t nil)))
 
-  (define-key map "\C-q\C-c" '(lambda (cdata) "" (interactive "P") (r-insert-node "r:code" cdata t nil))) ; was t t
-  (define-key map "\C-x\C-q\C-c" '(lambda () "" (interactive "*") (r-insert-node "r:function" t t nil) (goto-char (nxml-token-after)) (r-insert-node "r:output" t t)))
-  (define-key map "\C-x\C-q\C-f" '(lambda () "" (interactive "*") (r-insert-node "r:function" t t nil) (r-insert-node "r:output" t t)))
-  (define-key map "\C-q\C-q" '(lambda () "" (interactive "*") (r-insert-node "sql:code" nil t nil) ))
-  (define-key map "\C-x\C-q\C-e" '(lambda () "" (interactive "*") (r-insert-node "sql:expr" nil nil nil) ))
-  (define-key map "\C-x\C-q\C-x" '(lambda () "" (interactive "*") (r-insert-node "sql:expr" nil nil nil) ))
-  (define-key map "\C-x\C-q\C-q" '(lambda () "" (interactive "*") (r-insert-node "sql:code" nil t nil) ))
-  (define-key map "\C-x\C-q\C-o" '(lambda () "" (interactive "*") (r-insert-node "sql:output" nil t nil) ))
-  (define-key map "\C-x\C-q\C-t" '(lambda () "" (interactive "*") (r-insert-node "sql:table" nil nil nil) ))
-  (define-key map "\C-x\C-q\C-f" '(lambda () "" (interactive "*") (r-insert-node "sql:field" nil nil nil) ))
-  (define-key map "\C-c\C-r" '(lambda () "" (interactive "*") (insert "<xref linkend=\"\"/>") (backward-char 3)))
+  (define-key map "\C-q\C-c" #'(lambda (cdata) "" (interactive "P") (r-insert-node "r:code" cdata t nil))) ; was t t
+  (define-key map "\C-x\C-q\C-c" #'(lambda () "" (interactive "*") (r-insert-node "r:function" t t nil) (goto-char (nxml-token-after)) (r-insert-node "r:output" t t)))
+  (define-key map "\C-x\C-q\C-f" #'(lambda () "" (interactive "*") (r-insert-node "r:function" t t nil) (r-insert-node "r:output" t t)))
+  (define-key map "\C-q\C-q" #'(lambda () "" (interactive "*") (r-insert-node "sql:code" nil t nil) ))
+  (define-key map "\C-x\C-q\C-e" #'(lambda () "" (interactive "*") (r-insert-node "sql:expr" nil nil nil) ))
+  (define-key map "\C-x\C-q\C-x" #'(lambda () "" (interactive "*") (r-insert-node "sql:expr" nil nil nil) ))
+  (define-key map "\C-x\C-q\C-q" #'(lambda () "" (interactive "*") (r-insert-node "sql:code" nil t nil) ))
+  (define-key map "\C-x\C-q\C-o" #'(lambda () "" (interactive "*") (r-insert-node "sql:output" nil t nil) ))
+  (define-key map "\C-x\C-q\C-t" #'(lambda () "" (interactive "*") (r-insert-node "sql:table" nil nil nil) ))
+  (define-key map "\C-x\C-q\C-f" #'(lambda () "" (interactive "*") (r-insert-node "sql:field" nil nil nil) ))
+  (define-key map "\C-c\C-r" #'(lambda () "" (interactive "*") (insert "<xref linkend=\"\"/>") (backward-char 3)))
 
-  (define-key map "\C-ld" '(lambda () "" (interactive "*") (r-insert-node "dir" nil)))  
-  (define-key map "\C-lf" '(lambda () "" (interactive "*") (r-insert-node "file" nil)))
-  (define-key map "\C-lx" '(lambda () "" (interactive "*") (r-insert-node "ext" nil)))         
-  (define-key map "\C-lg" '(lambda () "" (interactive "*") (r-insert-node "sh:flag" nil)))  
-  (define-key map "\C-le" '(lambda () "" (interactive "*") (r-insert-node "sh:exec" nil)))
-  (define-key map "\C-lc" '(lambda () "" (interactive "*") (r-insert-node "sh:cmd" nil)))
+  (define-key map "\C-ld" #'(lambda () "" (interactive "*") (r-insert-node "dir" nil)))  
+  (define-key map "\C-lf" #'(lambda () "" (interactive "*") (r-insert-node "file" nil)))
+  (define-key map "\C-lx" #'(lambda () "" (interactive "*") (r-insert-node "ext" nil)))         
+  (define-key map "\C-lg" #'(lambda () "" (interactive "*") (r-insert-node "sh:flag" nil)))  
+  (define-key map "\C-le" #'(lambda () "" (interactive "*") (r-insert-node "sh:exec" nil)))
+  (define-key map "\C-lc" #'(lambda () "" (interactive "*") (r-insert-node "sh:cmd" nil)))
 
-  (define-key map "\C-jv" '(lambda () "" (interactive "*") (r-insert-node "js:var" nil)))
-  (define-key map "\C-jf" '(lambda () "" (interactive "*") (r-insert-node "js:func" nil)))  
-  (define-key map "\C-j\C-c" '(lambda (cdata) "" (interactive "P") (r-insert-node "js:code" cdata t nil)))    
+  (define-key map "\C-jv" #'(lambda () "" (interactive "*") (r-insert-node "js:var" nil)))
+  (define-key map "\C-jf" #'(lambda () "" (interactive "*") (r-insert-node "js:func" nil)))  
+  (define-key map "\C-j\C-c" #'(lambda (cdata) "" (interactive "P") (r-insert-node "js:code" cdata t nil)))    
 				;
 ;  Okay to here.
-  (define-key map "\C-ll" '(lambda () "" (interactive "*") (r-insert-node "llvm" nil)))  
-  (define-key map  "\C-lo" '(lambda() "" (interactive "*") (insert "<ol>\n<li></li>\n</ol>")  ))
-  (define-key map  "\C-lu" '(lambda() "" (interactive "*") (insert "<ul>\n<li></li>\n</ul>")  ))  
+  (define-key map "\C-ll" #'(lambda () "" (interactive "*") (r-insert-node "llvm" nil)))  
+  (define-key map  "\C-lo" #'(lambda() "" (interactive "*") (insert "<ol>\n<li></li>\n</ol>")  ))
+  (define-key map  "\C-lu" #'(lambda() "" (interactive "*") (insert "<ul>\n<li></li>\n</ul>")  ))  
 
   
 
   ; r:function  (definition)
-;  (define-key map  "\C-x\C-r\C-f" '(lambda () "" (interactive "*") (r-insert-node "r:function" t t)))
-  (define-key map  "\C-q\C-f" '(lambda (cdata) "" (interactive "P") (r-insert-node "r:function" (not cdata) t nil)))
+;  (define-key map  "\C-x\C-r\C-f" #'(lambda () "" (interactive "*") (r-insert-node "r:function" t t)))
+  (define-key map  "\C-q\C-f" #'(lambda (cdata) "" (interactive "P") (r-insert-node "r:function" (not cdata) t nil)))
   ; r:test
-  (define-key map  "\C-q\C-t" '(lambda (cdata) "" (interactive "P") (r-insert-node "r:test" (not cdata) t t)))
+  (define-key map  "\C-q\C-t" #'(lambda (cdata) "" (interactive "P") (r-insert-node "r:test" (not cdata) t t)))
  ; r:plot
-  (define-key map  "\C-q\C-d" '(lambda (cdata) "" (interactive "P") (r-insert-node "r:plot" (not cdata) t nil)))
+  (define-key map  "\C-q\C-d" #'(lambda (cdata) "" (interactive "P") (r-insert-node "r:plot" (not cdata) t nil)))
   ; C-q C-p is overridden by ESS.
-  (define-key map  "\C-q\C-p" '(lambda (cdata) "" (interactive "P") (r-insert-node "r:plot" (not cdata) t nil)))
+  (define-key map  "\C-q\C-p" #'(lambda (cdata) "" (interactive "P") (r-insert-node "r:plot" (not cdata) t nil)))
 
    ; make smarter to know if we need the /ignore on a new line.
-  (define-key map  "\C-q\C-i" '(lambda () "" (interactive "*") (r-insert-node "ignore" nil t t)))
+  (define-key map  "\C-q\C-i" #'(lambda () "" (interactive "*") (r-insert-node "ignore" nil t t)))
 ; (insert "<ignore>") (nxml-forward-element) (insert "\n</ignore>")
 
-  (define-key map "\C-q@" '(lambda () "" (interactive "*") (r-insert-node "r:attr" nil)))
+  (define-key map "\C-q@" #'(lambda () "" (interactive "*") (r-insert-node "r:attr" nil)))
   
    ; <para>\n</para>
-  (define-key map  "\C-q\C-p" '(lambda () "" (interactive "*") (r-insert-node "para" nil t)))
-  (define-key map  "\C-q\C-return" '(lambda () "" (interactive "*") (r-insert-node "para" nil t)))
-  (define-key map  "\C-c\C-p" '(lambda () ""  
+  (define-key map  "\C-q\C-p" #'(lambda () "" (interactive "*") (r-insert-node "para" nil t)))
+  (define-key map  "\C-q\C-return" #'(lambda () "" (interactive "*") (r-insert-node "para" nil t)))
+  (define-key map  "\C-c\C-p" #'(lambda () ""  
                                (interactive "*") 
                                (insert "\n") 
                                (r-insert-node "para" nil t) 
@@ -487,12 +487,12 @@ This deals with a CDATA escape and extracts the contents from that."
   (define-key map  "\C-q\C-n" 'rxml-eval-node-contents)
   (define-key map  "\C-q\C-p" 'rxml-eval-node-insert-output)
 
-;  (define-key map  "\C-c\C-l\C-l" '(lambda () ""  (interactive "*") (insert-itemized-list)))
-;  (define-key map  "\C-c\C-l\C-i" '(lambda () ""  (interactive "*") (r-insert-node "li")))
+;  (define-key map  "\C-c\C-l\C-l" #'(lambda () ""  (interactive "*") (insert-itemized-list)))
+;  (define-key map  "\C-c\C-l\C-i" #'(lambda () ""  (interactive "*") (r-insert-node "li")))
 
 ;; okay to here
 
-  (define-key map  "\C-c\C-s\C-s" '(lambda () ""  
+  (define-key map  "\C-c\C-s\C-s" #'(lambda () ""  
                                    (interactive "*") 
                                    (r-insert-node "section" nil t)
                                    (r-insert-node "title" nil nil)
@@ -502,20 +502,20 @@ This deals with a CDATA escape and extracts the contents from that."
                                  ))
 
   
-  (define-key map  "\C-l\C-l" '(lambda () ""  (interactive "*") (r-insert-node "literal" nil)))
+  (define-key map  "\C-l\C-l" #'(lambda () ""  (interactive "*") (r-insert-node "literal" nil)))
   
-  (define-key map  "\C-qo" '(lambda () ""  (interactive "*") (r-insert-node "r:op" nil)))
-  (define-key map  "\C-qt" '(lambda () ""  (interactive "*") (insert "<r:true/>")))
-  (define-key map  "\C-qT" '(lambda () ""  (interactive "*") (insert "<r:true/>")))
-  (define-key map  "\C-qF" '(lambda (arg) ""  (interactive "P") (insert "<r:false/>")))
+  (define-key map  "\C-qo" #'(lambda () ""  (interactive "*") (r-insert-node "r:op" nil)))
+  (define-key map  "\C-qt" #'(lambda () ""  (interactive "*") (insert "<r:true/>")))
+  (define-key map  "\C-qT" #'(lambda () ""  (interactive "*") (insert "<r:true/>")))
+  (define-key map  "\C-qF" #'(lambda (arg) ""  (interactive "P") (insert "<r:false/>")))
 
 ; <xml:*> elements used for talking about XML.
-  (define-key map  "\C-x\C-x" '(lambda () ""  (interactive "*") (r-insert-node "xml:tag" nil)))
-  (define-key map  "\C-x\C-a" '(lambda () ""  (interactive "*") (r-insert-node "xml:attr" nil)))
-  (define-key map  "\C-x\C-n" '(lambda () ""  (interactive "*") (r-insert-node "xml:ns" nil)))
-  (define-key map  "\C-x\C-e" '(lambda () ""  (interactive "*") (r-insert-node "xml:expr" nil)))
+  (define-key map  "\C-x\C-x" #'(lambda () ""  (interactive "*") (r-insert-node "xml:tag" nil)))
+  (define-key map  "\C-x\C-a" #'(lambda () ""  (interactive "*") (r-insert-node "xml:attr" nil)))
+  (define-key map  "\C-x\C-n" #'(lambda () ""  (interactive "*") (r-insert-node "xml:ns" nil)))
+  (define-key map  "\C-x\C-e" #'(lambda () ""  (interactive "*") (r-insert-node "xml:expr" nil)))
 
-  (define-key map  "\C-ql" '(lambda () ""  (interactive "*")
+  (define-key map  "\C-ql" #'(lambda () ""  (interactive "*")
 ;;;XXX if we have a selection, use this as the url attribute value
                      (if mark-active
                        (progn
@@ -535,38 +535,38 @@ This deals with a CDATA escape and extracts the contents from that."
 						 ))))
 
 
-  (define-key map  "\C-ck" '(lambda () ""  (interactive "*") (r-insert-node "cpp:class" nil)))
-  (define-key map  "\C-cm" '(lambda () ""  (interactive "*") (r-insert-node "cpp:method" nil)))
-  (define-key map  "\C-ce" '(lambda () ""  (interactive "*") (r-insert-node "c:expr" nil)))        
-  (define-key map  "\C-ct" '(lambda () ""  (interactive "*") (r-insert-node "c:type" nil)))
-  (define-key map  "\C-ca" '(lambda () ""  (interactive "*") (r-insert-node "c:arg" nil)))          
-  (define-key map  "\C-cv" '(lambda () ""  (interactive "*") (r-insert-node "c:var" nil)))  
-  (define-key map  "\C-cf" '(lambda () ""  (interactive "*") (r-insert-node "c:func" nil)))
-  (define-key map  "\C-cw" '(lambda () ""  (interactive "*") (r-insert-node "c:keyword" nil)))
-  (define-key map  "\C-co" '(lambda () ""  (interactive "*") (r-insert-node "c:op" nil)))
-  (define-key map  "\C-cs" '(lambda () ""  (interactive "*") (r-insert-node "c:struct" nil)))  
-  (define-key map  "\C-ch" '(lambda () ""  (interactive "*") (r-insert-node "c:header" nil)))
-  (define-key map  "\C-c\C-c" '(lambda (omg) ""  (interactive "P") (r-insert-node (if omg "c:routine" "c:code") t t nil))) 
+  (define-key map  "\C-ck" #'(lambda () ""  (interactive "*") (r-insert-node "cpp:class" nil)))
+  (define-key map  "\C-cm" #'(lambda () ""  (interactive "*") (r-insert-node "cpp:method" nil)))
+  (define-key map  "\C-ce" #'(lambda () ""  (interactive "*") (r-insert-node "c:expr" nil)))        
+  (define-key map  "\C-ct" #'(lambda () ""  (interactive "*") (r-insert-node "c:type" nil)))
+  (define-key map  "\C-ca" #'(lambda () ""  (interactive "*") (r-insert-node "c:arg" nil)))          
+  (define-key map  "\C-cv" #'(lambda () ""  (interactive "*") (r-insert-node "c:var" nil)))  
+  (define-key map  "\C-cf" #'(lambda () ""  (interactive "*") (r-insert-node "c:func" nil)))
+  (define-key map  "\C-cw" #'(lambda () ""  (interactive "*") (r-insert-node "c:keyword" nil)))
+  (define-key map  "\C-co" #'(lambda () ""  (interactive "*") (r-insert-node "c:op" nil)))
+  (define-key map  "\C-cs" #'(lambda () ""  (interactive "*") (r-insert-node "c:struct" nil)))  
+  (define-key map  "\C-ch" #'(lambda () ""  (interactive "*") (r-insert-node "c:header" nil)))
+  (define-key map  "\C-c\C-c" #'(lambda (omg) ""  (interactive "P") (r-insert-node (if omg "c:routine" "c:code") t t nil))) 
 
 ; Put in a <programlisting> but add white space to avoid reformatting messing it up.
-  (define-key map  "\C-x\C-p" '(lambda () ""  (interactive "*") (insert "\n") (r-insert-node "programlisting" t t nil) (save-excursion (forward-sexp) (goto-char (nxml-token-after))  (goto-char (nxml-token-after))  (insert "\n\n"))))
-  (define-key map  "\C-x\C-p" '(lambda () ""  (interactive "*")  (r-insert-node "programlisting" t t nil)
+  (define-key map  "\C-x\C-p" #'(lambda () ""  (interactive "*") (insert "\n") (r-insert-node "programlisting" t t nil) (save-excursion (forward-sexp) (goto-char (nxml-token-after))  (goto-char (nxml-token-after))  (insert "\n\n"))))
+  (define-key map  "\C-x\C-p" #'(lambda () ""  (interactive "*")  (r-insert-node "programlisting" t t nil)
  ))
 
 ;;XXX Fails.
-;  (define-key map  "\C-q\C-l" '(lambda () ""  (interactive "*")  (r-insert-node "listitem" nil nil nil) (r-insert-node "para" nil t nil)))
+;  (define-key map  "\C-q\C-l" #'(lambda () ""  (interactive "*")  (r-insert-node "listitem" nil nil nil) (r-insert-node "para" nil t nil)))
 
-  (define-key map  "\C-x\C-l" '(lambda () ""  (interactive "*")  (r-insert-node "listitem" nil nil nil) (r-insert-node "para" nil t nil)))
+  (define-key map  "\C-x\C-l" #'(lambda () ""  (interactive "*")  (r-insert-node "listitem" nil nil nil) (r-insert-node "para" nil t nil)))
 
-  (define-key map  "\C-q\C-h" '(lambda () ""  (interactive "*")  (insert "<html/>")))
-;  (define-key map  "\C-q\C-r" '(lambda () ""  (interactive "*")  (insert "<R/>")))
-;  (define-key map  "\C-x\C-l" '(lambda () ""  (interactive "*")  (insert "<latex/>")))
-					;  (define-key map  "\C-q\C-d" '(lambda () ""  (interactive "*")  (insert "<docbook/>")))
+  (define-key map  "\C-q\C-h" #'(lambda () ""  (interactive "*")  (insert "<html/>")))
+;  (define-key map  "\C-q\C-r" #'(lambda () ""  (interactive "*")  (insert "<R/>")))
+;  (define-key map  "\C-x\C-l" #'(lambda () ""  (interactive "*")  (insert "<latex/>")))
+					;  (define-key map  "\C-q\C-d" #'(lambda () ""  (interactive "*")  (insert "<docbook/>")))
   
-  (define-key map  "\C-q\C-r" '(lambda () ""  (interactive "*")  (insert "<r/>")))
+  (define-key map  "\C-q\C-r" #'(lambda () ""  (interactive "*")  (insert "<r/>")))
 
 ; Not quite correct!
-  (define-key map  "\C-x\C-j" '(lambda () ""  (interactive "*") (r-insert-node "note" nil t) (r-insert-node "para" nil t nil)))
+  (define-key map  "\C-x\C-j" #'(lambda () ""  (interactive "*") (r-insert-node "note" nil t) (r-insert-node "para" nil t nil)))
 
   (define-key map  "\C-qb" 'insert-bib)
 
@@ -580,35 +580,35 @@ This deals with a CDATA escape and extracts the contents from that."
     ; XXX get good key bindings for these. 
   (define-key map  "\C-q\C-s" 'insert-date-stamp)
 
-  (define-key map "\C-qe" '(lambda () "" (interactive "*") (r-insert-node "r:slot" nil)))
+  (define-key map "\C-qe" #'(lambda () "" (interactive "*") (r-insert-node "r:slot" nil)))
 
-  (define-key map "\C-q." '(lambda () "" (interactive "*") (r-insert-node "r:dots" nil nil nil t)))
-  (define-key map "\C-qu" '(lambda () "" (interactive "*") (r-insert-node "r:null" nil nil nil t)))  
+  (define-key map "\C-q." #'(lambda () "" (interactive "*") (r-insert-node "r:dots" nil nil nil t)))
+  (define-key map "\C-qu" #'(lambda () "" (interactive "*") (r-insert-node "r:null" nil nil nil t)))  
 
   
-  (define-key map "\C-l\C-f" '(lambda (cdata) "" (interactive "P") (r-insert-node "sh:code" cdata t nil)))  
-  (define-key map "\C-l\C-c" '(lambda (cdata) "" (interactive "P") (r-insert-node "sh:code" cdata t nil)))
-  (define-key map "\C-lv" '(lambda () "" (interactive "*") (r-insert-node "sh:env" nil)))
-  (define-key map "\C-la" '(lambda () "" (interactive "*") (r-insert-node "sh:arg" nil)))
-  (define-key map "\C-xt" '(lambda () "" (interactive "*") (r-insert-node "xml:tag" nil)))
-  (define-key map "\C-xa" '(lambda () "" (interactive "*") (r-insert-node "xml:attr" nil)))
+  (define-key map "\C-l\C-f" #'(lambda (cdata) "" (interactive "P") (r-insert-node "sh:code" cdata t nil)))  
+  (define-key map "\C-l\C-c" #'(lambda (cdata) "" (interactive "P") (r-insert-node "sh:code" cdata t nil)))
+  (define-key map "\C-lv" #'(lambda () "" (interactive "*") (r-insert-node "sh:env" nil)))
+  (define-key map "\C-la" #'(lambda () "" (interactive "*") (r-insert-node "sh:arg" nil)))
+  (define-key map "\C-xt" #'(lambda () "" (interactive "*") (r-insert-node "xml:tag" nil)))
+  (define-key map "\C-xa" #'(lambda () "" (interactive "*") (r-insert-node "xml:attr" nil)))
 
-  (define-key map "\C-l\C-o" '(lambda (cdata) "" (interactive "P") (r-insert-node "sh:output" (not cdata) t nil)))
+  (define-key map "\C-l\C-o" #'(lambda (cdata) "" (interactive "P") (r-insert-node "sh:output" (not cdata) t nil)))
 
 
 ;;;; Can't use C-a
-   (define-key map "\C-i\C-c" '(lambda (cdata) "" (interactive "P") (r-insert-node "py:code" cdata t t)))
+   (define-key map "\C-i\C-c" #'(lambda (cdata) "" (interactive "P") (r-insert-node "py:code" cdata t t)))
 
-   (define-key map "\C-ic" '(lambda () "" (interactive "*") (r-insert-node "ir:code" nil)))
+   (define-key map "\C-ic" #'(lambda () "" (interactive "*") (r-insert-node "ir:code" nil)))
 
 
-   (define-key map "\C-id" '(lambda () "" (interactive "*") (insert "<emdash/>")))
+   (define-key map "\C-id" #'(lambda () "" (interactive "*") (insert "<emdash/>")))
 
- ; (define-key map "\C-g\C-g" '(lambda () "" (interactive) (insert "<glossentry><glossterm></glossterm>\n<glossdef><para>\n\n</para></glossdef>\n</glossentry>")))
+ ; (define-key map "\C-g\C-g" #'(lambda () "" (interactive) (insert "<glossentry><glossterm></glossterm>\n<glossdef><para>\n\n</para></glossdef>\n</glossentry>")))
 
 
    ; bound to ignore
-;  (define-key map  "\C-q\C-i" '(lambda (arg) "" (interactive "P") (r-insert-node "item" nil t)))
+;  (define-key map  "\C-q\C-i" #'(lambda (arg) "" (interactive "P") (r-insert-node "item" nil t)))
 
 ;  (define-key map  "\C-r\C-r" 'isearch-backward)
 )
@@ -620,7 +620,7 @@ This deals with a CDATA escape and extracts the contents from that."
 ;(setq ispell-html-skip-alists (append r-ispell-html-skip-alists ispell-html-skip-alists))
 
 (add-hook 'nxml-mode-hook
-	  '(lambda ()
+	  #'(lambda ()
             (if (not r-nxml-mode-init) (progn (r-nxml-keys-map nxml-mode-map) (setq r-nxml-mode-init t)))
 ;	    (flyspell-xml-lang-setup)
 ;	    (add-hook 'post-command-hook 'rnxml-switch-mode t)
