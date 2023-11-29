@@ -711,6 +711,7 @@ This deals with a CDATA escape and extracts the contents from that."
 (puthash (intern "sql") "http://www.sql.org" rxml-namespaces)
 (puthash (intern "ir") "http://llvm.org/ir" rxml-namespaces)
 (puthash (intern "llvm") "http://llvm.org" rxml-namespaces)
+(puthash (intern "lldb") "http://llvm.org/lldb" rxml-namespaces)
 (puthash (intern "gh") "http://github.com" rxml-namespaces)
 (puthash (intern "as") "http://www.assemblycode.org" rxml-namespaces)
 (puthash (intern "wasm") "http://webassembly.org" rxml-namespaces)
@@ -740,7 +741,8 @@ This deals with a CDATA escape and extracts the contents from that."
 (defun r-add-namespace-def (prefix)
   (interactive "sEnter namespace prefix: ")
   (let ((val (gethash (intern prefix) rxml-namespaces nil)))
-     (if val (r-nxml-insert-namespace prefix val)))
+    (if val (r-nxml-insert-namespace prefix val)
+            (message (concat "no XML namespace registered for " prefix))))
 )
 
 (defun r-insert-id (val)
